@@ -1,0 +1,41 @@
+/*====Form Added Tournament====*/
+
+.form-dropdown {
+  margin-bottom: 3rem;
+  height: 7rem;
+
+  &:hover,
+  &:focus{
+    .form-dropdown__item {
+      display: block;
+    }
+  }
+
+
+  &__title {
+    padding-bottom: 1rem;
+    font-size: 2rem;
+    font-style: normal;
+    transition: color .3s;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: var(--blue);
+    }
+  }
+
+  &__item {
+    font-size: 1.8rem;
+    font-style: normal;
+    transition: color .3s;
+    cursor: pointer;
+    padding-bottom: .6rem;
+    display: none;
+
+    &:hover,
+    &:focus {
+      color: var(--blue);
+    }
+  }
+}

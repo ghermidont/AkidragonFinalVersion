@@ -1,0 +1,137 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+*:focus {
+  outline: none;
+}
+
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    outline: none;
+  }
+}
+
+body {
+  @include fw400;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  margin: 0 auto;
+  padding: 0;
+  color: var(--blueLight);
+  background-color: var(--blueDark);
+  position: relative;
+}
+
+section {
+  position: relative;
+}
+
+.container {
+  max-width: 1230px;
+  padding: 0 1.5rem;
+  margin: 0 auto;
+}
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  outline: none;
+  border: none;
+  transition: all .3s;
+
+  &:hover,
+  &:focus {
+    opacity: .8;
+  }
+}
+
+textarea {
+  outline: none;
+  border: none;
+  transition: all .3s;
+
+  &:hover,
+  &:focus {
+    opacity: .8;
+  }
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}
+
+.btn-upload {
+  padding: 1rem 2rem;
+  display: inline-block !important;
+  border-radius: 0.6rem;
+  color: var(--blueDark);
+  background-color: var(--blue);
+  cursor: pointer;
+  transition: opacity 0.3s;
+
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+  }
+
+  &--tournament{
+    width: 100%;
+  }
+}

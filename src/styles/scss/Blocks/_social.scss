@@ -1,0 +1,63 @@
+/*====Social====*/
+
+.social {
+  padding: 5rem 0 5rem;
+
+  &__title {
+    font-size: 2.4rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 5rem;
+    color: var(--white);
+  }
+
+  &__list {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__item {
+    transition: opacity 0.5s;
+
+    .icon-facebook2 {
+      &:hover {
+        color: var(--blue);
+      }
+    }
+    .icon-youtube {
+      &:hover {
+        color: var(--red);
+      }
+    }
+    .icon-instagram {
+      &:hover {
+        color: var(--violet);
+      }
+    }
+    .icon-twitch {
+      &:hover {
+        color: var(--twitch);
+      }
+    }
+
+    span {
+      display: inline-block;
+      font-size: 3rem;
+      transition: all 0.3s;
+
+      &:hover,
+      &:focus {
+        transform: scale(1.2);
+      }
+    }
+
+    &:not(:first-child) {
+      margin-left: 3rem;
+    }
+  }
+
+
+
+}
+
+

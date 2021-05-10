@@ -1,0 +1,42 @@
+/*====Btn====*/
+.btn {
+  width: 19rem;
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 0.8rem 1.5rem;
+  border-radius: 1rem;
+  color: var(--blue);
+  text-transform: uppercase;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  background-color: var(--btnBg);
+  box-shadow: 8px 8px 0px var(--black);
+  transition: opacity 0.3s;
+
+  span {
+    color: var(--white);
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+  }
+  &:active {
+    opacity: 0.7;
+    transform: scale(0.9);
+  }
+}
+
+.btn-more{
+  width: 19rem;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+
+  &__home-slider{
+    margin-top: 5rem;
+  }
+}
+

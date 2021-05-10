@@ -1,0 +1,32 @@
+/*====Partner====*/
+.partner {
+  padding-bottom: 5rem;
+
+  &__title {
+    margin-bottom: 6rem;
+  }
+  &__list {
+    display: flex;
+    justify-content: space-around;
+  }
+  &__item {
+    width: 10rem;
+    height: 10rem;
+  }
+  &__image{
+    object-fit: cover;
+  }
+}
+@media screen and (max-width: 768px) {
+  .partner {
+    &__item {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+}
+@media screen and (max-width: 420px) {
+  .partner {
+    padding-bottom: 0;
+  }
+}

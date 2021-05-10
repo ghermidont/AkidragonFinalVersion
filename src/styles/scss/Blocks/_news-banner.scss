@@ -1,0 +1,60 @@
+/*====News-Banner====*/
+.news-banner {
+  padding: 14rem 0 5rem;
+
+  &__title {
+    margin-bottom: 1rem;
+  }
+  &__subtitle {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--blue);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 7rem;
+  }
+
+  .tab__btn {
+    font-size: 2.4rem;
+    text-transform: uppercase;
+    transition: all 0.3s;
+
+    &:hover,
+    &:focus {
+      transform: scale(1.1);
+      color: var(--blue);
+    }
+    &:active {
+      transform: scale(0.8);
+    }
+    &.active {
+      transform: scale(1.1);
+      color: var(--blue);
+    }
+
+    &-list {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6rem;
+    }
+  }
+}
+
+@media screen and (max-width: 690px) {
+  .news-banner {
+    .tab__btn {
+      font-size: 1.8rem;
+    }
+  }
+}
+@media screen and (max-width: 520px) {
+  .news-banner {
+    .tab__btn {
+      margin: 0 0 2rem;
+      &-list {
+        flex-direction: column;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}

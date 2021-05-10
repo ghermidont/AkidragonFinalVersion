@@ -1,0 +1,44 @@
+{
+  "title": "Italian version of the app",
+  "NavBar": {
+    "LoginSignUpButton": "Entra/Registrati",
+    "SearchButton": "Ricerca",
+    "LogoutButton": "Disconnettersi",
+    "WelcomeMessage": "Benvenuto",
+    "Menu": {
+      "Our universe": {
+        "Blog": "Blog",
+        "GameTeams": "Team e giochi",
+        "Game Sales": "Vendite di giochi"
+      },
+      "Community": {
+        "News": "Notizia",
+        "Content": "Contenuti"
+      },
+      "TheBrand": {
+        "AboutUs": "Chi siamo",
+        "Sponsorship": "Sponsorizzazione"
+      },
+      "Contacts": {
+        "Form": "Modulo",
+        "ContactInfo": "Informazioni di contatto"
+      }
+    }
+  },
+  "Footer": {
+    "ContactsButton": "Contatti",
+    "SocialMessage": "Seguici sui social network"
+  },
+  "HomePage": {
+    "BannerText": "ESPLORA L'UNIVERSO AKIDRAGON",
+    "Card1": "TORNEI",
+    "Card2": "TEAMS E GIOCHI",
+    "Card3": "VENDITA DI GIOCHI",
+    "LatestArticlesTitle": "ARTICOLI RECENTI",
+    "OtherArticlesButton": "ALTRI ARTICOLI",
+    "LatestStreamsTitle": "I NOSTRI ULTIMI STREAM",
+    "OtherVideosButton": "ALTRI VIDEO",
+    "SponsorshipBanner": "SPONSORIZZAZIONE",
+    "ContactsBanner": "CONTATTI"
+  }
+}

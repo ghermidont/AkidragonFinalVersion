@@ -1,0 +1,49 @@
+/*====Btn====*/
+.feed {
+  padding: 5rem 0;
+
+  &__inner {
+    display: flex;
+    justify-content: center;
+  }
+  &__item {
+    max-width: 50rem;
+    width: 100%;
+
+    &:not(:first-child) {
+      margin-left: 1rem;
+    }
+  }
+  &__image {
+    width: 100%;
+    height: 20rem;
+    background-color: var(--white);
+    margin-bottom: 2rem;
+  }
+  &__link {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--blue);
+    text-align: center;
+    text-transform: uppercase;
+    transition: opacity 0.3s;
+
+    &:hover,
+    &:focus {
+      opacity: 0.8;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .feed {
+    &__inner {
+      flex-direction: column;
+      align-items: center;
+    }
+    &__item {
+      margin-bottom: 5rem;
+    }
+  }
+}

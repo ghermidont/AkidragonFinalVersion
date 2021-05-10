@@ -1,0 +1,41 @@
+/*====Banner====*/
+.banner {
+  padding: 24rem 0 6rem;
+  height: 100vh;
+  position: relative;
+
+  &__image {
+    width: 80%;
+    min-height: 36rem;
+    height: 50rem;
+    margin: 0 auto;
+  }
+  &__img{
+    border-radius: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .banner {
+    &__image {
+      height: 26rem;
+    }
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .banner {
+    height: auto;
+
+    &__image {
+      width: 100%;
+      height: 1.6rem;
+      margin-bottom: 5rem;
+    }
+    &__icon-down {
+      position: initial;
+      margin: 0 auto;
+      transform: translateX(0);
+    }
+  }
+}

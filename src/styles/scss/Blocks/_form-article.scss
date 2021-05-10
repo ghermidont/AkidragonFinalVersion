@@ -1,0 +1,99 @@
+/*====Form article====*/
+
+.form-article, .form-update {
+  width: 100%;
+  margin: auto 0;
+
+  &__body {
+    padding: 14rem 1.5rem 8rem;
+    max-width: 50rem;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+
+  &__avatar-image{
+    width: 12rem;
+    height: 12rem;
+    border-radius: 100%;
+    background-color: var(--blue);
+    margin-bottom: 3rem;
+  }
+  &__avatar-img{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    object-fit: cover;
+  }
+  &__label {
+    display: block;
+    font-size: 1.8rem;
+    font-style: normal;
+    margin-bottom: 2rem;
+
+    &-check {
+      display: block;
+      margin-bottom: 1rem;
+      font-style: normal;
+
+      &:last-child {
+        margin-bottom: 2rem;
+      }
+
+      input {
+        margin-right: 1rem;
+      }
+      &.form-cv{
+        margin-bottom: 3rem;
+      }
+    }
+  }
+
+  &__input {
+    display: block;
+    margin: .6rem 0 2rem;
+    padding: 0.8rem 2rem;
+    width: 100%;
+    font-size: 1.8rem;
+    color: var(--blueDark);
+    background-color: var(--blueLight);
+    border-radius: 0.4rem;
+
+    &::placeholder {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--blueDark);
+    }
+    
+    &.date{
+      background-color: var(--blue);
+    }
+  }
+
+  &__checkbox-title {
+    margin: 3rem 0 1.5rem;
+  }
+
+  &__box-btn {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__btn {
+    display: block;
+    padding: 0 2rem;
+    height: 4.2rem;
+    border-radius: 0.6rem;
+    font-size: 1.8rem;
+    line-height: 1;
+    font-style: normal;
+    color: var(--blueDark);
+    background-color: var(--blue);
+    transition: opacity 0.3s;
+
+    &:hover,
+    &:focus {
+      opacity: 0.8;
+    }
+  }
+}

@@ -1,0 +1,72 @@
+/*====Career====*/
+.career {
+  padding: 6rem 0 5rem;
+  &__inner {
+    display: flex;
+  }
+  &__image {
+    width: 50rem;
+    min-width: 40rem;
+    height: 40rem;
+    margin-top: 7rem;
+    background-color: var(--blue);
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &__content {
+    margin-left: 3rem;
+    max-width: 70rem;
+  }
+  &__title {
+    margin-bottom: 3rem;
+  }
+  &__text {
+    font-size: 1.6rem;
+    line-height: 1.4;
+    margin-bottom: 3rem;
+  }
+  &__btn {
+    padding: 1rem 2rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    width: 20rem;
+    text-align: center;
+    color: var(--blueLight);
+    border: 3px solid var(--blue);
+    border-radius: 0.6rem;
+    transition: opacity 0.3s;
+
+    &:hover,
+    &:focus {
+      opacity: 0.8;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .career {
+    padding-top: 0;
+    &__image {
+      min-width: 30rem;
+      height: 30rem;
+    }
+  }
+}
+@media screen and (max-width: 640px) {
+  .career {
+    &__inner {
+      flex-direction: column;
+      align-items: center;
+    }
+    &__image {
+      margin-bottom: 4rem;
+      width: 100%;
+      min-width: 30rem;
+    }
+    &__content {
+      margin-left: 0;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+/*====Fonts====*/
+
+@mixin fw300 {
+  font-family: 'ProximaNova-LightIt', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@mixin fw400 {
+  font-family: 'ProximaNova-RegularIt', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@mixin fw700 {
+  font-family: 'ProximaNova-BoldIt', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}

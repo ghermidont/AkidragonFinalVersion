@@ -1,0 +1,37 @@
+/*====Mission====*/
+.mission {
+  padding: 5rem 0;
+  &__wrapper {
+    padding: 3rem 2rem 5rem;
+    border: 4px solid var(--blue);
+    border-radius: 1rem;
+  }
+  &__image {
+    width: 100%;
+    height: 40rem;
+    margin-bottom: 3rem;
+    background-color: var(--blue);
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &__title {
+    margin-bottom: 3rem;
+  }
+}
+@media screen and(max-width: 580px) {
+  .mission {
+    &__image {
+      height: 25rem;
+    }
+  }
+}
+@media screen and(max-width: 420px) {
+  .mission {
+    &__wrapper {
+      padding: 3rem 1rem 4rem;
+    }
+  }
+}

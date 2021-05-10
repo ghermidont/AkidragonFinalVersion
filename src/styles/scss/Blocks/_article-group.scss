@@ -1,0 +1,23 @@
+/*====Article Group====*/
+/*====Article Group====*/
+.article-group {
+  &__inner {
+    display: flex;
+  }
+  &__item {
+    &:not(:first-child) {
+      margin-left: 2rem;
+    }
+  }
+  &__box {
+    display: flex;
+  }
+}
+
+.article--small {
+  &.article {
+    &__content {
+      background-color: black;
+    }
+  }
+}
