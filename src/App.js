@@ -20,7 +20,7 @@ import MainLoginPage from "./pages/LoginPage/MainLoginPage";
 // import ModifyStreamForm from "./pages/UserAccount/ModifyStream/ModifyStreamForm";
 // import ModifyTournamentForm from "./pages/UserAccount/ModifyTournament/ModifyTournamentForm";
 //import NOUserProfileArticlesPage from './pages/UserAccount/NO-UserProfileArticlesPage';
-//import NOApproveArticlesPage from './pages/ModeratorPanel/NO-ApproveArticlesPage';
+import NOApproveArticlesPage from './pages/ModeratorPanel/NO-ApproveArticlesPage';
 
 //connect styles
 import './styles/scss/style.scss';
@@ -61,7 +61,7 @@ function App() {
                                             <PrivateRoute path="/ModeratorAddTournamentsForm" component={ModeratorAddTournamentsForm} />
                                             {/*<PrivateRoute path="/NOUserProfileArticlesPage" component={NOUserProfileArticlesPage} />*/}
                                             {/*<PrivateRoute path="/NOUpdateUserProfilePage" component={NOUpdateUserProfilePage} />*/}
-                                            {/*<PrivateRoute path="/NOApproveArticlesPage" component={NOApproveArticlesPage} />*/}
+                                            <PrivateRoute path="/NOApproveArticlesPage" component={NOApproveArticlesPage} />
                                             {/*<PrivateRoute path="/Step2CompleteProfilePage" component={Step2CompleteProfilePage} />*/}
                                             {/*<PrivateRoute path="/ModifyArticleForm" component={UpdateArticleForm} />*/}
                                             {/*<PrivateRoute path="/ModifyStreamForm" component={ModifyStreamForm} />*/}

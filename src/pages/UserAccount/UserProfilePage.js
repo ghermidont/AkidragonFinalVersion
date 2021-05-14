@@ -96,9 +96,9 @@ export default function UserProfilePage() {
                                     <li className="profile__settings-item">
                                       <Link className='profile__settings-link' to='/ManageTournamentsPage'>Manage tournaments</Link>
                                     </li>
-                                    {/*<li className="profile__settings-item">*/}
-                                    {/*  <Link className='profile__settings-link' to='/NOApproveArticlesPage'>Approve Articles</Link>*/}
-                                    {/*</li>*/}
+                                    <li className="profile__settings-item">
+                                      <Link className='profile__settings-link' to='/NOApproveArticlesPage'>Approve Articles</Link>
+                                    </li>
                                   </ul>
                                 </li>
                               </ul>

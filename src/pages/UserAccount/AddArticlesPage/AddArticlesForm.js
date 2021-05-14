@@ -9,7 +9,7 @@ export default function AddArticlesForm() {
   console.log("AddArticlesPage worked");
 
   const {currentUser} = useAuthContext();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
   const fileTypesArray = ['image/png', 'image/jpeg'];
   const history = useHistory();
   const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
@@ -24,8 +24,9 @@ export default function AddArticlesForm() {
   // const [music, setMusic] = useState('');
   const [loading, setLoading] = useState(true);
   const [articleCategory, setArticleCategory] = useState('');
+  const [fileSuccess, setFileSuccess] = useState(false);
   // const categoryArr = [videoGames==="on"?"Video games":"", movies==="on"?"Movies":"", music==="on"?"Music":""];
-  //const [uploadedPicFile, setUploadedPicFile] = useState('');
+  const [uploadedPicFile, setUploadedPicFile] = useState('');
   //const [fileUploadError, setFileUploadError] = useState('');
   const [url, setUrl] = useState('');
 
@@ -37,20 +38,22 @@ export default function AddArticlesForm() {
         let uploadedFile = e.target.files[0];
         //'image/png', 'image/jpeg' are also some default values we can see in the uploadedFilesArray object.
         if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-            //setUploadedPicFile(uploadedFile);
+            setUploadedPicFile(uploadedFile);
             //setAddArticlesFormUserUploadedFile(uploadedFilesArray);
             async function putFile(uploadedFile){
                 e.preventDefault();
                 try {
                     setLoading(true);
                     setError("");
-                    const storageRef = projectStorage.ref('articles_pictures/').child(uploadedFile.name + timestamp);//file.name
+                    const storageRef = projectStorage.ref('articles_pictures/').child(uploadedFile.name);//file.name
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
-                    });
+                    }, async()=>{
                     const finalUrl = await storageRef.getDownloadURL();
+                    finalUrl!==undefined?setFileSuccess(true):setFileSuccess(false);
                     setUrl(finalUrl);
+                    });
                 } catch {
                     setError("Failed to upload file");
                 }
@@ -58,8 +61,8 @@ export default function AddArticlesForm() {
             }
             putFile(uploadedFile).then(()=>console.log(url));
         } else {
-            //reset the value.
-            //setUploadedPicFile('');
+
+            setUploadedPicFile('');
             //setAddArticlesFormUserUploadedFile(null);
             setError('Please select an image file (png or jpg)');
         }
@@ -94,6 +97,27 @@ export default function AddArticlesForm() {
                  console.error("Error updating document: ", error);
              });
      }
+  }
+
+  const clearInput = () => {
+      setArticleCategory("");
+      setENDescription("");
+      setENText("");
+      setENTitle("");
+      setITDescription("");
+      setITText("");
+      setITTitle("");
+      setUploadedPicFile('');
+      setUrl('');
+      setFileSuccess(false);
+      const desertRef = projectStorage.ref('articles_pictures/').child(uploadedPicFile.name);
+      if(desertRef) {
+          desertRef.delete().then(() => {
+              console.log("uploaded image removed successfully")
+          }).catch((error) => {
+              console.log("could not delete the file because:" + error);
+          });
+      }
   }
 
   return (
@@ -138,6 +162,7 @@ export default function AddArticlesForm() {
                       className='form-article__input'
                       type="text"
                       required
+                      value={ITTitle}
                       onChange={
                         (e)=>setITTitle(e.target.value)
                       }/>
@@ -148,6 +173,7 @@ export default function AddArticlesForm() {
                       className='form-article__input'
                       rows='1'
                       name="text"
+                      value={ITDescription}
                       onChange={
                         (e)=>setITDescription(e.target.value)
                       }
@@ -201,6 +227,7 @@ export default function AddArticlesForm() {
                       className='form-article__input'
                       rows='2'
                       name="countent"
+                      value={ITText}
                       onChange={
                         (e)=>setITText(e.target.value)
                       }
@@ -223,6 +250,8 @@ export default function AddArticlesForm() {
                   <input
                       className='form-article__input'
                       type="text"
+                      required
+                      value={ENTitle}
                       onChange={
                         (e)=>setENTitle(e.target.value)
                       }/>
@@ -233,6 +262,8 @@ export default function AddArticlesForm() {
                       className='form-article__input'
                       rows='1'
                       name="text"
+                      value={ENDescription}
+                      required
                       onChange={
                         (e)=>setENDescription(e.target.value)
                       }
@@ -283,6 +314,8 @@ export default function AddArticlesForm() {
                       className='form-article__input'
                       rows='2'
                       name="countent"
+                      value={ENText}
+                      required
                       onChange={
                         (e)=>setENText(e.target.value)
                       }
@@ -303,6 +336,7 @@ export default function AddArticlesForm() {
               </label>
               <div className="output">
                 { error && <div className="error">{ error }</div>}
+                  {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url} alt=""/></div> }
               </div>
               <button
                   className="form-article__btn"
@@ -310,6 +344,12 @@ export default function AddArticlesForm() {
               >
                 Publish
               </button>
+                <button
+                    className="form-article__btn"
+                    onClick={clearInput}
+                >
+                    Cancel
+                </button>
             </div>
         </div>
       </section>

@@ -42,3 +42,5 @@ https://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-re
 https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 
 https://gitlab.com/akidragonapp/firebase-cloud/-/blob/master/firebase.json
+
+https://stackoverflow.com/questions/44354530/nodejs-integrate-with-php

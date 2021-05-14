@@ -16,12 +16,13 @@
      storageBucket: process.env.REACT_APP_FIRE_BASE_STORAGE_BUCKET,
      messagingSenderId: process.env.REACT_APP_FIRE_BASE_MESSAGING_SENDER_ID,
      appId: process.env.REACT_APP_FIRE_BASE_APP_ID,
-     measurementId: process.env.REACT_APP_FIRE_BASE_MEASUREMENT_ID
+     measurementId: process.env.REACT_APP_FIRE_BASE_MEASUREMENT_ID,
+     region: 'europe-west1'
   };
 
   // Initialize Firebase
   const fireBase = firebase.initializeApp(firebaseConfig);
-  const functions = firebase.functions();
+  const functions = firebase.app().functions('europe-west1');
   const projectStorage = firebase.storage();
   const projectFirestore = firebase.firestore();
   const timestamp = firebase.firestore.FieldValue.serverTimestamp();
