@@ -20,6 +20,7 @@ export function ArticlesContextProvider({ children }) {
     const [addArticlesFormUserUploadedFileUrl, setAddArticlesFormUserUploadedFileUrl] = useState();
     const [chosenArticleNumber, setChosenArticleNumber] = useState();
     const [articleContent, setArticleContent] = useState();
+    const [chosenModifyArticleNumber, setChosenModifyArticleNumber] = useState('');
 
     const writeSurveyToFirestoreUF = (surveyAnswersObject) =>{
 
@@ -45,7 +46,9 @@ export function ArticlesContextProvider({ children }) {
         addArticlesFormUserUploadedFileUrl,
         setAddArticlesFormUserUploadedFileUrl,
         chosenArticleNumber,
-        setChosenArticleNumber
+        setChosenArticleNumber,
+        chosenModifyArticleNumber,
+        setChosenModifyArticleNumber
     }
 
     return (

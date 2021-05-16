@@ -4,31 +4,28 @@ import {useDataFromFirestore} from "../../customHooks/useFirestore";
 //import {useLanguageContext} from "../../context/LanguageContext";
 import {useAuthContext} from "../../context/AuthContext";
 import {useArticlesContext} from "../../context/ArticlesContext";
+import {useLanguageContext} from "../../context/LanguageContext";
 
-const NOUserProfileArticlesPage = () => {
-  console.log("NOUserProfileArticlesPage ");
+const UserProfileArticlesPage = () => {
+  console.log("UserProfileArticlesPage ");
   const {docsFromHook} = useDataFromFirestore('articles');
   const {currentUser} = useAuthContext();
-  //const {appLanguage} = useLanguageContext();
+  const {appLanguage} = useLanguageContext();
   const history = useHistory();
-  const {setArticleContent, setChosenArticleNumber} = useArticlesContext();
+  const {setChosenArticleNumber} = useArticlesContext();
+  const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
 
   let generalLatestArticlesArr = [];
   let userPersonalArticlesArr = [];
 
-  useEffect(() => {
-    docsFromHook && setArticleContent(docsFromHook);
-  }, [docsFromHook, setArticleContent] );
+  if(docsFromHook&&(currentUser||CurrentUserFromLS)) {
 
-  if(docsFromHook&&currentUser) {
-      console.log("first option worked");
     userPersonalArticlesArr = docsFromHook.filter(function (article) {
-      return article.id === currentUser.uid;
+      return article.authorId === (currentUser.uid||CurrentUserFromLS.uid);
     });
   }
 
-  if(docsFromHook&&currentUser) {
-    console.log("first option worked");
+  if(docsFromHook&&(currentUser||CurrentUserFromLS)) {
     generalLatestArticlesArr = docsFromHook.filter(function (article) {
       return article.approved === true;
     });
@@ -49,7 +46,6 @@ const NOUserProfileArticlesPage = () => {
       tabsItems.forEach(function (item) {
         item.classList.remove('active');
       });
-
       currentBtn.classList.add('active');
       currentTab.classList.add('active');
     });
@@ -74,21 +70,21 @@ const NOUserProfileArticlesPage = () => {
                   <li className="articles-page__tab-item" key={doc.id}>
                   <article className='articles-page__post'>
                     <div className="articles-page__image">
-                      <img src={doc.imageURL} alt="" className="articles-page__img"/>
+                      <img src={doc.content.image} alt="" className="articles-page__img"/>
                     </div>
                     <div className="articles-page__content">
                       <Link
                           onClick={()=>{
                             setChosenArticleNumber(doc.id);
-                            history.push(`/article/${doc.id}`, { from: "/NOUserProfileArticlesPage" });//check which one works!!!!
+                            history.push(`/article/${doc.id}`, { from: "/UserProfileArticlesPage" });//check which one works!!!!
                           }}
                       >
-                        <h3 className="articles-page__content-title">{doc.content.en.title}</h3>
+                        <h3 className="articles-page__content-title">{doc.content[appLanguage].title}</h3>
                       </Link>
                       <div className="articles-page__content-info">
                       </div>
                         <p className="articles-page__content-text">
-                          {doc.content.en.text}
+                          {doc.content[appLanguage].text}
                         </p>
                     </div>
                   </article>
@@ -101,22 +97,22 @@ const NOUserProfileArticlesPage = () => {
                 <li className="articles-page__tab-item">
                   <article className='articles-page__post'>
                     <div className="articles-page__image">
-                      <img src={doc.imageURL} alt="" className="articles-page__img"/>
+                      <img src={doc.content.image} alt="" className="articles-page__img"/>
                     </div>
                     <div className="articles-page__content">
 
-                        <h3 className="articles-page__content-title">{doc.content.en.title}</h3>
+                        <h3 className="articles-page__content-title">{doc.content[appLanguage].title}</h3>
 
                       <div className="articles-page__content-info">
                          <time className="articles-page__content-date"></time>
                       </div>
                         <p className="articles-page__content-text">
-                          {doc.content.en.text}
+                          {doc.content[appLanguage].text}
                         </p>
                     </div>
+                    {doc.approved===false&&<div>Not approve yet</div>}
                   </article>
                 </li>
-
                 ))}
               </ul>
             </div>
@@ -127,5 +123,4 @@ const NOUserProfileArticlesPage = () => {
   );
 }
 
-
-export default NOUserProfileArticlesPage;
+export default UserProfileArticlesPage;

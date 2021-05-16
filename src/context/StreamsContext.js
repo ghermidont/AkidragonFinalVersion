@@ -3,7 +3,7 @@ import {projectFirestore} from "../fireBase";
 
 const streamsContext = React.createContext();
 
-export function useLatestStreamsContext(){
+export function useStreamsContext(){
     return useContext(streamsContext);
 }
 
@@ -13,6 +13,7 @@ export function StreamsContextProvider({ children }) {
     const [entStreams, setEntStreams] = useState([]);
     const [latestTournamentStreams, setLatestTournamentStreams] = useState([]);
     const [latestEntertainmentStreams, setLatestEntertainmentStreams] = useState([]);
+    const [chosenModifyStreamNumber, setChosenModifyStreamNumber] = useState('');
 
     const getLatestTournamentsForSwiper = async () => {
         console.log("getLatestTournamentsForSwiper worked");
@@ -92,7 +93,9 @@ export function StreamsContextProvider({ children }) {
         getLatestTournamentsForSwiper,
         latestEntertainmentStreams,
         getLatestEntertainmentForSwiper,
-        getLatestStreamsForSwiper
+        getLatestStreamsForSwiper,
+        chosenModifyStreamNumber,
+        setChosenModifyStreamNumber
     }
 
     return (

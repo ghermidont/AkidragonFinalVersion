@@ -1,28 +1,30 @@
 //implement redirect to the individual article page
 import React, {useState} from 'react'
 import {Link} from "react-router-dom";
-import {useNavBarContext} from "../../context/NavBarContext";
+//import {useNavBarContext} from "../../context/NavBarContext";
 import {Col, Container, Row} from "react-bootstrap";
 //https://www.pluralsight.com/guides/how-to-implement-a-read-more-link-in-react
 
 const Item = (props) => {
-    const [readMore,setReadMore] = useState(false);
+    const [readMore, setReadMore] = useState(false);
 
-    const extraContent=
+    const extraContent = (
         <div>
             <p className="extra-content">
-                {props.content}
+                {props.text}
             </p>
         </div>
+    );
 
-    const linkName = readMore ? 'Read Less << ' : 'Read More >> '
+    const linkName = readMore ? 'Read Less << ' : 'Read More >> ';
 
     return (
+        <>
         <li>
             <Container>
                 <Row>
                     <Col>
-                        <img src={props.imageURL} alt="article graphics"/>
+                        <img src={props.image} alt="article graphics"/>
                     </Col>
                     <Col>
                         <Row>
@@ -52,8 +54,10 @@ const Item = (props) => {
                 </Row>
             </Container>
        </li>
+        <br />
+    </>
     )
 }
 
-export default Item
+export default Item;
 

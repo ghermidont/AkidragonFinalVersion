@@ -86,13 +86,13 @@ export default function AddArticlesForm() {
             .then((result) => {
                     window.alert("Article added successfully!");
                     history.push("/UserProfilePage", {from: "/AddArticlesForm"});
-                    return console.log("TEMP-article collection added successfully.");
+                    return console.log("article collection added successfully.");
                 }
             ).catch((error) => {
             console.log(error.code + " " + error.message + "" + error.details);
         });
       }
-      e.preventDefault();
+
     }
 
     //Clears all the in puts of the form and deletes the uploaded file:
@@ -107,14 +107,13 @@ export default function AddArticlesForm() {
       setUploadedPicFile('');
       setUrl('');
       setFileSuccess(false);
-      setVideoGames("");
-      setMovies("");
-      setMusic("");
-      // setCategoriesArr([]);
-      // inputArr=[];
+      setVideoGamesSwitch(0);
+      setMusicSwitch(0);
+      setMoviesSwitch(0);
 
       const desertRef = projectStorage.ref('articles_pictures/').child(uploadedPicFile.name);
-      if(desertRef) {
+
+      if(desertRef){
           desertRef.delete().then(() => {
               console.log("uploaded image removed successfully");
           }).catch((error) => {
@@ -122,11 +121,6 @@ export default function AddArticlesForm() {
           });
       }
   }
-
-  //Checkboxes switch variables:
-  //   let i = 0;
-  //   let n = 0;
-  //   let y = 0;
 
   return (
     <>

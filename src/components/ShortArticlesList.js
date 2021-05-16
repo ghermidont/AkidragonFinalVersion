@@ -1,7 +1,7 @@
 //https://firebase.google.com/docs/firestore/data-model
 //https://firebase.google.com/docs/firestore/query-data/index-overview
 //https://www.pluralsight.com/guides/how-to-implement-a-read-more-link-in-react
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useDataFromFirestore} from '../customHooks/useFirestore';
 import {Link} from "react-router-dom";
 import {useArticlesContext} from "../context/ArticlesContext";
@@ -10,36 +10,35 @@ import {useHistory} from 'react-router-dom';
 import {useLanguageContext} from "../context/LanguageContext";
 
 export default function ShortArticlesList() {
-  console.log("ArticlesList started");
+  console.log("ShortArticlesList started");
   const {appLanguage} = useLanguageContext();
   const history = useHistory();
-  const {setArticleContent, setChosenArticleNumber} = useArticlesContext();
-  //We pass the name of the collection we want to work with to the useDataFromFirestore hook
-  const {docsFromHook} = useDataFromFirestore('TEMP-articles');
+  const {setChosenArticleNumber} = useArticlesContext();
+  const {docsFromHook} = useDataFromFirestore('articles');
 
-  //Put out the articles objects array to the context.
-  useEffect(() => {
-    docsFromHook && setArticleContent(docsFromHook);
-  }, [docsFromHook, setArticleContent] );
+  let articlesArr;
 
-  console.log("Articles extracted from ShortArticlesList component.");
-  console.log(docsFromHook);
+  if(docsFromHook) {
+    articlesArr = docsFromHook.filter(function (article) {
+      return article.approved===true;
+    });
+  }
 
   return (
     <>
-      {docsFromHook && docsFromHook.slice(0, 4).map(doc => (
+      {articlesArr && articlesArr.slice(0, 4).map(doc => (
         <article className="article" key={doc.id}>
           <Link onClick={()=>{
             setChosenArticleNumber(doc.id);
             history.push(`/article/${doc.id}`, { from: "/ShortArticlesList" });//check which one works!!!!
           }}>
             <a className="article__link">
-              <img src={doc.imageURL?doc.imageURL:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="articles-page__img" alt="" className="article__image"/>
+              <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="articles-page__img" alt="" className="article__image"/>
               <div className="article__content">
                 <img className="article__logo" src={logo} alt="logo"/>
                 <div className="article__box-text">
                   <p className="article__text">
-                    {doc[appLanguage].description}
+                    {doc.content[appLanguage].description}
                   </p>
                 </div>
               </div>

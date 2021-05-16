@@ -51,26 +51,26 @@ const LoginSignUpForm = () => {
             <p className="passwordError">{passwordError}</p>
 
           <div className='form-article__box-btn'>
-            {/*{hasAccount ? (*/}
-
+            {hasAccount ? (
+                <>
                  <button className="form-article__btn" style={{marginLeft: '20px'}} type="button" onClick={handleLogin}>Sign in</button>
-                {/*<p>*/}
-                {/*  Don't have an account?*/}
-                {/*  <span onClick={()=>setHasAccount(!hasAccount)}>Sign up</span>*/}
-                {/*</p>*/}
-
-            {/*// ):(*/}
-            {/*// <>*/}
-            {/*//      <PictureUploadForm />*/}
-            {/*//   <div>*/}
-            {/*//      <p>*/}
-            {/*//         Have an account?*/}
-            {/*//      </p>*/}
-            {/*//   <span onClick={()=>setHasAccount(!hasAccount)}>Sign in</span>*/}
-            {/*//   </div>*/}
-            {/*//   <div> <button className="form-article__btn" type="button" onClick={handleSignup}>Sign up</button></div>*/}
-            {/*// </>*/}
-            {/*// )}*/}
+                <p>
+                  Don't have an account?
+                  <span onClick={()=>setHasAccount(!hasAccount)}>Sign up</span>
+                </p>
+              </>
+             ):(
+             <>
+                  <PictureUploadForm />
+               <div>
+                  <p>
+                     Have an account?
+                  </p>
+               <span onClick={()=>setHasAccount(!hasAccount)}>Sign in</span>
+               </div>
+               <div> <button className="form-article__btn" type="button" onClick={handleSignup}>Sign up</button></div>
+             </>
+             )}
           </div>
         </form>
       </div>

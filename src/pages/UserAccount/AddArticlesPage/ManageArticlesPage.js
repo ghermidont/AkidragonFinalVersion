@@ -10,7 +10,7 @@ const ManageArticlesPage = () => {
     console.log("ManageArticlesPage worked");
     const {appLanguage} = useLanguageContext();
     const history = useHistory();
-    const {setChosenArticleNumber} = useArticlesContext();
+    const {setChosenModifyArticleNumber} = useArticlesContext();
     const {docsFromHook} = useDataFromFirestore('TEMP-articles');
 
     return (
@@ -26,34 +26,36 @@ const ManageArticlesPage = () => {
                                     <li className="articles-page__tab-item" key={doc.id}>
                                         <article className='articles-page__post'>
                                             <div className="articles-page__image">
-                                                <img src={doc.imageURL?doc.imageURL:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="articles-page__img"/>
+                                                <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="articles-page__img"/>
                                             </div>
                                             <div className="articles-page__content">
-                                                <Link
-                                                    onClick={()=>{
-                                                        setChosenArticleNumber(doc.id);
-                                                        history.push(`/article/${doc.id}`, { from: "/ManageArticlesPage" });//check which one works!!!!
-                                                    }}
-                                                >
-                                                    <h3 className="articles-page__content-title">{doc[appLanguage].title}</h3>
-                                                </Link>
-                                                <div className="articles-page__content-info">
-                                                </div>
+                                                <h3 className="articles-page__content-title">{doc.content[appLanguage].title}</h3>
                                                 <p className="articles-page__content-text">
-                                                    {doc[appLanguage].text}
-                                                </p>
+                                                    {doc.content[appLanguage].text}
+                                                 </p>
                                             </div>
                                         </article>
                                         <Button
                                             variant="danger"
                                             onClick={()=>{
-                                                projectFirestore.collection("TEMP-articles").doc(doc.id).delete().then(() => {
+                                                projectFirestore.collection("articles").doc(doc.id).delete().then(() => {
                                                     console.log("Document successfully deleted!");
                                                 }).catch((error) => {
                                                     console.error("Error removing document: ", error);
                                                 });
                                             }}
-                                        >DELETE</Button>
+                                        >
+                                            DELETE
+                                        </Button>
+
+                                        <Link onClick={()=> {
+                                            setChosenModifyArticleNumber(doc.id);
+                                            history.push(`/modify-article/${doc.id}`, {from: "/ManageArticlesPage"});
+                                        }}>
+                                            <Button>
+                                                UPDATE
+                                            </Button>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>

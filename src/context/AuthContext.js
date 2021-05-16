@@ -24,7 +24,7 @@ export function AuthContextProvider({ children }) {
     const [currentUserModerator, setCurrentUserModerator] = useState();
     const [userInfoCompleted, setUserInfoCompleted] = useState();
     //const [loading, setLoading] = useState(true);
-
+    const[moderator, setModerator] = useState(false);
     console.log("AuthContextProvider() worked!");
 
     const clearErrors = () => {
@@ -214,7 +214,9 @@ export function AuthContextProvider({ children }) {
         userUploadedPictureUrl,
         setUserUploadedPictureUrl,
         userInfoCompleted,
-        setUserInfoCompleted
+        setUserInfoCompleted,
+        moderator,
+        setModerator
     }
 
     return (

@@ -3,7 +3,7 @@ import React from 'react';
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
 import {auth} from "../../fireBase";
 
-export default function NOUpdateUserProfilePage() {
+export default function UpdateUserProfilePage() {
   //const {currentUser} = useAuthContext();
   const {docsFromHook} = useDataFromFirestore('user-profiles');
   const currentUser = auth.currentUser

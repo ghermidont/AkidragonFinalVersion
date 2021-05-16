@@ -6,9 +6,8 @@ import {useLanguageContext} from "../context/LanguageContext";
 const queryString = require('query-string');
 
 export default function Article() {
-    console.log("Article component worked!");
-    const {articleContent, chosenArticleNumber} = useArticlesContext();
-    const {docsFromHook} = useDataFromFirestore('TEMP-articles');
+    console.log("Individual article component worked!");
+    const {docsFromHook} = useDataFromFirestore('articles');
     const {appLanguage} = useLanguageContext();
     let parsedWindowLocation = queryString.parse(window.location.hash);
     const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(13);
@@ -18,24 +17,12 @@ export default function Article() {
 
     let selectedArticle = "";
 
-    if(chosenArticleNumber){
-        console.log("Value of chosenArticleNumber:");
-        console.log(chosenArticleNumber);
-        if(articleContent) {
-            console.log("first option worked");
-            //Filter the articles object and select the article who's slug corresponds to the current window slug
-            selectedArticle = articleContent.filter(function (article) {
-                return article.id === chosenArticleNumber;
-            });
-        }
-    }else{
-        if(docsFromHook) {
-            console.log("second option worked");
-            //Filter the articles object and select the article who's slug corresponds to the current window slug
-            selectedArticle = docsFromHook.filter(function (article) {
-                return article.id === stringifiedSlug;
-            });
-        }
+    if(docsFromHook) {
+        console.log("second option worked");
+        //Filter the articles object and select the article who's slug corresponds to the current window slug
+        selectedArticle = docsFromHook.filter(function (article) {
+            return article.id === stringifiedSlug;
+        });
     }
 
     return(
@@ -57,16 +44,16 @@ export default function Article() {
                                 maxWidth: '25%',
                                 height: 'auto'
                             }}
-                                 src={doc.imageURL?doc.imageURL:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
+                                 src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
                                  className="articles-page__img"
                                  alt=""
                             />
                         </div>
                             <h1 className="new-article__title title">
-                                Title: {doc[appLanguage].title}
+                                Title: {doc.content[appLanguage].title}
                             </h1>
                         <p className="new-article__text">
-                            Content: {doc[appLanguage].text}
+                            Content: {doc.content[appLanguage].text}
                         </p>
                         <div className="new-article__info">
                         <br/>

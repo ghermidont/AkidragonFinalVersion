@@ -2,11 +2,13 @@ import React from 'react';
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
 import {Button} from "react-bootstrap";
 import {projectFirestore} from "../../fireBase";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import {useTournamentsContext} from "../../context/TournamentsContext";
 
-function TournamentsPage() {
-    const {docsFromHook} = useDataFromFirestore('TEMP-tournaments');
-
+function ManageTournamentsPage() {
+    const history = useHistory();
+    const {docsFromHook} = useDataFromFirestore('tournaments');
+    const {setChosenTournamentNumber} = useTournamentsContext();
     const passedEvents = docsFromHook.filter(function (doc) {
         return doc.eventStatus === "passed";
     });
@@ -31,7 +33,7 @@ function TournamentsPage() {
             <div className="tab__content">
                 <a className="tab__title">{doc.eventCategory}</a>
                 <div className="tab__name">{doc.eventTitle}</div>
-                <date className="tab__date">{doc.eventDate}</date>
+                <date className="tab__date">{new Date(Date.parse(doc.eventDate))}</date>
             </div>
             <ul className="tab__icon">
                 <li className="tab__item-icon">
@@ -57,7 +59,7 @@ function TournamentsPage() {
                 <Button
                     variant="danger"
                     onClick={()=>{
-                        projectFirestore.collection("TEMP-tournaments").doc(doc.id).delete().then(() => {
+                        projectFirestore.collection("tournaments").doc(doc.id).delete().then(() => {
                             window.alert("Document successfully deleted!");
                         }).catch((error) => {
                             console.error("Error removing document: ", error);
@@ -66,6 +68,11 @@ function TournamentsPage() {
                 >
                     DELETE
                 </Button>
+                <Link to="/ModifyTournamentForm">
+                <Button>
+                    UPDATE
+                </Button>
+                </Link>
         </li>
 
         );
@@ -115,6 +122,14 @@ function TournamentsPage() {
                         });
                     }}
                 >DELETE</Button>
+            <Link onClick={()=> {
+                setChosenTournamentNumber(doc.id);
+                history.push(`/tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
+            }}  >
+                <Button>
+                    UPDATE
+                </Button>
+            </Link>
         </li>
         );
     }
@@ -173,6 +188,14 @@ function TournamentsPage() {
                 >
                     DELETE
                 </Button>
+                <Link onClick={()=> {
+                    setChosenTournamentNumber(doc.id);
+                    history.push(`/tournament/${doc.id}`, {from: "/ManageTournamentsPage"});//check which one works!!!!
+                }}  >
+                    <Button>
+                        UPDATE
+                    </Button>
+                </Link>
         </li>
         );
     }
@@ -246,6 +269,14 @@ function TournamentsPage() {
                 >
                     DELETE
                 </Button>
+                <Link onClick={()=> {
+                    setChosenTournamentNumber(doc.id);
+                    history.push(`/tournament/${doc.id}`, {from: "/ManageTournamentsPage"});//check which one works!!!!
+                }}  >
+                    <Button>
+                        UPDATE
+                    </Button>
+                </Link>
         </li>
         );
     }
@@ -274,4 +305,4 @@ function TournamentsPage() {
     );
 }
 
-export default TournamentsPage;
+export default ManageTournamentsPage;

@@ -3,10 +3,10 @@ import {useDataFromFirestore} from "../../customHooks/useFirestore";
 import {functions} from "../../fireBase";
 import {useLanguageContext} from "../../context/LanguageContext";
 
-export default function NOApproveArticlesPage() {
+export default function ApproveArticlesPage() {
     console.log("ApproveArticlesComponent");
-      const {docsFromHook} = useDataFromFirestore('articles');
-    //const {appLanguage} = useLanguageContext();
+    const {docsFromHook} = useDataFromFirestore('articles');
+    const {appLanguage} = useLanguageContext();
     const [readMore, setReadMore] = useState(false);
 
     let pendingArticlesArr;
@@ -17,9 +17,6 @@ export default function NOApproveArticlesPage() {
             return article.approved===false;
         });
     }
-
-    console.log("Pending articles from ApproveArticlesComponent");
-    console.log(pendingArticlesArr);
 
     const approveCloudFunctTrigger = (id) => {
         console.log("approveCloudFunctTrigger()");
@@ -49,11 +46,11 @@ export default function NOApproveArticlesPage() {
                             <>
                             <li className="approve__item">
                                 <div className="approve__image">
-                                    <img src={doc.pictureURL} alt="" className="approve__img"/>
+                                    <img src={doc.content.image} alt="" className="approve__img"/>
                                 </div>
                                 <div className="approve__content">
-                                    <h3 className="approve__item-title" >{doc.content.en.title}</h3>
-                                    <p className="approve__text">{doc.content.en.description}</p>
+                                    <h3 className="approve__item-title" >{doc.content[appLanguage].title}</h3>
+                                    <p className="approve__text">{doc.content[appLanguage].description}</p>
                                 </div>
                                 <div className="approve__box-btn">
                                     <button className="approve__btn approve__btn--green" onClick={()=>approveCloudFunctTrigger(doc.id)}>Approve</button>
@@ -64,7 +61,7 @@ export default function NOApproveArticlesPage() {
                             {readMore &&
                                 <div>
                                     <p className="extra-content">
-                                        {doc.content.en.text}
+                                        {doc.content[appLanguage].text}
                                     </p>
                                 </div>
                             }

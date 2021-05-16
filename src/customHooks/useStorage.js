@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {projectStorage, timestamp} from '../fireBase';
+import {projectStorage} from '../fireBase';
 //import {useAuthContext} from '../context/AuthContext';
 
 const useStorage = (file, userId) => {

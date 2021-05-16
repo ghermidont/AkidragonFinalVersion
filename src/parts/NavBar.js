@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 //import {useAuthContext} from '../context/AuthContext';
 import {useLanguageContext} from '../context/LanguageContext';
 import {useTranslation} from 'react-i18next';
-import SearchForm from "../components/SearchBar/SearchForm";
+import SearchBar from "../components/SearchBar/SearchBar";
 import logo from '../assets/images/src/DragonLogo.png';
 import {useAuthContext} from "../context/AuthContext";
 
@@ -111,13 +111,13 @@ export default function NavBar() {
                 </Link>
               }
             </li>
-           {/*<li className="box-user__item">*/}
-           {/*   {currentUser &&*/}
-           {/*      <Link to='./FormUpdateProfile' className='box-user__exit'>*/}
-           {/*       <span className="icon-cog box-user__icon"></span>*/}
-           {/*     </Link>*/}
-           {/*   }*/}
-           {/* </li>*/}
+           <li className="box-user__item">
+              {currentUser &&
+                 <Link to='./FormUpdateProfile' className='box-user__exit'>
+                  <span className="icon-cog box-user__icon"></span>
+                </Link>
+              }
+            </li>
             <li className="box-user__item">
               {currentUser &&
                 <button className='box-user__exit' onClick={handleLogout}>
@@ -149,7 +149,7 @@ export default function NavBar() {
         </ul>
 
         <div className="search header__search">
-           <SearchForm />
+           <SearchBar />
         </div>
       </div>
     </header>

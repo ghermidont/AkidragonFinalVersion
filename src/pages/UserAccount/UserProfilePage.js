@@ -5,7 +5,7 @@ import {useAuthContext} from "../../context/AuthContext";
 //import useStorage from "../../customHooks/useStorage";
 //import {useDataFromFirestore} from "../../customHooks/useFirestore";
 //import LoginSignUpForm from "../LoginPage/LoginSignUpForm";
-//import Step2CompleteProfilePage from "./NO-CreateUserAccount/Step2CompleteProfilePage";
+//import Step2CompleteProfilePage from "./CreateUserAccount/Step2CompleteProfilePage";
 
 export default function UserProfilePage() {
   console.log("UserProfilePage");
@@ -110,7 +110,7 @@ export default function UserProfilePage() {
                           <div className="container">
                             <h2 className='article-profile__title title'>Article</h2>
                             <div className="article-profile__inner">
-                              <Link className='article-profile__btn' to="/BlogPage">See All</Link>
+                              <Link className='article-profile__btn' to="/UserProfileArticlesPage">See All</Link>
                               <ShortArticlesList/>
                             </div>
                           </div>
