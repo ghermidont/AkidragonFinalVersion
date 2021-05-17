@@ -1,63 +1,89 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 //import {useAuthContext} from "../../context/AuthContext";
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
-import {auth} from "../../fireBase";
+import {auth, projectFirestore} from "../../fireBase";
+import {Button} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import {useAuthContext} from "../../context/AuthContext";
 
 export default function UpdateUserProfilePage() {
-  //const {currentUser} = useAuthContext();
+  console.log("UpdateUserProfilePage() worked");
   const {docsFromHook} = useDataFromFirestore('user-profiles');
-  const currentUser = auth.currentUser
+  const {currentUser} = useAuthContext();
+  const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
+  const[currentUserDbInfo, setCurrentUserDbInfo] = useState();
 
-  let returnedUserDoc = [];
-
-  if(docsFromHook&&currentUser) {
-    returnedUserDoc = docsFromHook.filter(doc => {
-      return doc.id === currentUser.uid;
-    });
-  }
+  useEffect(() => {
+    if(docsFromHook&&(currentUser||CurrentUserFromLS)) {
+      let userDoc = projectFirestore
+          .collection('user-profiles')
+          .doc(CurrentUserFromLS.uid).get().then((doc)=>{
+            if(doc.exists){
+              setCurrentUserDbInfo(JSON.stringify(doc.data()));
+            }else{
+              console.log("No such document!");
+            }
+          })
+          .catch((error) => {
+            console.log("Error getting document:", error);
+          });
+      console.log(JSON.stringify(userDoc));
+     }
+  }, );
 
   return (
     <>
       <div className='form-update__body'>
         <form className="form-update">
           <div className="form-update__avatar-image">
-            <img className="form-update__avatar-img" src="https://www.istockphoto.com/resources/images/PhotoFTLP/Signature-1205756464.jpg" alt=""/>
+            <img className="form-update__avatar-img" src={(currentUserDbInfo.photoURL)?currentUserDbInfo.photoURL:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/profile_pictures%2Fdepositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg?alt=media&token=5f904560-36a3-4425-9386-960fa63a92e6"} alt=""/>
           </div>
           <label className='form-update__label btn-upload'> <span className='icon-upload2'></span> Upload
             <input className='form-update__btn visually-hidden' type="file" placeholder='file'/>
           </label>
           <label className='form-update__label'>
-            Nick Name
-            <input className='form-update__input' type="text" required/>
-          </label>
-          <label className='form-update__label'>
-            Date
+            Birth date
             <input className='form-update__input date' type="date"
                    min="2021-05-03" max="2022-12-31"/>
           </label>
           <label className='form-update__label'>
-            Name
+            Display name
+            <input className='form-update__input' type="text" required/>
+          </label>
+
+          <button className="form-article__btn">Update birth date</button>
+          <label className='form-update__label'>
+            First name
             <input className='form-update__input' type="text" required/>
           </label>
           <label className='form-update__label'>
-            Last Name
+            Last name
             <input className='form-update__input' type="text" required/>
           </label>
           <label className='form-update__label'>
             Address
             <input className='form-update__input' type="text" required/>
           </label>
+          <button className="form-article__btn">Update address</button>
           <label className='form-update__label'>
             Password
             <input className='form-update__input' type="password" required/>
           </label>
           <label className='form-update__label'>
+            Password
+            <input className='form-update__input' type="password" required/>
+          </label>
+          <button className="form-article__btn">Change password</button>
+          <label className='form-update__label'>
             Email
             <input className='form-update__input' type="email" required/>
           </label>
-          <button className="form-article__btn">Submit</button>
+          <button className="form-article__btn">Change email</button>
         </form>
-      </div>
+        <Link to="/DeleteProfilePage">
+          <Button variant="danger">Delete Account</Button>
+        </Link>
+        </div>
     </>
   );
 }

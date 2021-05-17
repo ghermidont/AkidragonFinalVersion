@@ -5,6 +5,8 @@ import {useDataFromFirestore} from "../../customHooks/useFirestore";
 import {useAuthContext} from "../../context/AuthContext";
 import {useArticlesContext} from "../../context/ArticlesContext";
 import {useLanguageContext} from "../../context/LanguageContext";
+import {Button} from "react-bootstrap";
+import {projectFirestore} from "../../fireBase";
 
 const UserProfileArticlesPage = () => {
   console.log("UserProfileArticlesPage ");
@@ -14,6 +16,7 @@ const UserProfileArticlesPage = () => {
   const history = useHistory();
   const {setChosenArticleNumber} = useArticlesContext();
   const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
+  const {setChosenModifyArticleNumber} = useArticlesContext();
 
   let generalLatestArticlesArr = [];
   let userPersonalArticlesArr = [];
@@ -55,18 +58,20 @@ const UserProfileArticlesPage = () => {
     <>
       <section className='articles-page'>
         <div className="container">
-          <h1 className="articles-page__title title">Article</h1>
+          <h1 className="articles-page__title title">Articles</h1>
           <Link className='btn ' to='/AddArticlesForm'>Add Articles</Link>
           <div className="articles-page__tab tab">
 
             <div className="articles-page__tab-body">
               <div className="articles-page__tab-btn-inner">
-                <button className="articles-page__tab-btn active" type="button" data-tab="#tab_1">All Article</button>
-                <button className="articles-page__tab-btn" type="button" data-tab="#tab_2">Personal Article</button>
+                <button className="articles-page__tab-btn active" type="button" data-tab="#tab_1">New Articles</button>
+                <button className="articles-page__tab-btn" type="button" data-tab="#tab_2">Personal Articles</button>
               </div>
 
               <ul className="articles-page__tab-list active" id="tab_1">
                 {generalLatestArticlesArr && generalLatestArticlesArr.slice(0, 8).map(doc => (
+               <>
+                  <br/>
                   <li className="articles-page__tab-item" key={doc.id}>
                   <article className='articles-page__post'>
                     <div className="articles-page__image">
@@ -76,7 +81,7 @@ const UserProfileArticlesPage = () => {
                       <Link
                           onClick={()=>{
                             setChosenArticleNumber(doc.id);
-                            history.push(`/article/${doc.id}`, { from: "/UserProfileArticlesPage" });//check which one works!!!!
+                            history.push(`/article/${doc.id}`, { from: "/UserProfileArticlesPage" });
                           }}
                       >
                         <h3 className="articles-page__content-title">{doc.content[appLanguage].title}</h3>
@@ -89,11 +94,12 @@ const UserProfileArticlesPage = () => {
                     </div>
                   </article>
                 </li>
+                  </>
                 ))}
               </ul>
 
               <ul className="articles-page__tab-list" id="tab_2">
-                {userPersonalArticlesArr && userPersonalArticlesArr.slice(0, 8).map(doc => ( //Consider pagination
+                {userPersonalArticlesArr && userPersonalArticlesArr.slice(0, 8).map(doc => ( //TODO Consider pagination
                 <li className="articles-page__tab-item">
                   <article className='articles-page__post'>
                     <div className="articles-page__image">
@@ -112,6 +118,26 @@ const UserProfileArticlesPage = () => {
                     </div>
                     {doc.approved===false&&<div>Not approve yet</div>}
                   </article>
+                  <Link onClick={()=> {
+                    setChosenModifyArticleNumber(doc.id);
+                    history.push(`/modify-article/${doc.id}`, {from: "/ManageArticlesPage"});
+                  }}>
+                    <Button>
+                      UPDATE
+                    </Button>
+                  </Link>
+                  <Button
+                      variant="danger"
+                      onClick={()=>{
+                        projectFirestore.collection("articles").doc(doc.id).delete().then(() => {
+                          console.log("Document successfully deleted!");
+                        }).catch((error) => {
+                          console.error("Error removing document: ", error);
+                        });
+                      }}
+                  >
+                    DELETE
+                  </Button>
                 </li>
                 ))}
               </ul>

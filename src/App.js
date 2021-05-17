@@ -17,6 +17,7 @@ import Step2CompleteProfilePage from "./pages/UserAccount/CreateUserAccount/Step
 import MainLoginPage from "./pages/LoginPage/MainLoginPage";
 import UserProfileArticlesPage from './pages/UserAccount/UserProfileArticlesPage';
 import ApproveArticlesPage from './pages/ModeratorPanel/ApproveArticlesPage';
+import DeleteProfilePage from "./pages/UserAccount/DeleteProfilePage";
 
 //connect styles
 import './styles/scss/style.scss';
@@ -60,7 +61,7 @@ function App() {
                                             <PrivateRoute path="/ModeratorAddTournamentsForm" component={ModeratorAddTournamentsForm} />
                                             <PrivateRoute path="/UserProfileArticlesPage" component={UserProfileArticlesPage} />
                                             <PrivateRoute path="/UpdateUserProfilePage" component={UpdateUserProfilePage} />
-                                            <PrivateRoute path="/NOApproveArticlesPage" component={ApproveArticlesPage} />
+                                            <PrivateRoute path="/ApproveArticlesPage" component={ApproveArticlesPage} />
                                             <PrivateRoute path="/Step2CompleteProfilePage" component={Step2CompleteProfilePage} />
                                             <PrivateRoute path="/ManageArticlesPage" component={ManageArticlesPage} />
                                             <PrivateRoute path="/ManageStreamsPage" component={ManageStreamsPage} />
@@ -68,6 +69,7 @@ function App() {
                                             <PrivateRoute path="/tournament/:slug" component={ModifyTournamentForm} />
                                             <PrivateRoute path="/stream/:slug" component={ModifyStreamForm} />
                                             <PrivateRoute path="/modify-article/:slug" component={ModifyArticleForm} />
+                                            <PrivateRoute path="/DeleteProfilePage" component={DeleteProfilePage} />
 
                                             <Route path="/" exact component={HomePage} />
                                             <Route path="/article/:slug" component={ArticlePage} />

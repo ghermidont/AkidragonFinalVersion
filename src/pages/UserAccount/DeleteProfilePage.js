@@ -7,14 +7,15 @@ export default function ConfirmDeleteProfile(){
     console.log("ConfirmDeleteProfile worked.");
 
     const deleteCurrentUser = () => {
-    currentUser.delete().then(function() {
-        useHistory.push('/');
-        window.alert("Profile deleted.");
-        console.log("deleteCurrentUser() worked.");
-    }).catch(function(error) {
-        window.alert(error);
-    });
-
+        if(currentUser) {
+            currentUser.delete().then(function () {
+                useHistory.push('/');
+                window.alert("Profile deleted.");
+                console.log("deleteCurrentUser() worked.");
+            }).catch(function (error) {
+                window.alert(error);
+            });
+        }
     }
     return(
         <div className="modal" tabIndex="-1">

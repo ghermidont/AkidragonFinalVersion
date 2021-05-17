@@ -18,14 +18,14 @@ const LoginSignUpForm = () => {
     setHasAccount,
     emailError,
     passwordError,
-    setUploadedPicFile
+    setSignUpFormUserUploadedFile
   } = useAuthContext();
 
  const fileUploadEventListener = (e) => {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-        localStorage.setItem("userPicture", uploadedFile);
-        // setUploadedPicFile(uploadedFile);
+        //localStorage.setItem("userPicture", uploadedFile);
+        setSignUpFormUserUploadedFile(uploadedFile);
     } else {
         //localStorage.removeItem("userPicture");
       //setUploadedPicFile('');
