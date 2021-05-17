@@ -14,6 +14,8 @@ export default function UserProfilePage() {
   const {currentUser} = useAuthContext();
   const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
   const {docsFromHook} = useDataFromFirestore('user-profiles');
+  const currentUserExtraInfoLS = JSON.parse(localStorage.getItem('currentUserExtraInfo'));
+
 
   useEffect(() => {
     if(docsFromHook&&(currentUser||CurrentUserFromLS)) {
@@ -34,7 +36,7 @@ export default function UserProfilePage() {
       console.log(JSON.stringify(userDoc));
       //localStorage.setItem("currentUserExtraInfo", JSON.stringify(userDoc));
       }
-  }, []);
+  }, );
 
   // projectFirestore
   //     .collection('user-profiles')
@@ -84,9 +86,9 @@ export default function UserProfilePage() {
                             <div className="profile__inner">
                               <div className="profile__box">
                                 <div className="profile__image">
-                                  {/*{userDoc&&userDoc.map((info)=>*/}
-                                  {/*<img className="profile__img" src={info.photoURL?info.photoURL:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/profile_pictures%2Fdepositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg?alt=media&token=5f904560-36a3-4425-9386-960fa63a92e6"} alt=""/>*/}
-                                  {/*)}*/}
+                                  {currentUserExtraInfoLS&&
+                                  <img className="profile__img" src={currentUserExtraInfoLS.photoURL?currentUserExtraInfoLS.photoURL:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/profile_pictures%2Fdepositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg?alt=media&token=5f904560-36a3-4425-9386-960fa63a92e6"} alt=""/>
+                                  }
                                 </div>
                                 <ul className="profile__list">
                                   <li className="profile__item"><strong>Profile page:</strong></li>
@@ -94,12 +96,12 @@ export default function UserProfilePage() {
                                   {/*<li className="profile__item">Lastname: {userInfo.lastName}</li>*/}
                                   <li className="profile__item">Email: {currentUser?currentUser.email:CurrentUserFromLS.email}</li>
                                   <li className="profile__item">Email verified: {currentUser?currentUser.emailVerified===false||CurrentUserFromLS.emailVerified===false?"false":"true":""}</li>
-                                  {/*{userDoc&&userDoc.map((info)=>*/}
-                                  {/*    <>*/}
-                                  {/*    <li className="profile__item">First name: {info.firstName}</li>*/}
-                                  {/*    <li className="profile__item">Last name: {info.lastName}</li>*/}
-                                  {/*</>*/}
-                                  {/*    )}*/}
+                                  {currentUserExtraInfoLS&&
+                                      <>
+                                      <li className="profile__item">First name: {currentUserExtraInfoLS.firstName}</li>
+                                      <li className="profile__item">Last name: {currentUserExtraInfoLS.lastName}</li>
+                                  </>
+                                      }
                                   <br/>
                                 </ul>
                               </div>
