@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import ShortArticlesList from "../../components/ShortArticlesList";
 import {Link} from "react-router-dom";
 import {useAuthContext} from "../../context/AuthContext";
+import {useDataFromFirestore} from "../../customHooks/useFirestore";
+import {projectFirestore} from "../../fireBase";
 //import useStorage from "../../customHooks/useStorage";
 //import {useDataFromFirestore} from "../../customHooks/useFirestore";
 //import LoginSignUpForm from "../LoginPage/LoginSignUpForm";
@@ -9,9 +11,34 @@ import {useAuthContext} from "../../context/AuthContext";
 
 export default function UserProfilePage() {
   console.log("UserProfilePage");
-  const {currentUser, sendVerifyEmail} = useAuthContext();
+  const {currentUser} = useAuthContext();
   const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
+  const {docsFromHook} = useDataFromFirestore('user-profiles');
 
+  useEffect(() => {
+    if(docsFromHook&&(currentUser||CurrentUserFromLS)) {
+      let userDoc = projectFirestore
+          .collection('user-profiles')
+          .doc(CurrentUserFromLS.uid).get().then((doc)=>{
+          if(doc.exists){
+            localStorage.setItem("currentUserExtraInfo", JSON.stringify(doc.data()));
+          }else{
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+          })
+          .catch((error) => {
+              console.log("Error getting document:", error);
+          });
+
+      console.log(JSON.stringify(userDoc));
+      //localStorage.setItem("currentUserExtraInfo", JSON.stringify(userDoc));
+      }
+  }, []);
+
+  // projectFirestore
+  //     .collection('user-profiles')
+  //     .doc(currentUser.uid?currentUser.uid:CurrentUserFromLS)
   //const {signUpFormUserUploadedFile, setUserUploadedPictureUrl} = useAuthContext;
   //const {url} = useStorage(signUpFormUserUploadedFile, currentUser.uid);
   //console.log("url of the db uploaded file");
@@ -57,16 +84,23 @@ export default function UserProfilePage() {
                             <div className="profile__inner">
                               <div className="profile__box">
                                 <div className="profile__image">
-                                  <img className="profile__img" src="https://www.istockphoto.com/resources/images/PhotoFTLP/Signature-1205756464.jpg" alt=""/>
+                                  {/*{userDoc&&userDoc.map((info)=>*/}
+                                  {/*<img className="profile__img" src={info.photoURL?info.photoURL:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/profile_pictures%2Fdepositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg?alt=media&token=5f904560-36a3-4425-9386-960fa63a92e6"} alt=""/>*/}
+                                  {/*)}*/}
                                 </div>
                                 <ul className="profile__list">
-                                  <li className="profile__item"><strong>Moderator page:</strong></li>
+                                  <li className="profile__item"><strong>Profile page:</strong></li>
                                   {/*<li className="profile__item">Name: {userInfo.firstName}</li>*/}
                                   {/*<li className="profile__item">Lastname: {userInfo.lastName}</li>*/}
                                   <li className="profile__item">Email: {currentUser?currentUser.email:CurrentUserFromLS.email}</li>
                                   <li className="profile__item">Email verified: {currentUser?currentUser.emailVerified===false||CurrentUserFromLS.emailVerified===false?"false":"true":""}</li>
+                                  {/*{userDoc&&userDoc.map((info)=>*/}
+                                  {/*    <>*/}
+                                  {/*    <li className="profile__item">First name: {info.firstName}</li>*/}
+                                  {/*    <li className="profile__item">Last name: {info.lastName}</li>*/}
+                                  {/*</>*/}
+                                  {/*    )}*/}
                                   <br/>
-                                <button className="btn btn-warning" type="button" onClick={sendVerifyEmail}>Verify email</button>
                                 </ul>
                               </div>
                               <ul className="profile__settings">

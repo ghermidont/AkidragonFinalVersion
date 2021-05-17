@@ -6,6 +6,7 @@ import {useTranslation} from 'react-i18next';
 import SearchBar from "../components/SearchBar/SearchBar";
 import logo from '../assets/images/src/DragonLogo.png';
 import {useAuthContext} from "../context/AuthContext";
+import UpdateUserProfilePage from "../pages/UserAccount/UpdateUserProfilePage";
 
 export default function NavBar() {
   const {currentUser, handleLogout} = useAuthContext();
@@ -113,7 +114,7 @@ export default function NavBar() {
             </li>
            <li className="box-user__item">
               {currentUser &&
-                 <Link to='./FormUpdateProfile' className='box-user__exit'>
+                 <Link to='/UpdateUserProfilePage' className='box-user__exit'>
                   <span className="icon-cog box-user__icon"></span>
                 </Link>
               }

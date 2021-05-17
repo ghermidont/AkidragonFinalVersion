@@ -2,26 +2,19 @@ import React, {useEffect} from 'react';
 import ShortArticlesList from "../../components/ShortArticlesList";
 import LatestStreamsSwiper from "../../components/swipers/LatestStreamsSwiper";
 import {Link} from 'react-router-dom';
-import {useLatestStreamsContext} from '../../context/StreamsContext';
 //import {useAuthContext} from "../../context/AuthContext";
 import logoSection from '../../assets/images/dest/logo-section.png';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 export default function HomePage() {
   console.log("HomePage component worked.");
-  const {getLatestTournamentsForSwiper, getLatestEntertainmentForSwiper} = useLatestStreamsContext();
+
   //const {authListener} = useAuthContext();
 
   // useEffect(() => {
   //   console.log("use effect worked");
   //   authListener();
   // });
-
-  //getLatestStreamsForSwiper();
-  useEffect(()=> {
-    getLatestEntertainmentForSwiper();
-    getLatestTournamentsForSwiper();
-  }, [] );
 
   return (
       <>

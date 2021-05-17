@@ -23,7 +23,7 @@ export default  function LatestStreamsSwiper () {
     const player = useRef();
 
     console.log("LatestStreamsSwiper component worked");
-    const {docsFromHook} = useDataFromFirestore('TEMP-streams');
+    const {docsFromHook} = useDataFromFirestore('streams');
     const [playState, setPlayState] = useState(false);
 
     return (

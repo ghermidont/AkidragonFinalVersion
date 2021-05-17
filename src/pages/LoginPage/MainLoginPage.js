@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import LoginSignUpForm from './LoginSignUpForm';
-import UserProfilePage from '../UserAccount/UserProfilePage';
+//import UserProfilePage from '../UserAccount/UserProfilePage';
 import {useAuthContext} from '../../context/AuthContext';
+import PreUserProfilePageCheck from "../pre-UserProfilePageCheck";
 
 export default function MainLoginPage() {
     console.log("MainLoginPage worked.");
@@ -11,7 +12,7 @@ export default function MainLoginPage() {
         <div>
             {currentUser||CurrentUserFromLS ?
                 (
-                    <UserProfilePage />
+                    <PreUserProfilePageCheck />
                 ) : (
                     <LoginSignUpForm />
                 )

@@ -17,7 +17,7 @@ SwiperCore.use([EffectCoverflow,Pagination]);
 
 export default function MatchesTournamentsSwiper (){
     console.log("EntertainmentSwiper component worked");
-    const {docsFromHook} = useDataFromFirestore('TEMP-streams');
+    const {docsFromHook} = useDataFromFirestore('streams');
     const [mainMatchVid, setMainMatchVid] = useState('');
 
     const filterResult =  docsFromHook.filter(function(doc) {

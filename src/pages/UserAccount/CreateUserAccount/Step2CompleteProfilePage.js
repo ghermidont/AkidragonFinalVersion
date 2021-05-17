@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useAuthContext} from "../../../context/AuthContext";
 import {functions} from "../../../fireBase";
 import {useHistory} from 'react-router-dom';
@@ -7,23 +7,22 @@ import useStorage from "../../../customHooks/useStorage";
 export default function Step2CompleteProfilePage() {
     console.log("Step2CompleteProfilePage");
     const history = useHistory();
-    const {currentUser, signUpFormUserUploadedFile} = useAuthContext();
-    const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
+    const {userUploadedPictureUrl} = useAuthContext();
+    // const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
+    const [currentUserFirstName, setCurrentUserFirstName] = useState('');
+    const [currentUserLastName, setCurrentUserLastName] = useState('');
+    const [currentDisplayName, setCurrentDisplayName] = useState('');
 
-    let currentUserFirstName = "";
-    let currentUserLastName = "";
-    let currentDisplayName = "";
-
-    const {url, error} = useStorage(signUpFormUserUploadedFile, CurrentUserFromLS);
+    //const {url, error} = useStorage(signUpFormUserUploadedFile, CurrentUserFromLS);
 
     const cloudFunctionTrigger = () => {
         console.log("Step2CompleteProfilePage cloudFunctionTrigger()");
         const addData = functions.httpsCallable('setUserData');
         addData({
-            photoURL: url,
-            firstName: currentUserFirstName,
-            lastName: currentUserLastName,
-            displayName: currentDisplayName
+            "photoURL": userUploadedPictureUrl,
+            "firstName": currentUserFirstName,
+            "lastName": currentUserLastName,
+            "displayName": currentDisplayName
         })
             .then((result) => {
                 history.push("/UserProfilePage", {from: "/Step2CompleteProfilePage"});
@@ -44,8 +43,9 @@ export default function Step2CompleteProfilePage() {
                         <input
                                autoFocus
                                required
+                               value={currentUserFirstName}
                                onChange={
-                                   (e) => currentUserFirstName = e.target.value}
+                                   (e) => setCurrentUserFirstName(e.target.value)}
                                className='form-article__input'
                                type="text"
                         />
@@ -55,16 +55,18 @@ export default function Step2CompleteProfilePage() {
                         <input
                             type="text"
                             required
+                            value={currentUserLastName}
                             onChange={
-                                (e) => currentUserLastName = e.target.value}
+                                (e) => setCurrentUserLastName(e.target.value)}
                             className='form-article__input' type="text"/>
                     </label>
                     <label className='form-article__label'>
                         Display Name
                         <input
                             required
+                            value={currentDisplayName}
                             onChange={
-                                (e) => currentDisplayName = e.target.value}
+                                (e) => setCurrentDisplayName(e.target.value)}
                             className='form-article__input'
                             type="text"/>
                     </label>

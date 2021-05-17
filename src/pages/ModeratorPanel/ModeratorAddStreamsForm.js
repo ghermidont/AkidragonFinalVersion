@@ -31,7 +31,7 @@ export default function ModeratorAddStreamsForm(){
         try {
           setLoading(true);
           setError("");
-          const storageRef = projectStorage.ref('streams_pictures/').child(uploadedFile.name);
+          const storageRef = projectStorage.ref('profile_pictures/').child(uploadedFile.name);
           storageRef.put(uploadedFile).on('state_changed', (err) => {
           },  (err) => {
             window.alert(err);

@@ -1,10 +1,12 @@
-import React from 'react';
-import PictureUploadForm from './PictureUploadForm';
+import React, {useState} from 'react';
 import {useAuthContext} from '../../context/AuthContext';
 
 //Implement the Enter key stroke login and signup
 const LoginSignUpForm = () => {
   console.log("LoginSignUpForm() worked");
+  const fileTypesArray = ['image/png', 'image/jpeg'];
+  const [error, setError] = useState(null);
+
   const {
     email,
     setEmail,
@@ -15,14 +17,27 @@ const LoginSignUpForm = () => {
     hasAccount,
     setHasAccount,
     emailError,
-    passwordError
+    passwordError,
+    setUploadedPicFile
   } = useAuthContext();
+
+ const fileUploadEventListener = (e) => {
+    let uploadedFile = e.target.files[0];
+    if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+        localStorage.setItem("userPicture", uploadedFile);
+        // setUploadedPicFile(uploadedFile);
+    } else {
+        //localStorage.removeItem("userPicture");
+      //setUploadedPicFile('');
+      setError('Please select an image file (png or jpg)');
+    }
+  };
 
   return (
     <>
       <div className='form-article__body form-login__body'>
         <h1 className="title form-title">
-          Login
+          Login/SignUp
         </h1>
         <form className='form-article' >
           <label className='form-article__label'>Username</label>
@@ -61,7 +76,15 @@ const LoginSignUpForm = () => {
               </>
              ):(
              <>
-                  <PictureUploadForm />
+               <form>
+                 <label>
+                   <input type="file" onChange={fileUploadEventListener} />
+                 </label>
+                 <div className="output">
+                   { error && <div className="error">{ error }</div>}
+
+                 </div>
+               </form>
                <div>
                   <p>
                      Have an account?

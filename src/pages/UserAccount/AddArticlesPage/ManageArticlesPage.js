@@ -11,7 +11,7 @@ const ManageArticlesPage = () => {
     const {appLanguage} = useLanguageContext();
     const history = useHistory();
     const {setChosenModifyArticleNumber} = useArticlesContext();
-    const {docsFromHook} = useDataFromFirestore('TEMP-articles');
+    const {docsFromHook} = useDataFromFirestore('articles');
 
     return (
         <>

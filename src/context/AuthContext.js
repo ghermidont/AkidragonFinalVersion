@@ -33,16 +33,6 @@ export function AuthContextProvider({ children }) {
         console.log("clearErrors() worked!");
     };
 
-    const sendVerifyEmail = () =>{
-            auth.currentUser.sendEmailVerification().then(function(){
-                window.alert("Verification email sent!");
-            }).catch(function(error){
-                window.alert(error);
-            });
-
-        console.log("VerifyEmail function worked!");
-    };
-
     const handleSignup = () => {
         clearErrors();
         auth
@@ -171,7 +161,7 @@ export function AuthContextProvider({ children }) {
     }
 
     const value = {
-        sendVerifyEmail,
+        //sendVerifyEmail,
         resetPassword,
         //loading,
         updateEmail,
