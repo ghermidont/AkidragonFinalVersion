@@ -13,7 +13,7 @@ export default function UserProfilePage() {
   //const currentUserExtraInfoLS = JSON.parse(localStorage.getItem('currentUserExtraInfo'));
   //const moderatorLS = JSON.parse(localStorage.getItem('currentUserRole'));
   const [moderator, setModerator] = useState();
-  const[currentUserExtraInfoFB, setCurrentUserExtraInfoFB] = useState();
+  const[currentUserExtraInfoFB, setCurrentUserExtraInfoFB] = useState({});
 
   useEffect(() => {
     async function getCurrentUserExtraInfo() {

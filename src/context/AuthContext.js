@@ -148,24 +148,7 @@ export function AuthContextProvider({ children }) {
         console.log("clearInput() worked!");
     }
 
-    const resetPassword = (email) => {
-        return auth.sendPasswordResetEmail(email)
-    }
-
-    const updateEmail = (email) => {
-        return currentUser.updateEmail(email)
-    }
-
-    const updatePassword = (password) => {
-        return currentUser.updatePassword(password)
-    }
-
     const value = {
-        //sendVerifyEmail,
-        resetPassword,
-        //loading,
-        updateEmail,
-        updatePassword,
         currentUserModerator,
         createSurveyCheckInUserDoc,
         userSurveyPassedStatus,
@@ -183,12 +166,8 @@ export function AuthContextProvider({ children }) {
         setEmail,
         emailError,
         setEmailError,
-        //authListener,
         handleSignup,
         handleLogin,
-        //resetPassword,
-        //updateEmail,
-        //updatePassword,
         handleLogout,
         password,
         setPassword,
@@ -200,7 +179,6 @@ export function AuthContextProvider({ children }) {
         setLastName,
         signUpFormUserUploadedFile,
         setSignUpFormUserUploadedFile,
-        //sendVerifyEmail,
         userUploadedPictureUrl,
         setUserUploadedPictureUrl,
         userInfoCompleted,
@@ -278,3 +256,7 @@ export function AuthContextProvider({ children }) {
 //updateTotalUsersNumber();
 //setEmail(email);
 //verifyEmail();
+
+// const resetPassword = (email) => {
+//     return auth.sendPasswordResetEmail(email)
+// }

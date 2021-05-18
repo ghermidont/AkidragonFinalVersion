@@ -1,14 +1,14 @@
 import React from 'react';
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {useAuthContext} from '../../context/AuthContext';
 
-export default function ConfirmDeleteProfile(){
+export default function DeleteProfilePage(){
     const {currentUser} = useAuthContext;
-    console.log("ConfirmDeleteProfile worked.");
+    console.log("DeleteProfilePage worked.");
 
-    const deleteCurrentUser = () => {
+    const deleteCurrentUser = async () => {
         if(currentUser) {
-            currentUser.delete().then(function () {
+            await currentUser.delete().then(function () {
                 useHistory.push('/');
                 window.alert("Profile deleted.");
                 console.log("deleteCurrentUser() worked.");
@@ -17,6 +17,7 @@ export default function ConfirmDeleteProfile(){
             });
         }
     }
+
     return(
         <div className="modal" tabIndex="-1">
             <div className="modal-dialog">
@@ -29,7 +30,9 @@ export default function ConfirmDeleteProfile(){
                         <p>Confirm profile deletion.</p>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <Link to="/MainLoginPage">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </Link>
                         <button type="button" className="btn btn-primary" onClick={deleteCurrentUser}>Delete profile</button>
                     </div>
                 </div>
