@@ -5,12 +5,11 @@
   height: 7rem;
 
   &:hover,
-  &:focus{
+  &:focus {
     .form-dropdown__item {
       display: block;
     }
   }
-
 
   &__title {
     padding-bottom: 1rem;

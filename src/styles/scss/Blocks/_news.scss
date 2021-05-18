@@ -12,3 +12,11 @@
     margin-bottom: 4rem;
   }
 }
+
+@media screen and (max-width: 360px) {
+  .news{
+    &__inner{
+      margin-bottom: 0;
+    }
+  }
+}

@@ -3,8 +3,8 @@
   display: flex;
 
   &__item {
-    &:first-child {
-      margin-right: 3rem;
+    &:not(:last-child) {
+      margin-right: 2rem;
     }
   }
   &__link {

@@ -6,36 +6,18 @@
 
   &__image {
     width: 80%;
-    min-height: 36rem;
-    height: 50rem;
     margin: 0 auto;
   }
-  &__img{
+
+  &__img {
     border-radius: 1rem;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .banner {
-    &__image {
-      height: 26rem;
-    }
-  }
-}
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 767px) {
   .banner {
+    padding-top: 12rem;
     height: auto;
-
-    &__image {
-      width: 100%;
-      height: 1.6rem;
-      margin-bottom: 5rem;
-    }
-    &__icon-down {
-      position: initial;
-      margin: 0 auto;
-      transform: translateX(0);
-    }
   }
 }

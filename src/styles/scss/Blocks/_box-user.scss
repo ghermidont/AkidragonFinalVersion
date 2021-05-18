@@ -19,3 +19,10 @@
     }
   }
 }
+@media screen and(max-width: 1024px) {
+  .box-user{
+    &__list{
+      margin: 0 0 3rem -3rem;
+    }
+  }
+}

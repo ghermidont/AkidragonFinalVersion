@@ -1,25 +1,38 @@
 /*====Menu====*/
 .search {
   position: relative;
+  margin-left: 1rem;
+  cursor: pointer;
+
+  .icon-search {
+    transition: color .3s;
+  }
+
+  &:hover,
+  &:focus {
+    .icon-search {
+      color: var(--blue);
+    }
+  }
 
   &__img {
     width: 3rem;
   }
+
   &__form {
     position: absolute;
     right: 0;
     bottom: -5.8rem;
 
-
     &--active {
       display: block;
     }
   }
+
   &__input {
     width: 27rem;
     height: 4rem;
-    padding: 0 1rem;
-    padding-right: 6.6rem;
+    padding: 0 6.6rem 0 1rem;
     font-size: 1.4rem;
     border: 3px solid var(--headerBg);
     position: relative;
@@ -28,11 +41,11 @@
       font-size: 1.4rem;
     }
   }
+
   &__btn {
     position: absolute;
     right: 0;
     bottom: 0.2rem;
-
     padding: 0 1rem;
     background-color: var(--headerBg);
     width: 5rem;

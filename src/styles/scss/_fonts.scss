@@ -52,6 +52,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-angle-down:before {
+  content: "\f107";
+}
 .icon-home:before {
   content: '\e900';
 }

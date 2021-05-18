@@ -4,6 +4,7 @@ import LatestStreamsSwiper from "../../components/swipers/LatestStreamsSwiper";
 import {Link} from 'react-router-dom';
 //import {useAuthContext} from "../../context/AuthContext";
 import logoSection from '../../assets/images/dest/logo-section.png';
+import logoBig from '../../assets/images/dest/logo-big.png';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 export default function HomePage() {
@@ -22,10 +23,7 @@ export default function HomePage() {
           <section className="banner">
             <div className="container">
               <div className="banner__image">
-                <img className="banner__img" src="https://static.dw.com/image/36055632_303.jpg" alt=""/>
-              </div>
-              <div className="banner__icon-down">
-                <span className="icon-arrow-down2"></span>
+                <img className="banner__img" src={logoBig} alt="Akidragon banner"/>
               </div>
             </div>
           </section>
@@ -132,8 +130,8 @@ export default function HomePage() {
           </section>
 
           <div className="contact__btn">
-            <Link to="/ContactUsPage">
-              <a className="contact__btn-link">Contattaci</a>
+            <Link className="contact__btn-link" to="/ContactUsPage">
+              Contattaci
             </Link>
           </div>
         </main>

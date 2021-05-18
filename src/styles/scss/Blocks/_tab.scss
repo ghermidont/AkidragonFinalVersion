@@ -13,8 +13,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1rem;
-    margin-bottom: 2rem;
+    margin: 1rem 1rem 2rem 1rem;
     border: 4px solid var(--blue);
     border-radius: 1rem;
   }
@@ -89,6 +88,7 @@
     margin-bottom: 5rem;
     font-size: 1.6rem;
     font-weight: 700;
+    border-radius: 0 .5rem 0 0;
     color: var(--white);
     background-color: var(--red);
     transition: opacity 0.3s;
@@ -100,13 +100,12 @@
     }
 
     &::before {
-      content: '';
+      font-family: 'icomoon';
+      font-style: normal;
+      content: '\ea9d';
       position: absolute;
-      width: 2rem;
-      height: 1.6rem;
-      background-color: var(--blue);
-      left: 0.4rem;
-      top: 0.5rem;
+      left: 0.8rem;
+      top: 0.4rem;
     }
   }
   &__link-info {
@@ -116,6 +115,7 @@
     font-size: 1.6rem;
     font-weight: 700;
     text-align: center;
+    border-radius: 0 0 .5rem 0;
     color: var(--black);
     background-color: var(--white);
     transition: opacity 0.3s;
@@ -127,13 +127,17 @@
   }
 
   /*Tabs*/
-  .tab {
+  .tab{
     &__body {
       max-width: 90rem;
       margin: 0 auto;
       border: 4px solid var(--blue);
       border-radius: 0 1rem 1rem;
       position: relative;
+    }
+    &-pane{
+      display: flex !important;
+
     }
     &__body-list {
       position: absolute;
@@ -202,7 +206,11 @@
     }
   }
 }
-
+.tab-pane.fade.active.show{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 @media screen and (max-width: 650px) {
   .tab {
     padding-top: 2rem;
@@ -300,11 +308,13 @@
       width: 13rem;
       font-size: 1.6rem;
       margin-bottom: 0;
+      border-radius: 0;
     }
     &__link-info {
       width: 13rem;
       padding: 0.4rem 2rem;
       font-size: 1.6rem;
+      border-radius: 0;
     }
 
     & .tab__body-btn {

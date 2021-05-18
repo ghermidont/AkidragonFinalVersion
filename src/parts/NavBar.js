@@ -23,7 +23,7 @@ export default function NavBar() {
   return (
     <header className="header">
       <div className="header__inner">
-        <div className="header-burger" onClick={()=>setToggleMenu('menu--active')}>
+        <div className="header-burger" onClick={() => setToggleMenu('menu--active')}>
           <span></span>
         </div>
         <Link className='header__logo' to="/">
@@ -31,14 +31,14 @@ export default function NavBar() {
         </Link>
 
         <nav className={`menu header__menu ${toggleMenu}`}>
-          <div className="menu-close" onClick={()=>setToggleMenu('')}>
+          <div className="menu-close" onClick={() => setToggleMenu('')}>
             <span></span>
           </div>
           <ul className="menu__list">
             <li className="menu__item">
               <a className="menu__link">Il nostro universo</a>
 
-              <span className="arrow menu__arrow"></span>
+              <span className="icon-angle-down arrow"></span>
               <ul className="sub-menu__list">
                 <li className="sub-menu__item">
                   <Link className="sub-menu__link" to="/TournamentsPage">
@@ -61,7 +61,7 @@ export default function NavBar() {
 
             <li className="menu__item">
               <a className="menu__link">Community</a>
-              <span className="arrow menu__arrow"></span>
+              <span className="icon-angle-down arrow"></span>
               <ul className="sub-menu__list">
                 <li className="sub-menu__item">
                   <Link className="sub-menu__link" to="/BlogPage">
@@ -78,7 +78,7 @@ export default function NavBar() {
 
             <li className="menu__item">
               <a className="menu__link">Il Brand</a>
-              <span className="arrow menu__arrow"></span>
+              <span className="icon-angle-down arrow"></span>
               <ul className="sub-menu__list">
                 <li className="sub-menu__item">
                   <Link className="sub-menu__link" to="/AboutUsPage">
@@ -93,65 +93,68 @@ export default function NavBar() {
                 Contact
               </Link>
             </li>
+            <li className="menu__item">
+              <ul className="lang header__lang">
+                <li className="lang__item">
+                  <button className="lang__link" onClick={() => {
+                    changeLanguage("it");
+                    if (appLanguage === "en") setAppLanguage("it");
+                    console.log(appLanguage);
+                  }
+                  }>ITA
+                  </button>
+                </li>
+                <li className="lang__item">
+                  <button className="lang__link" onClick={() => {
+                    changeLanguage("en");
+                    if (appLanguage === "it") setAppLanguage("en");
+                    console.log(appLanguage);
+                  }
+                  }>ENG
+                  </button>
+                </li>
+              </ul>
+            </li>
+            <li className="menu__item">
+              <ul className="box-user__list">
+                <li className="box-user__item">
+                  {!currentUser &&
+                  <Link className='box-user__enter' to='/MainLoginPage'>
+                    <span className="icon-enter box-user__icon"></span>
+                  </Link>
+                  }
+                </li>
+
+                <li className="box-user__item">
+                  {currentUser &&
+                  <Link className="box-user__userpic" to='/UserProfilePage'>
+                    <span className="icon-user box-user__icon"></span>
+                  </Link>
+                  }
+                </li>
+                <li className="box-user__item">
+                  {currentUser &&
+                  <Link to='/UpdateUserProfilePage' className='box-user__exit'>
+                    <span className="icon-cog box-user__icon"></span>
+                  </Link>
+                  }
+                </li>
+                <li className="box-user__item">
+                  {currentUser &&
+                  <button className='box-user__exit' onClick={handleLogout}>
+                    <span className="icon-exit box-user__icon"></span>
+                  </button>
+                  }
+                </li>
+              </ul>
+            </li>
+            <li className="menu__item">
+              <div className="search header__search">
+                <SearchBar/>
+              </div>
+            </li>
           </ul>
         </nav>
-        <div className="box-user">
-          <ul className="box-user__list">
-            <li className="box-user__item">
-              {!currentUser &&
-                <Link className='box-user__enter' to='/MainLoginPage'>
-                  <span className="icon-enter box-user__icon"></span>
-                </Link>
-              }
-            </li>
-
-            <li className="box-user__item">
-              {currentUser &&
-                <Link className="box-user__userpic" to='/UserProfilePage'>
-                  <span className="icon-user box-user__icon"></span>
-                </Link>
-              }
-            </li>
-           <li className="box-user__item">
-              {currentUser &&
-                 <Link to='/UpdateUserProfilePage' className='box-user__exit'>
-                  <span className="icon-cog box-user__icon"></span>
-                </Link>
-              }
-            </li>
-            <li className="box-user__item">
-              {currentUser &&
-                <button className='box-user__exit' onClick={handleLogout}>
-                <span className="icon-exit box-user__icon"></span>
-                </button>
-              }
-            </li>
-          </ul>
-        </div>
-        <ul className="lang header__lang">
-          <li className="lang__item">
-            <button className="lang__link" onClick={() =>
-              {
-                changeLanguage("it");
-                if(appLanguage==="en")setAppLanguage("it");
-                console.log(appLanguage);
-              }
-            }>ITA</button>
-          </li>
-          <li className="lang__item">
-            <button className="lang__link" onClick={() =>
-                {
-                  changeLanguage("en");
-                  if(appLanguage==="it")setAppLanguage("en");
-                  console.log(appLanguage);
-                }
-            }>ENG</button>
-          </li>
-        </ul>
-
-        <div className="search header__search">
-           <SearchBar />
-        </div>
       </div>
     </header>
   );

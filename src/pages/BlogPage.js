@@ -73,11 +73,11 @@ export default function BlogPage() {
                                                     </div>
                                                 </div>
                                                 <div className="article__footer">
-                                                    <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt=""/>
+                                                    {/*<img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt=""/>*/}
                                                 </div>
                                             </Link>
                                             {doc.categories.map(category=>
-                                            <h1>{category}</h1>
+                                            <h1 className="article__title">{category}</h1>
                                             )}
                                         </article>
                                     )}
@@ -178,7 +178,7 @@ export default function BlogPage() {
                 <div className="container">
                     <h2 className="contact__title">Send us your articles, our editorial staff will light them</h2>
                     <div className="contact__btn">
-                        <Link to="/ContacUsPage" className="contact__btn-link">
+                        <Link to="/ContacUsPage" className="contact__btn-link contact__btn-link--blog-page">
                            Contact Us
                         </Link>
                     </div>
