@@ -379,7 +379,7 @@ export default function ModeratorAddTournamentsForm() {
           <div className="form-dropdown">
             <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Event category
+                {eventCategory!==''? eventCategory : "Event category"}
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item onClick={()=>setEventCategory("match")}>Match</Dropdown.Item>
@@ -391,7 +391,7 @@ export default function ModeratorAddTournamentsForm() {
           <div className="form-dropdown">
             <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Event status
+                {eventStatus!==''? eventStatus : "Event status"}
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item onClick={()=>setEventStatus("future")}>Future</Dropdown.Item>

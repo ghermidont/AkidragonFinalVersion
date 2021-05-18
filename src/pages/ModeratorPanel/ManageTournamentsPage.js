@@ -3,12 +3,12 @@ import {useDataFromFirestore} from "../../customHooks/useFirestore";
 import {Button} from "react-bootstrap";
 import {projectFirestore} from "../../fireBase";
 import {Link, useHistory} from "react-router-dom";
-import {useTournamentsContext} from "../../context/TournamentsContext";
+//import {useTournamentsContext} from "../../context/TournamentsContext";
 
 function ManageTournamentsPage() {
-    const history = useHistory();
+    //const history = useHistory();
     const {docsFromHook} = useDataFromFirestore('tournaments');
-    const {setChosenTournamentNumber} = useTournamentsContext();
+    //const {setChosenTournamentNumber} = useTournamentsContext();
     const passedEvents = docsFromHook.filter(function (doc) {
         return doc.eventStatus === "passed";
     });
@@ -19,6 +19,9 @@ function ManageTournamentsPage() {
 
 //Templates
     const PassedMatchTemp = (doc) => {
+        let date = new Date(doc.eventDate);
+        let parsedDate = date.toString();
+
         return (
             <li className="tab__item">
             <div className="tab__image"
@@ -31,9 +34,10 @@ function ManageTournamentsPage() {
                  }}>
             </div>
             <div className="tab__content">
-                <a className="tab__title">{doc.eventCategory}</a>
-                <div className="tab__name">{doc.eventTitle}</div>
-                <date className="tab__date">{new Date(Date.parse(doc.eventDate))}</date>
+                <a className="tab__title">Category: {doc.eventCategory}</a>
+                <div className="tab__name">Title: {doc.eventTitle}</div>
+                <br/>
+                <date className="tab__date">Event date: {parsedDate}</date>
             </div>
             <ul className="tab__icon">
                 <li className="tab__item-icon">
@@ -68,10 +72,14 @@ function ManageTournamentsPage() {
                 >
                     DELETE
                 </Button>
-                <Link to="/ModifyTournamentForm">
-                <Button>
-                    UPDATE
-                </Button>
+                <br/>
+                <Link
+                //     onClick={()=> {
+                //     setChosenTournamentNumber(doc.id);
+                //     history.push(`/tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
+                // }}
+                >
+                    Update tournament info >>>
                 </Link>
         </li>
 
@@ -79,6 +87,9 @@ function ManageTournamentsPage() {
     }
 
     const PassedTournTemp = (doc) => {
+        let date = new Date(doc.eventDate);
+        let parsedDate = date.toString();
+
         return (<li className="tab__item">
             <div className="tab__image"
                  style={{
@@ -90,9 +101,10 @@ function ManageTournamentsPage() {
                  }}>
             </div>
             <div className="tab__content">
-                <a className="tab__title">{doc.eventCategory}</a>
-                <div className="tab__name">Rambow Six Siege</div>
-                <date className="tab__date">{doc.eventDate}</date>
+                <a className="tab__title">Category: {doc.eventCategory}</a>
+                <div className="tab__name">Title: {doc.eventTitle}</div>
+                <br/>
+                <date className="tab__date">Event date: {parsedDate}</date>
             </div>
             <ul className="tab__icon">
                 <li className="tab__item-icon">
@@ -122,19 +134,23 @@ function ManageTournamentsPage() {
                         });
                     }}
                 >DELETE</Button>
-            <Link onClick={()=> {
-                setChosenTournamentNumber(doc.id);
-                history.push(`/tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
-            }}  >
-                <Button>
-                    UPDATE
-                </Button>
+                <br/>
+            <Link
+            //     onClick={()=> {
+            //     setChosenTournamentNumber(doc.id);
+            //     history.push(`/tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
+            // }}
+            >
+                Update tournament info >>>
             </Link>
         </li>
         );
     }
 
     const FutureMatchTemp = (doc) => {
+        let date = new Date(doc.eventDate);
+        let parsedDate = date.toString();
+
         return (<li className="tab__item">
             <div className="tab__image"
                  style={{
@@ -146,9 +162,10 @@ function ManageTournamentsPage() {
                  }}>
             </div>
             <div className="tab__content">
-                <a className="tab__title">{doc.eventCategory}</a>
-                <div className="tab__name">{doc.eventTitle}</div>
-                <date className="tab__date">{doc.eventDate}</date>
+                <a className="tab__title">Category: {doc.eventCategory}</a>
+                <div className="tab__name">Title: {doc.eventTitle}</div>
+                <br/>
+                <date className="tab__date">Event date: {parsedDate}</date>
             </div>
             <ul className="tab__icon">
                 <li className="tab__item-icon">
@@ -188,19 +205,24 @@ function ManageTournamentsPage() {
                 >
                     DELETE
                 </Button>
-                <Link onClick={()=> {
-                    setChosenTournamentNumber(doc.id);
-                    history.push(`/tournament/${doc.id}`, {from: "/ManageTournamentsPage"});//check which one works!!!!
-                }}  >
-                    <Button>
-                        UPDATE
-                    </Button>
+                <br/>
+                <Link
+                //     onClick={()=> {
+                //     setChosenTournamentNumber(doc.id);
+                //     history.push(`/tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
+                // }}
+                >
+                    Update tournament info >>>
                 </Link>
+
         </li>
         );
     }
 
     const FutureTournTemp = (doc) => {
+        let date = new Date(doc.eventDate);
+        let parsedDate = date.toString();
+
         return (<li className="tab__item">
             <div className="tab__image"
                  style={{
@@ -212,9 +234,10 @@ function ManageTournamentsPage() {
                  }}>
             </div>
             <div className="tab__content">
-                <a className="tab__title">{doc.eventCategory}</a>
-                <div className="tab__name">{doc.eventTitle}</div>
-                <date className="tab__date">{doc.eventDate}</date>
+                <a className="tab__title">Category: {doc.eventCategory}</a>
+                <div className="tab__name">Title: {doc.eventTitle}</div>
+                <br/>
+                <date className="tab__date">Event date: {parsedDate}</date>
             </div>
             <ul className="tab__icon">
                 <li className="tab__item-icon">
@@ -269,13 +292,14 @@ function ManageTournamentsPage() {
                 >
                     DELETE
                 </Button>
-                <Link onClick={()=> {
-                    setChosenTournamentNumber(doc.id);
-                    history.push(`/tournament/${doc.id}`, {from: "/ManageTournamentsPage"});//check which one works!!!!
-                }}  >
-                    <Button>
-                        UPDATE
-                    </Button>
+                <br/>
+                <Link
+                //     onClick={()=> {
+                //     setChosenTournamentNumber(doc.id);
+                //     history.push(`/tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
+                // }}
+                >
+                    Update tournament info >>>
                 </Link>
         </li>
         );
@@ -289,8 +313,9 @@ function ManageTournamentsPage() {
                         <div className="tournament__tab tab">
                             <div className="tab__body">
                                <ul className="tab__list active" id="tab_1">
-                                    {passedEvents && passedEvents.map(doc =>
-                                        doc.eventCategory === "match" ? PassedMatchTemp(doc) : PassedTournTemp(doc)
+                                    {passedEvents && passedEvents.map(doc =>{
+                                        doc.eventCategory === "match" ? PassedMatchTemp(doc) : PassedTournTemp(doc);
+                                    }
                                     )}
                                    {futureEvents && futureEvents.map(doc =>
                                        doc.eventCategory === "match" ? FutureMatchTemp(doc) : FutureTournTemp(doc)

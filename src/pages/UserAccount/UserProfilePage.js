@@ -66,7 +66,8 @@ export default function UserProfilePage() {
                 }
               </div>
               <ul className="profile__list">
-                <li className="profile__item"> {moderator?<strong>Moderator page:</strong>:<strong>Profile page:</strong>}</li>
+                {/*<li className="profile__item"> {moderator?<strong>Moderator page:</strong>:<strong>Profile page:</strong>}</li>*/}
+                <li className="profile__item"> <strong>Profile page:</strong>}</li>
                 <li className="profile__item">Email: {currentUser?currentUser.email:CurrentUserFromLS.email}</li>
                 <li className="profile__item">Email verified: {currentUser?currentUser.emailVerified===false||CurrentUserFromLS.emailVerified===false?"false":"true":""}</li>
                 {currentUserExtraInfoFB&&
@@ -78,7 +79,7 @@ export default function UserProfilePage() {
                 <br/>
               </ul>
             </div>
-            {moderator&&
+            {/*{moderator&&*/}
             <ul className="profile__settings">
               <li>
                 <div className="profile__settings-title">
@@ -109,7 +110,7 @@ export default function UserProfilePage() {
                 </ul>
               </li>
             </ul>
-            }
+            {/*}*/}
           </div>
         </div>
       </section>

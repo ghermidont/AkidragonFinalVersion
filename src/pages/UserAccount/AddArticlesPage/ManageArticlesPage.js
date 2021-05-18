@@ -23,6 +23,7 @@ const ManageArticlesPage = () => {
                         <div className="articles-page__tab-body">
                             <ul className="articles-page__tab-list active">
                                 {docsFromHook && docsFromHook.map(doc => (
+                                    <>
                                     <li className="articles-page__tab-item" key={doc.id}>
                                         <article className='articles-page__post'>
                                             <div className="articles-page__image">
@@ -35,7 +36,14 @@ const ManageArticlesPage = () => {
                                                  </p>
                                             </div>
                                         </article>
+                                        <Link onClick={()=> {
+                                            setChosenModifyArticleNumber(doc.id);
+                                            history.push(`/modify-article/${doc.id}`, {from: "/ManageArticlesPage"});
+                                        }}> Edit article >>>
+
+                                        </Link>
                                         <Button
+                                            style={{float: "right"}}
                                             variant="danger"
                                             onClick={()=>{
                                                 projectFirestore.collection("articles").doc(doc.id).delete().then(() => {
@@ -45,18 +53,15 @@ const ManageArticlesPage = () => {
                                                 });
                                             }}
                                         >
-                                            DELETE
+                                            Delete Article
                                         </Button>
 
-                                        <Link onClick={()=> {
-                                            setChosenModifyArticleNumber(doc.id);
-                                            history.push(`/modify-article/${doc.id}`, {from: "/ManageArticlesPage"});
-                                        }}>
-                                            <Button>
-                                                UPDATE
-                                            </Button>
-                                        </Link>
                                     </li>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </>
                                 ))}
                             </ul>
                         </div>

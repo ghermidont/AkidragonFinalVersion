@@ -14,7 +14,7 @@ const ManageStreamsPage = () => {
 
     return (
         <>
-            <section className='articles-page'>
+            <section className='articles-page' >
                 <div className="container">
                     <h1 className="articles-page__title title">Manage streams</h1>
                     <Link className='btn ' to='/ModeratorAddStreamsForm'>Add streams</Link>
@@ -22,9 +22,10 @@ const ManageStreamsPage = () => {
                         <div className="articles-page__tab-body">
                             <ul className="articles-page__tab-list active">
                                 {docsFromHook && docsFromHook.map(doc => (
-                                    <li className="articles-page__tab-item" key={doc.id}>
+                                    <li style={{marginTop: "5em"}} className="articles-page__tab-item" key={doc.id}>
                                         <article className='articles-page__post'>
                                             <div>Category: {doc.category}</div>
+                                            <br/>
                                             <div className="articles-page__image">
                                                 <img src={doc.imageURL?doc.imageURL:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="articles-page__img"/>
                                             </div>
@@ -38,7 +39,15 @@ const ManageStreamsPage = () => {
                                                 </div>
                                             </div>
                                         </article>
+                                        <Link
+                                        //     onClick={()=> {
+                                        //     setChosenModifyStreamNumber(doc.id);
+                                        //     history.push(`/stream/${doc.id}`, {from: "/ManageStreamsPage"});
+                                        // }}
+                                        > Update stream >>>
+                                        </Link>
                                         <Button
+                                            style={{float:'right', marginBottom: "5em"}}
                                             variant="danger"
                                             onClick={()=>{
                                                 projectFirestore.collection("streams").doc(doc.id).delete().then(() => {
@@ -48,14 +57,8 @@ const ManageStreamsPage = () => {
                                                 });
                                             }}
                                         >DELETE</Button>
-                                        <Link onClick={()=> {
-                                            setChosenModifyStreamNumber(doc.id);
-                                            history.push(`/stream/${doc.id}`, {from: "/ManageStreamsPage"});
-                                        }}>
-                                            <Button>
-                                                UPDATE
-                                            </Button>
-                                        </Link>
+                                        <br/>
+
                                     </li>
                                 ))}
                             </ul>

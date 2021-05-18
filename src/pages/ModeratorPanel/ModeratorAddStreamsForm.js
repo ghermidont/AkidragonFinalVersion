@@ -15,7 +15,7 @@ export default function ModeratorAddStreamsForm(){
   const history = useHistory();
   const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
   const {currentUser} = useAuthContext();
-  const[streamCategory, setStreamCategory] = useState('');
+  const [streamCategory, setStreamCategory] = useState('');
   const [videoURL, setVideoURL] = useState('');
   const [loading, setLoading] = useState(true);
   const [url, setUrl] = useState('');
@@ -100,12 +100,14 @@ export default function ModeratorAddStreamsForm(){
       <div className='form-update__body form-login__body'>
         <h1 className="title form-title">Add Stream</h1>
         <form className="form-update">
-          <ReactPlayer
-              url = {videoURL?videoURL:""}
-              controls = {true}
-              light = {true}
-              playing = {false}
-          />
+          {videoURL&&
+            <ReactPlayer
+                url={videoURL ? videoURL : ""}
+                controls={true}
+                light={true}
+                playing={false}
+            />
+          }
           <label className='form-update__label'>
             Video URL
             <input
@@ -121,14 +123,15 @@ export default function ModeratorAddStreamsForm(){
           </label>
           <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
-              Stream category
+              {streamCategory!==''? streamCategory: "Stream category"}
             </Dropdown.Toggle>
+
             <Dropdown.Menu>
               <Dropdown.Item onClick={()=>setStreamCategory("entertainment")}>Entertainment</Dropdown.Item>
               <Dropdown.Item onClick={()=>setStreamCategory("tournaments")}>Tournaments</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-
+          <br/>
           <div className="form-article__box-btn">
             <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload thumbnail
               <input
@@ -139,20 +142,15 @@ export default function ModeratorAddStreamsForm(){
                   onChange={fileUploadEventListener}
               />
             </label>
-          {/*  {url===''&&<Loader*/}
-          {/*    type="Puff"*/}
-          {/*    color="#00BFFF"*/}
-          {/*    height={100}*/}
-          {/*    width={100}*/}
-          {/*    timeout={3000} //3 secs*/}
-          {/*/>}*/}
             <div className="output">
               { error && <div className="error">{ error }</div>}
-              {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url} alt=""/></div> }
+              {fileSuccess&&
+                <div>Image Uploaded successfully:
+                  <img style={{width: "25%", height: "auto"}} src={url} alt=""/>
+                </div>
+              }
             </div>
-            <div className="output">
-              { error && <div className="error">{ error }</div>}
-            </div>
+
             <button
                 className="form-article__btn"
                 onClick={addStreamsWithFBCallback}

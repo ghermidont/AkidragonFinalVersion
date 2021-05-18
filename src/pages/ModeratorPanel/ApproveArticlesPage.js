@@ -49,23 +49,27 @@ export default function ApproveArticlesPage() {
                                     <img src={doc.content.image} alt="" className="approve__img"/>
                                 </div>
                                 <div className="approve__content">
-                                    <h3 className="approve__item-title" >{doc.content[appLanguage].title}</h3>
-                                    <p className="approve__text">{doc.content[appLanguage].description}</p>
+                                    <h3 className="approve__item-title" >Title: {doc.content[appLanguage].title}</h3>
+                                    <p className="approve__text">Description: {doc.content[appLanguage].description}</p>
+                                    <br/>
+                                    <a style={{marginBottom: "3em"}} className="read-more-link" onClick={()=>{setReadMore(!readMore)}}><h2>{linkName}</h2></a>
+                                    {readMore &&
+                                    <div style={{marginBottom: "10em"}}>
+                                        <p className="extra-content">
+                                            {doc.content[appLanguage].text}
+                                        </p>
+                                    </div>
+                                    }
                                 </div>
                                 <div className="approve__box-btn">
                                     <button className="approve__btn approve__btn--green" onClick={()=>approveCloudFunctTrigger(doc.id)}>Approve</button>
                                     <button className="approve__btn approve__btn--red" onClick={()=>deleteCloudFunctTrigger(doc.id)}>Delete</button>
                                 </div>
                             </li>
-                            <a className="read-more-link" onClick={()=>{setReadMore(!readMore)}}><h2>{linkName}</h2></a>
-                            {readMore &&
-                                <div>
-                                    <p className="extra-content">
-                                        {doc.content[appLanguage].text}
-                                    </p>
-                                </div>
-                            }
-                            </>
+
+
+                           </>
+
                         ))}
                     </ul>
                 </div>
