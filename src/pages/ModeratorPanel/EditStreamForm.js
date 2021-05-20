@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 //import {useArticlesContext} from "../../context/ArticlesContext";
 import {projectFirestore, projectStorage} from "../../fireBase";
 import {useHistory} from 'react-router-dom';
@@ -11,10 +11,12 @@ const queryString = require('query-string');
 
 //TODO import current date form Firebase
 
-export default function ModifyStreamForm(){
-    console.log("ModifyStreamForm worked");
+export default function EditStreamForm(){
+
+    console.log("EditStreamForm worked");
+
     const {docsFromHook} = useDataFromFirestore('streams');
-    const [error, setError] = useState(null);
+    const [error, setError] = useState('');
     const fileTypesArray = ['image/png', 'image/jpeg'];
     const history = useHistory();
     const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
@@ -25,6 +27,7 @@ export default function ModifyStreamForm(){
     const [url, setUrl] = useState('');
     const [fileSuccess, setFileSuccess] = useState(false);
     const [uploadedPicFile, setUploadedPicFile] = useState('');
+    const [createdAt, setCreatedAt] = useState('');
     let parsedWindowLocation = queryString.parse(window.location.hash);
     const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(13);
 
@@ -33,22 +36,25 @@ export default function ModifyStreamForm(){
 
     let selectedStream = "";
 
-    if(docsFromHook) {
-        console.log("second option worked");
-        //Filter the articles object and select the article who's slug corresponds to the current window slug
-        selectedStream = docsFromHook.filter(function (stream) {
-            return stream.id === stringifiedSlug;
-        });
+    useEffect(() => {
+        if (docsFromHook) {
+            console.log("second option worked");
+            //Filter the articles object and select the article who's slug corresponds to the current window slug
+            selectedStream = docsFromHook.filter(function (stream) {
+                return stream.id === stringifiedSlug;
+            });
+            console.log(selectedStream);
 
-        if(selectedStream!==""){
-            selectedStream && selectedStream.map( doc =>
-            {
-                setStreamCategory(doc.category);
-                setVideoURL(doc.videoURL);
-                setUrl(doc.imageURL);
-            })
+            if (selectedStream !== "") {
+                selectedStream && selectedStream.map(doc => {
+                    setCreatedAt(doc.createdAt)
+                    setStreamCategory(doc.category);
+                    setVideoURL(doc.videoURL);
+                    setUrl(doc.imageURL);
+                })
+            }
         }
-    }
+    }, []);
 
     const fileUploadEventListener = (e) => {
         let uploadedFile = e.target.files[0];
@@ -90,10 +96,11 @@ export default function ModifyStreamForm(){
                     "category": streamCategory,
                     "videoURL": videoURL,
                     "imageURL": url,
-                    "createdAt": Date.now()
+                    "createdAt": createdAt,
+                    "updatedAt": Date.now()
                 })
                 .then(() => {
-                    window.alert("Stream added successfully!");
+                    window.alert("Stream edited successfully!");
                     history.push("/UserProfilePage", {from: "/ModeratorAddStreamsForm"});
                     return console.log("To streams collection added successfully!");
                 })
@@ -157,46 +164,40 @@ export default function ModifyStreamForm(){
                             <Dropdown.Item onClick={()=>setStreamCategory("tournaments")}>Tournaments</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
-
+                    <div>
+                        Current thumbnail:
+                        <img src={url} alt=""/>
+                    </div>
                     <div className="form-article__box-btn">
                         <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload thumbnail
                             <input
                                 className='form-article__btn visually-hidden'
                                 type="file"
                                 placeholder='file'
-                                required
                                 onChange={fileUploadEventListener}
                             />
                         </label>
-                        {/*  {url===''&&<Loader*/}
-                        {/*    type="Puff"*/}
-                        {/*    color="#00BFFF"*/}
-                        {/*    height={100}*/}
-                        {/*    width={100}*/}
-                        {/*    timeout={3000} //3 secs*/}
-                        {/*/>}*/}
+
                         <div className="output">
                             { error && <div className="error">{ error }</div>}
                             {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url} alt=""/></div> }
                         </div>
-                        <div className="output">
-                            { error && <div className="error">{ error }</div>}
-                        </div>
-                        <button
+
+                       <button
                             className="form-article__btn"
                             onClick={addStreamsWithFBCallback}
-                        >
-                            Submit
-                        </button>
-                        <button
+                       >Submit
+                       </button>
+
+                       <button
                             className="form-article__btn"
                             onClick={()=> {
                                 clearInput();
                                 history.push("/ManageStreamsPage", {from: "/ModifyStreamsForm"});
                             }}
-                        >
-                            Cancel
-                        </button>
+                       >Cancel
+                       </button>
+
                     </div>
                 </form>
             </div>

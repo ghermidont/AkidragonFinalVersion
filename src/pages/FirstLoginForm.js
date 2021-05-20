@@ -64,6 +64,8 @@ export default function FirstLoginForm ({setLoginPassed}) {
     const checkPassword = (data) => {
         if(email === data.email && password === data.password){
             setLoginPassed(true);
+            //localStorage.setItem("LSLoginPassed", '{"loginPassed": true}');
+
             setDisplayErrorMessage('false');
         }else{
             setDisplayErrorMessage('true');

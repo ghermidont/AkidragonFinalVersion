@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 //import {useArticlesContext} from "../../../context/ArticlesContext";
 import {projectStorage, functions} from "../../../fireBase";
 import {useHistory} from 'react-router-dom';
-//import {useAuthContext} from "../../../context/AuthContext";
-//import {Dropdown} from "react-bootstrap";
 
-export default function AddArticlesForm() {
+export default function AddArticlesForm(){
+
   console.log("AddArticlesPage worked");
-
+    let publishBtnRef = useRef();
+    let cancelBtnRef = useRef();
   // const {currentUser} = useAuthContext();
   // const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
   const [error, setError] = useState("");
@@ -65,6 +65,11 @@ export default function AddArticlesForm() {
   const publishArticleCFTrigger = (e) => {
     const addData = functions.httpsCallable('publishArticle');
 
+      if(publishBtnRef.current&&cancelBtnRef.current){
+          publishBtnRef.current.setAttribute("disabled", "disabled");
+          cancelBtnRef.current.setAttribute("disabled", "disabled");
+      }
+
     if(loading === false) {
         addData({
             "content": {
@@ -84,11 +89,13 @@ export default function AddArticlesForm() {
 
         })
             .then((result) => {
-                    window.alert("Article added successfully!");
-                    history.push("/UserProfilePage", {from: "/AddArticlesForm"});
-                    return console.log("article collection added successfully.");
-                }
-            ).catch((error) => {
+                publishBtnRef.current.removeAttribute("disabled", "disabled");
+                cancelBtnRef.current.removeAttribute("disabled", "disabled");
+                window.alert("Article added successfully!");
+                history.push("/UserProfilePage", {from: "/AddArticlesForm"});
+                return console.log("article collection added successfully.");
+            })
+            .catch((error) => {
             console.log(error.code + " " + error.message + "" + error.details);
         });
       }
@@ -120,6 +127,7 @@ export default function AddArticlesForm() {
               console.log("could not delete the file because:" + error);
           });
       }
+      history.push("/UserProfilePage", {from: "/AddArticlesForm"});
   }
 
   return (
@@ -176,6 +184,7 @@ export default function AddArticlesForm() {
                       className='form-article__input'
                       rows='1'
                       name="text"
+                      required
                       value={ITDescription}
                       onChange={
                         (e)=>setITDescription(e.target.value)
@@ -188,6 +197,7 @@ export default function AddArticlesForm() {
                   <textarea
                       className='form-article__input'
                       rows='2'
+                      required
                       name="countent"
                       value={ITText}
                       onChange={
@@ -281,6 +291,7 @@ export default function AddArticlesForm() {
                 <input
                     className='form-article__btn visually-hidden'
                     type="file"
+                    required
                     placeholder='file'
                     onChange={fileUploadEventListener}
                 />
@@ -290,12 +301,15 @@ export default function AddArticlesForm() {
                   {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url} alt=""/></div> }
               </div>
               <button
+                  ref={publishBtnRef}
                   className="form-article__btn"
                   onClick={publishArticleCFTrigger}
               >
                 Publish
               </button>
+
                 <button
+                    ref={cancelBtnRef}
                     className="form-article__btn"
                     onClick={clearInput}
                 >

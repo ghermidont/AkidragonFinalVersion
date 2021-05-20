@@ -95,44 +95,6 @@ export function AuthContextProvider({ children }) {
             });
     }
 
-    const checkCurrentUserRole = async (User) => {
-        const snapshot = await projectFirestore
-            .collection("roles")
-            .doc(User.uid).get();
-        console.log(snapshot.data());
-        // snapshot.data().moderator!=undefined?data=false
-        // data===true?setCurrentUserModerator(true):setCurrentUserModerator(false);
-    }
-
-    // const authListener = () => {
-    //     console.log("authListener() worked!");
-    //     auth
-    //         .onAuthStateChanged((user) => {
-    //             if(user){
-    //                 //every time we have a user we clear the inputs
-    //                 clearInput();
-    //                 setCurrentUser(user);
-    //                 checkCurrentUserRole(user).then(()=>console.log("checkCurrentUserRole() worked fine."));
-    //                 setLoading(false);
-    //
-    //                 console.log("currentUser value in auth listener");
-    //                 console.log(currentUser);
-    //                 // !auth.currentUser.emailVerified&&
-    //                 // auth.currentUser.sendEmailVerification().then(function () {
-    //                 //     window.alert("Verification email sent!");
-    //                 // }).catch(function (error) {
-    //                 //     window.alert(error);
-    //                 // });
-    //
-    //                 // console.log("if(user) condition from authListener()/auth.onAuthStateChanged() worked!");
-    //             }else{
-    //                 setCurrentUser(undefined);
-    //                 console.log("No user defined in the authListener.");
-    //             }
-    //
-    //         });
-    // };
-
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             localStorage.setItem("LSCurrentUser", JSON.stringify(user));
@@ -155,7 +117,6 @@ export function AuthContextProvider({ children }) {
         setUserSurveyPassedStatus,
         userPoints,
         setUserPoints,
-        checkCurrentUserRole,
         auth,
         setCurrentUserModerator,
         hasAccount,
@@ -260,3 +221,40 @@ export function AuthContextProvider({ children }) {
 // const resetPassword = (email) => {
 //     return auth.sendPasswordResetEmail(email)
 // }
+
+//  const checkCurrentUserRole = async (User) => {
+//      const snapshot = await projectFirestore
+//          .collection("roles")
+//          .doc(User.uid).get();
+//      console.log(snapshot.data());
+// }
+
+// const authListener = () => {
+//     console.log("authListener() worked!");
+//     auth
+//         .onAuthStateChanged((user) => {
+//             if(user){
+//                 //every time we have a user we clear the inputs
+//                 clearInput();
+//                 setCurrentUser(user);
+//                 checkCurrentUserRole(user).then(()=>console.log("checkCurrentUserRole() worked fine."));
+//                 setLoading(false);
+//
+//                 console.log("currentUser value in auth listener");
+//                 console.log(currentUser);
+//                 // !auth.currentUser.emailVerified&&
+//                 // auth.currentUser.sendEmailVerification().then(function () {
+//                 //     window.alert("Verification email sent!");
+//                 // }).catch(function (error) {
+//                 //     window.alert(error);
+//                 // });
+//
+//                 // console.log("if(user) condition from authListener()/auth.onAuthStateChanged() worked!");
+//             }else{
+//                 setCurrentUser(undefined);
+//                 console.log("No user defined in the authListener.");
+//             }
+//
+//         });
+// };
+// };

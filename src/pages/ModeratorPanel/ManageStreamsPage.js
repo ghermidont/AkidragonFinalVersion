@@ -9,7 +9,7 @@ import {useStreamsContext} from "../../context/StreamsContext";
 const ManageStreamsPage = () => {
     console.log("ManageStreamsPage worked");
     const {docsFromHook} = useDataFromFirestore('streams');
-    const {history} = useHistory();
+    const history = useHistory();
     const {setChosenModifyStreamNumber} = useStreamsContext();
 
     return (
@@ -40,10 +40,10 @@ const ManageStreamsPage = () => {
                                             </div>
                                         </article>
                                         <Link
-                                        //     onClick={()=> {
-                                        //     setChosenModifyStreamNumber(doc.id);
-                                        //     history.push(`/stream/${doc.id}`, {from: "/ManageStreamsPage"});
-                                        // }}
+                                            onClick={()=> {
+                                            setChosenModifyStreamNumber(doc.id);
+                                            history.push(`/edit-stream/${doc.id}`, {from: "/ManageStreamsPage"});
+                                        }}
                                         > Update stream >>>
                                         </Link>
                                         <Button

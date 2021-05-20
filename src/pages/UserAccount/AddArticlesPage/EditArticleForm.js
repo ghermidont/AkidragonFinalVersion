@@ -10,8 +10,8 @@ const queryString = require('query-string');
 
 //TODO import data from Firebase
 
-export default function ModifyArticleForm() {
-    console.log("ModifyArticleForm worked");
+export default function EditArticleForm() {
+    console.log("EditArticleForm worked");
 
     const {docsFromHook} = useDataFromFirestore('articles');
     //const {appLanguage} = useLanguageContext();
@@ -121,7 +121,7 @@ export default function ModifyArticleForm() {
             })
                 .then((result) => {
                         window.alert("Article added successfully!");
-                        history.push("/UserProfilePage", {from: "/ModifyArticleForm"});
+                        history.push("/UserProfilePage", {from: "/EditArticleForm"});
                         return console.log("article collection added successfully.");
                     }
                 ).catch((error) => {
@@ -335,7 +335,7 @@ export default function ModifyArticleForm() {
                             className="form-article__btn"
                             onClick={()=> {
                                 clearInput();
-                                history.push("/ManageArticlesPage", {from: "/ModifyArticleForm"});
+                                history.push("/ManageArticlesPage", {from: "/EditArticleForm"});
                             }}
                         >
                             Cancel

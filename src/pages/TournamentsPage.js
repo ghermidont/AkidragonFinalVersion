@@ -1,44 +1,54 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {useDataFromFirestore} from "../customHooks/useFirestore";
 import logoSection from '../assets/images/dest/logo-section.png';
 
 function TournamentsPage() {
-  const tabsBtn = document.querySelectorAll('.tab__body-btn');
-  const tabsItems = document.querySelectorAll('.tab__list');
-  tabsBtn.forEach(function (item) {
-    item.addEventListener('click', function () {
-      let currentBtn = item;
-      let tabId = currentBtn.getAttribute('data-tab');
-      let currentTab = document.querySelector(tabId);
+  console.log("TournamentsPage() worked");
+  const [passedEvents, setPassedEvents] = useState();
+  const [futureEvents, setFutureEvents] = useState();
 
-      tabsBtn.forEach(function (item) {
-        item.classList.remove('active');
+  const {docsFromHook} = useDataFromFirestore('tournaments');
+
+  useEffect(()=>{
+      const passedEvents = docsFromHook.filter(function (doc) {
+        return doc.eventStatus === "passed";
       });
-      tabsItems.forEach(function (item) {
-        item.classList.remove('active');
+      setPassedEvents(passedEvents);
+
+      const futureEvents = docsFromHook.filter(function (doc) {
+        return doc.eventStatus === "future";
       });
-
-      currentBtn.classList.add('active');
-      currentTab.classList.add('active');
-    });
+      setFutureEvents(futureEvents);
   });
 
-  /*====EndTab====*/
-
-  const {docsFromHook} = useDataFromFirestore('TEMP-tournaments');
-
-  const passedEvents = docsFromHook.filter(function (doc) {
-    return doc.eventStatus === "passed";
-  });
-
-  const futureEvents = docsFromHook.filter(function (doc) {
-    return doc.eventStatus === "future";
-  });
+  // const tabsBtn = document.querySelectorAll('.tab__body-btn');
+  // const tabsItems = document.querySelectorAll('.tab__list');
+  // tabsBtn.forEach(function (item) {
+  //   item.addEventListener('click', function () {
+  //     let currentBtn = item;
+  //     let tabId = currentBtn.getAttribute('data-tab');
+  //     let currentTab = document.querySelector(tabId);
+  //
+  //     tabsBtn.forEach(function (item) {
+  //       item.classList.remove('active');
+  //     });
+  //     tabsItems.forEach(function (item) {
+  //       item.classList.remove('active');
+  //     });
+  //
+  //     currentBtn.classList.add('active');
+  //     currentTab.classList.add('active');
+  //   });
+  // });
 
 //Templates
   const PassedMatchTemp = (doc) => {
-    return (<li className="tab__item">
+    let date = new Date(doc.eventDate);
+    let parsedDate = date.toString();
+
+    return (
+        <li className="tab__item">
           <div className="tab__image"
                style={{
                  background: "blue",
@@ -49,9 +59,10 @@ function TournamentsPage() {
                }}>
           </div>
           <div className="tab__content">
-            <a className="tab__title">{doc.eventCategory}</a>
-            <div className="tab__name">{doc.eventTitle}</div>
-            <date className="tab__date">{doc.eventDate}</date>
+            <a className="tab__title">Category: {doc.eventCategory}</a>
+            <div className="tab__name">Title: {doc.eventTitle}</div>
+            <br/>
+            <date className="tab__date">Event date: {parsedDate}</date>
           </div>
           <ul className="tab__icon">
             <li className="tab__item-icon">
@@ -73,11 +84,14 @@ function TournamentsPage() {
               <a className="" href={doc.eventInfoPage}>Info</a>Info
             </button>
           </div>
-    </li>
+        </li>
     );
   }
 
   const PassedTournTemp = (doc) => {
+    let date = new Date(doc.eventDate);
+    let parsedDate = date.toString();
+
     return (<li className="tab__item">
       <div className="tab__image"
            style={{
@@ -89,9 +103,10 @@ function TournamentsPage() {
            }}>
       </div>
       <div className="tab__content">
-        <a className="tab__title">{doc.eventCategory}</a>
-        <div className="tab__name">Rambow Six Siege</div>
-        <date className="tab__date">{doc.eventDate}</date>
+        <a className="tab__title">Category: {doc.eventCategory}</a>
+        <div className="tab__name">Title: {doc.eventTitle}</div>
+        <br/>
+        <date className="tab__date">Event date: {parsedDate}</date>
       </div>
       <ul className="tab__icon">
         <li className="tab__item-icon">
@@ -115,6 +130,9 @@ function TournamentsPage() {
   }
 
   const FutureMatchTemp = (doc) => {
+    let date = new Date(doc.eventDate);
+    let parsedDate = date.toString();
+
     return (<li className="tab__item">
       <div className="tab__image"
            style={{
@@ -126,9 +144,10 @@ function TournamentsPage() {
            }}>
       </div>
       <div className="tab__content">
-        <a className="tab__title">{doc.eventCategory}</a>
-        <div className="tab__name">{doc.eventTitle}</div>
-        <date className="tab__date">{doc.eventDate}</date>
+        <a className="tab__title">Category: {doc.eventCategory}</a>
+        <div className="tab__name">Title: {doc.eventTitle}</div>
+        <br/>
+        <date className="tab__date">Event date: {parsedDate}</date>
       </div>
       <ul className="tab__icon">
         <li className="tab__item-icon">
@@ -160,6 +179,9 @@ function TournamentsPage() {
   }
 
   const FutureTournTemp = (doc) => {
+    let date = new Date(doc.eventDate);
+    let parsedDate = date.toString();
+
     return (<li className="tab__item">
       <div className="tab__image"
            style={{
@@ -171,9 +193,10 @@ function TournamentsPage() {
            }}>
       </div>
       <div className="tab__content">
-        <a className="tab__title">{doc.eventCategory}</a>
-        <div className="tab__name">{doc.eventTitle}</div>
-        <date className="tab__date">{doc.eventDate}</date>
+        <a className="tab__title">Category: {doc.eventCategory}</a>
+        <div className="tab__name">Title: {doc.eventTitle}</div>
+        <br/>
+        <date className="tab__date">Event date: {parsedDate}</date>
       </div>
       <ul className="tab__icon">
         <li className="tab__item-icon">
@@ -224,6 +247,7 @@ function TournamentsPage() {
       <main className="page">
         <section className="tournament">
           <div className="container">
+
             <div className="info__logo logo-section">
               <img src={logoSection} alt="" className="info__img"/>
             </div>
@@ -242,32 +266,36 @@ function TournamentsPage() {
               Earum neque quasi vel laudantium nemo?
             </p>
 
-            <div className="tournament__tab tab">
-              <div className="tab__body">
-                <ul className="tab__body-list">
-                  <li className="tab__body-item">
-                    <button className="tab__body-btn active" type="button"
-                            data-tab="#tab_1">Eventi passati
-                    </button>
-                  </li>
-                  <li className="tab__body-item">
-                    <button className="tab__body-btn" type="button"
-                            data-tab="#tab_2">Prossimi eventi
-                    </button>
-                  </li>
-                </ul>
 
-                <ul className="tab__list active" id="tab_1">
+            <div className="tab__body">
+
+              <ul className="nav nav-tabs tab__btn-list" id="myTab" role="tablist">
+
+                <li className="nav-item tab__btn-item" >
+                  <a className="tab__btn active" id="passed-tab" data-toggle="tab" href="#passed" role="tab"
+                     aria-controls="passed" aria-selected="true">Passed events</a>
+                </li>
+
+                <li className="nav-item tab__btn-item">
+                  <a className="tab__btn" id="future-tab" data-toggle="tab" href="#future" role="tab"
+                     aria-controls="future" aria-selected="false">Future events</a>
+                </li>
+
+             </ul>
+
+              <div className="tab-content" id="myTabContent">
+
+                <div className="tab-pane fade show active" id="passed" role="tabpanel" aria-labelledby="passed-tab">
                   {passedEvents && passedEvents.slice(0, 4).map(doc =>
-                    doc.EventCategory === "match" ? PassedMatchTemp(doc) : PassedTournTemp(doc)
+                     doc.eventCategory === "match" ? PassedMatchTemp(doc) : PassedTournTemp(doc)
                   )}
-                </ul>
+                </div>
 
-                <ul className="tab__list active" id="tab_2">
+                <div className="tab-pane fade" id="future" role="tabpanel" aria-labelledby="future-tab">
                   {futureEvents && futureEvents.slice(0, 4).map(doc =>
-                    doc.EventCategory === "match" ? FutureMatchTemp(doc) : FutureTournTemp(doc)
+                     doc.eventCategory === "match" ? FutureMatchTemp(doc) : FutureTournTemp(doc)
                   )}
-                </ul>
+                </div>
 
               </div>
             </div>
@@ -290,3 +318,34 @@ function TournamentsPage() {
 }
 
 export default TournamentsPage;
+
+
+  {/*<div className="tournament__tab tab">*/}
+  {/*  <div className="tab__body">*/}
+  {/*    <ul className="tab__body-list">*/}
+  {/*      <li className="tab__body-item">*/}
+  {/*        <button className="tab__body-btn active" type="button"*/}
+  {/*                data-tab="#tab_1">Eventi passati*/}
+  {/*        </button>*/}
+  {/*      </li>*/}
+  {/*      <li className="tab__body-item">*/}
+  {/*        <button className="tab__body-btn" type="button"*/}
+  {/*                data-tab="#tab_2">Prossimi eventi*/}
+  {/*        </button>*/}
+  {/*      </li>*/}
+  {/*    </ul>*/}
+
+  {/*    <ul className="tab__list active" id="tab_1">*/}
+  {/*      {passedEvents && passedEvents.slice(0, 4).map(doc =>*/}
+  {/*        doc.eventCategory === "match" ? PassedMatchTemp(doc) : PassedTournTemp(doc)*/}
+  {/*      )}*/}
+  {/*    </ul>*/}
+
+  {/*    <ul className="tab__list active" id="tab_2">*/}
+  {/*      {futureEvents && futureEvents.slice(0, 4).map(doc =>*/}
+  {/*        doc.eventCategory === "match" ? FutureMatchTemp(doc) : FutureTournTemp(doc)*/}
+  {/*      )}*/}
+  {/*    </ul>*/}
+
+  {/*  </div>*/}
+  {/*</div>*/}

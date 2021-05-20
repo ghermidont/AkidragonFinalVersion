@@ -8,8 +8,8 @@ import {useDataFromFirestore} from "../../customHooks/useFirestore";
 const queryString = require('query-string');
 //TODO import current data from firebase
 
-export default function ModifyTournamentsForm() {
-    console.log("ModifyTournamentsForm worked");
+export default function EditTournamentsForm() {
+    console.log("EditTournamentsForm worked");
     const {docsFromHook} = useDataFromFirestore('tournaments');
     const {currentUser} = useAuthContext();
     const fileTypesArray = ['image/png', 'image/jpeg'];
@@ -53,6 +53,7 @@ export default function ModifyTournamentsForm() {
     const [url4, setUrl4] = useState('');
     const [urlWin1, setUrlWin1] = useState('');
     const [urlWin2, setUrlWin2] = useState('');
+    const [createdAt, setCreatedAt] = useState('');
 
     let parsedWindowLocation = queryString.parse(window.location.hash);
     const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(13);
@@ -394,12 +395,13 @@ export default function ModifyTournamentsForm() {
                     "pictureURL2": url2,
                     "pictureURL3": url3,
                     "pictureURL4": url4,
-                    "createdAt": Date.now()
+                    "createdAt": createdAt,
+                    "updatedAt": Date.now()
                 })
                 .then(() => {
                     window.alert("Tournament added successfully!");
-                    history.push("/UserProfilePage", {from: "/ModeratorAddTournamentsForm"});
-                    return console.log("tournaments document added successfully.");
+                    history.push("/UserProfilePage", {from: "/EditTournamentForm"});
+                    return console.log("tournament edited successfully.");
                 })
                 .catch((error) => {
                     console.error(error.code + " " + error.message + "" + error.details);

@@ -36,7 +36,7 @@ export default function NavBar() {
           </div>
           <ul className="menu__list">
             <li className="menu__item">
-              <a className="menu__link">Il nostro universo</a>
+              <a className="menu__link">OUR UNIVERSE</a>
 
               <span className="icon-angle-down arrow"></span>
               <ul className="sub-menu__list">
@@ -77,12 +77,17 @@ export default function NavBar() {
             </li>
 
             <li className="menu__item">
-              <a className="menu__link">Il Brand</a>
+              <a className="menu__link">THE BRAND</a>
               <span className="icon-angle-down arrow"></span>
               <ul className="sub-menu__list">
                 <li className="sub-menu__item">
                   <Link className="sub-menu__link" to="/AboutUsPage">
                     About Us
+                  </Link>
+                </li>
+                <li className="sub-menu__item">
+                  <Link className="sub-menu__link" to="/SponsorshipPage">
+                    SPONSORSHIP
                   </Link>
                 </li>
               </ul>

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {useAuthContext} from "../../../context/AuthContext";
-import {projectStorage} from "../../../fireBase";
+//import {projectStorage} from "../../../fireBase";
 import {Button} from "react-bootstrap";
 
 const sendVerifyEmail = (User) =>{
@@ -15,32 +15,32 @@ const sendVerifyEmail = (User) =>{
 
 export default function Step1EmailVerificationPage() {
     console.log("Step1EmailVerification worked!");
-    const {currentUser, handleLogout, signUpFormUserUploadedFile, setUserUploadedPictureUrl} = useAuthContext();
+    const {currentUser, handleLogout, /*signUpFormUserUploadedFile, setUserUploadedPictureUrl*/} = useAuthContext();
     const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
     const User = currentUser?currentUser:CurrentUserFromLS;
-    const [url, setUrl] = useState('');
+    //const [url, setUrl] = useState('');
 
     useEffect(()=>{
         sendVerifyEmail(User);
         handleLogout();
-        if (signUpFormUserUploadedFile) {
-            async function putFile(File){
-                try {
-                    const storageRef = projectStorage.ref('profile_pictures/').child(File.name);
-                    storageRef.put(File).on('state_changed', (err) => {
-                    },  (err) => {
-                        console.log(err);
-                    }, async()=>{
-                        const finalUrl = await storageRef.getDownloadURL();
-                        finalUrl!==undefined&&setUserUploadedPictureUrl(finalUrl);
-                        setUrl(finalUrl);
-                    });
-                } catch {
-                    console.error("File not uploaded");
-                }
-            }
-            putFile(signUpFormUserUploadedFile).then(()=>console.log(url));
-        }
+        // if (signUpFormUserUploadedFile) {
+        //     async function putFile(File){
+        //         try {
+        //             const storageRef = projectStorage.ref('profile_pictures/').child(File.name);
+        //             storageRef.put(File).on('state_changed', (err) => {
+        //             },  (err) => {
+        //                 console.log(err);
+        //             }, async()=>{
+        //                 const finalUrl = await storageRef.getDownloadURL();
+        //                 finalUrl!==undefined&&setUserUploadedPictureUrl(finalUrl);
+        //                 setUrl(finalUrl);
+        //             });
+        //         } catch {
+        //             console.error("File not uploaded");
+        //         }
+        //     }
+        //     putFile(signUpFormUserUploadedFile).then(()=>console.log(url));
+        // }
     }, []);
 
     return(
