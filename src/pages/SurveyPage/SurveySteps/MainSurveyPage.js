@@ -1,4 +1,6 @@
+//Multi-step official page
 //https://www.npmjs.com/package/react-multistep
+
 import React from 'react';
 import MultiStep from 'react-multistep';
 import Step3RadioGameQtPage from "./Step3RadioGameQtPage";
@@ -34,9 +36,7 @@ const MainSurveyPage = () =>{
     return (
         <div style={{paddingTop: "10em"}} className='container'>
             <MultiStep surveyResultObject={surveyResultObject} showNavigation={true} steps={steps} prevStyle={prevStyle} nextStyle={nextStyle}/>
-            <div className='container app-footer'>
-                <h6>Press 'Enter' or click on progress bar for next step.</h6>
-            </div>
+
         </div>
     );
 }

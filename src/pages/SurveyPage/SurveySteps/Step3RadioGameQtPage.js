@@ -23,15 +23,7 @@ export default function Step3RadioGameQtPage({surveyResultObject}) {
                     Third category
                 </label>
             </div>
-            <Link to="/Step5CheckboxGameQtPage">
-                <button
-                    type="button"
-                    className="btn btn-light"
-                    onClick={
-                        ()=>console.log("Hello from Step3RadioGameQtPage")
-                    }
-                >Next</button>
-            </Link>
+
         </div>
     );
 }
