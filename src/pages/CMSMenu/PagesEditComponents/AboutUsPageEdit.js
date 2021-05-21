@@ -25,8 +25,8 @@ function TournamentsPageEdit() {
     const [ITCareerTitle, setITCareerTitle] = useState("");
     const [ENCrewTitle, setENCrewTitle] = useState("");
     const [ITCrewTitle, setITCrewTitle] = useState("");
-    const [ENMainText, setENMainText] = useState("");
-    const [ITMainText, setITMainText] = useState("");
+    const [ITMissionText, setITMissionText] = useState("");
+    const [ENMissionText, setENMissionText] = useState("");
     const [ENPartnersTitle, setENPartnersTitle] = useState("");
     const [ITPartnersTitle, setITPartnersTitle] = useState("");
     const [name1, setName1] = useState("");
@@ -83,6 +83,9 @@ function TournamentsPageEdit() {
                 switch(setterKey){
                     case "ENBanner":
                         setENBanner(finalUrl);
+                        break;
+                    case "ITBanner":
+                        setITBanner(finalUrl);
                         break;
                     case "setPartner1Url":
                         setPartner1Url(finalUrl);
@@ -168,8 +171,8 @@ function TournamentsPageEdit() {
                         "it": ITCrewTitle
                     },
                     "mainText": {
-                        "en": ENMainText,
-                        "it": ITMainText
+                        "en": ENMissionText,
+                        "it": ITMissionText
                     },
                     "partnersLogos": {
                         "partner1": partner1Url,
@@ -311,6 +314,7 @@ function TournamentsPageEdit() {
                             >English</a>
                         </li>
                     </ul>
+
                     <div className="tab-content" id="myTabContent">
 
                         {/*Tab1*/}
@@ -364,6 +368,20 @@ function TournamentsPageEdit() {
                                         { error && <div className="error">{ error }</div>}
                                         {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITBanner} alt=""/></div> }
                                     </div>
+
+                                    <label className='form-article__label'>
+                                        Mission text:
+                                        <textarea
+                                            className='form-article__input'
+                                            rows='2'
+                                            name="countent"
+                                            value={ITMissionText}
+                                            required
+                                            onChange={
+                                                (e)=>setITMissionText(e.target.value)
+                                            }
+                                        ></textarea>
+                                    </label>
 
                                     <label className='form-article__label'>
                                         Crew title:
@@ -775,10 +793,455 @@ function TournamentsPageEdit() {
                             <div className='form-article__body'>
                                 <form className="form-article">
 
+                                    <label className='form-article__label'>
+                                        Title:
+                                        <textarea
+                                            className='form-article__input'
+                                            rows='2'
+                                            name="countent"
+                                            value={ENTitle}
+                                            required
+                                            onChange={
+                                                (e)=>setENTitle(e.target.value)
+                                            }
+                                        ></textarea>
+                                    </label>
 
+                                    <label className='form-article__label'>
+                                        Title text:
+                                        <textarea
+                                            className='form-article__input'
+                                            rows='2'
+                                            name="countent"
+                                            value={ENTitleText}
+                                            required
+                                            onChange={
+                                                (e)=>setENTitleText(e.target.value)
+                                            }
+                                        ></textarea>
+                                    </label>
 
+                                    {/*banner*/}
+                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
+                                        <input
+                                            className='form-article__btn visually-hidden'
+                                            type="file"
+                                            required
+                                            placeholder='file'
+                                            onChange={(e)=>fileUploadEventListener(e, "ENBanner")}
+                                        />
+                                    </label>
+                                    <div className="output">
+                                        { error && <div className="error">{ error }</div>}
+                                        {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENBanner} alt=""/></div> }
+                                    </div>
+
+                                    <label className='form-article__label'>
+                                        Mission text:
+                                        <textarea
+                                            className='form-article__input'
+                                            rows='2'
+                                            name="countent"
+                                            value={ENMissionText}
+                                            required
+                                            onChange={
+                                                (e)=>setENMissionText(e.target.value)
+                                            }
+                                        ></textarea>
+                                    </label>
+
+                                    <label className='form-article__label'>
+                                        Crew title:
+                                        <textarea
+                                            className='form-article__input'
+                                            rows='2'
+                                            name="countent"
+                                            value={ENCrewTitle}
+                                            required
+                                            onChange={
+                                                (e)=>setENCrewTitle(e.target.value)
+                                            }
+                                        ></textarea>
+                                    </label>
+
+                                    {/*Team members:*/}
+                                    {/*Member1*/}
+                                    <div>Team members list:</div>
+                                    <div>Member 1:</div>
+                                    <label className='form-article__label'>
+                                        Name:
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={name1}
+                                            onChange={
+                                                (e)=>setName1(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+                                        <input
+                                            className='form-article__btn visually-hidden'
+                                            type="file"
+                                            required
+                                            placeholder='file'
+                                            onChange={(e)=>fileUploadEventListener(e, "Avatar1")}
+                                        />
+                                    </label>
+                                    <div className="output">
+                                        { error && <div className="error">{ error }</div>}
+                                        {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar1} alt=""/></div> }
+                                    </div>
+
+                                    <label className='form-article__label'>
+                                        Title
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={ENTitle1}
+                                            onChange={
+                                                (e)=>setENTitle1(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    {/*Member2*/}
+                                    <div>Member 2:</div>
+                                    <label className='form-article__label'>
+                                        Name:
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={name2}
+                                            onChange={
+                                                (e)=>setName2(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+                                        <input
+                                            className='form-article__btn visually-hidden'
+                                            type="file"
+                                            required
+                                            placeholder='file'
+                                            onChange={(e)=>fileUploadEventListener(e, "Avatar2")}
+                                        />
+                                    </label>
+                                    <div className="output">
+                                        { error && <div className="error">{ error }</div>}
+                                        {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar2} alt=""/></div> }
+                                    </div>
+
+                                    <label className='form-article__label'>
+                                        Title
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={ENTitle2}
+                                            onChange={
+                                                (e)=>setENTitle2(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    {/*Member3*/}
+                                    <div>Member 3:</div>
+                                    <label className='form-article__label'>
+                                        Name:
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={name3}
+                                            onChange={
+                                                (e)=>setName3(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+                                        <input
+                                            className='form-article__btn visually-hidden'
+                                            type="file"
+                                            required
+                                            placeholder='file'
+                                            onChange={(e)=>fileUploadEventListener(e, "Avatar3")}
+                                        />
+                                    </label>
+                                    <div className="output">
+                                        { error && <div className="error">{ error }</div>}
+                                        {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar3} alt=""/></div> }
+                                    </div>
+
+                                    <label className='form-article__label'>
+                                        Title
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={ENTitle3}
+                                            onChange={
+                                                (e)=>setENTitle3(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    {/*Member4*/}
+                                    <div>Member 4:</div>
+                                    <label className='form-article__label'>
+                                        Name:
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={name4}
+                                            onChange={
+                                                (e)=>setName4(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+                                        <input
+                                            className='form-article__btn visually-hidden'
+                                            type="file"
+                                            required
+                                            placeholder='file'
+                                            onChange={(e)=>fileUploadEventListener(e, "Avatar4")}
+                                        />
+                                    </label>
+                                    <div className="output">
+                                        { error && <div className="error">{ error }</div>}
+                                        {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar4} alt=""/></div> }
+                                    </div>
+
+                                    <label className='form-article__label'>
+                                        Title
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={ENTitle4}
+                                            onChange={
+                                                (e)=>setENTitle4(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    {/*Member5*/}
+                                    <div>Member 5:</div>
+                                    <label className='form-article__label'>
+                                        Name:
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={name5}
+                                            onChange={
+                                                (e)=>setName5(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+                                        <input
+                                            className='form-article__btn visually-hidden'
+                                            type="file"
+                                            required
+                                            placeholder='file'
+                                            onChange={(e)=>fileUploadEventListener(e, "Avatar5")}
+                                        />
+                                    </label>
+                                    <div className="output">
+                                        { error && <div className="error">{ error }</div>}
+                                        {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar5} alt=""/></div> }
+                                    </div>
+
+                                    <label className='form-article__label'>
+                                        Title
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={ENTitle5}
+                                            onChange={
+                                                (e)=>setENTitle5(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    {/*Member6*/}
+                                    <div>Member 6:</div>
+                                    <label className='form-article__label'>
+                                        Name:
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={name6}
+                                            onChange={
+                                                (e)=>setName6(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+                                        <input
+                                            className='form-article__btn visually-hidden'
+                                            type="file"
+                                            required
+                                            placeholder='file'
+                                            onChange={(e)=>fileUploadEventListener(e, "Avatar6")}
+                                        />
+                                    </label>
+                                    <div className="output">
+                                        { error && <div className="error">{ error }</div>}
+                                        {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar6} alt=""/></div> }
+                                    </div>
+
+                                    <label className='form-article__label'>
+                                        Title
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={ENTitle6}
+                                            onChange={
+                                                (e)=>setENTitle6(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    {/*Member7*/}
+                                    <div>Member 7:</div>
+                                    <label className='form-article__label'>
+                                        Name:
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={name7}
+                                            onChange={
+                                                (e)=>setName7(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+                                        <input
+                                            className='form-article__btn visually-hidden'
+                                            type="file"
+                                            required
+                                            placeholder='file'
+                                            onChange={(e)=>fileUploadEventListener(e, "Avatar7")}
+                                        />
+                                    </label>
+                                    <div className="output">
+                                        { error && <div className="error">{ error }</div>}
+                                        {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar7} alt=""/></div> }
+                                    </div>
+
+                                    <label className='form-article__label'>
+                                        Title
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={ENTitle7}
+                                            onChange={
+                                                (e)=>setENTitle7(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    {/*Member8*/}
+                                    <div>Member 8:</div>
+                                    <label className='form-article__label'>
+                                        Name:
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={name8}
+                                            onChange={
+                                                (e)=>setName8(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+                                        <input
+                                            className='form-article__btn visually-hidden'
+                                            type="file"
+                                            required
+                                            placeholder='file'
+                                            onChange={(e)=>fileUploadEventListener(e, "Avatar8")}
+                                        />
+                                    </label>
+                                    <div className="output">
+                                        { error && <div className="error">{ error }</div>}
+                                        {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar8} alt=""/></div> }
+                                    </div>
+
+                                    <label className='form-article__label'>
+                                        Title
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={ENTitle8}
+                                            onChange={
+                                                (e)=>setENTitle8(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    <label className='form-article__label'>
+                                        Partners title:
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={ENPartnersTitle}
+                                            onChange={
+                                                (e)=>setENPartnersTitle(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    <label className='form-article__label'>
+                                        Career title:
+                                        <input
+                                            className='form-article__input'
+                                            type="text"
+                                            required
+                                            value={ENCareerTitle}
+                                            onChange={
+                                                (e)=>setENCareerTitle(e.target.value)
+                                            }
+                                        />
+                                    </label>
+
+                                    <label className='form-article__label'>
+                                        Career text:
+                                        <textarea
+                                            className='form-article__input'
+                                            rows='2'
+                                            name="countent"
+                                            value={ENCareerText}
+                                            required
+                                            onChange={
+                                                (e)=>setENCareerText(e.target.value)
+                                            }
+                                        ></textarea>
+                                    </label>
                                 </form>
-
                             </div>
                         </div>
 
