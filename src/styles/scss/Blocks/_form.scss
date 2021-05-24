@@ -18,7 +18,10 @@
       color: var(--blueDark);
     }
   }
-
+  &__intro-text{
+    margin: .4rem auto 0 1.5rem;
+    font-size: 1.5rem;
+  }
   &__box {
     display: flex;
     justify-content: space-between;
@@ -95,5 +98,13 @@
     &__box {
       flex-direction: column;
     }
+  }
+}
+
+@media screen and(max-width: 360px) {
+  .form__intro-text{
+    position: absolute;
+    left: 0;
+    bottom: -4rem;
   }
 }

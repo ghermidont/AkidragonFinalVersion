@@ -3,6 +3,8 @@
 .form-article, .form-update {
   width: 100%;
   margin: auto 0;
+  padding: 0 1.5rem;
+  position: relative;
 
   &__body {
     padding: 14rem 1.5rem 8rem;
@@ -96,5 +98,16 @@
     &:focus {
       opacity: 0.8;
     }
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .form-article__btn{
+    font-size: 1.5rem;
+    padding: .8rem 1.5rem;
+    height: 3.4rem;
+  }
+  .form-article__body.form-login__body{
+    padding-bottom: 0;
   }
 }
