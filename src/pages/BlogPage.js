@@ -36,145 +36,141 @@ export default function BlogPage() {
                     <p className="news-banner__subtitle">Le ultime della community</p>
 
                     <div className="tab__body">
-                            <ul className="nav nav-tabs tab__btn-list" id="myTab" role="tablist">
-                                <li className="nav-item tab__btn-item" >
-                                    <a className="tab__btn active" id="all-tab" data-toggle="tab" href="#all" role="tab"
-                                       aria-controls="all" aria-selected="true">All</a>
-                                </li>
+                        <ul className="nav nav-tabs tab__btn-list" id="myTab" role="tablist">
+                            <li className="nav-item tab__btn-item" >
+                                <a className="tab__btn active" id="all-tab" data-toggle="tab" href="#all" role="tab"
+                                   aria-controls="all" aria-selected="true">All</a>
+                            </li>
 
-                                <li className="nav-item tab__btn-item">
-                                    <a className="tab__btn" id="videogames-tab" data-toggle="tab" href="#videogames" role="tab"
-                                       aria-controls="videogames" aria-selected="false">Video games</a>
-                                </li>
+                            <li className="nav-item tab__btn-item">
+                                <a className="tab__btn" id="videogames-tab" data-toggle="tab" href="#videogames" role="tab"
+                                   aria-controls="videogames" aria-selected="false">Video games</a>
+                            </li>
 
-                                <li className="nav-item tab__btn-item">
-                                    <a className="tab__btn" id="movies-tab" data-toggle="tab" href="#movies" role="tab"
-                                       aria-controls="movies" aria-selected="false">Movies</a>
-                                </li>
+                            <li className="nav-item tab__btn-item">
+                                <a className="tab__btn" id="movies-tab" data-toggle="tab" href="#movies" role="tab"
+                                   aria-controls="movies" aria-selected="false">Movies</a>
+                            </li>
 
-                                <li className="nav-item tab__btn-item">
-                                    <a className="tab__btn" id="music-tab" data-toggle="tab" href="#music" role="tab"
-                                       aria-controls="music" aria-selected="false">Music</a>
-                                </li>
-                            </ul>
+                            <li className="nav-item tab__btn-item">
+                                <a className="tab__btn" id="music-tab" data-toggle="tab" href="#music" role="tab"
+                                   aria-controls="music" aria-selected="false">Music</a>
+                            </li>
+                        </ul>
 
 
-                            <div className="tab-content" id="myTabContent">
+                        <div className="tab-content" id="myTabContent">
 
-                                <div className="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
-                                    {docsFromHook && docsFromHook.slice(0, 8).map(doc=>
-                                        <article className="article" key={doc.id}>
-                                           <Link className="article__link">
-                                                <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="article__image"/>
-                                                <div className="article__content">
-                                                    <img className="article__logo" src={logoSection} alt=""/>
-                                                    <div className="article__box-text">
-                                                        <p className="article__text">
-                                                            {doc.content[appLanguage].title}
-                                                        </p>
-                                                    </div>
+                            <div className="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                                {docsFromHook && docsFromHook.slice(0, 8).map(doc=>
+                                    <article className="article" key={doc.id}>
+                                       <Link className="article__link">
+                                            <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="article__image"/>
+                                            <div className="article__content">
+                                                <img className="article__logo" src={logoSection} alt=""/>
+                                                <div className="article__box-text">
+                                                    <p className="article__text">
+                                                        {doc.content[appLanguage].title}
+                                                    </p>
                                                 </div>
-                                                <div className="article__footer">
-                                                    {/*<img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt=""/>*/}
-                                                </div>
-                                            </Link>
-                                            {doc.categories.map(category=>
-                                            <h1 className="article__title">{category}</h1>
-                                            )}
-                                        </article>
-                                    )}
-                                </div>
-
-                                <div
-                                    className="tab-pane fade"
-                                    id="videogames"
-                                    role="tabpanel"
-                                    aria-labelledby="videogames-tab"
-                                >
-                                    {videoGamesNews && videoGamesNews.slice(0, 8).map(doc=>
-                                        <article className="article" key={doc.id}>
-                                            <Link className="article__link">
-                                                <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="article__image"/>
-                                                <div className="article__content">
-                                                    <img className="article__logo" src={logoSection} alt=""/>
-                                                    <div className="article__box-text">
-                                                        <p className="article__text">
-                                                            {doc.content[appLanguage].title}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div className="article__footer">
-                                                    <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt=""/>
-                                                </div>
-                                            </Link>
-                                            {doc.categories.map(category=>
-                                                <h1>{category}</h1>
-                                            )}
-                                        </article>
-                                    )}
-                                </div>
-
-                                <div
-                                    className="tab-pane fade"
-                                    id="movies"
-                                    role="tabpanel"
-                                    aria-labelledby="movies-tab"
-                                >
-                                    {moviesNews && moviesNews.slice(0, 8).map(doc=>
-                                        <article className="article" key={doc.id}>
-                                            <Link className="article__link">
-                                                <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="article__image"/>
-                                                <div className="article__content">
-                                                    <img className="article__logo" src={logoSection} alt=""/>
-                                                    <div className="article__box-text">
-                                                        <p className="article__text">
-                                                            {doc.content[appLanguage].title}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div className="article__footer">
-                                                    <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt=""/>
-                                                </div>
-                                            </Link>
-                                            {doc.categories.map(category=>
-                                                <h1>{category}</h1>
-                                            )}
-                                        </article>
-                                    )}
-                                </div>
-
-                                <div
-                                    className="tab-pane fade"
-                                    id="music"
-                                    role="tabpanel"
-                                    aria-labelledby="music-tab"
-                                >
-                                    {musicNews && musicNews.slice(0, 8).map(doc=>
-                                        <article className="article" key={doc.id}>
-                                            <Link className="article__link">
-                                                <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="article__image"/>
-                                                <div className="article__content">
-                                                    <img className="article__logo" src={logoSection} alt=""/>
-                                                    <div className="article__box-text">
-                                                        <p className="article__text">
-                                                            {doc.content[appLanguage].title}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div className="article__footer">
-                                                    <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt=""/>
-                                                </div>
-                                            </Link>
-                                            {doc.categories.map(category=>
-                                                <h1>{category}</h1>
-                                            )}
-                                        </article>
-                                    )}
-                                </div>
+                                            </div>
+                                            <div className="article__footer">
+                                                {/*<img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt=""/>*/}
+                                            </div>
+                                        </Link>
+                                    </article>
+                                )}
                             </div>
-                        ....................
+
+                            <div
+                                className="tab-pane fade"
+                                id="videogames"
+                                role="tabpanel"
+                                aria-labelledby="videogames-tab"
+                            >
+                                {videoGamesNews && videoGamesNews.slice(0, 8).map(doc=>
+                                    <article className="article" key={doc.id}>
+                                        <Link className="article__link">
+                                            <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="article__image"/>
+                                            <div className="article__content">
+                                                <img className="article__logo" src={logoSection} alt=""/>
+                                                <div className="article__box-text">
+                                                    <p className="article__text">
+                                                        {doc.content[appLanguage].title}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div className="article__footer">
+                                                <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt=""/>
+                                            </div>
+                                        </Link>
+                                        {doc.categories.map(category=>
+                                            <h1>{category}</h1>
+                                        )}
+                                    </article>
+                                )}
+                            </div>
+
+                            <div
+                                className="tab-pane fade"
+                                id="movies"
+                                role="tabpanel"
+                                aria-labelledby="movies-tab"
+                            >
+                                {moviesNews && moviesNews.slice(0, 8).map(doc=>
+                                    <article className="article" key={doc.id}>
+                                        <Link className="article__link">
+                                            <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="article__image"/>
+                                            <div className="article__content">
+                                                <img className="article__logo" src={logoSection} alt=""/>
+                                                <div className="article__box-text">
+                                                    <p className="article__text">
+                                                        {doc.content[appLanguage].title}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div className="article__footer">
+                                                <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt=""/>
+                                            </div>
+                                        </Link>
+                                        {doc.categories.map(category=>
+                                            <h1>{category}</h1>
+                                        )}
+                                    </article>
+                                )}
+                            </div>
+
+                            <div
+                                className="tab-pane fade"
+                                id="music"
+                                role="tabpanel"
+                                aria-labelledby="music-tab"
+                            >
+                                {musicNews && musicNews.slice(0, 8).map(doc=>
+                                    <article className="article" key={doc.id}>
+                                        <Link className="article__link">
+                                            <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="article__image"/>
+                                            <div className="article__content">
+                                                <img className="article__logo" src={logoSection} alt=""/>
+                                                <div className="article__box-text">
+                                                    <p className="article__text">
+                                                        {doc.content[appLanguage].title}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div className="article__footer">
+                                                <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt=""/>
+                                            </div>
+                                        </Link>
+                                        {doc.categories.map(category=>
+                                            <h1>{category}</h1>
+                                        )}
+                                    </article>
+                                )}
+                            </div>
                         </div>
                     </div>
+                </div>
             </section>
 
             <section className="contact">

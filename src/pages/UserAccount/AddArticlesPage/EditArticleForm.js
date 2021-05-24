@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 //import {useArticlesContext} from "../../../context/ArticlesContext";
 import {projectStorage, functions} from "../../../fireBase";
 import {useHistory} from 'react-router-dom';
@@ -33,25 +33,31 @@ export default function EditArticleForm() {
     const [videoGamesSwitch, setVideoGamesSwitch] = useState(0);
     const [musicSwitch, setMusicSwitch] = useState(0);
     const [moviesSwitch, setMoviesSwitch] = useState(0);
+    const [currentCategories, setCurrentCategories] = useState();
     const categoryArr = [videoGamesSwitch===1?"videogames":"", moviesSwitch===1?"movies":"", musicSwitch===1?"music":""];
    //Getting an parsing data from url field
     let parsedWindowLocation = queryString.parse(window.location.hash);
-    const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(13);
+    const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(18);
 
     console.log("This is the stringified:");
     console.log(stringifiedSlug);
 
     let selectedArticle = "";
 
-    if(docsFromHook) {
-        console.log("second option worked");
-        //Filter the articles object and select the article who's slug corresponds to the current window slug
-        selectedArticle = docsFromHook.filter(function (article) {
-            return article.id === stringifiedSlug;
-        });
+    useEffect(() => {
+        if(docsFromHook) {
+            selectedArticle = docsFromHook.filter(function (article) {
+                return article.id === stringifiedSlug;
+            });
+            console.log(selectedArticle);
+        }
 
+    });
+
+    useEffect(() => {
         if(selectedArticle!==""){
             selectedArticle && selectedArticle.map( doc =>
+
             {
                 setENDescription(doc.content.en.description);
                 setENText(doc.content.en.text);
@@ -60,9 +66,10 @@ export default function EditArticleForm() {
                 setITText(doc.content.it.text);
                 setITTitle(doc.content.it.title);
                 setUrl(doc.content.image);
+                setCurrentCategories(doc.categories.map(category=>`${category} \n`))
             })
         }
-    }
+    }, [docsFromHook]);
 
     const fileUploadEventListener = (e) => {
         //setCategoriesArr(inputArr);
@@ -93,7 +100,6 @@ export default function EditArticleForm() {
             putFile(uploadedFile).then(()=>console.log(url));
         } else {
             setUploadedPicFile('');
-            //setAddArticlesFormUserUploadedFile(null);
             setError('Please select an image file (png or jpg)');
         }
     };
@@ -122,16 +128,14 @@ export default function EditArticleForm() {
                 .then((result) => {
                         window.alert("Article added successfully!");
                         history.push("/UserProfilePage", {from: "/EditArticleForm"});
-                        return console.log("article collection added successfully.");
+                        return console.log("Article edited successfully.");
                     }
                 ).catch((error) => {
                 console.log(error.code + " " + error.message + "" + error.details);
             });
         }
-
     }
 
-    //Clears all the in puts of the form and deletes the uploaded file:
     const clearInput = () => {
         //setArticleCategory("");
         setENDescription("");
@@ -149,12 +153,15 @@ export default function EditArticleForm() {
 
         const desertRef = projectStorage.ref('articles_pictures/').child(uploadedPicFile.name);
 
-        if(desertRef){
+        if(desertRef&&fileSuccess){
             desertRef.delete().then(() => {
                 console.log("uploaded image removed successfully");
+                history.push("/UserProfilePage", {from: "/EditArticleForm"});
             }).catch((error) => {
                 console.log("could not delete the file because:" + error);
             });
+        }else{
+            history.push("/UserProfilePage", {from: "/EditArticleForm"});
         }
     }
 
@@ -288,7 +295,7 @@ export default function EditArticleForm() {
                     </div>
 
                     <div className="form-article__checkbox-title form-article__label">
-                        Article category:
+                        Article category: {currentCategories?currentCategories:""}
                     </div>
 
                     <label className="form-article__label-check">
@@ -311,8 +318,13 @@ export default function EditArticleForm() {
                             onChange={()=>moviesSwitch===0?setMoviesSwitch(1):setMoviesSwitch(0)}
                         /> Movie
                     </label>
-                    <div>Current categories: {selectedArticle.map(doc => doc.categories.map(category=><div>category</div>))}</div>
+
+                    <div>
+                        Current thumbnail:
+                        <img style={{width: "25%", height: "auto"}} src={url} alt=""/>
+                    </div>
                     <div className="form-article__box-btn">
+
                         <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload
                             <input
                                 className='form-article__btn visually-hidden'
@@ -327,15 +339,14 @@ export default function EditArticleForm() {
                         </div>
                         <button
                             className="form-article__btn"
-                            onClick={publishArticleCFTrigger}
+                            onClick={()=>publishArticleCFTrigger()}
                         >
-                            Publish
+                            Save changes
                         </button>
                         <button
                             className="form-article__btn"
                             onClick={()=> {
                                 clearInput();
-                                history.push("/ManageArticlesPage", {from: "/EditArticleForm"});
                             }}
                         >
                             Cancel

@@ -24,8 +24,6 @@ export default function UserProfilePage() {
             .doc(CurrentUserFromLS.uid).get().then((doc) => {
           if (doc.exists) {
             setCurrentUserExtraInfoFB(doc.data());
-            console.log(currentUserExtraInfoFB);
-            //localStorage.setItem("currentUserExtraInfo", JSON.stringify(doc.data()));
           } else {
             console.log("No such document!");
           }
@@ -57,7 +55,6 @@ export default function UserProfilePage() {
           .doc(CurrentUserFromLS.uid).get().then((doc)=>{
             if(doc.exists){
               setCurrentUserDbPointsInfo(doc.data());
-              console.log(doc.data());
             }else{
               console.log("No such document!");
             }
@@ -70,7 +67,7 @@ export default function UserProfilePage() {
     getCurrentUserExtraInfo().then(()=>console.log("Got the user info!")).catch(()=>console.error("could not get current use extra info."));
     checkCurrentUserRole().then(()=>console.log(moderator)).catch(()=>console.error("could not get current use role."));
     getDoc().then(()=>console.log("Got the user info for update!")).catch(()=>console.error("could not get current use extra info."));
-    console.log(currentUserDbPointsInfo);
+    //console.log(currentUserDbPointsInfo);
 
   }, []);
 

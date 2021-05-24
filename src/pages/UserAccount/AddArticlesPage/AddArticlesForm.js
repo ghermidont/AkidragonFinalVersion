@@ -127,7 +127,7 @@ export default function AddArticlesForm(){
               console.log("could not delete the file because:" + error);
           });
       }
-      history.push("/UserProfilePage", {from: "/AddArticlesForm"});
+      history.push("/", {from: "/AddArticlesForm"});
   }
 
   return (

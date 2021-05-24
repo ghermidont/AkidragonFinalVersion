@@ -5,10 +5,10 @@ import Tab from '@material-ui/core/Tab';
 import TabContext from '@material-ui/lab/TabContext';
 import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
-import HomePageEdit from "./PagesEditComponents/HomePageEdit";
-import TournamentsPageEdit from "./PagesEditComponents/TournamentsPageEdit";
-import BlogPageEdit from "./PagesEditComponents/BlogPageEdit";
-import AboutUsPageEdit from "./PagesEditComponents/AboutUsPageEdit";
+import CMSHomePageEdit from "./PagesEditComponents/CMSHomePageEdit";
+import CMSTournamentsPageEdit from "./PagesEditComponents/CMSTournamentsPageEdit";
+import CMSBlogPageEdit from "./PagesEditComponents/CMSBlogPageEdit";
+import CMSAboutUsPageEdit from "./PagesEditComponents/CMSAboutUsPageEdit";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,10 +36,10 @@ export default function LabTabs() {
                         <Tab label="AboutUs Page" value="4" />
                     </TabList>
                 </AppBar>
-                <TabPanel value="1"><HomePageEdit /></TabPanel>
-                <TabPanel value="2"><TournamentsPageEdit /></TabPanel>
-                <TabPanel value="3"><BlogPageEdit /></TabPanel>
-                <TabPanel value="4"><AboutUsPageEdit /></TabPanel>
+                <TabPanel value="1"><CMSHomePageEdit /></TabPanel>
+                <TabPanel value="2"><CMSTournamentsPageEdit /></TabPanel>
+                <TabPanel value="3"><CMSBlogPageEdit /></TabPanel>
+                <TabPanel value="4"><CMSAboutUsPageEdit /></TabPanel>
             </TabContext>
         </div>
     );

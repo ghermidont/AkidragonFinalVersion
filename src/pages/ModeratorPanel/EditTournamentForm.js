@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {projectFirestore, projectStorage} from "../../fireBase";
 import {useHistory} from 'react-router-dom';
 import {useAuthContext} from "../../context/AuthContext";
@@ -6,7 +6,6 @@ import {Dropdown} from "react-bootstrap";
 import ReactPlayer from "react-player/lazy";
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
 const queryString = require('query-string');
-//TODO import current data from firebase
 
 export default function EditTournamentsForm() {
     console.log("EditTournamentsForm worked");
@@ -15,307 +14,226 @@ export default function EditTournamentsForm() {
     const fileTypesArray = ['image/png', 'image/jpeg'];
     const history = useHistory();
     const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
-
+    //const [loading, setLoading] = useState(true);
     const [eventCategory, setEventCategory] = useState('');
     const [eventTitle, setEventTitle] = useState('');
     const [eventStatus, setEventStatus] = useState('');
     const [eventVideoLink, setEventVideoLink] =useState('');
     const [eventDate, setEventDate] = useState();
     const [eventInfoPageLink, setEventInfoPageLink] = useState('');
-
-    const [error1, setError1] = useState(null);
-    const [error2, setError2] = useState(null);
-    const [error3, setError3] = useState(null);
-    const [error4, setError4] = useState(null);
-    const [errorWin1, setErrorWin1] = useState(null);
-    const [errorWin2, setErrorWin2] = useState(null);
+    //const [uploadedPicFile, setUploadedPicFile] = useState('');
+    const [uploadError1, setUploadError1] = useState(null);
+    const [uploadError2, setUploadError2] = useState(null);
+    const [uploadError3, setUploadError3] = useState(null);
+    const [uploadError4, setUploadError4] = useState(null);
+    const [uploadErrorWin1, setUploadErrorWin1] = useState(null);
+    const [uploadErrorWin2, setUploadErrorWin2] = useState(null);
     const [fileSuccess1, setFileSuccess1] = useState(false);
     const [fileSuccess2, setFileSuccess2] = useState(false);
     const [fileSuccess3, setFileSuccess3] = useState(false);
     const [fileSuccess4, setFileSuccess4] = useState(false);
     const [fileSuccessWin1, setFileSuccessWin1] = useState(false);
     const [fileSuccessWin2, setFileSuccessWin2] = useState(false);
-    const [loading1, setLoading1] = useState(true);
-    const [loading2, setLoading2] = useState(true);
-    const [loading3, setLoading3] = useState(true);
-    const [loading4, setLoading4] = useState(true);
-    const [loadingWin1, setLoadingWin1] = useState(true);
-    const [loadingWin2, setLoadingWin2] = useState(true);
-    const [uploadedPicFile1, setUploadedPicFile1] = useState('');
-    const [uploadedPicFile2, setUploadedPicFile2] = useState('');
-    const [uploadedPicFile3, setUploadedPicFile3] = useState('');
-    const [uploadedPicFile4, setUploadedPicFile4] = useState('');
-    const [uploadedPicFileWin1, setUploadedPicFileWin1] = useState('');
-    const [uploadedPicFileWin2, setUploadedPicFileWin2] = useState('');
     const [url1, setUrl1] = useState('');
     const [url2, setUrl2] = useState('');
     const [url3, setUrl3] = useState('');
     const [url4, setUrl4] = useState('');
     const [urlWin1, setUrlWin1] = useState('');
     const [urlWin2, setUrlWin2] = useState('');
-    const [createdAt, setCreatedAt] = useState('');
+    const [fileTypeError1, setFileTypeError1] = useState("");
+    const [fileTypeError2, setFileTypeError2] = useState("");
+    const [fileTypeError3, setFileTypeError3] = useState("");
+    const [fileTypeError4, setFileTypeError4] = useState("");
+    const [fileTypeErrorWin1, setFileTypeErrorWin1] = useState("");
+    const [fileTypeErrorWin2, setFileTypeErrorWin2] = useState("");
+    const [uploadedPicFile1,setUploadedPicFile1] = useState();
+    const [uploadedPicFile2,setUploadedPicFile2] = useState();
+    const [uploadedPicFile3,setUploadedPicFile3] = useState();
+    const [uploadedPicFile4,setUploadedPicFile4] = useState();
+    const [uploadedPicFileWin1, setUploadedPicFileWin1] = useState();
+    const [uploadedPicFileWin2, setUploadedPicFileWin2] = useState();
+    //const [createdAt, setCreatedAt] = useState('');
+    //const [fileSuccess, setFileSuccess] = useState(false);
+    const [fileTypeError, setFileTypeError] = useState('');
+    const [currentDate, setCurrentDate] = useState('');
 
     let parsedWindowLocation = queryString.parse(window.location.hash);
-    const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(13);
+    const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(21);
 
     console.log("This is the stringified:");
     console.log(stringifiedSlug);
 
     let selectedTournament = "";
 
-    if(docsFromHook) {
-         selectedTournament = docsFromHook.filter(function (tournament) {
-            return tournament.id === stringifiedSlug;
-        });
+    useEffect(() => {
+        if (docsFromHook) {
+            selectedTournament = docsFromHook.filter(function (tournament) {
+               return tournament.id === stringifiedSlug;
+            });
+            console.log(selectedTournament);
+        }
+    });
 
-        if(selectedTournament!==""){
-            selectedTournament && selectedTournament.map( doc =>
-            {
+    useEffect(() => {
+        if (selectedTournament !== "") {
+            selectedTournament && selectedTournament.map(doc => {
+                let date = new Date(doc.eventDate);
+                let parsedDate = date.toString();
                 setEventCategory(doc.eventCategory);
                 setEventStatus(doc.eventStatus);
                 setEventTitle(doc.eventTitle);
-                setUrlWin1(doc.eventWinner1);
-                setUrlWin2(doc.eventWinner2);
+                setUrlWin1(doc.eventWinner1?doc.eventWinner1:"");
+                setUrlWin2(doc.eventWinner2?doc.eventWinner2:"");
                 setEventInfoPageLink(doc.eventInfoPage);
-                setEventDate(new Date(doc.eventDate));
-                eventVideoLink(doc.eventVideoLink);
-                setUrl1(doc.pictureURL1);
-                setUrl2(doc.pictureURL2);
-                setUrl3(doc.pictureURL3);
-                setUrl4(doc.pictureURL4);
+                setEventDate(doc.eventDate);
+                setCurrentDate(parsedDate);
+
+                setEventVideoLink(doc.eventVideoLink);
+                setUrl1(doc.pictureURL1?doc.pictureURL1:"");
+                setUrl2(doc.pictureURL2?doc.pictureURL2:"");
+                setUrl3(doc.pictureURL3?doc.pictureURL3:"");
+                setUrl4(doc.pictureURL4?doc.pictureURL4:"");
             })
         }
+    }, [docsFromHook]);
+
+    async function putFile(File, setterKey){
+        try {
+            //setLoading(true);
+            setFileTypeError("");
+            const storageRef = projectStorage.ref('tournaments_pictures').child(File.name);
+            storageRef.put(File).on('state_changed', (err) => {
+            },  (err) => {
+                window.alert(err);
+            }, async()=>{
+                const finalUrl = await storageRef.getDownloadURL();
+
+                if(finalUrl!==undefined) {
+                    if (setterKey === "url1") {
+                        setFileSuccess1(true);
+                    }else{
+                        setFileSuccess1(false);
+                    }
+                    if (setterKey === "url2") {
+                        setFileSuccess2(true);
+                    }else{
+                        setFileSuccess2(false);
+                    }
+                    if (setterKey === "url3") {
+                        setFileSuccess3(true);
+                    }else{
+                        setFileSuccess3(false);
+                    }
+                    if (setterKey === "url4") {
+                        setFileSuccess4(true);
+                    }else{
+                        setFileSuccess4(false);
+                    }
+                    if (setterKey === "urlWin1") {
+                        setFileSuccessWin1(true);
+                    }else{
+                        setFileSuccessWin1(false);
+                    }
+                    if (setterKey === "urlWin2") {
+                        setFileSuccessWin2(true);
+                    }else{
+                        setFileSuccessWin2(false);
+                    }
+                }
+
+                switch(setterKey){
+                    case "url1":
+                        setUrl1(finalUrl);
+                        break;
+                    case "url2":
+                        setFileSuccess2(true);
+                        break;
+                    case "url3":
+                        setFileSuccess3(true);
+                        break;
+                    case "url4":
+                        setFileSuccess4(true);
+                        break;
+                    case "urlWin1":
+                        setFileSuccessWin1(true);
+                        break;
+                    case "urlWin2":
+                        setFileSuccessWin2(true);
+                        break;
+                    default:
+                        console.log("None of the cases worked!");
+                }
+            });
+        } catch {
+            if (setterKey === "url1") {
+                setUploadError1("Failed to upload file " + setterKey);
+            } else if (setterKey === "url2") {
+                setUploadError2("Failed to upload file " + setterKey);
+            } else if (setterKey === "url3") {
+                setUploadError3("Failed to upload file " + setterKey);
+            } else if (setterKey === "url4") {
+                setUploadError4("Failed to upload file " + setterKey);
+            } else if (setterKey === "urlWin1") {
+                setUploadErrorWin1("Failed to upload file " + setterKey);
+            } else if (setterKey === "urlWin2") {
+                setUploadErrorWin2("Failed to upload file " + setterKey);
+            }
+        }
+        //setLoading(false);
     }
 
-    const file1UploadEventListener = (e) => {
+    const fileUploadEventListener = (e, setterKey) => {
         let uploadedFile = e.target.files[0];
         if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-            setUploadedPicFile1(uploadedFile);
-            async function putFile(uploadedFile){
-                e.preventDefault();
-                try {
-                    setLoading1(true);
-                    setError1("");
-                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedFile.name);
-                    storageRef.put(uploadedFile).on('state_changed', (err) => {
-                    },  (err) => {
-                        window.alert(err);
-                    }, async()=>{
-                        const finalUrl = await storageRef.getDownloadURL();
-                        finalUrl!==undefined?setFileSuccess1(true):setFileSuccess1(false);
-                        setUrl1(finalUrl);
-                    });
-                } catch {
-                    setError1("Failed to upload file");
-                }
-                setLoading1(false);
+            if (setterKey === "url1") {
+               setUploadedPicFile1(uploadedFile);
+                putFile(uploadedPicFile1, setterKey).then(()=>console.log("putFile() worked"));
+            } else if (setterKey === "url2") {
+               setUploadedPicFile2(uploadedFile);
+                putFile(uploadedPicFile2, setterKey).then(()=>console.log("putFile() worked"));
+            } else if (setterKey === "url3") {
+              setUploadedPicFile3(uploadedFile);
+                putFile(uploadedPicFile3, setterKey).then(()=>console.log("putFile() worked"));
+            } else if (setterKey === "url4") {
+              setUploadedPicFile4(uploadedFile);
+                putFile(uploadedPicFile4, setterKey).then(()=>console.log("putFile() worked"));
+            } else if (setterKey === "urlWin1") {
+              setUploadedPicFileWin1(uploadedFile);
+                putFile(uploadedPicFileWin1, setterKey).then(()=>console.log("putFile() worked"));
+            } else if (setterKey === "urlWin2") {
+              setUploadedPicFileWin2(uploadedFile);
+                putFile(uploadedPicFileWin2, setterKey).then(()=>console.log("putFile() worked"));
             }
-            putFile(uploadedFile).then(()=>console.log(url1));
         } else {
-            setUploadedPicFile1('');
-            setError1('Please select an image file (png or jpg)');
-        }
-    };
-
-    const file2UploadEventListener = (e) => {
-        let uploadedFile = e.target.files[0];
-        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-            setUploadedPicFile2(uploadedFile);
-            async function putFile(uploadedFile){
-                e.preventDefault();
-                try {
-                    setLoading2(true);
-                    setError2("");
-                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedFile.name);
-                    storageRef.put(uploadedFile).on('state_changed', (err) => {
-                    },  (err) => {
-                        window.alert(err);
-                    }, async()=>{
-                        const finalUrl = await storageRef.getDownloadURL();
-                        finalUrl!==undefined?setFileSuccess2(true):setFileSuccess2(false);
-                        setUrl2(finalUrl);
-                    });
-                } catch {
-                    setError2("Failed to upload file");
-                }
-                setLoading2(false);
+            if (setterKey === "url1") {
+                setFileTypeError1('Please select an image file (png or jpg)');
+                setUploadedPicFile1('');
+            } else if (setterKey === "url2") {
+                setFileTypeError2('Please select an image file (png or jpg)');
+                setUploadedPicFile2('');
+            } else if (setterKey === "url3") {
+                setFileTypeError3('Please select an image file (png or jpg)');
+                setUploadedPicFile3('');
+            } else if (setterKey === "url4") {
+                setFileTypeError4('Please select an image file (png or jpg)');
+                setUploadedPicFile4('');
+            } else if (setterKey === "urlWin1") {
+                setFileTypeErrorWin1('Please select an image file (png or jpg)');
+                setUploadedPicFileWin1('');
+            } else if (setterKey === "urlWin2") {
+                setFileTypeErrorWin2('Please select an image file (png or jpg)');
+                setUploadedPicFileWin2('');
             }
-            putFile(uploadedFile).then(()=>console.log(url2));
-        } else {
-            setUploadedPicFile2('');
-            setError2('Please select an image file (png or jpg)');
         }
-    };
-
-    const file3UploadEventListener = (e) => {
-        let uploadedFile = e.target.files[0];
-        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-            setUploadedPicFile3(uploadedFile);
-            async function putFile(uploadedFile){
-                e.preventDefault();
-                try {
-                    setLoading3(true);
-                    setError3("");
-                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedFile.name);
-                    storageRef.put(uploadedFile).on('state_changed', (err) => {
-                    },  (err) => {
-                        window.alert(err);
-                    }, async()=>{
-                        const finalUrl = await storageRef.getDownloadURL();
-                        finalUrl!==undefined?setFileSuccess3(true):setFileSuccess3(false);
-                        setUrl3(finalUrl);
-                    });
-                } catch {
-                    setError3("Failed to upload file");
-                }
-                setLoading3(false);
-            }
-            putFile(uploadedFile).then(()=>console.log(url3));
-        } else {
-            setUploadedPicFile3('');
-            setError3('Please select an image file (png or jpg)');
-        }
-    };
-
-    const file4UploadEventListener = (e) => {
-        let uploadedFile = e.target.files[0];
-        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-            setUploadedPicFile4(uploadedFile);
-
-            async function putFile(uploadedFile){
-                e.preventDefault();
-                try {
-                    setLoading4(true);
-                    setError4("");
-                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedFile.name);
-                    storageRef.put(uploadedFile).on('state_changed', (err) => {
-                    },  (err) => {
-                        window.alert(err);
-                    }, async()=>{
-                        const finalUrl = await storageRef.getDownloadURL();
-                        finalUrl!==undefined?setFileSuccess4(true):setFileSuccess4(false);
-                        setUrl4(finalUrl);
-                    });
-                } catch {
-                    setError4("Failed to upload file");
-                }
-                setLoading4(false);
-            }
-            putFile(uploadedFile).then(()=>console.log(url4));
-        } else {
-            setUploadedPicFile4('');
-            setError4('Please select an image file (png or jpg)');
-        }
-    };
-
-    const fileWin1UploadEventListener = (e) => {
-        let uploadedFile = e.target.files[0];
-        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-            setUploadedPicFileWin1(uploadedFile);
-            //setAddArticlesFormUserUploadedFile(uploadedFilesArray);
-            async function putFile(uploadedFile){
-                e.preventDefault();
-                try {
-                    setLoadingWin1(true);
-                    setErrorWin1("");
-                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedFile.name);
-                    storageRef.put(uploadedFile).on('state_changed', (err) => {
-                    },  (err) => {
-                        window.alert(err);
-                    }, async()=>{
-                        const finalUrl = await storageRef.getDownloadURL();
-                        finalUrl!==undefined?setFileSuccessWin1(true):setFileSuccessWin1(false);
-                        setUrlWin1(finalUrl);
-                    });
-                } catch {
-                    setErrorWin1("Failed to upload file");
-                }
-                setLoadingWin1(false);
-            }
-            putFile(uploadedFile).then(()=>console.log(urlWin1));
-        } else {
-            setUploadedPicFileWin1('');
-            setErrorWin1('Please select an image file (png or jpg)');
-        }
-    };
-
-    const fileWin2UploadEventListener = (e) => {
-        //setCategoriesArr(inputArr);
-        let uploadedFile = e.target.files[0];
-        //'image/png', 'image/jpeg' are also some default values we can see in the uploadedFilesArray object.
-        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-            setUploadedPicFileWin2(uploadedFile);
-            //setAddArticlesFormUserUploadedFile(uploadedFilesArray);
-            async function putFile(uploadedFile){
-                e.preventDefault();
-                try {
-                    setLoadingWin2(true);
-                    setErrorWin2("");
-                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedFile.name);
-                    storageRef.put(uploadedFile).on('state_changed', (err) => {
-                    },  (err) => {
-                        window.alert(err);
-                    }, async()=>{
-                        const finalUrl = await storageRef.getDownloadURL();
-                        finalUrl!==undefined?setFileSuccessWin2(true):setFileSuccessWin2(false);
-                        setUrlWin2(finalUrl);
-                    });
-                } catch {
-                    setErrorWin2("Failed to upload file");
-                }
-                setLoadingWin2(false);
-            }
-            putFile(uploadedFile).then(()=>console.log(urlWin2));
-        } else {
-            setUploadedPicFileWin2('');
-            setErrorWin2('Please select an image file (png or jpg)');
-        }
-    };
+   };
 
     const clearInput = () => {
-        setEventCategory('');
-        setEventTitle('');
-        setEventStatus('');
-        setEventVideoLink('');
-        setEventDate('');
-        setEventInfoPageLink('');
-        setError1(null);
-        setError2(null);
-        setError3(null);
-        setError4(null);
-        setErrorWin1(null);
-        setErrorWin2(null);
-        setFileSuccess1(false);
-        setFileSuccess2(false);
-        setFileSuccess3(false);
-        setFileSuccess4(false);
-        setFileSuccessWin1(false);
-        setFileSuccessWin2(false);
-        setLoading1(true);
-        setLoading2(true);
-        setLoading3(true);
-        setLoading4(true);
-        setLoadingWin1(true);
-        setLoadingWin2(true);
-        setUploadedPicFile1('');
-        setUploadedPicFile2('');
-        setUploadedPicFile3('');
-        setUploadedPicFile4('');
-        setUploadedPicFileWin1('');
-        setUploadedPicFileWin2('');
-        setUrl1('');
-        setUrl2('');
-        setUrl3('');
-        setUrl4('');
-        setUrlWin1('');
-        setUrlWin2('');
-
-        const storageRef1 = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedPicFile1.name);
-        const storageRef2 = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedPicFile2.name);
-        const storageRef3 = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedPicFile3.name);
-        const storageRef4 = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedPicFile4.name);
-        const storageRefWin1 = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedPicFileWin1.name);
-        const storageRefWin2 = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedPicFileWin2.name);
+        const storageRef1 = uploadedPicFile1?projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFile1.name):"";
+        const storageRef2 = uploadedPicFile2?projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFile2.name):"";
+        const storageRef3 = uploadedPicFile3?projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFile3.name):"";
+        const storageRef4 = uploadedPicFile4?projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFile4.name):"";
+        const storageRefWin1 = uploadedPicFileWin1?projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFileWin1.name):"";
+        const storageRefWin2 = uploadedPicFileWin2?projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFileWin2.name):"";
 
         if(storageRef1){
             storageRef1.delete().then(() => {
@@ -358,28 +276,19 @@ export default function EditTournamentsForm() {
         }
 
         if(storageRefWin2){
-            storageRef1.delete().then(() => {
+            storageRef2.delete().then(() => {
                 console.log("uploaded image removed successfully");
             }).catch((error) => {
                 console.log("could not delete the file because:" + error);
             });
         }
+        history.push("/TournamentsPage", {from: "/ModeratorAddTournamentsForm"});
     }
 
-    const addTournamentWithFBCallback = () => {
-        const collectionRef = projectFirestore.collection('tournaments').doc();
-        if( (loading1=== false &&
-            loading2=== false &&
-            loading3=== false &&
-            loading4=== false) ||
-            (loading1=== false &&
-                loading2=== false) ||
-            (loading3=== false &&
-                loading4=== false) ||
-            loadingWin1 === false ||
-            ( loadingWin1 === false &&
-                loadingWin2 === false)
-        ) {
+    const editTournamentWithFBCallback = () => {
+        const collectionRef = projectFirestore.collection('tournaments').doc(stringifiedSlug);
+
+        if (eventStatus === "passed" && eventCategory === "match") {
             collectionRef.set(
                 {
                     "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
@@ -391,17 +300,85 @@ export default function EditTournamentsForm() {
                     "eventInfoPage": eventInfoPageLink,
                     "eventDate": Date.parse(eventDate),
                     "eventVideoLink": eventVideoLink,
+                    "updatedAt": Date.now()
+                })
+                .then(() => {
+                    window.alert("Tournament edited successfully!");
+                    history.push("/TournamentsPage", {from: "/ModeratorAddTournamentsForm"});
+                    return console.log("Tournament edited successfully.");
+                })
+                .catch((error) => {
+                    console.error(error.code + " " + error.message + "" + error.details);
+                });
+        }
+
+        if (eventStatus === "passed" && eventCategory === "tournament") {
+            collectionRef.set(
+                {
+                    "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
+                    "eventCategory": eventCategory,
+                    "eventStatus": eventStatus,
+                    "eventTitle": eventTitle,
+                    "eventWinner1": urlWin1,
+                    "eventInfoPage": eventInfoPageLink,
+                    "eventDate": Date.parse(eventDate),
+                    "eventVideoLink": eventVideoLink,
+                    "updatedAt": Date.now()
+                })
+                .then(() => {
+                    window.alert("Tournament edited successfully!");
+                    history.push("/TournamentsPage", {from: "/ModeratorAddTournamentsForm"});
+                    return console.log("Tournament edited successfully.");
+                })
+                .catch((error) => {
+                    console.error(error.code + " " + error.message + "" + error.details);
+                });
+        }
+
+        if (eventStatus === "future" && eventCategory === "match") {
+            collectionRef.set(
+                {
+                    "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
+                    "eventCategory": eventCategory,
+                    "eventStatus": eventStatus,
+                    "eventTitle": eventTitle,
+                    "eventInfoPage": eventInfoPageLink,
+                    "eventDate": Date.parse(eventDate),
+                    "eventVideoLink": eventVideoLink,
+                    "pictureURL1": url1,
+                    "pictureURL2": url2,
+                    "updatedAt": Date.now()
+                })
+                .then(() => {
+                    window.alert("Tournament edited successfully!");
+                    history.push("/TournamentsPage", {from: "/ModeratorAddTournamentsForm"});
+                    return console.log("Tournament edited successfully.");
+                })
+                .catch((error) => {
+                    console.error(error.code + " " + error.message + "" + error.details);
+                });
+        }
+
+        if (eventStatus === "future" && eventCategory === "tournament") {
+            collectionRef.set(
+                {
+                    "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
+                    "eventCategory": eventCategory,
+                    "eventStatus": eventStatus,
+                    "eventTitle": eventTitle,
+                    "eventInfoPage": eventInfoPageLink,
+                    "eventDate": eventDate,
+                    "eventVideoLink": eventVideoLink,
                     "pictureURL1": url1,
                     "pictureURL2": url2,
                     "pictureURL3": url3,
                     "pictureURL4": url4,
-                    "createdAt": createdAt,
                     "updatedAt": Date.now()
                 })
                 .then(() => {
-                    window.alert("Tournament added successfully!");
-                    history.push("/UserProfilePage", {from: "/EditTournamentForm"});
-                    return console.log("tournament edited successfully.");
+                    window.alert("Tournament edited successfully!");
+                    history.push("/TournamentsPage", {from: "/ModeratorAddTournamentsForm"});
+                    return console.log("Tournament edited successfully.");
                 })
                 .catch((error) => {
                     console.error(error.code + " " + error.message + "" + error.details);
@@ -416,7 +393,7 @@ export default function EditTournamentsForm() {
                     <div className="form-dropdown">
                         <Dropdown>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                Event category
+                                {eventCategory!==''? eventCategory : "Event category"}
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 <Dropdown.Item onClick={()=>setEventCategory("match")}>Match</Dropdown.Item>
@@ -428,7 +405,7 @@ export default function EditTournamentsForm() {
                     <div className="form-dropdown">
                         <Dropdown>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                Event status
+                                {eventStatus!==''? eventStatus : "Event status"}
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 <Dropdown.Item onClick={()=>setEventStatus("future")}>Future</Dropdown.Item>
@@ -442,71 +419,90 @@ export default function EditTournamentsForm() {
                         <input
                             className='form-update__input'
                             type="text"
-                            required
+                            value={eventTitle}
                             onChange={
                                 (e)=>setEventTitle(e.target.value)
                             }
                         />
                     </label>
 
-                    {eventStatus==="future"&&
+                    {/*{eventStatus==="future"&&*/}
                     <>
+                        <div>
+                            Current Picture1:
+                            <img style={{width: "25%", height: "auto"}} src={url1} alt=""/>
+                        </div>
                         <label className='form-update__label btn-upload btn-upload--tournament'> <span className='icon-upload2'></span> Picture team 1
                             <input
                                 className='form-update__btn visually-hidden'
                                 type="file"
                                 placeholder='file'
-                                onChange={file1UploadEventListener}
+                                onChange={(e)=>fileUploadEventListener(e, "url1")}
                             />
                             <div className="output">
-                                { error1 && <div className="error">{ error1 }</div>}
-                                {fileSuccess1&&<div>Image 1 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url1} alt=""/></div> }
+                                { uploadError1!=="" && <div className="error">{ uploadError1 }</div>}
+                                { fileTypeError1!=="" && <div className="error">{ fileTypeError1 }</div> }
+                                { fileSuccess1&&<div>Image 1 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url1} alt=""/></div> }
                             </div>
                         </label>
+                        <div>
+                            Current Picture2:
+                            <img style={{width: "25%", height: "auto"}} src={url2} alt=""/>
+                        </div>
                         <label className='form-update__label btn-upload btn-upload--tournament'> <span className='icon-upload2'></span> Picture team 2
                             <input
                                 className='form-update__btn visually-hidden'
                                 type="file"
                                 placeholder='file'
-                                onChange={file2UploadEventListener}
+                                onChange={(e)=>fileUploadEventListener(e, "url2")}
                             />
                             <div className="output">
-                                { error2 && <div className="error">{ error2 }</div>}
+                                { uploadError2!=="" && <div className="error">{ uploadError2 }</div>}
+                                { fileTypeError2!=="" && <div className="error">{ fileTypeError2 }</div> }
                                 {fileSuccess2&&<div>Image 2 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url2} alt=""/></div> }
                             </div>
                         </label>
                     </>
-                    }
+                    {/*}*/}
 
-                    {(eventCategory==="tournament"&&eventStatus==="future")&&
-                    <>
+                    {/*{(eventCategory==="tournament"&&eventStatus==="future")&&*/}UploadE                    <>
+                        <div>
+                            Current Picture3:
+                            <img style={{width: "25%", height: "auto"}} src={url3} alt=""/>
+                        </div>
                         <label className='form-update__label btn-upload btn-upload--tournament'><span className='icon-upload2'></span> Picture team 3
                             <input
                                 className='form-update__btn visually-hidden'
                                 type="file"
                                 placeholder='file'
-                                onChange={file3UploadEventListener}
+                                onChange={(e)=>fileUploadEventListener(e, "url3")}
                             />
                             <div className="output">
-                                { error3 && <div className="error">{ error3 }</div>}
+                                { uploadError3!=="" && <div className="error">{ uploadError3 }</div>}
+                                { fileTypeError3!=="" && <div className="error">{ fileTypeError3 }</div> }
                                 {fileSuccess3&&<div>Image 3 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url3} alt=""/></div> }
                             </div>
                         </label>
 
+                        <div>
+                            Current Picture4:
+                            <img style={{width: "25%", height: "auto"}} src={url4} alt=""/>
+                        </div>
                         <label className='form-update__label btn-upload btn-upload--tournament'> <span className='icon-upload2'></span> Picture team 4
                             <input
                                 className='form-update__btn visually-hidden'
                                 type="file"
                                 placeholder='file'
-                                onChange={file4UploadEventListener}
+                                onChange={(e)=>fileUploadEventListener(e, "url4")}
                             />
                             <div className="output">
-                                { error4 && <div className="error">{ error4 }</div>}
+                                { uploadError4!=="" && <div className="error">{ uploadError4 }</div>}
+                                { fileTypeError4!=="" && <div className="error">{ fileTypeError4 }</div> }
                                 {fileSuccess4&&<div>Image 4 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url4} alt=""/></div> }
                             </div>
                         </label>
                     </>
-                    }
+                    {/*}*/}
                     {eventVideoLink&&
                     <ReactPlayer
                         url={eventVideoLink ? eventVideoLink : ""}
@@ -520,7 +516,6 @@ export default function EditTournamentsForm() {
                         <input
                             className='form-update__input'
                             type="text"
-                            required
                             value={eventVideoLink}
                             onChange={
                                 (e)=>setEventVideoLink(e.target.value)
@@ -533,13 +528,14 @@ export default function EditTournamentsForm() {
                         <input
                             className='form-update__input'
                             type="text"
-                            required
+                            value={eventInfoPageLink}
                             onChange={
                                 (e)=>setEventInfoPageLink(e.target.value)
                             }
                         />
                     </label>
 
+                    <div>Current date: {currentDate}</div>
                     <label className='form-update__label'>
                         Date/Hour
                         <input
@@ -548,61 +544,71 @@ export default function EditTournamentsForm() {
                             min="2021-05-03"
                             max="2022-12-31"
                             onChange={
-                                (e)=>setEventDate(e.target.value)
+                                (e)=>setEventDate(Date.parse(e.target.value))
                             }
                         />
                     </label>
-                    <div>Current event date: {eventDate}</div>
 
-                    {eventStatus === "passed" &&
+                    {/*{eventStatus === "passed" &&*/}
+                    <div>
+                        Current Winner 1:
+                        <img style={{width: "25%", height: "auto"}} src={urlWin1} alt=""/>
+                    </div>
                     <label
                         className='form-update__label btn-upload btn-upload--tournament'>
-            <span
-                className='icon-upload2'>
-            </span>
+                    <span
+                        className='icon-upload2'>
+                    </span>
                         Event winner 1
                         <input
                             className='form-update__btn visually-hidden'
                             type="file"
                             placeholder='file'
-                            onChange={fileWin1UploadEventListener}
+                            onChange={(e)=>fileUploadEventListener(e, "urlWin1")}
                         />
                         <div className="output">
-                            { errorWin1 && <div className="error">{ errorWin1 }</div>}
+                            { uploadErrorWin1!=="" && <div className="error">{ uploadErrorWin1 }</div>}
+                            { fileTypeErrorWin1!=="" && <div className="error">{ fileTypeErrorWin1 }</div>}
                             {fileSuccessWin1&&<div>Image Win1 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={urlWin1} alt=""/></div> }
                         </div>
                     </label>
-                    }
-                    {(eventStatus === "passed" && eventCategory === "match")&&
+                    {/*}*/}
+                    {/*{(eventStatus === "passed" && eventCategory === "match")&&*/}
+                    <div>
+                        Current Winner 2:
+                        <img style={{width: "25%", height: "auto"}} src={urlWin2} alt=""/>
+                    </div>
                     <label
                         className='form-update__label btn-upload btn-upload--tournament'>
-            <span
-                className='icon-upload2'>
-            </span>
+                    <span
+                        className='icon-upload2'>
+                    </span>
+
                         Event winner 2
                         <input
                             className='form-update__btn visually-hidden'
                             type="file"
                             placeholder='file'
-                            onChange={fileWin2UploadEventListener}
+                            onChange={(e)=>fileUploadEventListener(e, "urlWin2")}
                         />
                         <div className="output">
-                            { errorWin2 && <div className="error">{ errorWin2 }</div>}
+                            { uploadErrorWin2!=="" && <div className="error">{ uploadErrorWin2 }</div>}
+                            { fileTypeErrorWin2!=="" && <div className="error">{ fileTypeErrorWin2 }</div> }
                             {fileSuccessWin2&&<div>Image Win2 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={urlWin2} alt=""/></div> }
                         </div>
 
                     </label>
-                    }
+                    {/*}*/}
 
                     <button
                         className="form-article__btn"
-                        onClick={addTournamentWithFBCallback}
+                        onClick={()=>editTournamentWithFBCallback()}
                     >
                         Submit
                     </button>
                     <button style={{marginTop: "1em"}}
                             className="form-article__btn"
-                            onClick={clearInput}
+                            onClick={()=>clearInput()}
                     >
                         Cancel
                     </button>

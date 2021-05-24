@@ -1,8 +1,9 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useHistory} from "react-router-dom";
 import {projectFirestore} from "../../../fireBase";
+import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
 
-function TournamentsPageEdit() {
+function CMSBlogPageEdit() {
     let publishBtnRef = useRef();
     let cancelBtnRef = useRef();
     // const {currentUser} = useAuthContext();
@@ -10,36 +11,52 @@ function TournamentsPageEdit() {
     const history = useHistory();
     const [ITMainText, setITMainText] = useState('');
     const [ENMainText, setENMainText] = useState('');
+    const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
 
-    const writeToFBCallback = () => {
+    let selectedDoc = "";
+
+    useEffect(() => {
+        console.log(docsFromHookCMS);
+        if (docsFromHookCMS) {
+            selectedDoc = docsFromHookCMS.filter(function (doc) {
+                return doc.id === "blogPage";
+            });
+            console.log(selectedDoc);
+        }
+    });
+
+    useEffect(() => {
+        if (selectedDoc !== "") {
+            selectedDoc.map(doc => {
+                setITMainText(doc.mainText.it);
+                setENMainText(doc.mainText.en);
+            })
+        }
+    }, [docsFromHookCMS]);
+
+   const writeToFBCallback = () => {
         const collectionRef = projectFirestore.collection('web-app-cms').doc("blogPage");
-            collectionRef.set(
-                {
-                    "mainText": {
-                        "en": ENMainText,
-                        "it": ITMainText
-                    }
-                })
-                .then(() => {
-                    window.alert("Doc edited successfully!");
-                    return console.log("Doc edited successfully!");
-                })
-                .catch((error) => {
-                    console.error(error.code + " " + error.message + "" + error.details);
-                });
+        collectionRef.set(
+        {
+            "mainText": {
+                "en": ENMainText,
+                "it": ITMainText
+            }
+        })
+        .then(() => {
+            window.alert("Content edited successfully!");
 
-    }
-
-    const clearInput = () => {
-        setENMainText("");
-        setITMainText("");
-        history.push("/UserProfilePage");
-    }
+            return console.log("Content edited successfully!");
+        })
+        .catch((error) => {
+            console.error(error.code + " " + error.message + "" + error.details);
+        });
+   }
 
     return (
         <>
             <div style={{paddingTop: "5em important"}}>
-                <center><h1>Edit <strong>Home</strong> Page static content:</h1></center>
+                <center><h1>Edit <strong>Blog</strong> Page static content:</h1></center>
                 <section>
                     <ul className="nav nav-tabs" id="myTab" role="tablist">
                         <li className="nav-item">
@@ -82,7 +99,6 @@ function TournamentsPageEdit() {
                                             rows='2'
                                             name="countent"
                                             value={ITMainText}
-                                            required
                                             onChange={
                                                 (e)=>setITMainText(e.target.value)
                                             }
@@ -104,13 +120,12 @@ function TournamentsPageEdit() {
                             <div className='form-article__body'>
                                 <form className="form-article">
                                     <label className='form-article__label'>
-                                        Content
+                                        Footer message:
                                         <textarea
                                             className='form-article__input'
                                             rows='2'
                                             name="countent"
                                             value={ENMainText}
-                                            required
                                             onChange={
                                                 (e)=>setENMainText(e.target.value)
                                             }
@@ -125,7 +140,7 @@ function TournamentsPageEdit() {
                             <button
                                 ref={publishBtnRef}
                                 className="form-article__btn"
-                                onClick={writeToFBCallback}
+                                onClick={()=>writeToFBCallback()}
                             >
                                 Publish
                             </button>
@@ -133,7 +148,7 @@ function TournamentsPageEdit() {
                             <button
                                 ref={cancelBtnRef}
                                 className="form-article__btn"
-                                onClick={clearInput}
+                                onClick={() => history.push("/UserProfilePage")}
                             >
                                 Cancel
                             </button>
@@ -145,4 +160,4 @@ function TournamentsPageEdit() {
     );
 }
 
-export default TournamentsPageEdit;
+export default CMSBlogPageEdit;

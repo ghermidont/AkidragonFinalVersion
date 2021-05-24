@@ -29,7 +29,7 @@ export default function EditStreamForm(){
     const [uploadedPicFile, setUploadedPicFile] = useState('');
     const [createdAt, setCreatedAt] = useState('');
     let parsedWindowLocation = queryString.parse(window.location.hash);
-    const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(13);
+    const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(17);
 
     console.log("This is the stringified:");
     console.log(stringifiedSlug);
@@ -38,23 +38,23 @@ export default function EditStreamForm(){
 
     useEffect(() => {
         if (docsFromHook) {
-            console.log("second option worked");
-            //Filter the articles object and select the article who's slug corresponds to the current window slug
             selectedStream = docsFromHook.filter(function (stream) {
-                return stream.id === stringifiedSlug;
+               return stream.id === stringifiedSlug;
             });
             console.log(selectedStream);
-
-            if (selectedStream !== "") {
-                selectedStream && selectedStream.map(doc => {
-                    setCreatedAt(doc.createdAt)
-                    setStreamCategory(doc.category);
-                    setVideoURL(doc.videoURL);
-                    setUrl(doc.imageURL);
-                })
-            }
         }
-    }, []);
+   });
+
+    useEffect(() => {
+    if (selectedStream !== "") {
+        selectedStream && selectedStream.map(doc => {
+            setCreatedAt(doc.createdAt);
+            setStreamCategory(doc.category);
+            setVideoURL(doc.videoURL);
+            setUrl(doc.imageURL);
+        })
+    }
+    }, [docsFromHook]);
 
     const fileUploadEventListener = (e) => {
         let uploadedFile = e.target.files[0];
@@ -73,11 +73,11 @@ export default function EditStreamForm(){
                         const finalUrl = await storageRef.getDownloadURL();
                         finalUrl!==undefined?setFileSuccess(true):setFileSuccess(false);
                         setUrl(finalUrl);
+                        setLoading(false);
                     });
                 } catch {
                     setError("Failed to upload file");
                 }
-                setLoading(false);
             }
             putFile(uploadedFile).then(()=>console.log(url));
         } else {
@@ -87,17 +87,16 @@ export default function EditStreamForm(){
     };
 
     const addStreamsWithFBCallback = (e) => {
-        const collectionRef = projectFirestore.collection('streams').doc();
+        const collectionRef = projectFirestore.collection('streams').doc(stringifiedSlug);
 
-        if(loading === false) {
             collectionRef.set(
                 {
                     "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
                     "category": streamCategory,
-                    "videoURL": videoURL,
-                    "imageURL": url,
                     "createdAt": createdAt,
-                    "updatedAt": Date.now()
+                    "imageURL": url,
+                    "updatedAt": Date.now(),
+                    "videoURL": videoURL,
                 })
                 .then(() => {
                     window.alert("Stream edited successfully!");
@@ -107,8 +106,7 @@ export default function EditStreamForm(){
                 .catch((error) => {
                     console.error(error.code + " " + error.message + "" + error.details);
                 });
-        }
-        e.preventDefault();
+
     }
 
     const clearInput = () => {
@@ -134,7 +132,7 @@ export default function EditStreamForm(){
         <>
             <div className='form-update__body form-login__body'>
                 <h1 className="title form-title">Add Stream</h1>
-                <form className="form-update">
+                <form className="form-update" style={{marginTop: "30em"}}>
                     <ReactPlayer
                         url = {videoURL?videoURL:""}
                         controls = {true}
@@ -185,7 +183,7 @@ export default function EditStreamForm(){
 
                        <button
                             className="form-article__btn"
-                            onClick={addStreamsWithFBCallback}
+                            onClick={()=>addStreamsWithFBCallback()}
                        >Submit
                        </button>
 

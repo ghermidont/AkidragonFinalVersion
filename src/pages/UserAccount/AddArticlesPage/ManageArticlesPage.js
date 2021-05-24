@@ -37,8 +37,8 @@ const ManageArticlesPage = () => {
                                             </div>
                                         </article>
                                         <Link onClick={()=> {
-                                            setChosenModifyArticleNumber(doc.id);
-                                            history.push(`/modify-article/${doc.id}`, {from: "/ManageArticlesPage"});
+                                            //setChosenModifyArticleNumber(doc.id);
+                                            history.push(`/edit-article/${doc.id}`, {from: "/ManageArticlesPage"});
                                         }}> Edit article >>>
 
                                         </Link>
