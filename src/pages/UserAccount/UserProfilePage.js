@@ -14,6 +14,7 @@ export default function UserProfilePage() {
   //const moderatorLS = JSON.parse(localStorage.getItem('currentUserRole'));
   const [moderator, setModerator] = useState();
   const[currentUserExtraInfoFB, setCurrentUserExtraInfoFB] = useState({});
+  const[currentUserDbPointsInfo, setCurrentUserDbPointsInfo] = useState();
 
   useEffect(() => {
     async function getCurrentUserExtraInfo() {
@@ -50,8 +51,27 @@ export default function UserProfilePage() {
           });
     }
 
+    async function getDoc(){
+      await projectFirestore
+          .collection('score')
+          .doc(CurrentUserFromLS.uid).get().then((doc)=>{
+            if(doc.exists){
+              setCurrentUserDbPointsInfo(doc.data());
+              console.log(doc.data());
+            }else{
+              console.log("No such document!");
+            }
+          })
+          .catch((error) => {
+            console.log("Error getting document:", error);
+          });
+    }
+
     getCurrentUserExtraInfo().then(()=>console.log("Got the user info!")).catch(()=>console.error("could not get current use extra info."));
     checkCurrentUserRole().then(()=>console.log(moderator)).catch(()=>console.error("could not get current use role."));
+    getDoc().then(()=>console.log("Got the user info for update!")).catch(()=>console.error("could not get current use extra info."));
+    console.log(currentUserDbPointsInfo);
+
   }, []);
 
   return (
@@ -67,7 +87,7 @@ export default function UserProfilePage() {
               </div>
               <ul className="profile__list">
                 {/*<li className="profile__item"> {moderator?<strong>Moderator page:</strong>:<strong>Profile page:</strong>}</li>*/}
-                <li className="profile__item"> <strong>Profile page:</strong>}</li>
+                <li className="profile__item"> <strong>Profile page:</strong></li>
                 <li className="profile__item">Email: {currentUser?currentUser.email:CurrentUserFromLS.email}</li>
                 <li className="profile__item">Email verified: {currentUser?currentUser.emailVerified===false||CurrentUserFromLS.emailVerified===false?"false":"true":""}</li>
                 {currentUserExtraInfoFB&&
@@ -75,7 +95,10 @@ export default function UserProfilePage() {
                       <li className="profile__item">First name: {currentUserExtraInfoFB.firstName}</li>
                       <li className="profile__item">Last name: {currentUserExtraInfoFB.lastName}</li>
                     </>
-                    }
+                }
+                {currentUserDbPointsInfo&&
+                  <li className="profile__item">Available points: {currentUserDbPointsInfo.value}</li>
+                }
                 <br/>
               </ul>
             </div>
@@ -106,6 +129,12 @@ export default function UserProfilePage() {
                   </li>
                   <li className="profile__settings-item">
                     <Link className='profile__settings-link' to='/ApproveArticlesPage'>Approve Articles</Link>
+                  </li>
+                  <li className="profile__settings-item">
+                    <Link className='profile__settings-link' to='/CMSMenu'>Edit Static Content</Link>
+                  </li>
+                  <li className="profile__settings-item">
+                    <Link className='profile__settings-link' to='/MainSurveyPage'>Take the survey</Link>
                   </li>
                 </ul>
               </li>

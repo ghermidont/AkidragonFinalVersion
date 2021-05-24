@@ -10,25 +10,26 @@ export default function UpdateUserProfilePage() {
   console.log("UpdateUserProfilePage() worked");
   //const {docsFromHook} = useDataFromFirestore('user-profiles');
   const {currentUser} = useAuthContext();
-  const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
-  const [currentUserDbInfo, setCurrentUserDbInfo] = useState({});
-  const [passwordError, setPasswordError] = useState();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const emailRef = useRef();
-  const [url, setUrl] = useState(currentUserDbInfo.photoURL?currentUserDbInfo.photoURL:'');
-  const [currentUserFirstName, setCurrentUserFirstName] = useState(currentUserDbInfo.firstName?currentUserDbInfo.firstName:'');
-  const [currentUserLastName, setCurrentUserLastName] = useState(currentUserDbInfo.lastName?currentUserDbInfo.lastName:'');
-  const [currentDisplayName, setCurrentDisplayName] = useState(currentUserDbInfo.displayName?currentUserDbInfo.displayName:'');
-  const [dateOfBirth, setDateOfBirth] = useState(currentUserDbInfo.dateOfBirth?currentUserDbInfo.dateOfBirth:'');
-  const [address, setAddress] = useState(currentUserDbInfo.address?currentUserDbInfo.address:'');
-  const [bio, setBio] = useState(currentUserDbInfo.bio?currentUserDbInfo.bio:'');
-   const fileTypesArray = ['image/png', 'image/jpeg'];
+  const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
+
+  const [currentUserDbInfo, setCurrentUserDbInfo] = useState({});
+  const [passwordError, setPasswordError] = useState('');
+  const [url, setUrl] = useState(/*currentUserDbInfo.photoURL?currentUserDbInfo.photoURL:*/'');
+  const [currentUserFirstName, setCurrentUserFirstName] = useState('');
+  const [currentUserLastName, setCurrentUserLastName] = useState('');
+  const [currentDisplayName, setCurrentDisplayName] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [address, setAddress] = useState('');
+  const [bio, setBio] = useState('');
+  const fileTypesArray = ['image/png', 'image/jpeg'];
    //is used for file deletion logic
   //const [uploadedPicFile, setUploadedPicFile] = useState('');
   const [fileSuccess, setFileSuccess] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
   //TODO format the date
 
@@ -84,25 +85,30 @@ export default function UpdateUserProfilePage() {
     }
   }
 
-  useEffect(() => {
-      async function getDoc(){
-        await projectFirestore
-            .collection('user-profiles')
-            .doc(CurrentUserFromLS.uid).get().then((doc)=>{
+  const getDoc = async () => {
+    await projectFirestore
+        .collection('user-profiles')
+        .doc(CurrentUserFromLS.uid).get().then((doc)=>{
           if(doc.exists){
             setCurrentUserDbInfo(doc.data());
           }else{
             console.log("No such document!");
           }
         })
-            .catch((error) => {
-              console.log("Error getting document:", error);
-            });
-      }
-      getDoc().then(()=>console.log("Got the user info for update!")).catch(()=>console.error("could not get current use extra info."));
-      console.log(currentUserDbInfo);
+        .catch((error) => {
+          console.log("Error getting document:", error);
+        });
+  }
+
+  useEffect(() => {
+    getDoc().then(()=>console.log("Got the user info for update!")).catch(()=>console.error("could not get current use extra info."));
+    console.log(currentUserDbInfo);
   }, []);
 
+  useEffect(() => {
+      getDoc().then(()=>console.log("Got the user info for update!")).catch(()=>console.error("could not get current use extra info."));
+      console.log(currentUserDbInfo);
+  }, [url, currentUserFirstName, currentUserLastName, currentDisplayName, dateOfBirth, address, bio]);
 
   const updateEmail = async () => {
     if (emailRef.current.value !== currentUser.email) {
@@ -150,7 +156,7 @@ export default function UpdateUserProfilePage() {
           <br />
           <label className='form-update__label'>
             <strong> Birth date </strong> <br />
-            Current date of birth: {dateOfBirth}
+            Current date of birth: {currentUserDbInfo.dateOfBirth?currentUserDbInfo.dateOfBirth:''}
             <input
                 className='form-update__input date'
                 type="date"
@@ -172,7 +178,7 @@ export default function UpdateUserProfilePage() {
             <strong> Display name </strong>
             <input
                 className='form-update__input'
-                value={currentUserDbInfo.displayName}
+                value={currentUserDbInfo.displayName?currentUserDbInfo.displayName:''}
                 onChange={
                   (e) => setCurrentDisplayName(e.target.value)
                 }
@@ -180,7 +186,7 @@ export default function UpdateUserProfilePage() {
           </label>
           <button
               className="form-article__btn"
-              onClick={cloudFunctionTrigger}
+              onClick={()=>cloudFunctionTrigger}
           >
             Update display name
           </button>
@@ -191,14 +197,14 @@ export default function UpdateUserProfilePage() {
             <strong> First name </strong>
             <input
                 className='form-update__input'
-                value={currentUserFirstName}
+                value={currentUserDbInfo.firstName?currentUserDbInfo.firstName:''}
                 onChange={
                   (e) => setCurrentUserFirstName(e.target.value)}
                 type="text" />
           </label>
           <button
               className="form-article__btn"
-              onClick={cloudFunctionTrigger}
+              onClick={()=>cloudFunctionTrigger}
           >
             Update first name
           </button>
@@ -209,7 +215,7 @@ export default function UpdateUserProfilePage() {
             <strong> Last name </strong>
             <input
                 className='form-update__input'
-                value={currentUserLastName}
+                value={currentUserDbInfo.lastName?currentUserDbInfo.lastName:''}
                 onChange={
                   (e) => setCurrentUserLastName(e.target.value)
                 }
@@ -218,7 +224,7 @@ export default function UpdateUserProfilePage() {
           </label>
           <button
               className="form-article__btn"
-              onClick={cloudFunctionTrigger}
+              onClick={()=>cloudFunctionTrigger}
           >
             Update last name
           </button>
@@ -229,6 +235,7 @@ export default function UpdateUserProfilePage() {
             <strong> Address </strong>
             <input
                 className='form-update__input'
+                value={currentUserDbInfo.address?currentUserDbInfo.address:''}
                 type="text"
                 onChange={
                   (e) => setAddress(e.target.value)
@@ -237,7 +244,7 @@ export default function UpdateUserProfilePage() {
           </label>
           <button
               className="form-article__btn"
-              onClick={cloudFunctionTrigger}
+              onClick={()=>cloudFunctionTrigger}
           >Update address</button>
 
           <br />
@@ -247,6 +254,7 @@ export default function UpdateUserProfilePage() {
             <input
                 className='form-update__input'
                 type="text"
+                value={currentUserDbInfo.bio?currentUserDbInfo.bio:''}
                 onChange={
                   (e) => setBio(e.target.value)
                 }
@@ -254,7 +262,7 @@ export default function UpdateUserProfilePage() {
           </label>
           <button
               className="form-article__btn"
-              onClick={cloudFunctionTrigger}
+              onClick={()=>cloudFunctionTrigger}
           >
             Update bio
           </button>
@@ -274,7 +282,7 @@ export default function UpdateUserProfilePage() {
             <input className='form-update__input' ref={passwordConfirmRef} type="password" />
           </label>
           {passwordError&&<div>{passwordError}</div>}
-          <button className="form-article__btn" onClick={updatePassword}>Change password</button>
+          <button className="form-article__btn" onClick={()=>updatePassword}>Change password</button>
 
           <br />
 
@@ -288,7 +296,7 @@ export default function UpdateUserProfilePage() {
           </label>
           <button 
               className="form-article__btn"
-              onClick={updateEmail}
+              onClick={()=>updateEmail}
           >
             Change email
           </button>

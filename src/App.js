@@ -17,7 +17,7 @@ import Step2CompleteProfilePage from "./pages/UserAccount/CreateUserAccount/Step
 import MainLoginPage from "./pages/LoginPage/MainLoginPage";
 import UserProfileArticlesPage from './pages/UserAccount/UserProfileArticlesPage';
 import ApproveArticlesPage from './pages/ModeratorPanel/ApproveArticlesPage';
-import DeleteProfilePage from "./pages/UserAccount/DeleteProfilePage";
+import DeleteProfilePage from './pages/UserAccount/DeleteProfilePage';
 
 //connect styles
 import './styles/scss/style.scss';
@@ -37,13 +37,18 @@ import PrivateRoute from "./PrivateRoutes";
 import ManageArticlesPage from "./pages/UserAccount/AddArticlesPage/ManageArticlesPage";
 import ManageStreamsPage from "./pages/ModeratorPanel/ManageStreamsPage";
 import ManageTournamentsPage from "./pages/ModeratorPanel/ManageTournamentsPage";
-import ModifyTournamentForm from "./pages/ModeratorPanel/ModifyTournamentForm";
-import ModifyStreamForm from "./pages/ModeratorPanel/ModifyStreamForm";
-import ModifyArticleForm from "./pages/UserAccount/AddArticlesPage/ModifyArticleForm";
-
+import EditTournamentForm from "./pages/ModeratorPanel/EditTournamentForm";
+import EditStreamForm from "./pages/ModeratorPanel/EditStreamForm";
+import EditArticleForm from "./pages/UserAccount/AddArticlesPage/EditArticleForm";
+//import FirstLoginForm from "./pages/FirstLoginForm";
+import SponsorshipPage from "./pages/SponsorshipPage/SponsoshipPage";
+import CMSMenu from "./pages/CMSMenu/CMSMenu";
+import MainSurveyPage from "./pages/SurveyPage/SurveySteps/MainSurveyPage";
 function App() {
-     //const [loginPassed, setLoginPassed] = useState(false);
-    //if(loginPassed===true) {
+
+    // const [loginPassed, setLoginPassed] = useState(false);
+    //
+    // if(loginPassed===true) {
     return(
         <div className="App">
             <AuthContextProvider>
@@ -66,10 +71,12 @@ function App() {
                                             <PrivateRoute path="/ManageArticlesPage" component={ManageArticlesPage} />
                                             <PrivateRoute path="/ManageStreamsPage" component={ManageStreamsPage} />
                                             <PrivateRoute path="/ManageTournamentsPage" component={ManageTournamentsPage} />
-                                            <PrivateRoute path="/tournament/:slug" component={ModifyTournamentForm} />
-                                            <PrivateRoute path="/stream/:slug" component={ModifyStreamForm} />
-                                            <PrivateRoute path="/modify-article/:slug" component={ModifyArticleForm} />
+                                            <PrivateRoute path="/edit-tournament/:slug" component={EditTournamentForm} />
+                                            <PrivateRoute path="/edit-stream/:slug" component={EditStreamForm} />
+                                            <PrivateRoute path="/edit-article/:slug" component={EditArticleForm} />
                                             <PrivateRoute path="/DeleteProfilePage" component={DeleteProfilePage} />
+                                            <PrivateRoute path="/CMSMenu" component={CMSMenu} />
+                                            <PrivateRoute path="/MainSurveyPage" component={MainSurveyPage} />
 
                                             <Route path="/" exact component={HomePage} />
                                             <Route path="/article/:slug" component={ArticlePage} />
@@ -80,6 +87,9 @@ function App() {
                                             <Route path="/TournamentsPage" component={TournamentsPage} />
                                             <Route path="/SubmitCvForm" component={SubmitCvForm} />
                                             <Route path="/MainLoginPage" component={MainLoginPage} />
+                                            <Route path="/SponsorshipPage" component={SponsorshipPage} />
+
+                                            SponsorshipPage
                                         </Switch>
                                     </TournamentsContextProvider>
                                 </ArticlesContextProvider>
@@ -91,9 +101,9 @@ function App() {
             </AuthContextProvider>
         </div>
     );
-//}else{
-    // return(<FirstLoginForm setLoginPassed={setLoginPassed}/>);
-//}
+// }else{
+//     return(<FirstLoginForm setLoginPassed={setLoginPassed}/>);
+// }
 }
 
 export default App;

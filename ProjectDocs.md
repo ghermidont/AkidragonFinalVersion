@@ -36,6 +36,7 @@ https://dashboard.emailjs.com/admin
 
 #Routes issues:
 https://stackoverflow.com/questions/51846914/add-timestamp-in-firestore-documents
+
 #way to get the browser location after slug
 https://www.npmjs.com/package/query-string
 https://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writing-manually
@@ -46,3 +47,15 @@ https://gitlab.com/akidragonapp/firebase-cloud/-/blob/master/firebase.json
 https://stackoverflow.com/questions/44354530/nodejs-integrate-with-php
 
 https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjY5ZWQ1N2Y0MjQ0OTEyODJhMTgwMjBmZDU4NTk1NGI3MGJiNDVhZTAiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2MjEwMTM2NjQsImF1ZCI6IjIxNjI5NjAzNTgzNC1rMWs2cWUwNjBzMnRwMmEyamFtNGxqZGNtczAwc3R0Zy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwMTcwMDMzMzA2NjMwMzIwNTc0NiIsImVtYWlsIjoibWloYWkub2xhcnUwMDdAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF6cCI6IjIxNjI5NjAzNTgzNC1rMWs2cWUwNjBzMnRwMmEyamFtNGxqZGNtczAwc3R0Zy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsIm5hbWUiOiJNaWhhaWwgT0xBUlUiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pzaTVTd2VzUlpIV09HcUVZR3hGWjZiNXBTMUtVaHQ0NF94a081eXc9czk2LWMiLCJnaXZlbl9uYW1lIjoiTWloYWlsIiwiZmFtaWx5X25hbWUiOiJPTEFSVSIsImlhdCI6MTYyMTAxMzk2NCwiZXhwIjoxNjIxMDE3NTY0LCJqdGkiOiI0MzJhNWVmNzE4NWZlY2YxM2M2YzYzMWZjMmQ4YzNkNjBiYmQzYWQzIn0.gtskKcWTEWXB5STR2LLbOpC8l9tKAWIMVef1kTD7Mdt59Z_Ku5ZU04zngul2tzO-kg0t-3hcWyTl6STNdNp6ACd6IvPoN0FMOkzo3vzkjz4OwTv4-TPWJEid-nqgooSjLnRSqipkckfdc9LjsiKtSvo3SW81_G2xcVhJsV_aBBPvzr8k2H6HehkRVDaxKOjmYD1WNHsoWo1i4NKWfrYV0XA06ts9uCTHx1dt0pR97LGo068P5SOeUXtUd4SEVcYrgYxE6XW7OmSbXfL32mhZPjn1fVVugTGngpMfRcmLUqoZ39XDXYFvOCZFLZBJVmqEFlJ19t6uAMPMG7szphoHjA
+https://stackoverflow.com/questions/41673499/how-to-upload-multiple-files-to-firebase
+
+#Date info:
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
+https://unix.stackexchange.com/questions/89568/how-to-convert-from-one-date-format-to-other-format
+https://www.tutorialsteacher.com/javascript/javascript-date
+https://coderrocketfuel.com/article/convert-milliseconds-to-a-date-in-vanilla-javascript
+https://stackoverflow.com/questions/49945312/delete-a-file-from-firebase-storage-using-download-url-with-cloud-functions/50524360
+https://www.geeksforgeeks.org/how-to-convert-milliseconds-to-date-in-javascript/
+
+#Delete files by ref:
+https://github.com/firebase/firebase-js-sdk/issues/2625

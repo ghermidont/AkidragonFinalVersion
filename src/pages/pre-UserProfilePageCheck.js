@@ -20,9 +20,10 @@ export default function PreUserProfilePageCheck(props) {
             .get()
             .then((doc) => {
                 if (doc.exists) {
-                    return doc.data['firstName']!==null&&setUserInfo(true);
+                    console.log(doc.data['firstName']);
+                    return doc.data['firstName']===undefined&&setUserInfo(false);
                 }else{
-                    return setUserInfo(false);
+                    return setUserInfo(true);
                 }
        })
     }
@@ -52,8 +53,9 @@ export default function PreUserProfilePageCheck(props) {
     useEffect(()=>{
         setLoading(true);
         checkUserFieldsExist()
-            .then(() => setLoading(false))
-            .catch(err => console.log(err));
+            .then(() => {setLoading(false);
+                })
+            .catch(err => console.error(err));
     },[]);
 
     return (
@@ -62,10 +64,7 @@ export default function PreUserProfilePageCheck(props) {
             <Loader type="TailSpin" color="#00BFFF" height={80} width={80} />
         ):(
             <>
-                {CurrentUserFromLS.emailVerified===true?
-                    userInfo?<UserProfilePage />:<Step2CompleteProfilePage />
-                    :<Step1EmailVerificationPage />
-                }
+                {CurrentUserFromLS.emailVerified===true?userInfo?<UserProfilePage />:<Step2CompleteProfilePage />:<Step1EmailVerificationPage />}
             </>
         )}
             </>

@@ -363,7 +363,7 @@ export default function ModeratorAddTournamentsForm() {
           })
           .then(() => {
             window.alert("Tournament added successfully!");
-            history.push("/UserProfilePage", {from: "/ModeratorAddTournamentsForm"});
+            history.push("/TournamentsPage", {from: "/ModeratorAddTournamentsForm"});
             return console.log("tournaments document added successfully.");
           })
           .catch((error) => {

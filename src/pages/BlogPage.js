@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {useDataFromFirestore} from "../customHooks/useFirestore";
 import logoSection from '../assets/images/dest/logo-section.png';
 import {useLanguageContext} from "../context/LanguageContext";
+
 export default function BlogPage() {
     console.log("ArticlesPage worked!");
     const{appLanguage} = useLanguageContext();
@@ -59,6 +60,7 @@ export default function BlogPage() {
 
 
                             <div className="tab-content" id="myTabContent">
+
                                 <div className="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                                     {docsFromHook && docsFromHook.slice(0, 8).map(doc=>
                                         <article className="article" key={doc.id}>
@@ -170,6 +172,7 @@ export default function BlogPage() {
                                     )}
                                 </div>
                             </div>
+                        ....................
                         </div>
                     </div>
             </section>
