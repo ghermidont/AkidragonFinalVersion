@@ -5,14 +5,13 @@ import {useAuthContext} from '../../context/AuthContext';
 export default function DeleteProfilePage(){
 
     const {currentUser} = useAuthContext;
-    const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
+    //const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
     console.log("DeleteProfilePage worked.");
     const history = useHistory();
 
-    const deleteCurrentUser = async () => {
-        const User = currentUser?currentUser:CurrentUserFromLS;
-        //if(currentUser) {
-            await User.delete().then(function () {
+    const deleteCurrentUser = () => {
+       //if(currentUser) {
+            currentUser.delete().then(function () {
                 window.alert("Profile deleted.");
                 console.log("deleteCurrentUser() worked.");
                 history.push('/');
@@ -35,7 +34,7 @@ export default function DeleteProfilePage(){
                 <Link to="/MainLoginPage">
                     <button type="button" className="btn btn-secondary" onClick={()=>history.push('/UserProfilePage')} data-bs-dismiss="modal">Cancel</button>
                 </Link>
-                <button type="button" className="btn btn-primary" onClick={deleteCurrentUser}>Delete profile</button>
+                <button type="button" className="btn btn-primary" onClick={()=>deleteCurrentUser()}>Delete profile</button>
             </div>
         </div>
     );

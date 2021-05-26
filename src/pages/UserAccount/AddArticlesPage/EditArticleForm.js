@@ -8,28 +8,37 @@ import {useLanguageContext} from "../../../context/LanguageContext";
 //import {Dropdown} from "react-bootstrap";
 const queryString = require('query-string');
 
-//TODO import data from Firebase
-
 export default function EditArticleForm() {
     console.log("EditArticleForm worked");
-
     const {docsFromHook} = useDataFromFirestore('articles');
-    //const {appLanguage} = useLanguageContext();
-    // const {currentUser} = useAuthContext();
-    // const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
-    const [error, setError] = useState("");
     const fileTypesArray = ['image/png', 'image/jpeg'];
     const history = useHistory();
-    const [ENTitle, setENTitle] = useState('');
-    const [ENDescription, setENDescription] = useState('');
-    const [ENText, setENText] = useState('');
-    const [ITTitle, setITTitle] = useState('');
-    const [ITDescription, setITDescription] = useState('');
-    const [ITText, setITText] = useState('');
-    const [loading, setLoading] = useState(true);
-    const [fileSuccess, setFileSuccess] = useState(false);
-    const [uploadedPicFile, setUploadedPicFile] = useState('');
-    const [url, setUrl] = useState('');
+
+    const [ENTitle, setENTitle] = useState("");
+    const [ENDescription, setENDescription] = useState("");
+    const [ENText, setENText] = useState("");
+    const [ITTitle, setITTitle] = useState("");
+    const [ITDescription, setITDescription] = useState("");
+    const [ITText, setITText] = useState("");
+
+    const [ITFileUploadError, setITFileUploadError] = useState("");
+    const [ENFileUploadError, setENFileUploadError] = useState("");
+
+    const [ITFileTypeError, setITFileTypeError] = useState("")
+    const [ENFileTypeError, setENFileTypeError] = useState("");
+
+    const [ITFileSuccess, setITFileSuccess] = useState(false);
+    const [ENFileSuccess, setENFileSuccess] = useState(false);
+
+    const [ITUploadedPicFile, setITUploadedPicFile] = useState();
+    const [ENUploadedPicFile, setENUploadedPicFile] = useState();
+
+    const [ITUrl, setITUrl] = useState("");
+    const [ENUrl, setENUrl] = useState("");
+
+    const [OldITUrl, setOldITUrl] = useState("");
+    const [OldENUrl, setOldENUrl] = useState("");
+
     const [videoGamesSwitch, setVideoGamesSwitch] = useState(0);
     const [musicSwitch, setMusicSwitch] = useState(0);
     const [moviesSwitch, setMoviesSwitch] = useState(0);
@@ -57,7 +66,6 @@ export default function EditArticleForm() {
     useEffect(() => {
         if(selectedArticle!==""){
             selectedArticle && selectedArticle.map( doc =>
-
             {
                 setENDescription(doc.content.en.description);
                 setENText(doc.content.en.text);
@@ -65,62 +73,94 @@ export default function EditArticleForm() {
                 setITDescription(doc.content.it.description);
                 setITText(doc.content.it.text);
                 setITTitle(doc.content.it.title);
-                setUrl(doc.content.image);
+                setENUrl(doc.content.en.image);
+                setOldENUrl(doc.content.en.image);
+                setITUrl(doc.content.it.image);
+                setOldITUrl(doc.content.it.image);
                 setCurrentCategories(doc.categories.map(category=>`${category} \n`))
             })
         }
     }, [docsFromHook]);
 
-    const fileUploadEventListener = (e) => {
-        //setCategoriesArr(inputArr);
+    const ENFileUploadEventListener = (e) => {
         let uploadedFile = e.target.files[0];
-        //'image/png', 'image/jpeg' are also some default values we can see in the uploadedFilesArray object.
         if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-            setUploadedPicFile(uploadedFile);
-            //setAddArticlesFormUserUploadedFile(uploadedFilesArray);
+            setENUploadedPicFile(uploadedFile);
+            async function putFile(File){
+                e.preventDefault();
+                try {
+                    //setLoading1(true);
+                    setENFileUploadError("");
+                    setENFileTypeError("");
+                    const storageRef = projectStorage.ref('articles_pictures/').child(Date.now()+File.name);
+                    storageRef.put(File).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined? setENFileSuccess(true): setENFileSuccess(false);
+                        setENUrl(finalUrl);
+                    });
+                } catch {
+                    setENFileUploadError("Failed to upload file");
+                }
+                //setLoading1(false);
+            }
+            putFile(uploadedFile).then(()=>console.log(ENUrl));
+        } else {
+            setENUploadedPicFile('');
+            setENFileTypeError('Please select an image file (png or jpg)');
+        }
+    };
+
+    const ITFileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setITUploadedPicFile(uploadedFile);
             async function putFile(uploadedFile){
                 e.preventDefault();
                 try {
-                    setLoading(true);
-                    setError("");
-                    const storageRef = projectStorage.ref('articles_pictures/').child(uploadedFile.name);
+                    setITFileUploadError("");
+                    setITFileTypeError("");
+                    const storageRef = projectStorage.ref('articles_pictures/').child(Date.now()+uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
                     }, async()=>{
                         const finalUrl = await storageRef.getDownloadURL();
-                        finalUrl!==undefined?setFileSuccess(true):setFileSuccess(false);
-                        setUrl(finalUrl);
+                        finalUrl!==undefined? setITFileSuccess(true): setITFileSuccess(false);
+                        setITUrl(finalUrl);
                     });
                 } catch {
-                    setError("Failed to upload file");
+                    setITFileUploadError("Failed to upload file");
                 }
-                setLoading(false);
+
             }
-            putFile(uploadedFile).then(()=>console.log(url));
+            putFile(uploadedFile).then(()=>console.log(ENUrl));
         } else {
-            setUploadedPicFile('');
-            setError('Please select an image file (png or jpg)');
+            setITUploadedPicFile('');
+            setITFileTypeError('Please select an image file (png or jpg)');
         }
     };
 
     const publishArticleCFTrigger = (e) => {
         const addData = functions.httpsCallable('publishArticle');
 
-        if(loading === false) {
             addData({
+                "id": stringifiedSlug,
                 "content": {
                     "en": {
                         "description": ENDescription,
                         "text": ENText,
-                        "title": ENTitle
+                        "title": ENTitle,
+                        "image": ENUrl,
                     },
                     "it": {
                         "description": ITDescription,
                         "text": ITText,
-                        "title": ITTitle
+                        "title": ITTitle,
+                        "image": ITUrl,
                     },
-                    "image": url,
                 },
                 "categories": categoryArr.filter(value=>value!=="")
 
@@ -133,36 +173,51 @@ export default function EditArticleForm() {
                 ).catch((error) => {
                 console.log(error.code + " " + error.message + "" + error.details);
             });
-        }
+
     }
 
     const clearInput = () => {
-        //setArticleCategory("");
-        setENDescription("");
-        setENText("");
-        setENTitle("");
-        setITDescription("");
-        setITText("");
-        setITTitle("");
-        setUploadedPicFile('');
-        setUrl('');
-        setFileSuccess(false);
+        setENDescription('');
+        setENText('');
+        setENTitle('');
+        setITDescription('');
+        setITText('');
+        setITTitle('');
+        setITUploadedPicFile('');
+        setENUploadedPicFile('');
+        setITUrl('');
+        setENUrl('');
+        setITFileSuccess(false);
+        setENFileSuccess(false);
         setVideoGamesSwitch(0);
         setMusicSwitch(0);
         setMoviesSwitch(0);
+        setITFileUploadError('');
+        setENFileUploadError('');
+        setITFileTypeError('');
+        setENFileTypeError('');
 
-        const desertRef = projectStorage.ref('articles_pictures/').child(uploadedPicFile.name);
+        const desertRefIT = projectStorage.ref('articles_pictures/').child(ITUploadedPicFile.name);
+        const desertRefEN = projectStorage.ref('articles_pictures/').child(ENUploadedPicFile.name);
 
-        if(desertRef&&fileSuccess){
-            desertRef.delete().then(() => {
+        if(desertRefIT){
+            desertRefIT.delete().then(() => {
                 console.log("uploaded image removed successfully");
-                history.push("/UserProfilePage", {from: "/EditArticleForm"});
             }).catch((error) => {
                 console.log("could not delete the file because:" + error);
             });
-        }else{
-            history.push("/UserProfilePage", {from: "/EditArticleForm"});
         }
+
+        if(desertRefEN){
+            desertRefEN.delete().then(() => {
+                console.log("uploaded image removed successfully");
+            }).catch((error) => {
+                console.log("could not delete the file because:" + error);
+            });
+        }
+
+        history.push("/UserProfilePage", {from: "/EditArticleForm"});
+
     }
 
     return (
@@ -238,6 +293,26 @@ export default function EditArticleForm() {
                                         }
                                     ></textarea>
                                 </label>
+                                <div>
+                                    Current thumbnail:
+                                    <img style={{width: "25%", height: "auto"}} src={ENUrl} alt=""/>
+                                </div>
+                                <div className="form-article__box-btn">
+
+                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload
+                                        <input
+                                            className='form-article__btn visually-hidden'
+                                            type="file"
+                                            placeholder='file'
+                                            onChange={ITFileUploadEventListener}
+                                        />
+                                    </label>
+                                    <div className="output">
+                                        { ITFileUploadError!=="" && <div className="error">{ ITFileUploadError }</div>}
+                                        { ITFileTypeError!=="" && <div className="error">{ ITFileTypeError }</div> }
+                                        { ITFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={OldITUrl} alt=""/></div> }
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -290,6 +365,27 @@ export default function EditArticleForm() {
                                         }
                                     ></textarea>
                                 </label>
+                                <div>
+                                    Current thumbnail:
+                                    <img style={{width: "25%", height: "auto"}} src={ITUrl} alt=""/>
+                                </div>
+                                <div className="form-article__box-btn">
+
+                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload
+                                        <input
+                                            className='form-article__btn visually-hidden'
+                                            type="file"
+                                            placeholder='file'
+                                            onChange={ENFileUploadEventListener}
+                                        />
+                                    </label>
+                                    <div className="output">
+                                        { ENFileUploadError!=="" && <div className="error">{ ENFileUploadError }</div>}
+                                        { ENFileTypeError!=="" && <div className="error">{ ENFileTypeError }</div> }
+                                        { ENFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={OldENUrl} alt=""/></div> }
+
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -319,24 +415,7 @@ export default function EditArticleForm() {
                         /> Movie
                     </label>
 
-                    <div>
-                        Current thumbnail:
-                        <img style={{width: "25%", height: "auto"}} src={url} alt=""/>
-                    </div>
-                    <div className="form-article__box-btn">
 
-                        <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload
-                            <input
-                                className='form-article__btn visually-hidden'
-                                type="file"
-                                placeholder='file'
-                                onChange={fileUploadEventListener}
-                            />
-                        </label>
-                        <div className="output">
-                            { error && <div className="error">{ error }</div>}
-                            {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url} alt=""/></div> }
-                        </div>
                         <button
                             className="form-article__btn"
                             onClick={()=>publishArticleCFTrigger()}
@@ -352,7 +431,7 @@ export default function EditArticleForm() {
                             Cancel
                         </button>
                     </div>
-                </div>
+
             </section>
         </>
     );

@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from "react";
 //auth is the auth function we created in the firebase.js file. All functions called after auth. are firebase functions.
-import {auth, projectFirestore} from "../fireBase";
+import {auth, projectFirestore, FBProvider} from "../fireBase";
 const authContext = React.createContext();
 
 export function useAuthContext(){
@@ -52,7 +52,7 @@ export function AuthContextProvider({ children }) {
         console.log("handleSignup() worked!");
     };
 
-    const handleLogin = () => {
+   const handleLogin = () => {
         console.log("handleLogin() worked!");
         clearErrors();
         auth
@@ -111,6 +111,7 @@ export function AuthContextProvider({ children }) {
     }
 
     const value = {
+
         currentUserModerator,
         createSurveyCheckInUserDoc,
         userSurveyPassedStatus,

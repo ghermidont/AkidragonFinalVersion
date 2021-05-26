@@ -2,76 +2,98 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useHistory} from "react-router-dom";
 import {projectFirestore, projectStorage} from "../../../fireBase";
 import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
-
+//TODO define the vars and implement the keys
 function CMSHomePageEdit() {
+
     let publishBtnRef = useRef();
     let cancelBtnRef = useRef();
-    // const {currentUser} = useAuthContext();
-    // const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
-    const [error, setError] = useState("");
     const fileTypesArray = ['image/png', 'image/jpeg'];
     const history = useHistory();
 
     //Url
-    const [ENBannerUrl, setENBannerUrl] = useState('');
-    const [ENContactsBannerUrl, setENContactsBannerUrl] = useState('');
-    const [ENGameTeamsBannerUrl, setENGameTeamsBannerUrl] = useState('');
-    const [ENSalesBannerUrl, setENSalesBannerUrl] = useState('');
-    const [ENSponsorshipBannerUrl, setENSponsorshipBannerUrl] = useState('');
-    const [ENTournamentsBannerUrl, setENTournamentsBannerUrl] = useState('');
-    const [ITBannerUrl, setITBannerUrl] = useState('');
-    const [ITContactsBannerUrl, setITContactsBannerUrl] = useState('');
-    const [ITGameTeamsBannerUrl, setITGameTeamsBannerUrl] = useState('');
-    const [ITSalesBannerUrl, setITSalesBannerUrl] = useState('');
-    const [ITSponsorshipBannerUrl, setITSponsorshipBannerUrl] = useState('');
-    const [ITTournamentsBannerUrl, setITTournamentsBannerUrl] = useState('');
+    const [ENBannerUrl, setENBannerUrl] = useState("");
+    const [ENContactsBannerUrl, setENContactsBannerUrl] = useState("");
+    const [ENGameTeamsBannerUrl, setENGameTeamsBannerUrl] = useState("");
+    const [ENSalesBannerUrl, setENSalesBannerUrl] = useState("");
+    const [ENSponsorshipBannerUrl, setENSponsorshipBannerUrl] = useState("");
+    const [ENTournamentsBannerUrl, setENTournamentsBannerUrl] = useState("");
+    const [ITBannerUrl, setITBannerUrl] = useState("");
+    const [ITContactsBannerUrl, setITContactsBannerUrl] = useState("");
+    const [ITGameTeamsBannerUrl, setITGameTeamsBannerUrl] = useState("");
+    const [ITSalesBannerUrl, setITSalesBannerUrl] = useState("");
+    const [ITSponsorshipBannerUrl, setITSponsorshipBannerUrl] = useState("");
+    const [ITTournamentsBannerUrl, setITTournamentsBannerUrl] = useState("");
+
+    const [oldENBannerUrl,setOldENBannerUrl] = useState("");
+    const [oldENContactsBannerUrl, setOldENContactsBannerUrl] = useState("");
+    const [oldENGameTeamsBannerUrl, setOldENGameTeamsBannerUrl] = useState("");
+    const [oldENSalesBannerUrl, setOldENSalesBannerUrl] = useState("");
+    const [oldENSponsorshipBannerUrl, setOldENSponsorshipBannerUrl] = useState("");
+    const [oldENTournamentsBannerUrl, setOldENTournamentsBannerUrl] = useState("");
+    const [oldITBannerUrl, setOldITBannerUrl] = useState("");
+    const [oldITContactsBannerUrl, setOldITContactsBannerUrl] = useState("");
+    const [oldITGameTeamsBannerUrl, setOldITGameTeamsBannerUrl] = useState("");
+    const [oldITSalesBannerUrl, setOldITSalesBannerUrl] = useState("");
+    const [oldITSponsorshipBannerUrl, setOldITSponsorshipBannerUrl] = useState("");
+    const [oldITTournamentsBannerUrl, setOldITTournamentsBannerUrl] = useState("");
 
     //Errors
-    const [ENBannerUploadError1, setENBannerUploadError1] = useState('');
-    const [ENContactsBannerUploadError2, setENContactsBannerUploadError2] = useState('');
-    const [ENGameTeamsBannerUploadError3, setENGameTeamsBannerUploadError3] = useState('');
-    const [ENSalesBannerUploadError4, setENSalesBannerUploadError4] = useState('');
-    const [ENSponsorshipBannerUploadError5, setENSponsorshipBannerUploadError5] = useState('');
-    const [ENTournamentsBannerUploadError6, setENTournamentsBannerUploadError6] = useState('');
-    const [ITBannerUploadError1, setITBannerUploadError1] = useState('');
-    const [ITContactsBannerUploadError2, setITContactsBannerUploadError2] = useState('');
-    const [ITGameTeamsBannerUploadError3, setITGameTeamsBannerUploadError3] = useState('');
-    const [ITSalesBannerUploadError4, setITSalesBannerUploadError4] = useState('');
-    const [ITSponsorshipBannerUploadError5, setITSponsorshipBannerUploadError5] = useState('');
-    const [ITTournamentsBannerUploadError6, setITTournamentsBannerUploadError6] = useState('');
+    const [ENBannerUploadError, setENBannerUploadError] = useState("");
+    const [ENContactsBannerUploadError, setENContactsBannerUploadError] = useState("");
+    const [ENGameTeamsBannerUploadError, setENGameTeamsBannerUploadError] = useState("");
+    const [ENSalesBannerUploadError, setENSalesBannerUploadError] = useState("");
+    const [ENSponsorshipBannerUploadError, setENSponsorshipBannerUploadError] = useState("");
+    const [ENTournamentsBannerUploadError, setENTournamentsBannerUploadError] = useState("");
+    const [ITBannerUploadError, setITBannerUploadError] = useState("");
+    const [ITContactsBannerUploadError, setITContactsBannerUploadError] = useState("");
+    const [ITGameTeamsBannerUploadError, setITGameTeamsBannerUploadError] = useState("");
+    const [ITSalesBannerUploadError, setITSalesBannerUploadError] = useState("");
+    const [ITSponsorshipBannerUploadError, setITSponsorshipBannerUploadError] = useState("");
+    const [ITTournamentsBannerUploadError, setITTournamentsBannerUploadError] = useState("");
 
-    const [ENBannerFileTypeError1, setENBannerFileTypeError1] = useState("");
-    const [ENContactsBannerFileTypeError2, setENContactsBannerFileTypeError2] = useState("");
-    const [ENGameTeamsBannerFileTypeError3, setENGameTeamsBannerFileTypeError3] = useState("");
-    const [ENSalesBannerFileTypeError4, setENSalesBannerFileTypeError4] = useState("");
-    const [ENSponsorshipBannerFileTypeError5, setENSponsorshipBannerFileTypeError5] = useState("");
-    const [ENTournamentsBannerUrlFileTypeError6, setENTournamentsBannerUrlFileTypeError6] = useState("");
-    const [ITBannerFileTypeError1, setITBannerFileTypeError1] = useState("");
-    const [ITContactsBannerFileTypeError2, setITContactsBannerFileTypeError2] = useState("");
-    const [ITGameTeamsBannerFileTypeError3, setITGameTeamsBannerFileTypeError3] = useState("");
-    const [ITSalesBannerFileTypeError4, setITSalesBannerFileTypeError4] = useState("");
-    const [ITSponsorshipBannerFileTypeError5, setITSponsorshipBannerFileTypeError5] = useState("");
-    const [ITTournamentsBannerUrlFileTypeError6, setITTournamentsBannerUrlFileTypeError6] = useState("");
+    const [ENBannerFileTypeError, setENBannerFileTypeError] = useState("");
+    const [ENContactsBannerFileTypeError, setENContactsBannerFileTypeError] = useState("");
+    const [ENGameTeamsBannerFileTypeError, setENGameTeamsBannerFileTypeError] = useState("");
+    const [ENSalesBannerFileTypeError, setENSalesBannerFileTypeError] = useState("");
+    const [ENSponsorshipBannerFileTypeError, setENSponsorshipBannerFileTypeError] = useState("");
+    const [ENTournamentsBannerUrlFileTypeError, setENTournamentsBannerUrlFileTypeError] = useState("");
+    const [ITBannerFileTypeError, setITBannerFileTypeError] = useState("");
+    const [ITContactsBannerFileTypeError, setITContactsBannerFileTypeError] = useState("");
+    const [ITGameTeamsBannerFileTypeError, setITGameTeamsBannerFileTypeError] = useState("");
+    const [ITSalesBannerFileTypeError, setITSalesBannerFileTypeError] = useState("");
+    const [ITSponsorshipBannerFileTypeError, setITSponsorshipBannerFileTypeError] = useState("");
+    const [ITTournamentsBannerUrlFileTypeError, setITTournamentsBannerUrlFileTypeError] = useState("");
 
     //Success
-    const [ENBannerFileSuccess1, setFileSuccess1] = useState(false);
-    const [ENContactsBannerFileSuccess2, setFileSuccess2] = useState(false);
-    const [FileSuccess3, setFileSuccess3] = useState(false);
-    const [FileSuccess4, setFileSuccess4] = useState(false);
-    const [FileSuccess5, setFileSuccess5] = useState(false);
-    const [FileSuccess6, setFileSuccess6] = useState(false);
+    const [ENBannerFileSuccess, setENBannerFileSuccess] = useState(false);
+    const [ENContactsBannerFileSuccess, setENContactsBannerFileSuccess] = useState(false);
+    const [ENGameTeamsBannerFileSuccess, setENGameTeamsBannerFileSuccess] = useState(false);
+    const [ENSalesBannerFileSuccess, setENSalesBannerFileSuccess] = useState(false);
+    const [ENSponsorshipBannerFileSuccess, setENSponsorshipBannerFileSuccess] = useState(false);
+    const [ENTournamentsBannerUrlFileSuccess, setENTournamentsBannerFileSuccess] = useState(false);
+    const [ITBannerFileSuccess, setITBannerFileSuccess] = useState(false);
+    const [ITContactsBannerFileSuccess, setITContactsBannerFileSuccess] = useState(false);
+    const [ITGameTeamsBannerFileSuccess, setITGameTeamsBannerFileSuccess] = useState(false);
+    const [ITSalesBannerFileSuccess, setITSalesBannerFileSuccess] = useState(false);
+    const [ITSponsorshipBannerFileSuccess, setITSponsorshipBannerFileSuccess] = useState(false);
+    const [ITTournamentsBannerFileSuccess, setITTournamentsBannerUrlFileSuccess] = useState(false);
 
     //Files
-    const [ENBanneruploadedPicFile1,setUploadedPicFile1] = useState();
-    const [ENContactsBanneruploadedPicFile2,setUploadedPicFile2] = useState();
-    const [uploadedPicFile3,setUploadedPicFile3] = useState();
-    const [uploadedPicFile4,setUploadedPicFile4] = useState();
-    const [uploadedPicFile5, setUploadedPicFile5] = useState();
-    const [uploadedPicFile6, setUploadedPicFile6] = useState();
-    const[loading, setLoading] = useState(false);
+    const [ENBannerUploadedPicFile, setENBannerUploadedPicFile] = useState();
+    const [ENContactsBannerUploadedPicFile, setENContactsBannerUploadedPicFile] = useState();
+    const [ENGameTeamsBannerUploadedPicFile, setENGameTeamsBannerUploadedPicFile] = useState();
+    const [ENSalesBannerUploadedPicFile, setENSalesBannerUploadedPicFile] = useState();
+    const [ENSponsorshipBannerUploadedPicFile, setENSponsorshipBannerUploadedPicFile] = useState();
+    const [ENTournamentsBannerUrlUploadedPicFile, setENTournamentsBannerUrlUploadedPicFile] = useState();
+    const [ITBannerUploadedPicFile, setITBannerUploadedPicFile] = useState();
+    const [ITContactsBannerUploadedPicFile, setITContactsBannerUploadedPicFile] = useState();
+    const [ITGameTeamsBannerUploadedPicFile, setITGameTeamsBannerUploadedPicFile] = useState();
+    const [ITSalesBannerUploadedPicFile, setITSalesBannerUploadedPicFile] = useState();
+    const [ITSponsorshipBannerUploadedPicFile, setITSponsorshipBannerUploadedPicFile] = useState();
+    const [ITTournamentsBannerUploadedPicFile, setITTournamentsBannerUrlUploadedPicFile] = useState();
+
     const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
 
-    //TODO transpose the logic of editTournamentsform
     let selectedDoc = "";
 
     useEffect(() => {
@@ -99,171 +121,401 @@ function CMSHomePageEdit() {
                 setITSalesBannerUrl(doc.salesBanner.it);
                 setITSponsorshipBannerUrl(doc.sponsorship.it);
                 setITTournamentsBannerUrl(doc.tournamentsBanner.it);
+
+                setOldENBannerUrl(doc.banner.en);
+                setOldENContactsBannerUrl(doc.contactsBanner.en);
+                setOldENGameTeamsBannerUrl(doc.gameTeamsBanner.en);
+                setOldENSalesBannerUrl(doc.salesBanner.en);
+                setOldENSponsorshipBannerUrl(doc.sponsorship.en);
+                setOldENTournamentsBannerUrl(doc.tournamentsBanner.en);
+                setOldITBannerUrl(doc.banner.it);
+                setOldITContactsBannerUrl(doc.contactsBanner.it);
+                setOldITGameTeamsBannerUrl(doc.gameTeamsBanner.it);
+                setOldITSalesBannerUrl(doc.salesBanner.it);
+                setOldITSponsorshipBannerUrl(doc.sponsorship.it);
+                setOldITTournamentsBannerUrl(doc.tournamentsBanner.it);
             })
         }
     }, [docsFromHookCMS]);
 
-    async function putFile(File, setterKey){
-       try {
-            setLoading(true);
-            setError("");
-            const storageRef = projectStorage.ref('CMS-pictures/homePage').child(File.name);
-            storageRef.put(File).on('state_changed', (err) => {
-            },  (err) => {
-                window.alert(err);
-            }, async()=>{
-                const finalUrl = await storageRef.getDownloadURL();
-                if(finalUrl!==undefined) {
-                    if (setterKey === "ENBanner") {
-                        setENBannerFileSuccess(true);
-                    }else{
-                        setENBannerFileSuccess(false);
-                    }
-                    if (setterKey === "ENContactsBanner") {
-                        setITBannerFileSuccess(true);
-                    }else{
-                        setITBannerFileSuccess(false);
-                    }
-
-                    if (setterKey === "ENGameTeamsBanner") {
-                        setAvatar1FileSuccess(true);
-                    }else{
-                        setAvatar1FileSuccess(false);
-                    }
-                    if (setterKey === "ENSalesBanner") {
-                        setAvatar2FileSuccess(true);
-                    }else{
-                        setAvatar2FileSuccess(false);
-                    }
-                    if (setterKey === "ENSponsorshipBanner") {
-                        setAvatar3FileSuccess(true);
-                    }else{
-                        setAvatar3FileSuccess(false);
-                    }
-                    if (setterKey === "ENTournamentsBanner") {
-                        setAvatar4FileSuccess(true);
-                    }else{
-                        setAvatar4FileSuccess(false);
-                    }
-                    if (setterKey === "ITBanner") {
-                        setAvatar5FileSuccess(true);
-                    }else{
-                        setAvatar5FileSuccess(false);
-                    }
-                    if (setterKey === "ITContactsBanner") {
-                        setAvatar6FileSuccess(true);
-                    }else{
-                        setAvatar6FileSuccess(false);
-                    }
-                    if (setterKey === "ITGameTeamsBanner") {
-                        setAvatar7FileSuccess(true);
-                    }else{
-                        setAvatar7FileSuccess(false);
-                    }
-                    if (setterKey === "ITSalesBanner") {
-                        setAvatar8FileSuccess(true);
-                    }else{
-                        setAvatar8FileSuccess(false);
-                    }
-                    if (setterKey === "ITSponsorshipBanner") {
-                        setPartnerLogo1FileSuccess(true);
-                    }else{
-                        setPartnerLogo1FileSuccess(false);
-                    }
-                    if (setterKey === "ITTournamentsBanner") {
-                        setPartnerLogo2FileSuccess(true);
-                    }else{
-                        setPartnerLogo2FileSuccess(false);
-                    }
-                }
-                switch(setterKey){
-                    case "ENBanner":
-                        setENBanner(finalUrl);
-                        break;
-                    case "ENContactsBanner":
-                        setENContactsBanner(finalUrl);
-                        break;
-                    case "ENGameTeamsBanner":
-                        setENGameTeamsBanner(finalUrl);
-                        break;
-                    case "ENSalesBanner":
-                        setENSalesBanner(finalUrl);
-                        break;
-                    case "ENSponsorshipBanner":
-                        setENSponsorshipBanner(finalUrl);
-                        break;
-                    case "ENTournamentsBanner":
-                        setENTournamentsBanner(finalUrl);
-                        break;
-                    case "ITBanner":
-                        setITBanner(finalUrl);
-                        break;
-                    case "ITContactsBanner":
-                        setITContactsBanner(finalUrl);
-                        break;
-                    case "ITGameTeamsBanner":
-                        setITGameTeamsBanner(finalUrl);
-                        break;
-                    case "ITSalesBanner":
-                        setITSalesBanner(finalUrl);
-                        break;
-                    case "ITSponsorshipBanner":
-                        setITSponsorshipBanner(finalUrl);
-                        break;
-                    case "ITTournamentsBanner":
-                        setITTournamentsBanner(finalUrl);
-                        break;
-                    default:
-                        console.log("None of the above cases worked!");
-                    }
-            });
-        } catch {
-            setError("Failed to upload file " + setterKey);
-        }
-        setLoading(false);
-    }
-
-    const fileUploadEventListener = (e, setterKey) => {
+    const ENBannerFileUploadEventListener = (e) => {
         let uploadedFile = e.target.files[0];
-
         if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-            setUploadedPicFile(uploadedFile);
-            putFile(uploadedFile, setterKey).then(()=>console.log("putFile() worked"));
+            setENBannerUploadedPicFile(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setENBannerUploadError("");
+                    setENBannerFileTypeError("");
+                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setENBannerFileSuccess(true):setENBannerFileSuccess(false);
+                        setENBannerUrl(finalUrl);
+                    });
+                } catch {
+                    setENBannerUploadError("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(ENBannerUrl));
         } else {
-            setUploadedPicFile('');
-            setError('Please select an image file (png or jpg)');
+            setENBannerUploadedPicFile('');
+            setENBannerFileTypeError('Please select an image file (png or jpg)');
+        }
+    };
+
+    const ENContactsBannerFileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setENContactsBannerUploadedPicFile(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setENContactsBannerUploadError("");
+                    setENContactsBannerFileTypeError("");
+                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setENContactsBannerFileSuccess(true):setENContactsBannerFileSuccess(false);
+                        setENContactsBannerUrl(finalUrl);
+                        //setLoading(false);
+                    });
+                } catch {
+                    setENContactsBannerUploadError("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(ENContactsBannerUrl));
+        } else {
+            setENContactsBannerUploadedPicFile('');
+            setENContactsBannerFileTypeError('Please select an image file (png or jpg)');
+        }
+    };
+
+    const ENGameTeamsBannerUrlFileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setENGameTeamsBannerUploadedPicFile(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setENGameTeamsBannerUploadError("");
+                    setENGameTeamsBannerFileTypeError("");
+                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setENGameTeamsBannerFileSuccess(true):setENGameTeamsBannerFileSuccess(false);
+                        setENGameTeamsBannerUrl(finalUrl);
+                    });
+                } catch {
+                    setENGameTeamsBannerUploadError("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(ENGameTeamsBannerUrl));
+        } else {
+            setENGameTeamsBannerUploadedPicFile('');
+            setENGameTeamsBannerFileTypeError('Please select an image file (png or jpg)');
+        }
+    };
+
+    const ENSalesBannerFileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setENSalesBannerUploadedPicFile(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setENSalesBannerUploadError("");
+                    setENSalesBannerFileTypeError("");
+                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setENSalesBannerFileSuccess(true):setENSalesBannerFileSuccess(false);
+                        setENSalesBannerUrl(finalUrl);
+                    });
+                } catch {
+                    setENSalesBannerUploadError("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(ENSalesBannerUrl));
+        } else {
+            setENSalesBannerUploadedPicFile('');
+            setENSalesBannerFileTypeError('Please select an image file (png or jpg)');
+        }
+    };
+
+    const ENSponsorshipBannerFileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setENSponsorshipBannerUploadedPicFile(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setENSponsorshipBannerUploadError("");
+                    setENSponsorshipBannerFileTypeError("");
+                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setENSponsorshipBannerFileSuccess(true):setENSponsorshipBannerFileSuccess(false);
+                        setENSponsorshipBannerUrl(finalUrl);
+                    });
+                } catch {
+                    setENSponsorshipBannerUploadError("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(ENSponsorshipBannerUrl));
+        } else {
+            setENSponsorshipBannerUploadedPicFile('');
+            setENSponsorshipBannerFileTypeError('Please select an image file (png or jpg)');
+        }
+    };
+
+    const ENTournamentsBannerFileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setENTournamentsBannerUrlUploadedPicFile(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setENTournamentsBannerUploadError("");
+                    setENTournamentsBannerUrlFileTypeError("");
+                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setENTournamentsBannerFileSuccess(true):setENTournamentsBannerFileSuccess(false);
+                        setENTournamentsBannerUrl(finalUrl);
+
+                    });
+                } catch {
+                    setENTournamentsBannerUploadError("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(ENTournamentsBannerUrl));
+        } else {
+            setENTournamentsBannerUrlUploadedPicFile("");
+            setENTournamentsBannerUrlFileTypeError('Please select an image file (png or jpg)');
+        }
+    };
+
+    const ITBannerUrlFileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setITBannerUploadedPicFile(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setITBannerUploadError("");
+                    setITBannerFileTypeError("");
+                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setITBannerFileSuccess(true):setITBannerFileSuccess(false);
+                        setITBannerUrl(finalUrl);
+                    });
+                } catch {
+                    setITBannerUploadError("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(ITBannerUrl));
+        } else {
+            setITBannerUploadedPicFile("");
+            setITBannerFileTypeError('Please select an image file (png or jpg)');
+        }
+    };
+
+    const ITContactsBannerUrlFileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setITContactsBannerUploadedPicFile(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setITContactsBannerUploadError("");
+                    setITContactsBannerFileTypeError("");
+                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setITContactsBannerFileSuccess(true):setITContactsBannerFileSuccess(false);
+                        setITContactsBannerUrl(finalUrl);
+                    });
+                } catch {
+                    setITContactsBannerUploadError("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(ITContactsBannerUrl));
+        } else {
+            setITContactsBannerUploadedPicFile("");
+            setITContactsBannerFileTypeError('Please select an image file (png or jpg)');
+        }
+    };
+
+    const ITGameTeamsBannerFileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setITGameTeamsBannerUploadedPicFile(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setITGameTeamsBannerUploadError("");
+                    setITGameTeamsBannerFileTypeError("");
+                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setITGameTeamsBannerFileSuccess(true):setITGameTeamsBannerFileSuccess(false);
+                        setITGameTeamsBannerUrl(finalUrl);
+                    });
+                } catch {
+                    setITGameTeamsBannerUploadError("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(ITGameTeamsBannerUrl));
+        } else {
+            setITGameTeamsBannerUploadedPicFile('');
+            setITGameTeamsBannerFileTypeError('Please select an image file (png or jpg)');
+        }
+    };
+
+    const ITSalesBannerFileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setITSalesBannerUploadedPicFile(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setITSalesBannerFileTypeError("");
+                    setITSalesBannerUploadError("");
+                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setITSalesBannerFileSuccess(true):setITSalesBannerFileSuccess(false);
+                        setITSalesBannerUrl(finalUrl);
+                    });
+                } catch {
+                    setITSalesBannerUploadError("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(ITSalesBannerUrl));
+        } else {
+            setITSalesBannerUploadedPicFile('');
+            setITSalesBannerFileTypeError('Please select an image file (png or jpg)');
+        }
+    };
+
+    const ITSponsorshipBannerFileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setITSponsorshipBannerUploadedPicFile(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setITSponsorshipBannerFileTypeError("");
+                    setITSponsorshipBannerUploadError("");
+                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setITSponsorshipBannerFileSuccess(true):setITSponsorshipBannerFileSuccess(false);
+                        setITSponsorshipBannerUrl(finalUrl);
+                    });
+                } catch {
+                    setITSponsorshipBannerUploadError("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(ITSponsorshipBannerUrl));
+        } else {
+            setITSponsorshipBannerUploadedPicFile('');
+            setITSponsorshipBannerFileTypeError('Please select an image file (png or jpg)');
+        }
+    };
+
+    const ITTournamentsBannerFileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setITTournamentsBannerUrlUploadedPicFile(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setITTournamentsBannerUploadError("");
+                    setITTournamentsBannerUrlFileTypeError("");
+                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setITTournamentsBannerUrlFileSuccess(true):setITTournamentsBannerUrlFileSuccess(false);
+                        setITTournamentsBannerUrl(finalUrl);
+                    });
+                } catch {
+                    setITTournamentsBannerUploadError("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(ITTournamentsBannerUrl));
+        } else {
+            setITTournamentsBannerUrlUploadedPicFile('');
+            setITTournamentsBannerUrlFileTypeError('Please select an image file (png or jpg)');
         }
     };
 
     const writeToFBCallback = () => {
         const collectionRef = projectFirestore.collection('web-app-cms').doc("homePage");
 
-        if(loading === false) {
             collectionRef.set(
                 {
                     "banner": {
-                        "en": ENBanner,
-                        "it": ITBanner
+                        "en": ENBannerUrl,
+                        "it": ITBannerUrl
                     },
                     "contactsBanner": {
-                        "en": ENContactsBanner,
-                        "it": ITContactsBanner
+                        "en": ENContactsBannerUrl,
+                        "it": ITContactsBannerUrl
                     },
                     "gameTeamsBanner": {
-                        "en": ENGameTeamsBanner,
-                        "it": ITGameTeamsBanner
+                        "en": ENGameTeamsBannerUrl,
+                        "it": ITGameTeamsBannerUrl
                     },
                     "salesBanner": {
-                        "en": ENSalesBanner,
-                        "it": ITSalesBanner
+                        "en": ENSalesBannerUrl,
+                        "it": ITSalesBannerUrl
                     },
                     "sponsorship": {
-                        "en": ENSponsorshipBanner,
-                        "it": ITSponsorshipBanner
+                        "en": ENSponsorshipBannerUrl,
+                        "it": ITSponsorshipBannerUrl
                     },
                     "tournamentsBanner": {
-                        "en": ENTournamentsBanner,
-                        "it": ITTournamentsBanner
+                        "en": ENTournamentsBannerUrl,
+                        "it": ITTournamentsBannerUrl
                     }
                 })
                 .then(() => {
@@ -272,33 +524,45 @@ function CMSHomePageEdit() {
                 .catch((error) => {
                     console.error(error.code + " " + error.message + "" + error.details);
                 });
-        }
     }
 
-    //Clears all the in puts of the form and deletes the uploaded file:
     const clearInput = () => {
-        setENBanner("");
-        setENContactsBanner("");
-        setENGameTeamsBanner("");
-        setENSalesBanner("");
-        setENSponsorshipBanner("");
-        setENTournamentsBanner("");
-        setITBanner("");
-        setITContactsBanner("");
-        setITGameTeamsBanner("");
-        setITSalesBanner("");
-        setITSponsorshipBanner("");
-        setITTournamentsBanner("");
+        const desertRef1 = projectStorage.ref('CMS-pictures/homePage').child(ENBannerUploadedPicFile.name);
+        const desertRef2 = projectStorage.ref('CMS-pictures/homePage').child(ENContactsBannerUploadedPicFile.name);
+        const desertRef3 = projectStorage.ref('CMS-pictures/homePage').child(ENGameTeamsBannerUploadedPicFile.name);
+        const desertRef4 = projectStorage.ref('CMS-pictures/homePage').child(ENSalesBannerUploadedPicFile.name);
+        const desertRef5 = projectStorage.ref('CMS-pictures/homePage').child(ENSponsorshipBannerUploadedPicFile.name);
+        const desertRef6 = projectStorage.ref('CMS-pictures/homePage').child(ENTournamentsBannerUrlUploadedPicFile.name);
+        const desertRef7 = projectStorage.ref('CMS-pictures/homePage').child(ITBannerUploadedPicFile.name);
+        const desertRef8 = projectStorage.ref('CMS-pictures/homePage').child(ITContactsBannerUploadedPicFile.name);
+        const desertRef9 = projectStorage.ref('CMS-pictures/homePage').child(ITGameTeamsBannerUploadedPicFile.name);
+        const desertRef10 = projectStorage.ref('CMS-pictures/homePage').child(ITSalesBannerUploadedPicFile.name);
+        const desertRef11 = projectStorage.ref('CMS-pictures/homePage').child(ITSponsorshipBannerUploadedPicFile.name);
+        const desertRef12 = projectStorage.ref('CMS-pictures/homePage').child(ITTournamentsBannerUploadedPicFile.name);
 
-        const desertRef = projectStorage.ref('CMS-pictures/homePage').child(uploadedPicFile.name);
-
-        if(desertRef){
-            desertRef.delete().then(() => {
-                console.log("uploaded image removed successfully");
-            }).catch((error) => {
-                console.log("could not delete the file because:" + error);
-            });
+        const deleteFile = (Ref) => {
+            if (Ref) {
+                Ref.delete().then(() => {
+                    console.log("uploaded image removed successfully");
+                }).catch((error) => {
+                    console.log("could not delete the file because:" + error);
+                });
+            }
         }
+
+        deleteFile(desertRef1);
+        deleteFile(desertRef2);
+        deleteFile(desertRef3);
+        deleteFile(desertRef4);
+        deleteFile(desertRef5);
+        deleteFile(desertRef6);
+        deleteFile(desertRef7);
+        deleteFile(desertRef8);
+        deleteFile(desertRef9);
+        deleteFile(desertRef10);
+        deleteFile(desertRef11);
+        deleteFile(desertRef12);
+
         history.push("/UserProfilePage", {from: "/CMSMenu"});
     }
 
@@ -347,14 +611,15 @@ function CMSHomePageEdit() {
                                         type="file"
                                         required
                                         placeholder='file'
-                                        onChange={(e)=>fileUploadEventListener(e, "ITBanner")}
+                                        onChange={ITBannerUrlFileUploadEventListener}
                                     />
                                 </label>
                                 <div className="output">
-                                    { error && <div className="error">{ error }</div>}
-                                    {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITBanner} alt=""/></div> }
+                                    { ITBannerUploadError!=="" && <div className="error">{ ITBannerUploadError }</div>}
+                                    { ITBannerFileTypeError!=="" && <div className="error">{ ITBannerFileTypeError }</div> }
+                                    {ITBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITBannerUrl} alt=""/></div> }
                                 </div>
-                                <div>Current main banner: <img style={{width: "25%", height: "auto"}} src={ITBanner} alt=""/></div>
+                                <div>Current main banner: <img style={{width: "25%", height: "auto"}} src={oldITBannerUrl} alt=""/></div>
                                 <br/>
 
                                 {/*2*/}
@@ -364,14 +629,15 @@ function CMSHomePageEdit() {
                                         type="file"
                                         required
                                         placeholder='file'
-                                        onChange={(e)=>fileUploadEventListener(e, "ITTournamentsBanner")}
+                                        onChange={ITTournamentsBannerFileUploadEventListener}
                                     />
                                 </label>
                                 <div className="output">
-                                    { error && <div className="error">{ error }</div>}
-                                    {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITTournamentsBanner} alt=""/></div> }
+                                    { ITTournamentsBannerUploadError!=="" && <div className="error">{ ITTournamentsBannerUploadError }</div>}
+                                    { ITTournamentsBannerUrlFileTypeError!=="" && <div className="error">{ ITTournamentsBannerUrlFileTypeError }</div> }
+                                    {ITTournamentsBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITTournamentsBannerUrl} alt=""/></div> }
                                 </div>
-                                <div>Current main banner: <img style={{width: "25%", height: "auto"}} src={ITTournamentsBanner} alt=""/></div>
+                                <div>Current main banner: <img style={{width: "25%", height: "auto"}} src={oldITTournamentsBannerUrl} alt=""/></div>
                                 <br/>
 
                                 {/*3*/}
@@ -381,14 +647,15 @@ function CMSHomePageEdit() {
                                         type="file"
                                         required
                                         placeholder='file'
-                                        onChange={(e)=>fileUploadEventListener(e, "ITGameTeamsBanner")}
+                                        onChange={ITGameTeamsBannerFileUploadEventListener}
                                     />
                                 </label>
                                 <div className="output">
-                                    { error && <div className="error">{ error }</div>}
-                                    {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITGameTeamsBanner} alt=""/></div> }
+                                    { ITGameTeamsBannerUploadError!=="" && <div className="error">{ ITGameTeamsBannerUploadError }</div>}
+                                    { ITGameTeamsBannerFileTypeError!=="" && <div className="error">{ ITGameTeamsBannerFileTypeError }</div> }
+                                    {ITGameTeamsBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITGameTeamsBannerUrl} alt=""/></div> }
                                 </div>
-                                <div>Current main banner: <img style={{width: "25%", height: "auto"}} src={ITGameTeamsBanner} alt=""/></div>
+                                <div>Current main banner: <img style={{width: "25%", height: "auto"}} src={oldITGameTeamsBannerUrl} alt=""/></div>
                                 <br/>
 
                                 {/*4*/}
@@ -398,14 +665,15 @@ function CMSHomePageEdit() {
                                         type="file"
                                         required
                                         placeholder='file'
-                                        onChange={(e)=>fileUploadEventListener(e, "ITSalesBanner")}
+                                        onChange={ITSalesBannerFileUploadEventListener}
                                     />
                                 </label>
                                 <div className="output">
-                                    { error && <div className="error">{ error }</div>}
-                                    {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITSalesBanner} alt=""/></div> }
+                                    { ITSalesBannerUploadError!=="" && <div className="error">{ ITSalesBannerUploadError }</div>}
+                                    { ITSalesBannerFileTypeError!=="" && <div className="error">{ ITSalesBannerFileTypeError}</div> }
+                                    { ITSalesBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITSalesBannerUrl} alt=""/></div> }
                                 </div>
-                                <div>Current sales banner: <img style={{width: "25%", height: "auto"}} src={ITSalesBanner} alt=""/></div>
+                                <div>Current sales banner: <img style={{width: "25%", height: "auto"}} src={oldITSalesBannerUrl} alt=""/></div>
                                 <br/>
 
                                 {/*5*/}
@@ -415,14 +683,15 @@ function CMSHomePageEdit() {
                                         type="file"
                                         required
                                         placeholder='file'
-                                        onChange={(e)=>fileUploadEventListener(e, "ITSponsorshipBanner")}
+                                        onChange={ITSponsorshipBannerFileUploadEventListener}
                                     />
                                 </label>
                                 <div className="output">
-                                    { error && <div className="error">{ error }</div>}
-                                    {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITSponsorshipBanner} alt=""/></div> }
+                                    { ITSponsorshipBannerUploadError!=="" && <div className="error">{ ITSponsorshipBannerUploadError }</div>}
+                                    { ITSponsorshipBannerFileTypeError!=="" && <div className="error">{ ITSponsorshipBannerFileTypeError }</div> }
+                                    { ITSponsorshipBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITSponsorshipBannerUrl} alt=""/></div> }
                                 </div>
-                                <div>Current sponsorship banner: <img style={{width: "25%", height: "auto"}} src={ITSponsorshipBanner} alt=""/></div>
+                                <div>Current sponsorship banner: <img style={{width: "25%", height: "auto"}} src={oldITSponsorshipBannerUrl} alt=""/></div>
                                 <br/>
 
                                 {/*6*/}
@@ -432,14 +701,15 @@ function CMSHomePageEdit() {
                                         type="file"
                                         required
                                         placeholder='file'
-                                        onChange={(e)=>fileUploadEventListener(e, "ITContactsBanner")}
+                                        onChange={ITContactsBannerUrlFileUploadEventListener}
                                     />
                                 </label>
                                 <div className="output">
-                                    { error && <div className="error">{ error }</div>}
-                                    {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITContactsBanner} alt=""/></div> }
+                                    { ITContactsBannerUploadError!=="" && <div className="error">{ ITContactsBannerUploadError }</div>}
+                                    { ITContactsBannerFileTypeError!=="" && <div className="error">{ ITContactsBannerFileTypeError}</div> }
+                                    {ITContactsBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITContactsBannerUrl} alt=""/></div> }
                                 </div>
-                                <div>Current contacts banner: <img style={{width: "25%", height: "auto"}} src={ITContactsBanner} alt=""/></div>
+                                <div>Current contacts banner: <img style={{width: "25%", height: "auto"}} src={oldITContactsBannerUrl} alt=""/></div>
                             </form>
                         </div>
                     </div>
@@ -462,14 +732,15 @@ function CMSHomePageEdit() {
                                         type="file"
                                         required
                                         placeholder='file'
-                                        onChange={(e)=>fileUploadEventListener(e, "ENBanner")}
+                                        onChange={ENBannerFileUploadEventListener}
                                     />
                                 </label>
                                 <div className="output">
-                                    { error && <div className="error">{ error }</div>}
-                                    {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENBanner} alt=""/></div> }
+                                    { ENBannerUploadError!=="" && <div className="error">{ ENBannerUploadError}</div>}
+                                    { ENBannerFileTypeError!=="" && <div className="error">{ ENBannerFileTypeError }</div> }
+                                    {ENBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENBannerUrl} alt=""/></div> }
                                 </div>
-                                <div>Current main banner: <img style={{width: "25%", height: "auto"}} src={ENBanner} alt=""/></div>
+                                <div>Current main banner: <img style={{width: "25%", height: "auto"}} src={oldENBannerUrl} alt=""/></div>
                                 <br/>
 
                                 {/*2*/}
@@ -479,14 +750,15 @@ function CMSHomePageEdit() {
                                         type="file"
                                         required
                                         placeholder='file'
-                                        onChange={(e)=>fileUploadEventListener(e, "ENTournamentsBanner")}
+                                        onChange={ENTournamentsBannerFileUploadEventListener}
                                     />
                                 </label>
                                 <div className="output">
-                                    { error && <div className="error">{ error }</div>}
-                                    {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENTournamentsBanner} alt=""/></div> }
+                                    { ENTournamentsBannerUploadError!=="" && <div className="error">{ ENTournamentsBannerUploadError }</div>}
+                                    { ENTournamentsBannerUrlFileTypeError!=="" && <div className="error">{ ENTournamentsBannerUrlFileTypeError }</div> }
+                                    {ENTournamentsBannerUrlFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENTournamentsBannerUrl} alt=""/></div> }
                                 </div>
-                                <div>Current tournaments banner: <img style={{width: "25%", height: "auto"}} src={ENTournamentsBanner} alt=""/></div>
+                                <div>Current tournaments banner: <img style={{width: "25%", height: "auto"}} src={oldENTournamentsBannerUrl} alt=""/></div>
                                 <br/>
 
                                 {/*3*/}
@@ -496,14 +768,15 @@ function CMSHomePageEdit() {
                                         type="file"
                                         required
                                         placeholder='file'
-                                        onChange={(e)=>fileUploadEventListener(e, "ENGameTeamsBanner")}
+                                        onChange={ENGameTeamsBannerUrlFileUploadEventListener}
                                     />
-                                </label>
+                                </label>3
                                 <div className="output">
-                                    { error && <div className="error">{ error }</div>}
-                                    {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENGameTeamsBanner} alt=""/></div> }
+                                    { ENGameTeamsBannerUploadError!=="" && <div className="error">{ ENGameTeamsBannerUploadError }</div>}
+                                    { ENGameTeamsBannerFileTypeError!=="" && <div className="error">{ ENGameTeamsBannerFileTypeError }</div> }
+                                    { ENGameTeamsBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENGameTeamsBannerUrl} alt=""/></div> }
                                 </div>
-                                <div>Current game teams banner: <img style={{width: "25%", height: "auto"}} src={ENGameTeamsBanner} alt=""/></div>
+                                <div>Current game teams banner: <img style={{width: "25%", height: "auto"}} src={oldENGameTeamsBannerUrl} alt=""/></div>
                                 <br/>
 
                                 {/*4*/}
@@ -513,14 +786,15 @@ function CMSHomePageEdit() {
                                         type="file"
                                         required
                                         placeholder='file'
-                                        onChange={(e)=>fileUploadEventListener(e, "ENSalesBanner")}
+                                        onChange={ENSalesBannerFileUploadEventListener}
                                     />
                                 </label>
                                 <div className="output">
-                                    { error && <div className="error">{ error }</div>}
-                                    {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENSalesBanner} alt=""/></div> }
+                                    { ENSalesBannerUploadError!=="" && <div className="error">{ENSalesBannerUploadError}</div>}
+                                    { ENSalesBannerFileTypeError!=="" && <div className="error">{ ENSalesBannerFileTypeError }</div> }
+                                    {ENSalesBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENSalesBannerUrl} alt=""/></div> }
                                 </div>
-                                <div>Current sales banner: <img style={{width: "25%", height: "auto"}} src={ENSalesBanner} alt=""/></div>
+                                <div>Current sales banner: <img style={{width: "25%", height: "auto"}} src={oldENSalesBannerUrl} alt=""/></div>
                                 <br/>
 
                                 {/*5*/}
@@ -530,14 +804,15 @@ function CMSHomePageEdit() {
                                         type="file"
                                         required
                                         placeholder='file'
-                                        onChange={(e)=>fileUploadEventListener(e, "ENSponsorshipBanner")}
+                                        onChange={ENSponsorshipBannerFileUploadEventListener}
                                     />
                                 </label>
                                 <div className="output">
-                                    { error && <div className="error">{ error }</div>}
-                                    {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENSponsorshipBanner} alt=""/></div> }
+                                    { ENSponsorshipBannerUploadError!=="" && <div className="error">{ ENSponsorshipBannerUploadError }</div>}
+                                    { ENSponsorshipBannerFileTypeError!=="" && <div className="error">{ ENSponsorshipBannerFileTypeError }</div> }
+                                    {ENSponsorshipBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENSponsorshipBannerUrl} alt=""/></div> }
                                 </div>
-                                <div>Current sponsorship banner: <img style={{width: "25%", height: "auto"}} src={ENSponsorshipBanner} alt=""/></div>
+                                <div>Current sponsorship banner: <img style={{width: "25%", height: "auto"}} src={oldENSponsorshipBannerUrl} alt=""/></div>
                                 <br/>
 
                                 {/*6*/}
@@ -547,14 +822,15 @@ function CMSHomePageEdit() {
                                         type="file"
                                         required
                                         placeholder='file'
-                                        onChange={(e)=>fileUploadEventListener(e, "ENContactsBanner")}
+                                        onChange={ENContactsBannerFileUploadEventListener}
                                     />
                                 </label>
                                 <div className="output">
-                                    { error && <div className="error">{ error }</div>}
-                                    {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENContactsBanner} alt=""/></div> }
+                                    { ENContactsBannerUploadError!=="" && <div className="error">{ ENContactsBannerUploadError }</div>}
+                                    { ENContactsBannerFileTypeError!=="" && <div className="error">{ ENContactsBannerFileTypeError }</div> }
+                                    { ENContactsBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENContactsBannerUrl} alt=""/></div> }
                                 </div>
-                                <div>Current contacts banner: <img style={{width: "25%", height: "auto"}} src={ENContactsBanner} alt=""/></div>
+                                <div>Current contacts banner: <img style={{width: "25%", height: "auto"}} src={oldENContactsBannerUrl} alt=""/></div>
                                 <br/>
 
                             </form>

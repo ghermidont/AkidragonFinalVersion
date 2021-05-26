@@ -6,21 +6,32 @@ import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
 function CMSTournamentsPageEdit() {
     let publishBtnRef = useRef();
     let cancelBtnRef = useRef();
-    // const {currentUser} = useAuthContext();
-    // const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
-    const [error, setError] = useState("");
+
     const fileTypesArray = ['image/png', 'image/jpeg'];
     const history = useHistory();
-    const [ENBanner, setENBanner] = useState();
-    const [ITBanner, setITBanner] = useState('');
-    const [ENBannerText, setENBannerText] = useState('');
-    const [ITBannerText, setITBannerText] = useState('');
-    const [ENFooterMessage, setENFooterMessage] = useState('');
-    const [ITFooterMessage, setITFooterMessage] = useState('');
-    const [fileSuccess, setFileSuccess] = useState(false);
-    const [uploadedPicFile, setUploadedPicFile] = useState('');
-    const [url, setUrl] = useState('');
-    const[loading, setLoading] = useState(false);
+
+    const [ENBannerUrl, setENBannerUrl] = useState("");
+    const [ITBannerUrl, setITBannerUrl] = useState("");
+    const [OldENBannerUrl, setOldENBannerUrl] = useState("");
+    const [OldITBannerUrl, setITOldBannerUrl] = useState("");
+
+    const [ENBannerText, setENBannerText] = useState("");
+    const [ITBannerText, setITBannerText] = useState("");
+    const [ENFooterMessage, setENFooterMessage] = useState("");
+    const [ITFooterMessage, setITFooterMessage] = useState("");
+
+    const [ITUploadedPicFile, setITUploadedPicFile] = useState("");
+    const [ENUploadedPicFile, setENUploadedPicFile] = useState("");
+
+    const [ITFileTypeError ,setITFileTypeError] = useState("");
+    const [ENFileTypeError ,setENFileTypeError] = useState("");
+
+    const [ITUploadError ,setITUploadError] = useState("");
+    const [ENUploadError ,setENUploadError] = useState("");
+
+    const [ITFileSuccess ,setITFileSuccess] = useState(false);
+    const [ENFileSuccess ,setENFileSuccess] = useState(false);
+
     const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
 
     let selectedDoc = "";
@@ -38,8 +49,12 @@ function CMSTournamentsPageEdit() {
     useEffect(() => {
         if (selectedDoc !== "") {
             selectedDoc.map(doc => {
-                setENBanner(doc.mainBanner.en);
-                setITBanner(doc.mainBanner.it);
+                setENBannerUrl(doc.mainBanner.en);
+                setOldENBannerUrl(doc.mainBanner.en);
+
+                setITBannerUrl(doc.mainBanner.it);
+                setITOldBannerUrl(doc.mainBanner.it);
+
                 setENBannerText(doc.bannerText.en);
                 setITBannerText(doc.bannerText.it);
                 setENFooterMessage(doc.footerMessage.en);
@@ -48,45 +63,73 @@ function CMSTournamentsPageEdit() {
         }
     }, [docsFromHookCMS]);
 
-    const fileUploadEventListener = (e) => {
+    const ITFileUploadEventListener = (e) => {
         let uploadedFile = e.target.files[0];
         if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-            setUploadedPicFile(uploadedFile);
+            setITUploadedPicFile(uploadedFile);
             async function putFile(uploadedFile){
                 e.preventDefault();
                 try {
-                    setLoading(true);
-                    setError("");
+                    setITFileTypeError("");
+                    setITUploadError("");
                     const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
                     }, async()=>{
                         const finalUrl = await storageRef.getDownloadURL();
-                        finalUrl!==undefined?setFileSuccess(true):setFileSuccess(false);
-                        setUrl(finalUrl);
-                        setLoading(false);
+                        finalUrl!==undefined?setITFileSuccess(true):setITFileSuccess(false);
+                        setITBannerUrl(finalUrl);
+
                     });
                 } catch {
-                    setError("Failed to upload file");
+                    setENUploadError("Failed to upload file");
                 }
             }
-            putFile(uploadedFile).then(()=>console.log(url));
+            putFile(uploadedFile).then(()=>console.log(ITBannerUrl));
         } else {
-            setUploadedPicFile('');
-            setError('Please select an image file (png or jpg)');
+            setITUploadedPicFile('');
+            setITFileTypeError('Please select an image file (png or jpg)');
+        }
+    };
+
+    const ENFileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setENUploadedPicFile(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setENFileTypeError("");
+                    setENUploadError("");
+                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setENFileSuccess(true):setENFileSuccess(false);
+                        setENBannerUrl(finalUrl);
+                    });
+                } catch {
+                    setENUploadError("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(ENBannerUrl));
+        } else {
+            setENUploadedPicFile('');
+            setENFileTypeError('Please select an image file (png or jpg)');
         }
     };
 
     const writeToFBCallback = () => {
         const collectionRef = projectFirestore.collection('web-app-cms').doc("tournamentsPage");
 
-        if(loading === false) {
             collectionRef.set(
                 {
                     "mainBanner": {
-                        "en": ENBanner,
-                        "it": ITBanner
+                        "en": ENBannerUrl,
+                        "it": ITBannerUrl
                     },
                     "bannerText": {
                         "en": ENBannerText,
@@ -105,22 +148,30 @@ function CMSTournamentsPageEdit() {
                 .catch((error) => {
                     console.error(error.code + " " + error.message + "" + error.details);
                 });
-        }
     }
 
     //Clears all the in puts of the form and deletes the uploaded file:
     const clearInput = () => {
-        // setENBanner("");
-        // setITBanner("");
+        // setENBannerUrl("");
+        // setITBannerUrl("");
         // setENBannerText("");
         // setITBannerText("");
         // setENFooterMessage("");
         // setITFooterMessage("");
 
-        const desertRef = uploadedPicFile?projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedPicFile.name):"";
+        const ITRef = ITUploadedPicFile?projectStorage.ref('CMS-pictures/tournamentsPage').child(ITUploadedPicFile.name):"";
+        const ENRef = ENUploadedPicFile?projectStorage.ref('CMS-pictures/tournamentsPage').child(ENUploadedPicFile.name):"";
 
-        if(desertRef){
-            desertRef.delete().then(() => {
+        if(ITRef){
+            ITRef.delete().then(() => {
+                console.log("uploaded image removed successfully");
+            }).catch((error) => {
+                console.log("could not delete the file because:" + error);
+            });
+        }
+
+        if(ENRef){
+            ENRef.delete().then(() => {
                 console.log("uploaded image removed successfully");
             }).catch((error) => {
                 console.log("could not delete the file because:" + error);
@@ -158,8 +209,7 @@ function CMSTournamentsPageEdit() {
                         </li>
                     </ul>
                     <div className="tab-content" id="myTabContent">
-
-                        {/*Tab1*/}
+                       {/*Tab1*/}
                         <div
                             className="tab-pane fade show active"
                             id="tab1"
@@ -167,23 +217,6 @@ function CMSTournamentsPageEdit() {
                             aria-labelledby="home-tab">
                             <div className='form-article__body'>
                                 <form className="form-article">
-                                    <div>
-                                        Current banner:
-                                        <img style={{width: "25%", height: "auto"}} src={ITBanner} alt=""/>
-                                    </div>
-                                    {/*file input*/}
-                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
-                                        <input
-                                            className='form-article__btn visually-hidden'
-                                            type="file"
-                                            placeholder='file'
-                                            onChange={()=>fileUploadEventListener()}
-                                        />
-                                    </label>
-                                    <div className="output">
-                                        { error && <div className="error">{ error }</div>}
-                                        {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENBanner} alt=""/></div> }
-                                    </div>
 
                                     <label className='form-article__label'>
                                         Banner text:
@@ -212,7 +245,24 @@ function CMSTournamentsPageEdit() {
                                             }
                                         ></textarea>
                                     </label>
-
+                                    <div>
+                                        Current banner:
+                                        <img style={{width: "25%", height: "auto"}} src={OldITBannerUrl} alt=""/>
+                                    </div>
+                                    {/*file input*/}
+                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
+                                        <input
+                                            className='form-article__btn visually-hidden'
+                                            type="file"
+                                            placeholder='file'
+                                            onChange={ITFileUploadEventListener}
+                                        />
+                                    </label>
+                                    <div className="output">
+                                        { ITUploadError!=="" && <div className="error">{ ITUploadError }</div>}
+                                        { ITFileTypeError!=="" && <div className="error">{ ITFileTypeError }</div>}
+                                        { ITFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITBannerUrl} alt=""/></div> }
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -227,23 +277,6 @@ function CMSTournamentsPageEdit() {
                         >
                             <div className='form-article__body'>
                                 <form className="form-article">
-                                    <div>
-                                        Current banner:
-                                        <img style={{width: "25%", height: "auto"}} src={ENBanner} alt=""/>
-                                    </div>
-                                    {/*File*/}
-                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
-                                        <input
-                                            className='form-article__btn visually-hidden'
-                                            type="file"
-                                            placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener()}
-                                        />
-                                    </label>
-                                    <div className="output">
-                                        { error && <div className="error">{ error }</div>}
-                                        {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENBanner} alt=""/></div> }
-                                    </div>
 
                                     <label className='form-article__label'>
                                         Content
@@ -272,7 +305,24 @@ function CMSTournamentsPageEdit() {
                                             }
                                         ></textarea>
                                     </label>
-
+                                    <div>
+                                        Current banner:
+                                        <img style={{width: "25%", height: "auto"}} src={OldENBannerUrl} alt=""/>
+                                    </div>
+                                    {/*file input*/}
+                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
+                                        <input
+                                            className='form-article__btn visually-hidden'
+                                            type="file"
+                                            placeholder='file'
+                                            onChange={ENFileUploadEventListener}
+                                        />
+                                    </label>
+                                    <div className="output">
+                                        { ENUploadError!=="" && <div className="error">{ ENUploadError }</div>}
+                                        { ENFileTypeError!=="" && <div className="error">{ ENFileTypeError }</div>}
+                                        { ENFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENBannerUrl} alt=""/></div> }
+                                    </div>
                                 </form>
                             </div>
                         </div>

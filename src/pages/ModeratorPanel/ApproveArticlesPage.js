@@ -46,7 +46,7 @@ export default function ApproveArticlesPage() {
                             <>
                             <li className="approve__item">
                                 <div className="approve__image">
-                                    <img src={doc.content.image} alt="" className="approve__img"/>
+                                    <img src={doc.content[appLanguage].image} alt="" className="approve__img"/>
                                 </div>
                                 <div className="approve__content">
                                     <h3 className="approve__item-title" >Title: {doc.content[appLanguage].title}</h3>

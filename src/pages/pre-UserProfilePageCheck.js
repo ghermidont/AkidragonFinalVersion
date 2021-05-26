@@ -10,7 +10,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 export default function PreUserProfilePageCheck(props) {
     const {currentUser} = useAuthContext();
     const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
-    const [userInfo, setUserInfo] = useState();
+    const [userInfo, setUserInfo] = useState(true);
     const[loading, setLoading] = useState();
 
     async function checkUserFieldsExist() {
@@ -20,35 +20,12 @@ export default function PreUserProfilePageCheck(props) {
             .get()
             .then((doc) => {
                 if (doc.exists) {
-                    console.log(doc.data['firstName']);
-                    return doc.data['firstName']===undefined&&setUserInfo(false);
+                   return doc.data().displayName===undefined&&setUserInfo(false);
                 }else{
                     return setUserInfo(true);
                 }
        })
     }
-
-    //This check is done in the user profile page
-    // async function checkCurrentUserRole(User) {
-    //     await projectFirestore
-    //         .collection("roles")
-    //         .doc(User.uid)
-    //         .get()
-    //         .then((doc)=>{
-    //             if(doc.exists){
-    //                 return doc.data['moderator']===true?setModerator(true):setModerator(false);
-    //             }else{
-    //                 return setModerator(false);
-    //             }
-    //
-    //         });
-    // }
-
-   // function checkCurrentUserStates() {
-   //
-   //      // await checkCurrentUserRole(currentUser ? currentUser.uid : CurrentUserFromLS.uid)
-   //      //     .then(() => localStorage.setItem("currentUserRole", JSON.stringify({moderator})));
-   //  }
 
     useEffect(()=>{
         setLoading(true);
@@ -56,7 +33,7 @@ export default function PreUserProfilePageCheck(props) {
             .then(() => {setLoading(false);
                 })
             .catch(err => console.error(err));
-    },[]);
+    }, [currentUser]);
 
     return (
         <>
@@ -64,7 +41,7 @@ export default function PreUserProfilePageCheck(props) {
             <Loader type="TailSpin" color="#00BFFF" height={80} width={80} />
         ):(
             <>
-                {CurrentUserFromLS.emailVerified===true?userInfo?<UserProfilePage />:<Step2CompleteProfilePage />:<Step1EmailVerificationPage />}
+                {CurrentUserFromLS.emailVerified===true?userInfo===true?<UserProfilePage />:<Step2CompleteProfilePage />:<Step1EmailVerificationPage />}
             </>
         )}
             </>

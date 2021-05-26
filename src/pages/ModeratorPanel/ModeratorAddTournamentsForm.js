@@ -421,11 +421,13 @@ export default function ModeratorAddTournamentsForm() {
                 placeholder='file'
                 onChange={file1UploadEventListener}
             />
+
+          </label>
             <div className="output">
               { error1 && <div className="error">{ error1 }</div>}
               {fileSuccess1&&<div>Image 1 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url1} alt=""/></div> }
             </div>
-          </label>
+            <br/>
           <label className='form-update__label btn-upload btn-upload--tournament'> <span className='icon-upload2'></span> Picture team 2
             <input
                 className='form-update__btn visually-hidden'
@@ -433,11 +435,13 @@ export default function ModeratorAddTournamentsForm() {
                 placeholder='file'
                 onChange={file2UploadEventListener}
             />
+
+          </label>
             <div className="output">
               { error2 && <div className="error">{ error2 }</div>}
               {fileSuccess2&&<div>Image 2 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url2} alt=""/></div> }
             </div>
-          </label>
+            <br/>
           </>
           }
 
@@ -450,12 +454,12 @@ export default function ModeratorAddTournamentsForm() {
                   placeholder='file'
                   onChange={file3UploadEventListener}
               />
-              <div className="output">
-                { error3 && <div className="error">{ error3 }</div>}
-                {fileSuccess3&&<div>Image 3 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url3} alt=""/></div> }
-              </div>
-            </label>
-
+              </label>
+                <div className="output">
+                  { error3 && <div className="error">{ error3 }</div>}
+                  {fileSuccess3&&<div>Image 3 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url3} alt=""/></div> }
+                </div>
+            <br/>
             <label className='form-update__label btn-upload btn-upload--tournament'> <span className='icon-upload2'></span> Picture team 4
               <input
                   className='form-update__btn visually-hidden'
@@ -463,11 +467,13 @@ export default function ModeratorAddTournamentsForm() {
                   placeholder='file'
                   onChange={file4UploadEventListener}
               />
-              <div className="output">
-                { error4 && <div className="error">{ error4 }</div>}
-                {fileSuccess4&&<div>Image 4 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url4} alt=""/></div> }
-              </div>
+
             </label>
+                <div className="output">
+                  { error4 && <div className="error">{ error4 }</div>}
+                  {fileSuccess4&&<div>Image 4 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url4} alt=""/></div> }
+                </div>
+                <br/>
             </>
           }
           {eventVideoLink&&
@@ -557,7 +563,7 @@ export default function ModeratorAddTournamentsForm() {
 
           <button
               className="form-article__btn"
-              onClick={addTournamentWithFBCallback}
+              onClick={()=>addTournamentWithFBCallback()}
           >
             Submit
           </button>

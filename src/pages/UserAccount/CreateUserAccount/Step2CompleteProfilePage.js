@@ -14,7 +14,6 @@ export default function Step2CompleteProfilePage() {
     const [currentDisplayName, setCurrentDisplayName] = useState('');
     const {signUpFormUserUploadedFile, setUserUploadedPictureUrl} = useAuthContext();
     const [url, setUrl] = useState('');
-    //const {url, error} = useStorage(signUpFormUserUploadedFile, CurrentUserFromLS);
 
     useEffect(()=>{
         if (signUpFormUserUploadedFile) {

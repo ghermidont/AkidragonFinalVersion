@@ -9,25 +9,26 @@ import ReactPlayer from "react-player/lazy";
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
 const queryString = require('query-string');
 
-//TODO import current date form Firebase
-
 export default function EditStreamForm(){
 
     console.log("EditStreamForm worked");
 
     const {docsFromHook} = useDataFromFirestore('streams');
-    const [error, setError] = useState('');
+
     const fileTypesArray = ['image/png', 'image/jpeg'];
     const history = useHistory();
     const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
     const {currentUser} = useAuthContext();
-    const[streamCategory, setStreamCategory] = useState('');
-    const [videoURL, setVideoURL] = useState('');
-    const [loading, setLoading] = useState(true);
-    const [url, setUrl] = useState('');
+
+    const [error, setError] = useState("");
+    const [streamCategory, setStreamCategory] = useState("");
+    const [videoURL, setVideoURL] = useState("");
+    const [url, setUrl] = useState("");
+    const [oldUrl, setOldUrl] = useState("");
     const [fileSuccess, setFileSuccess] = useState(false);
-    const [uploadedPicFile, setUploadedPicFile] = useState('');
-    const [createdAt, setCreatedAt] = useState('');
+    const [uploadedPicFile, setUploadedPicFile] = useState("");
+    const [createdAt, setCreatedAt] = useState("");
+
     let parsedWindowLocation = queryString.parse(window.location.hash);
     const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(17);
 
@@ -52,6 +53,7 @@ export default function EditStreamForm(){
             setStreamCategory(doc.category);
             setVideoURL(doc.videoURL);
             setUrl(doc.imageURL);
+            setOldUrl(doc.imageURL)
         })
     }
     }, [docsFromHook]);
@@ -63,17 +65,15 @@ export default function EditStreamForm(){
             async function putFile(uploadedFile){
                 e.preventDefault();
                 try {
-                    setLoading(true);
                     setError("");
                     const storageRef = projectStorage.ref('streams_pictures/').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
-                    }, async()=>{
+                    }, async () => {
                         const finalUrl = await storageRef.getDownloadURL();
                         finalUrl!==undefined?setFileSuccess(true):setFileSuccess(false);
                         setUrl(finalUrl);
-                        setLoading(false);
                     });
                 } catch {
                     setError("Failed to upload file");
@@ -164,7 +164,7 @@ export default function EditStreamForm(){
                     </Dropdown>
                     <div>
                         Current thumbnail:
-                        <img src={url} alt=""/>
+                        <img src={oldUrl} alt=""/>
                     </div>
                     <div className="form-article__box-btn">
                         <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload thumbnail

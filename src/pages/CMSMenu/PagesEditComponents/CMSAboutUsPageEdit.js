@@ -33,51 +33,45 @@ function CMSAboutUsPageEdit() {
     const [uploadedPicFilePartnerLogo5, setUploadedPicFilePartnerLogo5] = useState();
 
     // Errors
-    const [picFileENBannerUploadError, setPicFileENBannerUploadError] = useState(null);
-    const [picFileITBannerUploadError, setPicFileITBannerUploadError] = useState(null);
+    const [picFileENBannerUploadError, setPicFileENBannerUploadError] = useState("");
+    const [picFileITBannerUploadError, setPicFileITBannerUploadError] = useState("");
 
-    const [picFileAvatarUploadError1, setPicFileAvatarUploadError1] = useState();
-    const [picFileAvatarUploadError2, setPicFileAvatarUploadError2] = useState();
-    const [picFileAvatarUploadError3, setPicFileAvatarUploadError3] = useState();
-    const [picFileAvatarUploadError4, setPicFileAvatarUploadError4] = useState();
-    const [picFileAvatarUploadError5, setPicFileAvatarUploadError5] = useState();
-    const [picFileAvatarUploadError6, setPicFileAvatarUploadError6] = useState();
-    const [picFileAvatarUploadError7, setPicFileAvatarUploadError7] = useState();
-    const [picFileAvatarUploadError8, setPicFileAvatarUploadError8] = useState();
+    const [picFileAvatarUploadError1, setPicFileAvatarUploadError1] = useState("");
+    const [picFileAvatarUploadError2, setPicFileAvatarUploadError2] = useState("");
+    const [picFileAvatarUploadError3, setPicFileAvatarUploadError3] = useState("");
+    const [picFileAvatarUploadError4, setPicFileAvatarUploadError4] = useState("");
+    const [picFileAvatarUploadError5, setPicFileAvatarUploadError5] = useState("");
+    const [picFileAvatarUploadError6, setPicFileAvatarUploadError6] = useState("");
+    const [picFileAvatarUploadError7, setPicFileAvatarUploadError7] = useState("");
+    const [picFileAvatarUploadError8, setPicFileAvatarUploadError8] = useState("");
 
-    const [picFilePartnerLogoUploadError1, setPicFilePartnerLogoUploadError1] = useState();
-    const [picFilePartnerLogoUploadError2, setPicFilePartnerLogoUploadError2] = useState();
-    const [picFilePartnerLogoUploadError3, setPicFilePartnerLogoUploadError3] = useState();
-    const [picFilePartnerLogoUploadError4, setPicFilePartnerLogoUploadError4] = useState();
-    const [picFilePartnerLogoUploadError5, setPicFilePartnerLogoUploadError5] = useState();
+    const [picFilePartnerLogoUploadError1, setPicFilePartnerLogoUploadError1] = useState("");
+    const [picFilePartnerLogoUploadError2, setPicFilePartnerLogoUploadError2] = useState("");
+    const [picFilePartnerLogoUploadError3, setPicFilePartnerLogoUploadError3] = useState("");
+    const [picFilePartnerLogoUploadError4, setPicFilePartnerLogoUploadError4] = useState("");
+    const [picFilePartnerLogoUploadError5, setPicFilePartnerLogoUploadError5] = useState("");
 
-    const [picFileENFileTypeError, setPicFileENFileTypeError] = useState('');
-    const [picFileITFileTypeError, setPicFileITFileTypeError] = useState('');
+    const [picFileENFileTypeError, setPicFileENFileTypeError] = useState("");
+    const [picFileITFileTypeError, setPicFileITFileTypeError] = useState("");
 
-    const [picFileAvatarFileTypeError1, setPicFileAvatarFileTypeError1] = useState();
-    const [picFileAvatarFileTypeError2, setPicFileAvatarFileTypeError2] = useState();
-    const [picFileAvatarFileTypeError3, setPicFileAvatarFileTypeError3] = useState();
-    const [picFileAvatarFileTypeError4, setPicFileAvatarFileTypeError4] = useState();
-    const [picFileAvatarFileTypeError5, setPicFileAvatarFileTypeError5] = useState();
-    const [picFileAvatarFileTypeError6, setPicFileAvatarFileTypeError6] = useState();
-    const [picFileAvatarFileTypeError7, setPicFileAvatarFileTypeError7] = useState();
-    const [picFileAvatarFileTypeError8, setPicFileAvatarFileTypeError8] = useState();
+    const [picFileAvatarFileTypeError1, setPicFileAvatarFileTypeError1] = useState("");
+    const [picFileAvatarFileTypeError2, setPicFileAvatarFileTypeError2] = useState("");
+    const [picFileAvatarFileTypeError3, setPicFileAvatarFileTypeError3] = useState("");
+    const [picFileAvatarFileTypeError4, setPicFileAvatarFileTypeError4] = useState("");
+    const [picFileAvatarFileTypeError5, setPicFileAvatarFileTypeError5] = useState("");
+    const [picFileAvatarFileTypeError6, setPicFileAvatarFileTypeError6] = useState("");
+    const [picFileAvatarFileTypeError7, setPicFileAvatarFileTypeError7] = useState("");
+    const [picFileAvatarFileTypeError8, setPicFileAvatarFileTypeError8] = useState("");
 
-    const [picFilePartnerLogoFileTypeError1, setPicFilePartnerLogoFileTypeError1] = useState();
-    const [picFilePartnerLogoFileTypeError2, setPicFilePartnerLogoFileTypeError2] = useState();
-    const [picFilePartnerLogoFileTypeError3, setPicFilePartnerLogoFileTypeError3] = useState();
-    const [picFilePartnerLogoFileTypeError4, setPicFilePartnerLogoFileTypeError4] = useState();
-    const [picFilePartnerLogoFileTypeError5, setPicFilePartnerLogoFileTypeError5] = useState();
+    const [picFilePartnerLogoFileTypeError1, setPicFilePartnerLogoFileTypeError1] = useState("");
+    const [picFilePartnerLogoFileTypeError2, setPicFilePartnerLogoFileTypeError2] = useState("");
+    const [picFilePartnerLogoFileTypeError3, setPicFilePartnerLogoFileTypeError3] = useState("");
+    const [picFilePartnerLogoFileTypeError4, setPicFilePartnerLogoFileTypeError4] = useState("");
+    const [picFilePartnerLogoFileTypeError5, setPicFilePartnerLogoFileTypeError5] = useState("");
 
     // Urls
-    const [ENBannerUrl, setENBannerUrl] = useState('');
-    const [ITBannerUrl, setITBannerUrl] = useState('');
-
-    const [partnerLogo1Url, setPartnerLogo1Url] = useState('');
-    const [partnerLogo2Url, setPartnerLogo2Url] = useState('');
-    const [partnerLogo3Url, setPartnerLogo3Url] = useState('');
-    const [partnerLogo4Url, setPartnerLogo4Url] = useState('');
-    const [partnerLogo5Url, setPartnerLogo5Url] = useState('');
+    const [ENBannerUrl, setENBannerUrl] = useState("");
+    const [ITBannerUrl, setITBannerUrl] = useState("");
 
     const [avatar1Url, setAvatar1Url] = useState("");
     const [avatar2Url, setAvatar2Url] = useState("");
@@ -87,6 +81,30 @@ function CMSAboutUsPageEdit() {
     const [avatar6Url, setAvatar6Url] = useState("");
     const [avatar7Url, setAvatar7Url] = useState("");
     const [avatar8Url, setAvatar8Url] = useState("");
+
+    const [partnerLogo1Url, setPartnerLogo1Url] = useState("");
+    const [partnerLogo2Url, setPartnerLogo2Url] = useState("");
+    const [partnerLogo3Url, setPartnerLogo3Url] = useState("");
+    const [partnerLogo4Url, setPartnerLogo4Url] = useState("");
+    const [partnerLogo5Url, setPartnerLogo5Url] = useState("");
+
+    const [oldENBannerUrl, setOldENBannerUrl] = useState("");
+    const [oldITBannerUrl, setOldITBannerUrl] = useState("");
+
+    const [oldAvatar1Url, setOldAvatar1Url] = useState("");
+    const [oldAvatar2Url, setOldAvatar2Url] = useState("");
+    const [oldAvatar3Url, setOldAvatar3Url] = useState("");
+    const [oldAvatar4Url, setOldAvatar4Url] = useState("");
+    const [oldAvatar5Url, setOldAvatar5Url] = useState("");
+    const [oldAvatar6Url, setOldAvatar6Url] = useState("");
+    const [oldAvatar7Url, setOldAvatar7Url] = useState("");
+    const [oldAvatar8Url, setOldAvatar8Url] = useState("");
+
+    const [oldPartnerLogo1Url, setOldPartnerLogo1Url] = useState("");
+    const [oldPartnerLogo2Url, setOldPartnerLogo2Url] = useState("");
+    const [oldPartnerLogo3Url, setOldPartnerLogo3Url] = useState("");
+    const [oldPartnerLogo4Url, setOldPartnerLogo4Url] = useState("");
+    const [oldPartnerLogo5Url, setOldPartnerLogo5Url] = useState("");
 
     // Success
     const [ENBannerFileSuccess, setENBannerFileSuccess] = useState(false);
@@ -159,8 +177,7 @@ function CMSAboutUsPageEdit() {
     const [ITTitleText, setITTitleText] = useState("");
 
     const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
-    //const [url, setUrl] = useState('');
-    //const[loading, setLoading] = useState(false);
+
     let selectedDoc = "";
 
     useEffect(() => {
@@ -184,11 +201,6 @@ function CMSAboutUsPageEdit() {
                 setENBannerUrl(doc.banner.en);
                 setITBannerUrl(doc.banner.it);
 
-                setITMissionTitle(doc.missionTitle.it);
-                setENMissionTitle(doc.missionTitle.en);
-                setITMissionText(doc.missionText.it);
-                setENMissionText(doc.missionText.en);
-
                 setAvatar1Url(doc.teamMembers.member1.photo);
                 setAvatar2Url(doc.teamMembers.member2.photo);
                 setAvatar3Url(doc.teamMembers.member3.photo);
@@ -198,6 +210,35 @@ function CMSAboutUsPageEdit() {
                 setAvatar7Url(doc.teamMembers.member7.photo);
                 setAvatar8Url(doc.teamMembers.member8.photo);
 
+                setPartnerLogo1Url(doc.partnersLogos.partner1);
+                setPartnerLogo2Url(doc.partnersLogos.partner2);
+                setPartnerLogo3Url(doc.partnersLogos.partner3);
+                setPartnerLogo4Url(doc.partnersLogos.partner4);
+                setPartnerLogo5Url(doc.partnersLogos.partner5);
+
+                setOldENBannerUrl(doc.banner.en);
+                setOldITBannerUrl(doc.banner.it);
+
+                setOldAvatar1Url(doc.teamMembers.member1.photo);
+                setOldAvatar2Url(doc.teamMembers.member2.photo);
+                setOldAvatar3Url(doc.teamMembers.member3.photo);
+                setOldAvatar4Url(doc.teamMembers.member4.photo);
+                setOldAvatar5Url(doc.teamMembers.member5.photo);
+                setOldAvatar6Url(doc.teamMembers.member6.photo);
+                setOldAvatar7Url(doc.teamMembers.member7.photo);
+                setOldAvatar8Url(doc.teamMembers.member8.photo);
+
+                setOldPartnerLogo1Url(doc.partnersLogos.partner1);
+                setOldPartnerLogo2Url(doc.partnersLogos.partner2);
+                setOldPartnerLogo3Url(doc.partnersLogos.partner3);
+                setOldPartnerLogo4Url(doc.partnersLogos.partner4);
+                setOldPartnerLogo5Url(doc.partnersLogos.partner5);
+
+                setITMissionTitle(doc.missionTitle.it);
+                setENMissionTitle(doc.missionTitle.en);
+                setITMissionText(doc.missionText.it);
+                setENMissionText(doc.missionText.en);
+
                 setENCareerTitle(doc.careerTitle.en);
                 setITCareerTitle(doc.careerTitle.it);
                 setENCareerText(doc.careerText.en);
@@ -206,323 +247,484 @@ function CMSAboutUsPageEdit() {
                 setENCrewTitle(doc.crewTitle.en);
                 setITCrewTitle(doc.crewTitle.it);
 
-                setENMissionText(doc.mainText.en);
-                setENMissionText(doc.mainText.it);
-
-                setPartnerLogo1Url(doc.partnersLogos.partner1);
-                setPartnerLogo2Url(doc.partnersLogos.partner2);
-                setPartnerLogo3Url(doc.partnersLogos.partner3);
-                setPartnerLogo4Url(doc.partnersLogos.partner4);
-                setPartnerLogo5Url(doc.partnersLogos.partner5);
-
                 setENPartnersTitle(doc.partnersTitle.en);
                 setITPartnersTitle(doc.partnersTitle.it);
 
-                setName1(doc.member1.name);
-                setName2(doc.member2.name);
-                setName3(doc.member3.name);
-                setName4(doc.member4.name);
-                setName5(doc.member5.name);
-                setName6(doc.member6.name);
-                setName7(doc.member7.name);
-                setName8(doc.member8.name);
+                setName1(doc.teamMembers.member1.name);
+                setName2(doc.teamMembers.member2.name);
+                setName3(doc.teamMembers.member3.name);
+                setName4(doc.teamMembers.member4.name);
+                setName5(doc.teamMembers.member5.name);
+                setName6(doc.teamMembers.member6.name);
+                setName7(doc.teamMembers.member7.name);
+                setName8(doc.teamMembers.member8.name);
 
-                setENPositionName1(doc.member1.title.en);
-                setITPositionName1(doc.member1.title.it);
-                setENPositionName2(doc.member2.title.en);
-                setITPositionName2(doc.member2.title.it);
-                setENPositionName3(doc.member3.title.en);
-                setITPositionName3(doc.member3.title.it);
-                setENPositionName4(doc.member4.title.en);
-                setITPositionName4(doc.member4.title.it);
-                setENPositionName5(doc.member5.title.en);
-                setITPositionName5(doc.member5.title.it);
-                setENPositionName6(doc.member6.title.en);
-                setITPositionName6(doc.member6.title.it);
-                setENPositionName7(doc.member7.title.en);
-                setITPositionName7(doc.member7.title.it);
-                setENPositionName8(doc.member8.title.en);
-                setITPositionName8(doc.member8.title.it);
-
+                setENPositionName1(doc.teamMembers.member1.title.en);
+                setITPositionName1(doc.teamMembers.member1.title.it);
+                setENPositionName2(doc.teamMembers.member2.title.en);
+                setITPositionName2(doc.teamMembers.member2.title.it);
+                setENPositionName3(doc.teamMembers.member3.title.en);
+                setITPositionName3(doc.teamMembers.member3.title.it);
+                setENPositionName4(doc.teamMembers.member4.title.en);
+                setITPositionName4(doc.teamMembers.member4.title.it);
+                setENPositionName5(doc.teamMembers.member5.title.en);
+                setITPositionName5(doc.teamMembers.member5.title.it);
+                setENPositionName6(doc.teamMembers.member6.title.en);
+                setITPositionName6(doc.teamMembers.member6.title.it);
+                setENPositionName7(doc.teamMembers.member7.title.en);
+                setITPositionName7(doc.teamMembers.member7.title.it);
+                setENPositionName8(doc.teamMembers.member8.title.en);
+                setITPositionName8(doc.teamMembers.member8.title.it);
             })
         }
     }, [docsFromHookCMS]);
 
-    async function putFile(File, setterKey){
-        try {
-            //setLoading(true);
-            //setError("");
-            const storageRef = projectStorage.ref('CMS-pictures/aboutUsPage').child(File.name);
-            storageRef.put(File).on('state_changed', (err) => {
-            },  (err) => {
-                window.alert(err);
-            }, async()=>{
-                const finalUrl = await storageRef.getDownloadURL();
-
-                if(finalUrl!==undefined) {
-                    if (setterKey === "ENBanner") {
-                        setENBannerFileSuccess(true);
-                    }else{
-                        setENBannerFileSuccess(false);
-                    }
-                    if (setterKey === "ITBanner") {
-                        setITBannerFileSuccess(true);
-                    }else{
-                        setITBannerFileSuccess(false);
-                    }
-
-                    if (setterKey === "avatar1") {
-                        setAvatar1FileSuccess(true);
-                    }else{
-                        setAvatar1FileSuccess(false);
-                    }
-                    if (setterKey === "avatar2") {
-                        setAvatar2FileSuccess(true);
-                    }else{
-                        setAvatar2FileSuccess(false);
-                    }
-                    if (setterKey === "avatar3") {
-                        setAvatar3FileSuccess(true);
-                    }else{
-                        setAvatar3FileSuccess(false);
-                    }
-                    if (setterKey === "avatar4") {
-                        setAvatar4FileSuccess(true);
-                    }else{
-                        setAvatar4FileSuccess(false);
-                    }
-                    if (setterKey === "avatar5") {
-                        setAvatar5FileSuccess(true);
-                    }else{
-                        setAvatar5FileSuccess(false);
-                    }
-                    if (setterKey === "avatar6") {
-                        setAvatar6FileSuccess(true);
-                    }else{
-                        setAvatar6FileSuccess(false);
-                    }
-                    if (setterKey === "avatar7") {
-                        setAvatar7FileSuccess(true);
-                    }else{
-                        setAvatar7FileSuccess(false);
-                    }
-                    if (setterKey === "avatar8") {
-                        setAvatar8FileSuccess(true);
-                    }else{
-                        setAvatar8FileSuccess(false);
-                    }
-
-                    if (setterKey === "partnerLogo1") {
-                        setPartnerLogo1FileSuccess(true);
-                    }else{
-                        setPartnerLogo1FileSuccess(false);
-                    }
-                    if (setterKey === "partnerLogo2") {
-                        setPartnerLogo2FileSuccess(true);
-                    }else{
-                        setPartnerLogo2FileSuccess(false);
-                    }
-                    if (setterKey === "partnerLogo3") {
-                        setPartnerLogo3FileSuccess(true);
-                    }else{
-                        setPartnerLogo3FileSuccess(false);
-                    }
-                    if (setterKey === "partnerLogo4") {
-                        setPartnerLogo4FileSuccess(true);
-                    }else{
-                        setPartnerLogo4FileSuccess(false);
-                    }
-                    if (setterKey === "partnerLogo5") {
-                        setPartnerLogo5FileSuccess(true);
-                    }else{
-                        setPartnerLogo5FileSuccess(false);
-                    }
-                }
-
-                switch(setterKey){
-                    case "ENBanner":
-                        setENBannerUrl(finalUrl);
-                        break;
-                    case "ITBanner":
-                        setITBannerUrl(finalUrl);
-                        break;
-                    case "partnerLogo1":
-                        setPartnerLogo1Url(finalUrl);
-                        break;
-                    case "partnerLogo2":
-                        setPartnerLogo2Url(finalUrl);
-                        break;
-                    case "partnerLogo3":
-                        setPartnerLogo3Url(finalUrl);
-                        break;
-                    case "partnerLogo4":
-                        setPartnerLogo4Url(finalUrl);
-                        break;
-                    case "partnerLogo5":
-                        setPartnerLogo5Url(finalUrl);
-                        break;
-                    case "avatar1":
-                        setAvatar1Url(finalUrl);
-                        break;
-                    case "avatar2":
-                        setAvatar2Url(finalUrl);
-                        break;
-                    case "avatar3":
-                        setAvatar3Url(finalUrl);
-                        break;
-                    case "avatar4":
-                        setAvatar4Url(finalUrl);
-                        break;
-                    case "avatar5":
-                        setAvatar5Url(finalUrl);
-                        break;
-                    case "avatar6":
-                        setAvatar6Url(finalUrl);
-                        break;
-                    case "avatar7":
-                        setAvatar7Url(finalUrl);
-                        break;
-                    case "avatar8":
-                        setAvatar8Url(finalUrl);
-                        break;
-                    default:
-                        console.log("None of the above cases worked!");
-                }
-            });
-        } catch {
-            if (setterKey === "ENBanner") {
-                setPicFileENBannerUploadError("Failed to upload file " + setterKey);
-            } else if (setterKey ===  "ITBanner") {
-                setPicFileITBannerUploadError("Failed to upload file " + setterKey);
-            } else if (setterKey ===  "partnerLogo1") {
-                setPicFilePartnerLogoUploadError1("Failed to upload file " + setterKey);
-            } else if (setterKey ===  "partnerLogo2") {
-                setPicFilePartnerLogoUploadError2("Failed to upload file " + setterKey);
-            } else if (setterKey ===  "partnerLogo3") {
-                setPicFilePartnerLogoUploadError3("Failed to upload file " + setterKey);
-            } else if (setterKey === "partnerLogo4") {
-                setPicFilePartnerLogoUploadError4("Failed to upload file " + setterKey);
-            } else if (setterKey === "partnerLogo5") {
-                setPicFilePartnerLogoUploadError5("Failed to upload file " + setterKey);
-            } else if (setterKey === "avatar1") {
-                setPicFileAvatarUploadError1("Failed to upload file " + setterKey);
-            } else if (setterKey === "avatar2") {
-                setPicFileAvatarUploadError2("Failed to upload file " + setterKey);
-            } else if (setterKey === "avatar3") {
-                setPicFileAvatarUploadError3("Failed to upload file " + setterKey);
-            } else if (setterKey === "avatar4") {
-                setPicFileAvatarUploadError4("Failed to upload file " + setterKey);
-            } else if (setterKey === "avatar5") {
-                setPicFileAvatarUploadError5("Failed to upload file " + setterKey);
-            } else if (setterKey === "avatar6") {
-                setPicFileAvatarUploadError6("Failed to upload file " + setterKey);
-            } else if (setterKey === "avatar7") {
-                setPicFileAvatarUploadError7("Failed to upload file " + setterKey);
-            } else if (setterKey === "avatar8") {
-                setPicFileAvatarUploadError8("Failed to upload file " + setterKey);
-            }
-        }
-        //setLoading(false);
-    }
-
-    const fileUploadEventListener = (e, setterKey) => {
+    const ENBannerFileUploadEventListener = (e) => {
         let uploadedFile = e.target.files[0];
         if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-            if (setterKey === "ENBanner") {
-                setUploadedPicFileENBanner(uploadedFile);
-                putFile(uploadedPicFileENBanner, setterKey).then(()=>console.log("putFile() worked"));
-            } else if (setterKey === "ITBanner") {
-                setUploadedPicFileITBanner(uploadedFile);
-                putFile(uploadedPicFileITBanner, setterKey).then(()=>console.log("putFile() worked"));
-            } else if (setterKey ===  "partnerLogo1") {
-                setUploadedPicFilePartnerLogo1(uploadedFile);
-                putFile(uploadedPicFilePartnerLogo1, setterKey).then(()=>console.log("putFile() worked"));
-            } else if (setterKey === "partnerLogo2") {
-                setUploadedPicFilePartnerLogo2(uploadedFile);
-                putFile(uploadedPicFilePartnerLogo2, setterKey).then(()=>console.log("putFile() worked"));
-            } else if (setterKey === "partnerLogo3") {
-                setUploadedPicFilePartnerLogo3(uploadedFile);
-                putFile(uploadedPicFilePartnerLogo3, setterKey).then(()=>console.log("putFile() worked"));
-            } else if (setterKey === "partnerLogo4") {
-                setUploadedPicFilePartnerLogo4(uploadedFile);
-                putFile(uploadedPicFilePartnerLogo4, setterKey).then(()=>console.log("putFile() worked"));
-            } else if (setterKey === "partnerLogo5") {
-                setUploadedPicFilePartnerLogo5(uploadedFile);
-                putFile(uploadedPicFilePartnerLogo5, setterKey).then(()=>console.log("putFile() worked"));
-            } else if (setterKey === "avatar1") {
-                setUploadedPicFileAvatar1(uploadedFile);
-                putFile(uploadedPicFileAvatar1, setterKey).then(()=>console.log("putFile() worked"));
-            } else if (setterKey === "avatar2") {
-                setUploadedPicFileAvatar2(uploadedFile);
-                putFile(uploadedPicFileAvatar2, setterKey).then(()=>console.log("putFile() worked"));
-            } else if (setterKey === "avatar3") {
-                setUploadedPicFileAvatar3(uploadedFile);
-                putFile(uploadedPicFileAvatar3, setterKey).then(()=>console.log("putFile() worked"));
-            } else if (setterKey === "avatar4") {
-                setUploadedPicFileAvatar4(uploadedFile);
-                putFile(uploadedPicFileAvatar4, setterKey).then(()=>console.log("putFile() worked"));
-            } else if (setterKey === "avatar5") {
-                setUploadedPicFileAvatar5(uploadedFile);
-                putFile(uploadedPicFileAvatar5, setterKey).then(()=>console.log("putFile() worked"));
-            } else if (setterKey === "avatar6") {
-                setUploadedPicFileAvatar6(uploadedFile);
-                putFile(uploadedPicFileAvatar6, setterKey).then(()=>console.log("putFile() worked"));
-            } else if (setterKey === "avatar7") {
-                setUploadedPicFileAvatar7(uploadedFile);
-                putFile(uploadedPicFileAvatar7, setterKey).then(()=>console.log("putFile() worked"));
-            } else if (setterKey === "avatar8") {
-                setUploadedPicFileAvatar8(uploadedFile);
-                putFile(uploadedPicFileAvatar8, setterKey).then(()=>console.log("putFile() worked"));
+            setUploadedPicFileENBanner(uploadedFile);
+
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFileENBannerUploadError("");
+                    setPicFileENFileTypeError("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setENBannerFileSuccess(true):setENBannerFileSuccess(false);
+                        setENBannerUrl(finalUrl);
+                    });
+                } catch {
+                    setPicFileENBannerUploadError("Failed to upload file");
+                }
             }
+            putFile(uploadedFile).then(()=>console.log(ENBannerUrl));
         } else {
-            if (setterKey === "ENBanner") {
-                setPicFileENFileTypeError('Please select an image file (png or jpg)');
-                uploadedPicFileENBanner('');
-            } else if (setterKey === "ITBanner") {
-                setPicFileITFileTypeError('Please select an image file (png or jpg)');
-                uploadedPicFileITBanner('');
-            } else if (setterKey ===  "partnerLogo1") {
-                setPicFilePartnerLogoFileTypeError1('Please select an image file (png or jpg)');
-                setUploadedPicFilePartnerLogo1('');
-            } else if (setterKey === "partnerLogo2") {
-                setPicFilePartnerLogoFileTypeError2('Please select an image file (png or jpg)');
-                setUploadedPicFilePartnerLogo2('');
-            } else if (setterKey === "partnerLogo3") {
-                setPicFilePartnerLogoFileTypeError3('Please select an image file (png or jpg)');
-                setUploadedPicFilePartnerLogo3('');
-            } else if (setterKey === "partnerLogo4") {
-                setPicFilePartnerLogoFileTypeError4('Please select an image file (png or jpg)');
-                setUploadedPicFilePartnerLogo4('');
-            } else if (setterKey === "partnerLogo5") {
-                setPicFilePartnerLogoFileTypeError5('Please select an image file (png or jpg)');
-                setUploadedPicFilePartnerLogo5('');
-            } else if (setterKey === "avatar1") {
-                setPicFileAvatarFileTypeError1('Please select an image file (png or jpg)');
-                setUploadedPicFileAvatar1('');
-            } else if (setterKey === "avatar2") {
-                setPicFileAvatarFileTypeError2('Please select an image file (png or jpg)');
-                setUploadedPicFileAvatar2('');
-            } else if (setterKey === "avatar3") {
-                setPicFileAvatarFileTypeError3('Please select an image file (png or jpg)');
-                setUploadedPicFileAvatar3('');
-            } else if (setterKey === "avatar4") {
-                setPicFileAvatarFileTypeError4('Please select an image file (png or jpg)');
-                setUploadedPicFileAvatar4('');
-            } else if (setterKey === "avatar5") {
-                setPicFileAvatarFileTypeError5('Please select an image file (png or jpg)');
-                setUploadedPicFileAvatar5('');
-            } else if (setterKey === "avatar6") {
-                setPicFileAvatarFileTypeError6('Please select an image file (png or jpg)');
-                setUploadedPicFileAvatar6('');
-            } else if (setterKey === "avatar7") {
-                setPicFileAvatarFileTypeError7('Please select an image file (png or jpg)');
-                setUploadedPicFileAvatar7('');
-            } else if (setterKey === "avatar8") {
-                setPicFileAvatarFileTypeError8('Please select an image file (png or jpg)');
-                setUploadedPicFileAvatar8('');
-            }
+            setUploadedPicFileENBanner('');
+            setPicFileENFileTypeError('Please select an image file (png or jpg)');
         }
     };
+
+    const ITBannerFileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setUploadedPicFileITBanner(uploadedFile);
+
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFileITBannerUploadError("");
+                    setPicFileITFileTypeError("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setITBannerFileSuccess(true):setITBannerFileSuccess(false);
+                        setITBannerUrl(finalUrl);
+                    });
+                } catch {
+                    setPicFileITBannerUploadError("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(ITBannerUrl));
+        } else {
+            setUploadedPicFileITBanner('');
+            setPicFileITFileTypeError('Please select an image file (png or jpg)');
+        }
+    };
+
+    const avatar1FileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setUploadedPicFileAvatar1(uploadedFile);
+
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFileAvatarUploadError1("");
+                    setPicFileAvatarFileTypeError1("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setAvatar1FileSuccess(true):setAvatar1FileSuccess(false);
+                        setAvatar1Url(finalUrl);
+                    });
+                } catch {
+                    setPicFileAvatarUploadError1("Failed to upload file");
+                }
+
+            }
+            putFile(uploadedFile).then(()=>console.log(avatar1Url));
+        } else {
+            setUploadedPicFileAvatar1('');
+            setPicFileAvatarFileTypeError1('Please select an image file (png or jpg)');
+        }
+    };
+
+    const avatar2FileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setUploadedPicFileAvatar2(uploadedFile);
+
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFileAvatarUploadError2("");
+                    setPicFileAvatarFileTypeError2("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setAvatar2FileSuccess(true):setAvatar2FileSuccess(false);
+                        setAvatar2Url(finalUrl);
+                    });
+                } catch {
+                    setPicFileAvatarUploadError2("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(avatar2Url));
+        } else {
+            setUploadedPicFileAvatar2('');
+            setPicFileAvatarFileTypeError2('Please select an image file (png or jpg)');
+        }
+    };
+
+    const avatar3FileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setUploadedPicFileAvatar3(uploadedFile);
+
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFileAvatarUploadError3("");
+                    setPicFileAvatarFileTypeError3("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setAvatar3FileSuccess(true):setAvatar3FileSuccess(false);
+                        setAvatar3Url(finalUrl);
+                    });
+                } catch {
+                    setPicFileAvatarUploadError3("Failed to upload file");
+                }
+
+            }
+            putFile(uploadedFile).then(()=>console.log(avatar3Url));
+        } else {
+            setUploadedPicFileAvatar3('');
+            setPicFileAvatarFileTypeError3('Please select an image file (png or jpg)');
+        }
+    };
+
+    const avatar4FileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setUploadedPicFileAvatar4(uploadedFile);
+
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFileAvatarUploadError4("");
+                    setPicFileAvatarFileTypeError4("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setAvatar4FileSuccess(true):setAvatar4FileSuccess(false);
+                        setAvatar4Url(finalUrl);
+                    });
+                } catch {
+                    setPicFileAvatarUploadError4("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(avatar4Url));
+        } else {
+            setUploadedPicFileAvatar4('');
+            setPicFileAvatarFileTypeError4('Please select an image file (png or jpg)');
+        }
+    };
+
+    const avatar5FileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setUploadedPicFileAvatar5(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFileAvatarUploadError5("");
+                    setPicFileAvatarFileTypeError5("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setAvatar5FileSuccess(true):setAvatar5FileSuccess(false);
+                        setAvatar5Url(finalUrl);
+                    });
+                } catch {
+                    setPicFileAvatarUploadError5("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(avatar5Url));
+        } else {
+            setUploadedPicFileAvatar5('');
+            setPicFileAvatarFileTypeError5('Please select an image file (png or jpg)');
+        }
+    };
+
+    const avatar6FileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setUploadedPicFileAvatar6(uploadedFile);
+
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFileAvatarUploadError6("");
+                    setPicFileAvatarFileTypeError6("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setAvatar6FileSuccess(true):setAvatar6FileSuccess(false);
+                        setAvatar6Url(finalUrl);
+                    });
+                } catch {
+                    setPicFileAvatarUploadError6("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(avatar6Url));
+        } else {
+            setUploadedPicFileAvatar6('');
+            setPicFileAvatarFileTypeError6('Please select an image file (png or jpg)');
+        }
+    };
+
+    const avatar7FileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setUploadedPicFileAvatar7(uploadedFile);
+
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFileAvatarUploadError7("");
+                    setPicFileAvatarFileTypeError7("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setAvatar7FileSuccess(true):setAvatar7FileSuccess(false);
+                        setAvatar7Url(finalUrl);
+                    });
+                } catch {
+                    setPicFileAvatarUploadError7("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(avatar7Url));
+        } else {
+            setUploadedPicFileAvatar7('');
+            setPicFileAvatarFileTypeError7('Please select an image file (png or jpg)');
+        }
+    };
+
+    const avatar8FileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setUploadedPicFileAvatar8(uploadedFile);
+
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFileAvatarUploadError8("");
+                    setPicFileAvatarFileTypeError8("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setAvatar8FileSuccess(true):setAvatar8FileSuccess(false);
+                        setAvatar8Url(finalUrl);
+                    });
+                } catch {
+                    setPicFileAvatarUploadError8("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(avatar8Url));
+        } else {
+            setUploadedPicFileAvatar8('');
+            setPicFileAvatarFileTypeError8('Please select an image file (png or jpg)');
+        }
+    };
+
+    const partnerLogo1FileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setUploadedPicFilePartnerLogo1(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFilePartnerLogoUploadError1("");
+                    setPicFilePartnerLogoFileTypeError1("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setPartnerLogo1FileSuccess(true):setPartnerLogo1FileSuccess(false);
+                        setPartnerLogo1Url(finalUrl);
+                    });
+                } catch {
+                    setPicFilePartnerLogoUploadError1("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(partnerLogo1Url));
+        } else {
+            setUploadedPicFilePartnerLogo1('');
+            setPicFilePartnerLogoFileTypeError1('Please select an image file (png or jpg)');
+        }
+    };
+
+    const partnerLogo2FileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setUploadedPicFilePartnerLogo2(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFilePartnerLogoUploadError2("");
+                    setPicFilePartnerLogoFileTypeError2("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setPartnerLogo2FileSuccess(true):setPartnerLogo2FileSuccess(false);
+                        setPartnerLogo2Url(finalUrl);
+                    });
+                } catch {
+                    setPicFilePartnerLogoUploadError2("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(partnerLogo2Url));
+        } else {
+            setUploadedPicFilePartnerLogo2('');
+            setPicFilePartnerLogoFileTypeError2('Please select an image file (png or jpg)');
+        }
+    };
+
+    const partnerLogo3FileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setUploadedPicFilePartnerLogo3(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFilePartnerLogoUploadError3("");
+                    setPicFilePartnerLogoFileTypeError3("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setPartnerLogo3FileSuccess(true):setPartnerLogo3FileSuccess(false);
+                        setPartnerLogo3Url(finalUrl);
+                    });
+                } catch {
+                    setPicFilePartnerLogoUploadError3("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(partnerLogo3Url));
+        } else {
+            setUploadedPicFilePartnerLogo3('');
+            setPicFilePartnerLogoFileTypeError3('Please select an image file (png or jpg)');
+        }
+    };
+
+    const partnerLogo4FileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setUploadedPicFilePartnerLogo4(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFilePartnerLogoUploadError4("");
+                    setPicFilePartnerLogoFileTypeError4("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setPartnerLogo4FileSuccess(true):setPartnerLogo4FileSuccess(false);
+                        setPartnerLogo4Url(finalUrl);
+                    });
+                } catch {
+                    setPicFilePartnerLogoUploadError4("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(partnerLogo4Url));
+        } else {
+            setUploadedPicFilePartnerLogo4('');
+            setPicFilePartnerLogoFileTypeError4('Please select an image file (png or jpg)');
+        }
+    };
+
+    const partnerLogo5FileUploadEventListener = (e) => {
+        let uploadedFile = e.target.files[0];
+        if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+            setUploadedPicFilePartnerLogo5(uploadedFile);
+            async function putFile(uploadedFile){
+                e.preventDefault();
+                try {
+                    setPicFilePartnerLogoUploadError5("");
+                    setPicFilePartnerLogoFileTypeError5("");
+                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    },  (err) => {
+                        window.alert(err);
+                    }, async()=>{
+                        const finalUrl = await storageRef.getDownloadURL();
+                        finalUrl!==undefined?setPartnerLogo5FileSuccess(true):setPartnerLogo5FileSuccess(false);
+                        setPartnerLogo5Url(finalUrl);
+                    });
+                } catch {
+                    setPicFilePartnerLogoUploadError5("Failed to upload file");
+                }
+            }
+            putFile(uploadedFile).then(()=>console.log(partnerLogo5Url));
+        } else {
+            setUploadedPicFilePartnerLogo5('');
+            setPicFilePartnerLogoFileTypeError5('Please select an image file (png or jpg)');
+        }
+    };
+
 
     const clearInput = () => {
         const storageRef1 = uploadedPicFileENBanner?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFileENBanner.name):"";
@@ -667,7 +869,6 @@ function CMSAboutUsPageEdit() {
     const writeToFBCallback = () => {
         const collectionRef = projectFirestore.collection('web-app-cms').doc("aboutUsPage");
 
-        // if(loading === false) {
             collectionRef.set(
                 {
                     "banner": {
@@ -788,7 +989,6 @@ function CMSAboutUsPageEdit() {
                 .catch((error) => {
                     console.error(error.code + " " + error.message + "" + error.details);
                 });
-        // }
     }
 
     return (
@@ -860,20 +1060,20 @@ function CMSAboutUsPageEdit() {
                                     {/*banner*/}
                                     <div>
                                         Current banner1:
-                                        <img style={{width: "25%", height: "auto"}} src={ITBannerUrl} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldITBannerUrl} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "ITBanner")}
+                                            onChange={ITBannerFileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
                                         { picFileITBannerUploadError!=="" && <div className="error">{ picFileITBannerUploadError }</div>}
                                         { picFileITFileTypeError!=="" && <div className="error">{ picFileITFileTypeError }</div> }
-                                        {ITBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITBannerUrl} alt=""/></div> }
+                                        { ITBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITBannerUrl} alt=""/></div> }
                                     </div>
 
                                     <label className='form-article__label'>
@@ -882,7 +1082,7 @@ function CMSAboutUsPageEdit() {
                                             className='form-article__input'
                                             rows='2'
                                             name="countent"
-                                            value={ITMissionText}
+                                            value={ITMissionTitle}
                                             onChange={
                                                 (e)=>setITMissionTitle(e.target.value)
                                             }
@@ -930,15 +1130,15 @@ function CMSAboutUsPageEdit() {
                                         />
                                     </label>
                                     <div>
-                                        Current avarat:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar1Url} alt=""/>
+                                        Current avatar:
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar1Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar1")}
+                                            onChange={avatar1FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
@@ -974,14 +1174,14 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar2Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar2Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar2")}
+                                            onChange={avatar2FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
@@ -1017,14 +1217,14 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar3Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar3")}
+                                            onChange={avatar3FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
@@ -1060,14 +1260,14 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar4Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar4Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar4")}
+                                            onChange={avatar4FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
@@ -1103,14 +1303,14 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar5Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar5Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar5")}
+                                            onChange={avatar5FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
@@ -1146,14 +1346,14 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar6Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar6Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar6")}
+                                            onChange={avatar6FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
@@ -1189,14 +1389,14 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar7Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar7Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar7")}
+                                            onChange={avatar7FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
@@ -1232,14 +1432,14 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar8Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar8Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar8")}
+                                            onChange={avatar8FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
@@ -1338,12 +1538,16 @@ function CMSAboutUsPageEdit() {
                                     </label>
 
                                     {/*banner*/}
+                                    <div>
+                                        Current banner:
+                                        <img style={{width: "25%", height: "auto"}} src={oldENBannerUrl} alt=""/>
+                                    </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "ENBanner")}
+                                            onChange={ENBannerFileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
@@ -1395,18 +1599,18 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar1Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar1Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar1")}
+                                            onChange={avatar1FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
-                                        { uploadedPicFileAvatar1!=="" && <div className="error">{ uploadedPicFileAvatar1}</div>}
+                                        { picFileAvatarFileTypeError1!=="" && <div className="error">{ picFileAvatarFileTypeError1}</div>}
                                         { picFileAvatarUploadError1!=="" && <div className="error">{ picFileAvatarUploadError1 }</div> }
                                         {avatar1FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar1Url} alt=""/></div> }
                                     </div>
@@ -1438,18 +1642,18 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar2Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar2Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar2")}
+                                            onChange={avatar2FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
-                                        { uploadedPicFileAvatar2!=="" && <div className="error">{ uploadedPicFileAvatar2 }</div>}
+                                        { picFileAvatarUploadError2!=="" && <div className="error">{ picFileAvatarUploadError2 }</div>}
                                         { picFileAvatarFileTypeError2!=="" && <div className="error">{ picFileAvatarFileTypeError2 }</div> }
                                         {avatar2FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar2Url} alt=""/></div> }
                                     </div>
@@ -1481,18 +1685,18 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar3Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar3")}
+                                            onChange={avatar3FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
-                                        { uploadedPicFileAvatar3!=="" && <div className="error">{ uploadedPicFileAvatar3 }</div>}
+                                        { picFileAvatarUploadError3!=="" && <div className="error">{ picFileAvatarUploadError3 }</div>}
                                         { picFileAvatarFileTypeError3!=="" && <div className="error">{ picFileAvatarFileTypeError3 }</div> }
                                         {avatar3FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/></div> }
                                     </div>
@@ -1524,18 +1728,18 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar4Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar4Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar4")}
+                                            onChange={avatar4FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
-                                        { uploadedPicFileAvatar4!=="" && <div className="error">{ uploadedPicFileAvatar4 }</div>}
+                                        { picFileAvatarUploadError4!=="" && <div className="error">{ picFileAvatarUploadError4 }</div>}
                                         { picFileAvatarFileTypeError4!=="" && <div className="error">{ picFileAvatarFileTypeError4 }</div> }
                                         {avatar4FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar4Url} alt=""/></div> }
                                     </div>
@@ -1567,18 +1771,18 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar5Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar5Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar5")}
+                                            onChange={avatar5FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
-                                        { uploadedPicFileAvatar5!=="" && <div className="error">{ uploadedPicFileAvatar5 }</div>}
+                                        { picFileAvatarUploadError5!=="" && <div className="error">{ picFileAvatarUploadError5 }</div>}
                                         { picFileAvatarFileTypeError5!=="" && <div className="error">{ picFileAvatarFileTypeError5 }</div> }
                                         {avatar5FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar5Url} alt=""/></div> }
                                     </div>
@@ -1610,18 +1814,18 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar6Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar6Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar6")}
+                                            onChange={avatar6FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
-                                        { uploadedPicFileAvatar6!=="" && <div className="error">{ uploadedPicFileAvatar6 }</div>}
+                                        { picFileAvatarUploadError6!=="" && <div className="error">{ picFileAvatarUploadError6 }</div>}
                                         { picFileAvatarFileTypeError6!=="" && <div className="error">{ picFileAvatarFileTypeError6 }</div> }
                                         {avatar6FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar6Url} alt=""/></div> }
                                     </div>
@@ -1653,18 +1857,18 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar7Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar7Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
                                             className='form-article__btn visually-hidden'
                                             type="file"
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar7")}
+                                            onChange={avatar7FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
-                                        { uploadedPicFileAvatar7!=="" && <div className="error">{ uploadedPicFileAvatar7}</div>}
+                                        { picFileAvatarUploadError7!=="" && <div className="error">{ picFileAvatarUploadError7}</div>}
                                         { picFileAvatarFileTypeError7!=="" && <div className="error">{ picFileAvatarFileTypeError7 }</div> }
                                         {avatar7FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar7Url} alt=""/></div> }
                                     </div>
@@ -1696,7 +1900,7 @@ function CMSAboutUsPageEdit() {
                                     </label>
                                     <div>
                                         Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={avatar8Url} alt=""/>
+                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar8Url} alt=""/>
                                     </div>
                                     <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                         <input
@@ -1704,11 +1908,11 @@ function CMSAboutUsPageEdit() {
                                             type="file"
 
                                             placeholder='file'
-                                            onChange={(e)=>fileUploadEventListener(e, "Avatar8")}
+                                            onChange={avatar8FileUploadEventListener}
                                         />
                                     </label>
                                     <div className="output">
-                                        { uploadedPicFileAvatar8!=="" && <div className="error">{ uploadedPicFileAvatar8 }</div>}
+                                        { picFileAvatarUploadError8!=="" && <div className="error">{ picFileAvatarUploadError8 }</div>}
                                         { picFileAvatarFileTypeError8!=="" && <div className="error">{ picFileAvatarFileTypeError8 }</div> }
                                         {avatar8FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar8Url} alt=""/></div> }
                                     </div>
@@ -1774,7 +1978,7 @@ function CMSAboutUsPageEdit() {
                             {/*1*/}
                             <div>
                                 Current Logo 1:
-                                <img style={{width: "25%", height: "auto"}} src={partnerLogo1Url} alt=""/>
+                                <img style={{width: "25%", height: "auto"}} src={oldPartnerLogo1Url} alt=""/>
                             </div>
                             <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Logo 1
                                 <input
@@ -1782,7 +1986,7 @@ function CMSAboutUsPageEdit() {
                                     type="file"
 
                                     placeholder='file'
-                                    onChange={(e)=>fileUploadEventListener(e, "setPartner1Url")}
+                                    onChange={partnerLogo1FileUploadEventListener}
                                 />
                             </label>
                             <div className="output">
@@ -1794,7 +1998,7 @@ function CMSAboutUsPageEdit() {
                             {/*2*/}
                             <div>
                                 Current Logo 2:
-                                <img style={{width: "25%", height: "auto"}} src={partnerLogo2Url} alt=""/>
+                                <img style={{width: "25%", height: "auto"}} src={oldPartnerLogo2Url} alt=""/>
                             </div>
                             <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Logo 2
                                 <input
@@ -1802,7 +2006,7 @@ function CMSAboutUsPageEdit() {
                                     type="file"
 
                                     placeholder='file'
-                                    onChange={(e)=>fileUploadEventListener(e, "partner2Url")}
+                                    onChange={partnerLogo2FileUploadEventListener}
                                 />
                             </label>
                             <div className="output">
@@ -1814,7 +2018,7 @@ function CMSAboutUsPageEdit() {
                             {/*3*/}
                             <div>
                                 Current Logo 3:
-                                <img style={{width: "25%", height: "auto"}} src={partnerLogo3Url} alt=""/>
+                                <img style={{width: "25%", height: "auto"}} src={oldPartnerLogo3Url} alt=""/>
                             </div>
                             <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Logo 3
                                 <input
@@ -1822,7 +2026,7 @@ function CMSAboutUsPageEdit() {
                                     type="file"
 
                                     placeholder='file'
-                                    onChange={(e)=>fileUploadEventListener(e, "partner3Url")}
+                                    onChange={partnerLogo3FileUploadEventListener}
                                 />
                             </label>
                             <div className="output">
@@ -1834,7 +2038,7 @@ function CMSAboutUsPageEdit() {
                             {/*4*/}
                             <div>
                                 Current Logo 4:
-                                <img style={{width: "25%", height: "auto"}} src={partnerLogo4Url} alt=""/>
+                                <img style={{width: "25%", height: "auto"}} src={oldPartnerLogo4Url} alt=""/>
                             </div>
                             <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Logo 4
                                 <input
@@ -1842,7 +2046,7 @@ function CMSAboutUsPageEdit() {
                                     type="file"
 
                                     placeholder='file'
-                                    onChange={(e)=>fileUploadEventListener(e, "partner4Url")}
+                                    onChange={partnerLogo4FileUploadEventListener}
                                 />
                             </label>
                             <div className="output">
@@ -1854,7 +2058,7 @@ function CMSAboutUsPageEdit() {
                             {/*5*/}
                             <div>
                                 Current Logo 5:
-                                <img style={{width: "25%", height: "auto"}} src={partnerLogo5Url} alt=""/>
+                                <img style={{width: "25%", height: "auto"}} src={oldPartnerLogo5Url} alt=""/>
                             </div>
                             <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Logo 5
                                 <input
@@ -1862,7 +2066,7 @@ function CMSAboutUsPageEdit() {
                                     type="file"
 
                                     placeholder='file'
-                                    onChange={(e)=>fileUploadEventListener(e, "partner5Url")}
+                                    onChange={partnerLogo5FileUploadEventListener}
                                 />
                             </label>
                             <div className="output">
@@ -1897,3 +2101,22 @@ function CMSAboutUsPageEdit() {
 }
 
 export default CMSAboutUsPageEdit;
+
+
+//For Devs keys list:
+// "ENBanner"
+// "ITBanner"
+// "partnerLogo1"
+// "partnerLogo2"
+// "partnerLogo3"
+// "partnerLogo4"
+// "partnerLogo5"
+// "avatar1"
+// "avatar2"
+// "avatar3"
+// "avatar4"
+// "avatar5"
+// "avatar6"
+// "avatar7"
+// "avatar8"
+

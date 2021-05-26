@@ -19,6 +19,7 @@ const LoginSignUpForm = () => {
     emailError,
     passwordError,
     setSignUpFormUserUploadedFile
+
   } = useAuthContext();
 
  const fileUploadEventListener = (e) => {
@@ -73,6 +74,9 @@ const LoginSignUpForm = () => {
                   Don't have an account?
                   <span onClick={()=>setHasAccount(!hasAccount)}>Sign up</span>
                 </p>
+
+
+
               </>
              ):(
              <>
