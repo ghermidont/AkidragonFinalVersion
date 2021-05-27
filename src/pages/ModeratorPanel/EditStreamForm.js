@@ -187,14 +187,14 @@ export default function EditStreamForm(){
                        >Submit
                        </button>
 
-                       <button
-                            className="form-article__btn"
-                            onClick={()=> {
-                                clearInput();
-                                history.push("/ManageStreamsPage", {from: "/ModifyStreamsForm"});
-                            }}
-                       >Cancel
-                       </button>
+                       {/*<button*/}
+                       {/*     className="form-article__btn"*/}
+                       {/*     onClick={()=> {*/}
+                       {/*         clearInput();*/}
+                       {/*         history.push("/ManageStreamsPage", {from: "/ModifyStreamsForm"});*/}
+                       {/*     }}*/}
+                       {/*>Cancel*/}
+                       {/*</button>*/}
 
                     </div>
                 </form>

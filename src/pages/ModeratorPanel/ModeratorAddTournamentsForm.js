@@ -567,12 +567,12 @@ export default function ModeratorAddTournamentsForm() {
           >
             Submit
           </button>
-          <button style={{marginTop: "1em"}}
-              className="form-article__btn"
-              onClick={clearInput}
-          >
-            Cancel
-          </button>
+          {/*<button style={{marginTop: "1em"}}*/}
+          {/*    className="form-article__btn"*/}
+          {/*    onClick={clearInput}*/}
+          {/*>*/}
+          {/*  Cancel*/}
+          {/*</button>*/}
         </form>
       </div>
     </>

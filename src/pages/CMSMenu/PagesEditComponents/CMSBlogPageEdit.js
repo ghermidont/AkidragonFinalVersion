@@ -177,13 +177,13 @@ function CMSBlogPageEdit() {
                                 Publish
                             </button>
 
-                            <button
-                                ref={cancelBtnRef}
-                                className="form-article__btn"
-                                onClick={() => history.push("/UserProfilePage")}
-                            >
-                                Cancel
-                            </button>
+                            {/*<button*/}
+                            {/*    ref={cancelBtnRef}*/}
+                            {/*    className="form-article__btn"*/}
+                            {/*    onClick={() => history.push("/UserProfilePage")}*/}
+                            {/*>*/}
+                            {/*    Cancel*/}
+                            {/*</button>*/}
                         </div>
                     </div>
                 </section>

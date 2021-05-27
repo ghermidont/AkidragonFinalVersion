@@ -2085,13 +2085,13 @@ function CMSAboutUsPageEdit() {
                                 Publish
                             </button>
 
-                            <button
-                                ref={cancelBtnRef}
-                                className="form-article__btn"
-                                onClick={()=>clearInput()}
-                            >
-                                Cancel
-                            </button>
+                            {/*<button*/}
+                            {/*    ref={cancelBtnRef}*/}
+                            {/*    className="form-article__btn"*/}
+                            {/*    onClick={()=>clearInput()}*/}
+                            {/*>*/}
+                            {/*    Cancel*/}
+                            {/*</button>*/}
                         </div>
                     </div>
                 </section>

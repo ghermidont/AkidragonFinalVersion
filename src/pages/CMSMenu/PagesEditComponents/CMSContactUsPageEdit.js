@@ -233,13 +233,13 @@ function CMSContactUpPageEdit() {
                                 Publish
                             </button>
 
-                            <button
-                                ref={cancelBtnRef}
-                                className="form-article__btn"
-                                onClick={() => history.push("/ContactUsPage")}
-                            >
-                                Cancel
-                            </button>
+                            {/*<button*/}
+                            {/*    ref={cancelBtnRef}*/}
+                            {/*    className="form-article__btn"*/}
+                            {/*    onClick={() => history.push("/ContactUsPage")}*/}
+                            {/*>*/}
+                            {/*    Cancel*/}
+                            {/*</button>*/}
                         </div>
                     </div>
                 </section>

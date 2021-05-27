@@ -120,48 +120,10 @@ function AboutUsPage() {
         setENBannerUrl(doc.banner.en);
         setITBannerUrl(doc.banner.it);
 
-        setAvatar1Url(doc.teamMembers.member1.photo);
-        setAvatar2Url(doc.teamMembers.member2.photo);
-        setAvatar3Url(doc.teamMembers.member3.photo);
-        setAvatar4Url(doc.teamMembers.member4.photo);
-        setAvatar5Url(doc.teamMembers.member5.photo);
-        setAvatar6Url(doc.teamMembers.member6.photo);
-        setAvatar7Url(doc.teamMembers.member7.photo);
-        setAvatar8Url(doc.teamMembers.member8.photo);
-
-        setPartnerLogo1Url(doc.partnersLogos.partner1);
-        setPartnerLogo2Url(doc.partnersLogos.partner2);
-        setPartnerLogo3Url(doc.partnersLogos.partner3);
-        setPartnerLogo4Url(doc.partnersLogos.partner4);
-        setPartnerLogo5Url(doc.partnersLogos.partner5);
-
-        setOldENBannerUrl(doc.banner.en);
-        setOldITBannerUrl(doc.banner.it);
-
-        setOldAvatar1Url(doc.teamMembers.member1.photo);
-        setOldAvatar2Url(doc.teamMembers.member2.photo);
-        setOldAvatar3Url(doc.teamMembers.member3.photo);
-        setOldAvatar4Url(doc.teamMembers.member4.photo);
-        setOldAvatar5Url(doc.teamMembers.member5.photo);
-        setOldAvatar6Url(doc.teamMembers.member6.photo);
-        setOldAvatar7Url(doc.teamMembers.member7.photo);
-        setOldAvatar8Url(doc.teamMembers.member8.photo);
-
-        setOldPartnerLogo1Url(doc.partnersLogos.partner1);
-        setOldPartnerLogo2Url(doc.partnersLogos.partner2);
-        setOldPartnerLogo3Url(doc.partnersLogos.partner3);
-        setOldPartnerLogo4Url(doc.partnersLogos.partner4);
-        setOldPartnerLogo5Url(doc.partnersLogos.partner5);
-
         setITMissionTitle(doc.missionTitle.it);
         setENMissionTitle(doc.missionTitle.en);
         setITMissionText(doc.missionText.it);
         setENMissionText(doc.missionText.en);
-
-        setENCareerTitle(doc.careerTitle.en);
-        setITCareerTitle(doc.careerTitle.it);
-        setENCareerText(doc.careerText.en);
-        setITCareerText(doc.careerText.it);
 
         setENCrewTitle(doc.crewTitle.en);
         setITCrewTitle(doc.crewTitle.it);
@@ -177,6 +139,11 @@ function AboutUsPage() {
         setName6(doc.teamMembers.member6.name);
         setName7(doc.teamMembers.member7.name);
         setName8(doc.teamMembers.member8.name);
+
+        setENCareerTitle(doc.careerTitle.en);
+        setITCareerTitle(doc.careerTitle.it);
+        setENCareerText(doc.careerText.en);
+        setITCareerText(doc.careerText.it);
 
         setENPositionName1(doc.teamMembers.member1.title.en);
         setITPositionName1(doc.teamMembers.member1.title.it);
@@ -194,6 +161,21 @@ function AboutUsPage() {
         setITPositionName7(doc.teamMembers.member7.title.it);
         setENPositionName8(doc.teamMembers.member8.title.en);
         setITPositionName8(doc.teamMembers.member8.title.it);
+
+        setAvatar1Url(doc.teamMembers.member1.photo);
+        setAvatar2Url(doc.teamMembers.member2.photo);
+        setAvatar3Url(doc.teamMembers.member3.photo);
+        setAvatar4Url(doc.teamMembers.member4.photo);
+        setAvatar5Url(doc.teamMembers.member5.photo);
+        setAvatar6Url(doc.teamMembers.member6.photo);
+        setAvatar7Url(doc.teamMembers.member7.photo);
+        setAvatar8Url(doc.teamMembers.member8.photo);
+
+        setPartnerLogo1Url(doc.partnersLogos.partner1);
+        setPartnerLogo2Url(doc.partnersLogos.partner2);
+        setPartnerLogo3Url(doc.partnersLogos.partner3);
+        setPartnerLogo4Url(doc.partnersLogos.partner4);
+        setPartnerLogo5Url(doc.partnersLogos.partner5);
       })
     }
   }, [docsFromHookCMS]);
@@ -208,19 +190,9 @@ function AboutUsPage() {
               <img src={logoBig} alt="" className="about__img"/>
             </div>
             <div className="about__content">
-              <h2 className="about__title title"><span>Chi</span> siamo</h2>
+              <h2 className="about__title title">{appLanguage==="it"?ITTitle:ENTitle}</h2>
               <p className="about__text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-                blanditiis earum minus perspiciatis impedit sint, mollitia
-                omnis. Odio nesciunt placeat consequatur reprehenderit eligendi
-                iusto asperiores autem aliquam iure perferendis. Esse facere
-                nihil eveniet quas, consectetur eius possimus perspiciatis
-                aliquid fugiat? At eum libero ea dolorum incidunt eius quae
-                repellendus maiores. Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Ipsum, quaerat! In, pariatur aperiam non
-                tempora commodi fugit expedita modi minus enim sapiente
-                perspiciatis natus qui nam? Veritatis harum ipsa pariatur,
-                corporis tempora voluptas illo et veniam! Quo eos ea deserunt.
+              {appLanguage==="it"?ITTitleText:ENTitleText}
               </p>
               <button className="about__btn">
                 Scopri di piu su Gold Fox Gaming
@@ -234,18 +206,11 @@ function AboutUsPage() {
         <div className="container">
           <div className="mission__wrapper">
             <div className="mission__image">
-              <img src="https://i.pcmag.com/imagery/roundups/06PrCnKwZ4IEdw5J7cYtmlg-2.fit_lim.size_1050x.jpg" alt="" className="mission__img"/>
+              <img src={appLanguage==="it"?ITBannerUrl:ENBannerUrl} alt="" className="mission__img"/>
             </div>
-            <h2 className="mission__title title">Mission</h2>
+            <h2 className="mission__title title">{appLanguage==="it"?ITMissionTitle:ENMissionTitle}</h2>
             <p className="mission__text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-              tempora cupiditate enim aliquam blanditiis recusandae quasi quia
-              facere. Porro, magnam optio? Qui, obcaecati quaerat? In labore
-              aspernatur nobis ullam expedita assumenda, earum molestiae laborum
-              ex totam nesciunt at id eum harum consequatur, molestias sequi a
-              nemo commodi unde minus adipisci. Lorem ipsum, dolor sit amet
-              consectetur adipisicing elit. Modi blanditiis quae eaque pariatur
-              iure incidunt molestias architecto delectus! Expedita, mollitia.
+              {appLanguage==="it"?ITMissionText:ITMissionText}
             </p>
           </div>
         </div>
@@ -254,49 +219,49 @@ function AboutUsPage() {
       <section className="team">
         <div className="container">
           <div className="team__wrapper">
-            <h2 className="team__title title">Crew</h2>
+            <h2 className="team__title title">{appLanguage==="it"?ITCrewTitle:ENCrewTitle}</h2>
             <ul className="team__list">
               <li className="team__item">
-                <img src="http://static.everypixel.com/ep-pixabay/0167/6119/0102/65563/1676119010265563032-man.jpg" alt="" className="team__image"/>
-                <div className="team__name">Name</div>
-                <div className="team__position">manager</div>
+                <img src={avatar1Url} alt="" className="team__image"/>
+                <div className="team__name">{name1}</div>
+                <div className="team__position">{appLanguage==="it"?ITPositionName1:ENPositionName1}</div>
               </li>
               <li className="team__item">
-                <img src="http://static.everypixel.com/ep-pixabay/0167/6119/0102/65563/1676119010265563032-man.jpg" alt="" className="team__image"/>
-                <div className="team__name">Name</div>
-                <div className="team__position">manager</div>
+                <img src={avatar2Url} alt="" className="team__image"/>
+                <div className="team__name">{name2}</div>
+                <div className="team__position">{appLanguage==="it"?ITPositionName2:ENPositionName2}</div>
               </li>
               <li className="team__item">
-                <img src="http://static.everypixel.com/ep-pixabay/0167/6119/0102/65563/1676119010265563032-man.jpg" alt="" className="team__image"/>
-                <div className="team__name">Name</div>
-                <div className="team__position">manager</div>
+                <img src={avatar3Url} alt="" className="team__image"/>
+                <div className="team__name">{name3}</div>
+                <div className="team__position">{appLanguage==="it"?ITPositionName3:ENPositionName3}</div>
               </li>
             </ul>
             <ul className="team__list team__list--second">
               <li className="team__item">
-                <img src="http://static.everypixel.com/ep-pixabay/0167/6119/0102/65563/1676119010265563032-man.jpg" alt="" className="team__image"/>
-                <div className="team__name">Name</div>
-                <div className="team__position">manager</div>
+                <img src={avatar4Url} alt="" className="team__image"/>
+                <div className="team__name">{name4}</div>
+                <div className="team__position">{appLanguage==="it"?ITPositionName4:ENPositionName4}</div>
               </li>
               <li className="team__item">
-                <img src="http://static.everypixel.com/ep-pixabay/0167/6119/0102/65563/1676119010265563032-man.jpg" alt="" className="team__image"/>
-                <div className="team__name">Name</div>
-                <div className="team__position">manager</div>
+                <img src={avatar5Url} alt="" className="team__image"/>
+                <div className="team__name">{name5}</div>
+                <div className="team__position">{appLanguage==="it"?ITPositionName5:ENPositionName5}</div>
               </li>
               <li className="team__item">
-                <img src="http://static.everypixel.com/ep-pixabay/0167/6119/0102/65563/1676119010265563032-man.jpg" alt="" className="team__image"/>
-                <div className="team__name">Name</div>
-                <div className="team__position">manager</div>
+                <img src={avatar6Url} alt="" className="team__image"/>
+                <div className="team__name">{name6}</div>
+                <div className="team__position">{appLanguage==="it"?ITPositionName6:ENPositionName6}</div>
               </li>
               <li className="team__item">
-                <img src="http://static.everypixel.com/ep-pixabay/0167/6119/0102/65563/1676119010265563032-man.jpg" alt="" className="team__image"/>
-                <div className="team__name">Name</div>
-                <div className="team__position">manager</div>
+                <img src={avatar7Url} alt="" className="team__image"/>
+                <div className="team__name">{name7}</div>
+                <div className="team__position">{appLanguage==="it"?ITPositionName7:ENPositionName7}</div>
               </li>
               <li className="team__item">
-                <img src="http://static.everypixel.com/ep-pixabay/0167/6119/0102/65563/1676119010265563032-man.jpg" alt="" className="team__image"/>
-                <div className="team__name">Name</div>
-                <div className="team__position">manager</div>
+                <img src={avatar8Url} alt="" className="team__image"/>
+                <div className="team__name">{name8}</div>
+                <div className="team__position">{appLanguage==="it"?ITPositionName8:ENPositionName8}</div>
               </li>
             </ul>
           </div>
@@ -305,13 +270,13 @@ function AboutUsPage() {
 
       <section className="partner">
         <div className="container">
-          <h2 className="partner__title title">Partner</h2>
+          <h2 className="partner__title title">{appLanguage==="it"?ITPartnersTitle:ENPartnersTitle}</h2>
           <ul className="partner__list">
-            <li className="partner__item"><img src="https://pbs.twimg.com/profile_images/1227196756036898821/7TX7ZmQ4_400x400.jpg" alt="" className="partner__image"/></li>
-            <li className="partner__item"><img src="https://game-tournaments.com/media/logo/t43022.png?91" alt="" className="partner__image"/></li>
-            <li className="partner__item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw3nRr6HLTmOZq_uLX7ErrHyG5poYecNliwmJiRdkRGwSu2t0WvsX7iIRcqvCwq-kgEgY&usqp=CAU" alt="" className="partner__image"/></li>
-            <li className="partner__item"><img src="https://image.freepik.com/free-vector/kurokage-samurai-esport-logo_18228-1114.jpg" alt="" className="partner__image"/></li>
-            <li className="partner__item"><img src="https://game-tournaments.com/media/logo/t55124.png?85" alt="" className="partner__image"/></li>
+            <li className="partner__item"><img src={partnerLogo1Url} alt="" className="partner__image"/></li>
+            <li className="partner__item"><img src={partnerLogo2Url} alt="" className="partner__image"/></li>
+            <li className="partner__item"><img src={partnerLogo3Url} alt="" className="partner__image"/></li>
+            <li className="partner__item"><img src={partnerLogo4Url} alt="" className="partner__image"/></li>
+            <li className="partner__item"><img src={partnerLogo5Url} alt="" className="partner__image"/></li>
           </ul>
         </div>
       </section>
@@ -323,16 +288,10 @@ function AboutUsPage() {
               <img src="https://corporate.exxonmobil.com/-/media/Global/Images/New-purchases/business-meeting-breakout-discussions_supporting.jpg" alt="" className="career__img"/>
             </div>
             <div className="career__content">
-              <h2 className="career__title title">Career</h2>
-              <p className="career__text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Dolores fugit facere
-                itaque quisquam doloremque similique qui in! Unde, nam. Aliquid tempora ab porro
-                aspernatur, similique
-                molestiae ipsam natus, ullam velit earum obcaecati laboriosam iste quae. Voluptates
-                ipsum amet
-                praesentium, quibusdam nisi dolor, inventore dolore voluptate, accusamus possimus
-                dignissimos nam
-                aperiam beatae rerum explicabo. Vel recusandae eius nulla, odit reiciendis numquam?</p>
+              <h2 className="career__title title">{appLanguage==="it"?ITCareerTitle:ENCareerTitle}</h2>
+              <p className="career__text">
+              {appLanguage==="it"?ITCareerText:ENCareerText}
+              </p>
               <Link className="career__btn" to='/SubmitCvForm'>Invia il tuo CV</Link>
             </div>
           </div>

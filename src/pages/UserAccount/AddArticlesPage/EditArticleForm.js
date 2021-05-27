@@ -422,14 +422,14 @@ export default function EditArticleForm() {
                         >
                             Save changes
                         </button>
-                        <button
-                            className="form-article__btn"
-                            onClick={()=> {
-                                clearInput();
-                            }}
-                        >
-                            Cancel
-                        </button>
+                        {/*<button*/}
+                        {/*    className="form-article__btn"*/}
+                        {/*    onClick={()=> {*/}
+                        {/*        clearInput();*/}
+                        {/*    }}*/}
+                        {/*>*/}
+                        {/*    Cancel*/}
+                        {/*</button>*/}
                     </div>
 
             </section>

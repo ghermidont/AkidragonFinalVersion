@@ -253,13 +253,13 @@ function CMSContentPageEdit() {
                                 Publish
                             </button>
 
-                            <button
-                                ref={cancelBtnRef}
-                                className="form-article__btn"
-                                onClick={() => history.push("/ContentPage")}
-                            >
-                                Cancel
-                            </button>
+                            {/*<button*/}
+                            {/*    ref={cancelBtnRef}*/}
+                            {/*    className="form-article__btn"*/}
+                            {/*    onClick={() => history.push("/ContentPage")}*/}
+                            {/*>*/}
+                            {/*    Cancel*/}
+                            {/*</button>*/}
                         </div>
                     </div>
                 </section>
