@@ -75,7 +75,7 @@ const UserProfileArticlesPage = () => {
                   <li className="articles-page__tab-item" key={doc.id}>
                   <article className='articles-page__post'>
                     <div className="articles-page__image">
-                      <img src={doc.content.image} alt="" className="articles-page__img"/>
+                      <img src={doc.content[appLanguage].image} alt="" className="articles-page__img"/>
                     </div>
                     <div className="articles-page__content">
                       <Link
@@ -103,7 +103,7 @@ const UserProfileArticlesPage = () => {
                 <li className="articles-page__tab-item">
                   <article className='articles-page__post'>
                     <div className="articles-page__image">
-                      <img src={doc.content.image} alt="" className="articles-page__img"/>
+                      <img src={doc.content[appLanguage].image} alt="" className="articles-page__img"/>
                     </div>
                     <div className="articles-page__content">
 

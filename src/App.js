@@ -40,15 +40,15 @@ import ManageTournamentsPage from "./pages/ModeratorPanel/ManageTournamentsPage"
 import EditTournamentForm from "./pages/ModeratorPanel/EditTournamentForm";
 import EditStreamForm from "./pages/ModeratorPanel/EditStreamForm";
 import EditArticleForm from "./pages/UserAccount/AddArticlesPage/EditArticleForm";
-//import FirstLoginForm from "./pages/FirstLoginForm";
+import FirstLoginForm from "./pages/FirstLoginForm";
 import SponsorshipPage from "./pages/SponsorshipPage/SponsoshipPage";
 import CMSMenu from "./pages/CMSMenu/CMSMenu";
 import MainSurveyPage from "./pages/SurveyPage/SurveySteps/MainSurveyPage";
 function App() {
 
-    // const [loginPassed, setLoginPassed] = useState(false);
-    //
-    // if(loginPassed===true) {
+   const [loginPassed, setLoginPassed] = useState(false);
+
+    if(loginPassed===true) {
     return(
         <div className="App">
             <AuthContextProvider>
@@ -101,9 +101,9 @@ function App() {
             </AuthContextProvider>
         </div>
     );
-// }else{
-//     return(<FirstLoginForm setLoginPassed={setLoginPassed}/>);
-// }
+}else{
+    return(<FirstLoginForm setLoginPassed={setLoginPassed}/>);
+}
 }
 
 export default App;

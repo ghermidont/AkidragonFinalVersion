@@ -59,3 +59,9 @@ https://www.geeksforgeeks.org/how-to-convert-milliseconds-to-date-in-javascript/
 
 #Delete files by ref:
 https://github.com/firebase/firebase-js-sdk/issues/2625
+
+#async/await
+https://javascript.info/async-await
+
+#pagination
+https://material-ui.com/components/pagination/#pagination

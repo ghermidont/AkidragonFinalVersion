@@ -12,15 +12,7 @@ export default function Step4InputGamesQtPage({surveyResultObject}) {
                 onChange={
                     (e)=>console.log(e.target.value)}
             />
-            <Link to="/MultipleQtAboutGames">
-                <button
-                    type="button"
-                    className="btn btn-light"
-                    onClick={
-                        ()=>console.log("Hello from Step4InputGamesQtPage")
-                    }
-                >Save changes</button>
-            </Link>
+
 
         </div>
     );

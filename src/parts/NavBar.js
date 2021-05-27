@@ -120,6 +120,7 @@ export default function NavBar() {
                 </li>
               </ul>
             </li>
+            <div>Current language is "{appLanguage}"</div>
             <li className="menu__item">
               <ul className="box-user__list">
                 <li className="box-user__item">

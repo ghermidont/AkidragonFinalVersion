@@ -1,5 +1,4 @@
 import React from 'react';
-import {useArticlesContext} from "../context/ArticlesContext";
 import {useDataFromFirestore} from "../customHooks/useFirestore";
 import {Link} from "react-router-dom";
 import {useLanguageContext} from "../context/LanguageContext";
@@ -44,7 +43,7 @@ export default function Article() {
                                 maxWidth: '25%',
                                 height: 'auto'
                             }}
-                                 src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
+                                 src={doc.content[appLanguage].image?doc.content[appLanguage].image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
                                  className="articles-page__img"
                                  alt=""
                             />

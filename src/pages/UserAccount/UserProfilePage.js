@@ -7,14 +7,14 @@ import {projectFirestore} from "../../fireBase";
 
 export default function UserProfilePage() {
   console.log("UserProfilePage");
-  const {currentUser} = useAuthContext();
+  const { currentUser } = useAuthContext();
   const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
   //const {docsFromHook} = useDataFromFirestore('user-profiles');
   //const currentUserExtraInfoLS = JSON.parse(localStorage.getItem('currentUserExtraInfo'));
   //const moderatorLS = JSON.parse(localStorage.getItem('currentUserRole'));
-  const [moderator, setModerator] = useState();
-  const[currentUserExtraInfoFB, setCurrentUserExtraInfoFB] = useState({});
-  const[currentUserDbPointsInfo, setCurrentUserDbPointsInfo] = useState();
+  const [ moderator, setModerator ] = useState();
+  const [ currentUserExtraInfoFB, setCurrentUserExtraInfoFB ] = useState({});
+  const [ currentUserDbPointsInfo, setCurrentUserDbPointsInfo ] = useState();
 
   useEffect(() => {
     async function getCurrentUserExtraInfo() {
@@ -24,8 +24,6 @@ export default function UserProfilePage() {
             .doc(CurrentUserFromLS.uid).get().then((doc) => {
           if (doc.exists) {
             setCurrentUserExtraInfoFB(doc.data());
-            console.log(currentUserExtraInfoFB);
-            //localStorage.setItem("currentUserExtraInfo", JSON.stringify(doc.data()));
           } else {
             console.log("No such document!");
           }
@@ -33,7 +31,7 @@ export default function UserProfilePage() {
             .catch((error) => {
               console.log("Error getting document:", error);
             });
-      }
+        }
     }
 
     async function checkCurrentUserRole() {
@@ -57,7 +55,6 @@ export default function UserProfilePage() {
           .doc(CurrentUserFromLS.uid).get().then((doc)=>{
             if(doc.exists){
               setCurrentUserDbPointsInfo(doc.data());
-              console.log(doc.data());
             }else{
               console.log("No such document!");
             }
@@ -70,7 +67,7 @@ export default function UserProfilePage() {
     getCurrentUserExtraInfo().then(()=>console.log("Got the user info!")).catch(()=>console.error("could not get current use extra info."));
     checkCurrentUserRole().then(()=>console.log(moderator)).catch(()=>console.error("could not get current use role."));
     getDoc().then(()=>console.log("Got the user info for update!")).catch(()=>console.error("could not get current use extra info."));
-    console.log(currentUserDbPointsInfo);
+    //console.log(currentUserDbPointsInfo);
 
   }, []);
 
@@ -86,8 +83,7 @@ export default function UserProfilePage() {
                 }
               </div>
               <ul className="profile__list">
-                {/*<li className="profile__item"> {moderator?<strong>Moderator page:</strong>:<strong>Profile page:</strong>}</li>*/}
-                <li className="profile__item"> <strong>Profile page:</strong></li>
+                <li className="profile__item"> {moderator?<strong>Moderator page:</strong>:<strong>Profile page:</strong>}</li>
                 <li className="profile__item">Email: {currentUser?currentUser.email:CurrentUserFromLS.email}</li>
                 <li className="profile__item">Email verified: {currentUser?currentUser.emailVerified===false||CurrentUserFromLS.emailVerified===false?"false":"true":""}</li>
                 {currentUserExtraInfoFB&&
@@ -96,13 +92,14 @@ export default function UserProfilePage() {
                       <li className="profile__item">Last name: {currentUserExtraInfoFB.lastName}</li>
                     </>
                 }
-                {currentUserDbPointsInfo&&
-                  <li className="profile__item">Available points: {currentUserDbPointsInfo.value}</li>
+                {currentUserDbPointsInfo?
+                  <li className="profile__item">Available points: {currentUserDbPointsInfo.value}</li>:
+                  <li className="profile__item">Available points: 0</li>
                 }
                 <br/>
               </ul>
             </div>
-            {/*{moderator&&*/}
+            {moderator&&
             <ul className="profile__settings">
               <li>
                 <div className="profile__settings-title">
@@ -139,7 +136,7 @@ export default function UserProfilePage() {
                 </ul>
               </li>
             </ul>
-            {/*}*/}
+            }
           </div>
         </div>
       </section>

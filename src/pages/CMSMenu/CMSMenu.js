@@ -5,10 +5,12 @@ import Tab from '@material-ui/core/Tab';
 import TabContext from '@material-ui/lab/TabContext';
 import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
-import HomePageEdit from "./PagesEditComponents/HomePageEdit";
-import TournamentsPageEdit from "./PagesEditComponents/TournamentsPageEdit";
-import BlogPageEdit from "./PagesEditComponents/BlogPageEdit";
-import AboutUsPageEdit from "./PagesEditComponents/AboutUsPageEdit";
+import CMSHomePageEdit from "./PagesEditComponents/CMSHomePageEdit";
+import CMSTournamentsPageEdit from "./PagesEditComponents/CMSTournamentsPageEdit";
+import CMSBlogPageEdit from "./PagesEditComponents/CMSBlogPageEdit";
+import CMSAboutUsPageEdit from "./PagesEditComponents/CMSAboutUsPageEdit";
+import CMSContentPageEdit from "./PagesEditComponents/CMSContentPageEdit";
+import CMSContactUpPageEdit from "./PagesEditComponents/CMSContactUsPageEdit";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,13 +35,17 @@ export default function LabTabs() {
                         <Tab label="HomePage" value="1" />
                         <Tab label="Tournaments Page" value="2" />
                         <Tab label="Blog Page" value="3" />
-                        <Tab label="AboutUs Page" value="4" />
+                        <Tab label="Content Page" value="4" />
+                        <Tab label="AboutUs Page" value="5" />
+                        <Tab label="ContactUs Page" value="6" />
                     </TabList>
                 </AppBar>
-                <TabPanel value="1"><HomePageEdit /></TabPanel>
-                <TabPanel value="2"><TournamentsPageEdit /></TabPanel>
-                <TabPanel value="3"><BlogPageEdit /></TabPanel>
-                <TabPanel value="4"><AboutUsPageEdit /></TabPanel>
+                <TabPanel value="1"><CMSHomePageEdit /></TabPanel>
+                <TabPanel value="2"><CMSTournamentsPageEdit /></TabPanel>
+                <TabPanel value="3"><CMSBlogPageEdit /></TabPanel>
+                <TabPanel value="4"><CMSContentPageEdit /></TabPanel>
+                <TabPanel value="5"><CMSAboutUsPageEdit /></TabPanel>
+                <TabPanel value="6"><CMSContactUpPageEdit /></TabPanel>
             </TabContext>
         </div>
     );

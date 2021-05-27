@@ -157,12 +157,12 @@ export default function ModeratorAddStreamsForm(){
             >
               Submit
             </button>
-            <button
-                className="form-article__btn"
-                onClick={clearInput}
-            >
-              Cancel
-            </button>
+            {/*<button*/}
+            {/*    className="form-article__btn"*/}
+            {/*    onClick={clearInput}*/}
+            {/*>*/}
+            {/*  Cancel*/}
+            {/*</button>*/}
           </div>
         </form>
       </div>

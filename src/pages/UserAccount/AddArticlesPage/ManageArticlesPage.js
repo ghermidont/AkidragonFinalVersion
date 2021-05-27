@@ -2,7 +2,6 @@ import React from 'react';
 import {Link, useHistory} from "react-router-dom";
 import {useDataFromFirestore} from "../../../customHooks/useFirestore";
 import {useLanguageContext} from "../../../context/LanguageContext";
-import {useArticlesContext} from "../../../context/ArticlesContext";
 import {Button} from "react-bootstrap";
 import {projectFirestore} from "../../../fireBase";
 
@@ -10,7 +9,7 @@ const ManageArticlesPage = () => {
     console.log("ManageArticlesPage worked");
     const {appLanguage} = useLanguageContext();
     const history = useHistory();
-    const {setChosenModifyArticleNumber} = useArticlesContext();
+
     const {docsFromHook} = useDataFromFirestore('articles');
 
     return (
@@ -27,7 +26,7 @@ const ManageArticlesPage = () => {
                                     <li className="articles-page__tab-item" key={doc.id}>
                                         <article className='articles-page__post'>
                                             <div className="articles-page__image">
-                                                <img src={doc.content.image?doc.content.image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="articles-page__img"/>
+                                                <img src={doc.content[appLanguage].image?doc.content[appLanguage].image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="articles-page__img"/>
                                             </div>
                                             <div className="articles-page__content">
                                                 <h3 className="articles-page__content-title">{doc.content[appLanguage].title}</h3>
@@ -37,8 +36,8 @@ const ManageArticlesPage = () => {
                                             </div>
                                         </article>
                                         <Link onClick={()=> {
-                                            setChosenModifyArticleNumber(doc.id);
-                                            history.push(`/modify-article/${doc.id}`, {from: "/ManageArticlesPage"});
+                                            //setChosenModifyArticleNumber(doc.id);
+                                            history.push(`/edit-article/${doc.id}`, {from: "/ManageArticlesPage"});
                                         }}> Edit article >>>
 
                                         </Link>
