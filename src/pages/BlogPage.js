@@ -1,16 +1,21 @@
 //https://firebase.google.com/docs/firestore/data-model
 //https://firebase.google.com/docs/firestore/query-data/index-overview
 //https://www.pluralsight.com/guides/how-to-implement-a-read-more-link-in-react
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
-import {useDataFromFirestore} from "../customHooks/useFirestore";
+import {useDataFromFirestore, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import logoSection from '../assets/images/dest/logo-section.png';
 import {useLanguageContext} from "../context/LanguageContext";
 
 export default function BlogPage() {
     console.log("ArticlesPage worked!");
-    const{appLanguage} = useLanguageContext();
+    const {appLanguage} = useLanguageContext();
     const {docsFromHook} = useDataFromFirestore('articles');
+    const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
+    const [ENMainText, setENMainText] = useState("");
+    const [ITMainText, setITMainText] = useState("");
+    const [ENFooterText, setENFooterText] = useState("");
+    const [ITFooterText, setITFooterText] = useState("");
 
     //Filter news by category:
     const moviesNews =  docsFromHook.filter(function(doc) {
@@ -25,6 +30,28 @@ export default function BlogPage() {
         return doc.categories.includes("videogames");
     });
 
+    let selectedDoc = "";
+
+    useEffect(() => {
+        console.log(docsFromHookCMS);
+        if (docsFromHookCMS) {
+            selectedDoc = docsFromHookCMS.filter(function (doc) {
+                return doc.id === "blogPage";
+            });
+            console.log(selectedDoc);
+        }
+    });
+
+    useEffect(() => {
+        if (selectedDoc !== "") {
+            selectedDoc.map(doc => {
+                setENMainText(doc.mainText.en);
+                setITMainText(doc.mainText.it);
+                setENFooterText(doc.footerText.en);
+                setITFooterText(doc.footerText.it);
+            })
+        }
+    }, [docsFromHookCMS]);
     return(
         <>
             <section className="news-banner">
@@ -33,7 +60,7 @@ export default function BlogPage() {
                         <img src={logoSection} alt="" className="info__img"/>
                     </div>
                     <h1 className="news-banner__title title"><span>News</span></h1>
-                    <p className="news-banner__subtitle">Le ultime della community</p>
+                    <p className="news-banner__subtitle">{appLanguage==="it"?ITMainText:ENMainText}</p>
 
                     <div className="tab__body">
                         <ul className="nav nav-tabs tab__btn-list" id="myTab" role="tablist">
@@ -169,7 +196,7 @@ export default function BlogPage() {
 
             <section className="contact">
                 <div className="container">
-                    <h2 className="contact__title">Send us your articles, our editorial staff will light them</h2>
+                    <h2 className="contact__title">{appLanguage==="it"?ITFooterText:ENFooterText}</h2>
                     <div className="contact__btn">
                         <Link to="/ContacUsPage" className="contact__btn-link contact__btn-link--blog-page">
                            Contact Us

@@ -3,17 +3,21 @@ import {useHistory} from "react-router-dom";
 import {projectFirestore} from "../../../fireBase";
 import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
 
-function CMSBlogPageEdit() {
+function CMSContactUpPageEdit() {
     let publishBtnRef = useRef();
     let cancelBtnRef = useRef();
+    const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
     // const {currentUser} = useAuthContext();
     // const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
     const history = useHistory();
-    const [ITMainText, setITMainText] = useState('');
-    const [ENMainText, setENMainText] = useState('');
-    const [ENFooterText, setENFooterText] = useState('');
-    const [ITFooterText, setITFooterText] = useState('');
-    const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
+
+    const [ENAddress, setENAddress] = useState("");
+    const [ITAddress, setITAddress] = useState("");
+    const [ENText, setENText] = useState("");
+    const [ITText, setITText] = useState("");
+    const [ENTitle, setENTitle] = useState("");
+    const [ITTitle, setITTitle] = useState("");
+    const [phone, setPhone] = useState("");
 
     let selectedDoc = "";
 
@@ -21,7 +25,7 @@ function CMSBlogPageEdit() {
         console.log(docsFromHookCMS);
         if (docsFromHookCMS) {
             selectedDoc = docsFromHookCMS.filter(function (doc) {
-                return doc.id === "blogPage";
+                return doc.id === "contactUsPage";
             });
             console.log(selectedDoc);
         }
@@ -30,41 +34,50 @@ function CMSBlogPageEdit() {
     useEffect(() => {
         if (selectedDoc !== "") {
             selectedDoc.map(doc => {
-                setITMainText(doc.mainText.it);
-                setENMainText(doc.mainText.en);
-                setENFooterText(doc.footerText.en);
-                setITFooterText(doc.footerText.it);
+                setENAddress(doc.address.en);
+                setITAddress(doc.address.it);
+                setENText(doc.text.en);
+                setITText(doc.text.it);
+                setENTitle(doc.title.en);
+                setITTitle(doc.title.it);
+                setPhone(doc.phone.it);
             })
         }
     }, [docsFromHookCMS]);
 
-   const writeToFBCallback = () => {
-        const collectionRef = projectFirestore.collection('web-app-cms').doc("blogPage");
+    const writeToFBCallback = () => {
+        const collectionRef = projectFirestore.collection('web-app-cms').doc("contactUsPage");
         collectionRef.set(
-        {
-            "footerText": {
-                "en": ENFooterText,
-                "it": ITFooterText
-            },
-            "mainText": {
-                "en": ENMainText,
-                "it": ITMainText
-            }
-        })
-        .then(() => {
-            window.alert("Content edited successfully!");
+            {
+                "address": {
+                    "en": ENAddress,
+                    "it": ITAddress
+                },
+                "phone": phone,
+                "text": {
+                    "en": ENText,
+                    "it": ITText
+                },
 
-            return console.log("Content edited successfully!");
-        })
-        .catch((error) => {
-            console.error(error.code + " " + error.message + "" + error.details);
-        });
-   }
+                "title": {
+                    "en": ENTitle,
+                    "it": ITTitle
+                }
+            })
+            .then(() => {
+                window.alert("Content edited successfully!");
+
+                return console.log("Content edited successfully!");
+            })
+            .catch((error) => {
+                console.error(error.code + " " + error.message + "" + error.details);
+            });
+    }
 
     return (
         <>
             <div style={{paddingTop: "5em important"}}>
-                <center><h1>Edit <strong>Blog</strong> Page static content:</h1></center>
+                <center><h1>Edit <strong>ContactUs</strong> Page static content:</h1></center>
                 <section>
                     <ul className="nav nav-tabs" id="myTab" role="tablist">
                         <li className="nav-item">
@@ -100,30 +113,45 @@ function CMSBlogPageEdit() {
                             <div className='form-article__body'>
                                 <form className="form-article">
 
-                                     <label className='form-article__label'>
-                                        Banner text:
-                                        <textarea
-                                            className='form-article__input'
-                                            rows='2'
-                                            name="countent"
-                                            value={ITMainText}
-                                            onChange={
-                                                (e)=>setITMainText(e.target.value)
-                                            }
-                                        ></textarea>
-                                    </label>
                                     <label className='form-article__label'>
-                                        Footer text:
+                                        Title:
                                         <textarea
                                             className='form-article__input'
                                             rows='2'
                                             name="countent"
-                                            value={ITFooterText}
+                                            value={ITTitle}
                                             onChange={
-                                                (e)=>setITFooterText(e.target.value)
+                                                (e)=>setITTitle(e.target.value)
                                             }
                                         ></textarea>
                                     </label>
+
+                                    <label className='form-article__label'>
+                                        Text:
+                                        <textarea
+                                            className='form-article__input'
+                                            rows='2'
+                                            name="countent"
+                                            value={ITText}
+                                            onChange={
+                                                (e)=>setITText(e.target.value)
+                                            }
+                                        ></textarea>
+                                    </label>
+
+                                    <label className='form-article__label'>
+                                        Address:
+                                        <textarea
+                                            className='form-article__input'
+                                            rows='2'
+                                            name="countent"
+                                            value={ITAddress}
+                                            onChange={
+                                                (e)=>setITAddress(e.target.value)
+                                            }
+                                        ></textarea>
+                                    </label>
+
                                 </form>
                             </div>
                         </div>
@@ -140,32 +168,60 @@ function CMSBlogPageEdit() {
                                 <form className="form-article">
 
                                     <label className='form-article__label'>
-                                        Banner text:
+                                        Title:
                                         <textarea
                                             className='form-article__input'
                                             rows='2'
                                             name="countent"
-                                            value={ENMainText}
+                                            value={ENTitle}
                                             onChange={
-                                                (e)=>setENMainText(e.target.value)
+                                                (e)=>setENTitle(e.target.value)
                                             }
                                         ></textarea>
                                     </label>
+
                                     <label className='form-article__label'>
-                                        Footer text:
+                                        Text:
                                         <textarea
                                             className='form-article__input'
                                             rows='2'
                                             name="countent"
-                                            value={ENFooterText}
+                                            value={ENText}
                                             onChange={
-                                                (e)=>setENFooterText(e.target.value)
+                                                (e)=>setENText(e.target.value)
                                             }
                                         ></textarea>
                                     </label>
-                                 </form>
+
+                                    <label className='form-article__label'>
+                                        Address:
+                                        <textarea
+                                            className='form-article__input'
+                                            rows='2'
+                                            name="countent"
+                                            value={ENAddress}
+                                            onChange={
+                                                (e)=>setENAddress(e.target.value)
+                                            }
+                                        ></textarea>
+                                    </label>
+
+                                </form>
                             </div>
                         </div>
+
+                        <label className='form-article__label'>
+                            Phone number:
+                            <textarea
+                                className='form-article__input'
+                                rows='2'
+                                name="countent"
+                                value={phone}
+                                onChange={
+                                    (e)=>setPhone(e.target.value)
+                                }
+                            ></textarea>
+                        </label>
 
                         <div className="form-article__box-btn">
 
@@ -180,7 +236,7 @@ function CMSBlogPageEdit() {
                             <button
                                 ref={cancelBtnRef}
                                 className="form-article__btn"
-                                onClick={() => history.push("/UserProfilePage")}
+                                onClick={() => history.push("/ContactUsPage")}
                             >
                                 Cancel
                             </button>
@@ -192,4 +248,4 @@ function CMSBlogPageEdit() {
     );
 }
 
-export default CMSBlogPageEdit;
+export default CMSContactUpPageEdit;

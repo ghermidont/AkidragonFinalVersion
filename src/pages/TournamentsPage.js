@@ -1,14 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
-import {useDataFromFirestore} from "../customHooks/useFirestore";
+import {useDataFromFirestore, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import logoSection from '../assets/images/dest/logo-section.png';
+import {useLanguageContext} from "../context/LanguageContext";
 
 function TournamentsPage() {
   console.log("TournamentsPage() worked");
   const [passedEvents, setPassedEvents] = useState();
   const [futureEvents, setFutureEvents] = useState();
-
+  const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
   const {docsFromHook} = useDataFromFirestore('tournaments');
+  const [ENBannerUrl,setENBannerUrl] = useState("");
+  const [ITBannerUrl, setITBannerUrl] = useState("");
+  const [ENBannerText, setENBannerText] = useState("");
+  const [ITBannerText, setITBannerText] = useState("");
+  const [ENFooterMessage, setENFooterMessage] = useState("");
+  const [ITFooterMessage, setITFooterMessage] = useState("");
+  const {appLanguage} = useLanguageContext();
 
   useEffect(()=>{
       const passedEvents = docsFromHook.filter(function (doc) {
@@ -21,6 +29,31 @@ function TournamentsPage() {
       });
       setFutureEvents(futureEvents);
   });
+
+  let selectedDoc = "";
+
+  useEffect(() => {
+    console.log(docsFromHookCMS);
+    if (docsFromHookCMS) {
+      selectedDoc = docsFromHookCMS.filter(function (doc) {
+        return doc.id === "tournamentsPage";
+      });
+      console.log(selectedDoc);
+    }
+  });
+
+  useEffect(() => {
+    if (selectedDoc !== "") {
+      selectedDoc.map(doc => {
+        setENBannerUrl(doc.mainBanner.en);
+        setITBannerUrl(doc.mainBanner.it);
+        setENBannerText(doc.bannerText.en);
+        setITBannerText(doc.bannerText.it);
+        setENFooterMessage(doc.footerMessage.en);
+        setITFooterMessage(doc.footerMessage.it);
+      })
+    }
+  }, [docsFromHookCMS]);
 
   // const tabsBtn = document.querySelectorAll('.tab__body-btn');
   // const tabsItems = document.querySelectorAll('.tab__list');
@@ -252,20 +285,15 @@ function TournamentsPage() {
               <img src={logoSection} alt="" className="info__img"/>
             </div>
             <h1 className="tournament__title title">
-              <span>I tornei aki</span>dragon
+              <span>Akidragon</span> tournaments
             </h1>
             <div className="tournament__image">
-              <img className="tournament__img" src="https://www.esportswizard.com/wp-content/uploads/south-korea-triumphing-in-the-overwatch-league.jpg" alt=""/>
+              <img className="tournament__img" src={appLanguage==="it"?ITBannerUrl:ENBannerUrl} alt=""/>
             </div>
 
             <p className="tournament__text">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur odio ipsum explicabo
-              repudiandae eius, quos corrupti dolorem sint voluptatum rem nihil sequi fugit quis amet
-              iusto numquam recusandae dolores quasi repellat fuga, nam suscipit illum labore. Iste
-              uasi animi necessitatibus temporibus et earum assumenda.
-              Earum neque quasi vel laudantium nemo?
+              {appLanguage==="it"?ITBannerText:ENBannerText}
             </p>
-
 
             <div className="tab__body">
 
@@ -304,10 +332,10 @@ function TournamentsPage() {
 
         <section className="contact">
           <div className="container">
-            <h2 className="contact__title">Hai un team? partecipa anche tu!</h2>
+            <h2 className="contact__title">{appLanguage==="it"?ITFooterMessage:ENFooterMessage}</h2>
             <div className="contact__btn">
               <Link to="/ContactUsPage">
-                <a className="contact__btn-link">Contattaci</a>
+                <a className="contact__btn-link">Contacts</a>
               </Link>
             </div>
           </div>

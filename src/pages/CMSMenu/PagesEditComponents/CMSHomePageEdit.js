@@ -92,6 +92,9 @@ function CMSHomePageEdit() {
     const [ITSponsorshipBannerUploadedPicFile, setITSponsorshipBannerUploadedPicFile] = useState();
     const [ITTournamentsBannerUploadedPicFile, setITTournamentsBannerUrlUploadedPicFile] = useState();
 
+    const [ITBannerText, setITBannerText] = useState("");
+    const [ENBannerText, setENBannerText] = useState("");
+
     const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
 
     let selectedDoc = "";
@@ -109,6 +112,9 @@ function CMSHomePageEdit() {
     useEffect(() => {
         if (selectedDoc !== "") {
             selectedDoc.map(doc => {
+
+                setENBannerText(doc.bannerText.it);
+                setITBannerText(doc.bannerText.en);
                 setENBannerUrl(doc.banner.en);
                 setENContactsBannerUrl(doc.contactsBanner.en);
                 setENGameTeamsBannerUrl(doc.gameTeamsBanner.en);
@@ -497,6 +503,10 @@ function CMSHomePageEdit() {
                         "en": ENBannerUrl,
                         "it": ITBannerUrl
                     },
+                    "bannerText": {
+                        "en": ENBannerText,
+                        "it": ITBannerText
+                    },
                     "contactsBanner": {
                         "en": ENContactsBannerUrl,
                         "it": ITContactsBannerUrl
@@ -604,6 +614,17 @@ function CMSHomePageEdit() {
                         aria-labelledby="home-tab">
                         <div className='form-article__body'>
                             <form className="form-article">
+                                <label className='form-article__label'>
+                                    Banner text:
+                                    <input
+                                        className='form-article__input'
+                                        type="text"
+                                        value={ITBannerText}
+                                        onChange={
+                                            (e)=>setITBannerText(e.target.value)
+                                        }
+                                    />
+                                </label>
                                 {/*1*/}
                                 <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
                                     <input
@@ -724,7 +745,17 @@ function CMSHomePageEdit() {
                     >
                         <div className='form-article__body'>
                             <form className="form-article">
-
+                                <label className='form-article__label'>
+                                    Banner text:
+                                    <input
+                                        className='form-article__input'
+                                        type="text"
+                                        value={ENBannerText}
+                                        onChange={
+                                            (e)=>setENBannerText(e.target.value)
+                                        }
+                                    />
+                                </label>
                                 {/*1*/}
                                 <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
                                     <input

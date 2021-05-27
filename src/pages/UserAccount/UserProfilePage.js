@@ -130,9 +130,9 @@ export default function UserProfilePage() {
                   <li className="profile__settings-item">
                     <Link className='profile__settings-link' to='/CMSMenu'>Edit Static Content</Link>
                   </li>
-                  <li className="profile__settings-item">
-                    <Link className='profile__settings-link' to='/MainSurveyPage'>Take the survey</Link>
-                  </li>
+                  {/*<li className="profile__settings-item">*/}
+                  {/*  <Link className='profile__settings-link' to='/MainSurveyPage'>Take the survey</Link>*/}
+                  {/*</li>*/}
                 </ul>
               </li>
             </ul>

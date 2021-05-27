@@ -1,20 +1,54 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ContactUsForm from "./ContactUsForm";
+import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
+import {useLanguageContext} from "../../context/LanguageContext";
 
 function ContactUsPage(props) {
+  const {appLanguage} = useLanguageContext();
+  const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
+
+  const [ENAddress, setENAddress] = useState("");
+  const [ITAddress, setITAddress] = useState("");
+  const [ENText, setENText] = useState("");
+  const [ITText, setITText] = useState("");
+  const [ENTitle, setENTitle] = useState("");
+  const [ITTitle, setITTitle] = useState("");
+  const [phone, setPhone] = useState("");
+
+  let selectedDoc = "";
+
+  useEffect(() => {
+    console.log(docsFromHookCMS);
+    if (docsFromHookCMS) {
+      selectedDoc = docsFromHookCMS.filter(function (doc) {
+        return doc.id === "contactUsPage";
+      });
+      console.log(selectedDoc);
+    }
+  });
+
+  useEffect(() => {
+    if (selectedDoc !== "") {
+      selectedDoc.map(doc => {
+        setENAddress(doc.address.en);
+        setITAddress(doc.address.it);
+        setENText(doc.text.en);
+        setITText(doc.text.it);
+        setENTitle(doc.title.en);
+        setITTitle(doc.title.it);
+        setPhone(doc.phone);
+      })
+    }
+  }, [docsFromHookCMS]);
+
   return (
     <>
       <main className="page">
         <section className="contact-intro">
           <div className="container">
-            <h1 className="contact-intro__title title"><span>Contattaci</span></h1>
+            <h1 className="contact-intro__title title"><span>{appLanguage==="it"?ITTitle:ENTitle}</span></h1>
             <p className="contact-intro__text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eius nesciunt, expedita
-              dignissimos ducimus laudantium obcaecati alias iste dolores repellendus libero fuga, earum
-              quisquam amet ea non unde, voluptate voluptatum suscipit esse facilis omnis! Nesciunt quia
-              iure necessitatibus in, nisi dicta, tempora optio dolorum qui facilis voluptatibus facere
-              porro. Ducimus consequuntur accusamus at eaque dicta a culpa sequi omnis id beatae officiis
-              perferendis, nobis placeat, fugiat ipsam voluptatibus natus autem.
+              {appLanguage==="it"?ITText:ENText}
             </p>
             <ContactUsForm/>
           </div>
@@ -25,11 +59,11 @@ function ContactUsPage(props) {
             <ul className="map__list">
               <li className="map__item map__address">
                 <span className="icon-location"> </span>
-                Piazza del Popolo nr.18, Palazzo Valadier 00187 Roma, Lazio
+                {appLanguage==="it"?ITAddress:ENAddress}
               </li>
               <li className="map__item map__phone">
                 <span className="icon-phone"> </span>
-                <a href="tel:+390636712213">+390636712213</a>
+                <a href="tel:+390636712213">{phone}</a>
               </li>
               <li className="map__item map__chat">
                 <span className="icon-whatsapp"> </span>
