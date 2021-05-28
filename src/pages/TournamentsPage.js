@@ -28,7 +28,7 @@ function TournamentsPage() {
         return doc.eventStatus === "future";
       });
       setFutureEvents(futureEvents);
-  });
+  }, [docsFromHook]);
 
   let selectedDoc = "";
 
@@ -55,41 +55,24 @@ function TournamentsPage() {
     }
   }, [docsFromHookCMS]);
 
-  // const tabsBtn = document.querySelectorAll('.tab__body-btn');
-  // const tabsItems = document.querySelectorAll('.tab__list');
-  // tabsBtn.forEach(function (item) {
-  //   item.addEventListener('click', function () {
-  //     let currentBtn = item;
-  //     let tabId = currentBtn.getAttribute('data-tab');
-  //     let currentTab = document.querySelector(tabId);
-  //
-  //     tabsBtn.forEach(function (item) {
-  //       item.classList.remove('active');
-  //     });
-  //     tabsItems.forEach(function (item) {
-  //       item.classList.remove('active');
-  //     });
-  //
-  //     currentBtn.classList.add('active');
-  //     currentTab.classList.add('active');
-  //   });
-  // });
-
-//Templates
+ //Templates
   const PassedMatchTemp = (doc) => {
     let date = new Date(doc.eventDate);
     let parsedDate = date.toString();
-
+   
     return (
         <li className="tab__item">
           <div className="tab__image"
                style={{
-                 background: "blue",
-                 url: "#",
+              
                  position: "center",
                  backgroundSize: "cover",
                  backgroundRepeat: "no-repeat"
                }}>
+                   <img
+                className="tab__img"
+                src={doc.eventBanner}
+                alt="some text"/>  
           </div>
           <div className="tab__content">
             <a className="tab__title">Category: {doc.eventCategory}</a>
@@ -124,16 +107,18 @@ function TournamentsPage() {
   const PassedTournTemp = (doc) => {
     let date = new Date(doc.eventDate);
     let parsedDate = date.toString();
-
+    
     return (<li className="tab__item">
       <div className="tab__image"
            style={{
-             background: "blue",
-             url: "#",
              position: "center",
              backgroundSize: "cover",
              backgroundRepeat: "no-repeat"
            }}>
+             <img
+                className="tab__img"
+                src={doc.eventBanner}
+                alt="some text"/>  
       </div>
       <div className="tab__content">
         <a className="tab__title">Category: {doc.eventCategory}</a>
@@ -169,12 +154,14 @@ function TournamentsPage() {
     return (<li className="tab__item">
       <div className="tab__image"
            style={{
-             background: "blue",
-             url: "#",
              position: "center",
              backgroundSize: "cover",
              backgroundRepeat: "no-repeat"
            }}>
+               <img
+                className="tab__img"
+                src={doc.eventBanner}
+                alt="some text"/>  
       </div>
       <div className="tab__content">
         <a className="tab__title">Category: {doc.eventCategory}</a>
@@ -218,12 +205,14 @@ function TournamentsPage() {
     return (<li className="tab__item">
       <div className="tab__image"
            style={{
-             background: "blue",
-             url: "#",
              position: "center",
              backgroundSize: "cover",
              backgroundRepeat: "no-repeat"
            }}>
+               <img
+                className="tab__img"
+                src={doc.eventBanner}
+                alt="some text"/>  
       </div>
       <div className="tab__content">
         <a className="tab__title">Category: {doc.eventCategory}</a>
@@ -346,34 +335,3 @@ function TournamentsPage() {
 }
 
 export default TournamentsPage;
-
-
-  {/*<div className="tournament__tab tab">*/}
-  {/*  <div className="tab__body">*/}
-  {/*    <ul className="tab__body-list">*/}
-  {/*      <li className="tab__body-item">*/}
-  {/*        <button className="tab__body-btn active" type="button"*/}
-  {/*                data-tab="#tab_1">Eventi passati*/}
-  {/*        </button>*/}
-  {/*      </li>*/}
-  {/*      <li className="tab__body-item">*/}
-  {/*        <button className="tab__body-btn" type="button"*/}
-  {/*                data-tab="#tab_2">Prossimi eventi*/}
-  {/*        </button>*/}
-  {/*      </li>*/}
-  {/*    </ul>*/}
-
-  {/*    <ul className="tab__list active" id="tab_1">*/}
-  {/*      {passedEvents && passedEvents.slice(0, 4).map(doc =>*/}
-  {/*        doc.eventCategory === "match" ? PassedMatchTemp(doc) : PassedTournTemp(doc)*/}
-  {/*      )}*/}
-  {/*    </ul>*/}
-
-  {/*    <ul className="tab__list active" id="tab_2">*/}
-  {/*      {futureEvents && futureEvents.slice(0, 4).map(doc =>*/}
-  {/*        doc.eventCategory === "match" ? FutureMatchTemp(doc) : FutureTournTemp(doc)*/}
-  {/*      )}*/}
-  {/*    </ul>*/}
-
-  {/*  </div>*/}
-  {/*</div>*/}
