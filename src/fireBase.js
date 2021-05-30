@@ -25,9 +25,9 @@
   const functions = firebase.app().functions('europe-west1');
   const projectStorage = firebase.storage();
   const projectFirestore = firebase.firestore();
-  const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+  //const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
-  export { functions, timestamp, projectStorage, projectFirestore, fireBase as default};
+  export { functions, projectStorage, projectFirestore, fireBase as default};
   export const auth = fireBase.auth();
 
  

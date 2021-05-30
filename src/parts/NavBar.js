@@ -41,7 +41,7 @@ export default function NavBar() {
               <span className="icon-angle-down arrow"></span>
               <ul className="sub-menu__list">
                 <li className="sub-menu__item">
-                  <Link className="sub-menu__link" to="/TournamentsPage">
+                  <Link className="sub-menu__link" onClick={() => setToggleMenu('')} to="/TournamentsPage">
                     Tournaments
                   </Link>
                 </li>
@@ -64,12 +64,12 @@ export default function NavBar() {
               <span className="icon-angle-down arrow"></span>
               <ul className="sub-menu__list">
                 <li className="sub-menu__item">
-                  <Link className="sub-menu__link" to="/BlogPage">
+                  <Link className="sub-menu__link" onClick={() => setToggleMenu('')} to="/BlogPage">
                     Blog
                   </Link>
                 </li>
                 <li className="sub-menu__item">
-                  <Link className="sub-menu__link" to="/ContentPage">
+                  <Link className="sub-menu__link" onClick={() => setToggleMenu('')} to="/ContentPage">
                     Content
                   </Link>
                 </li>
@@ -81,12 +81,12 @@ export default function NavBar() {
               <span className="icon-angle-down arrow"></span>
               <ul className="sub-menu__list">
                 <li className="sub-menu__item">
-                  <Link className="sub-menu__link" to="/AboutUsPage">
+                  <Link className="sub-menu__link" onClick={() => setToggleMenu('')} to="/AboutUsPage">
                     About Us
                   </Link>
                 </li>
                 <li className="sub-menu__item">
-                  <Link className="sub-menu__link" to="/SponsorshipPage">
+                  <Link className="sub-menu__link" onClick={() => setToggleMenu('')} to="/SponsorshipPage">
                     SPONSORSHIP
                   </Link>
                 </li>

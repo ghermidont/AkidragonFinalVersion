@@ -3,10 +3,12 @@ import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 //import {useNavBarContext} from "../../context/NavBarContext";
 import {Col, Container, Row} from "react-bootstrap";
+import {useLanguageContext} from "../../context/LanguageContext";
 //https://www.pluralsight.com/guides/how-to-implement-a-read-more-link-in-react
 
 const Item = (props) => {
     const [readMore, setReadMore] = useState(false);
+    const {appLanguage} = useLanguageContext();
 
     const extraContent = (
         <div>
@@ -44,7 +46,7 @@ const Item = (props) => {
                                     <br/>
                                         {readMore && extraContent}
                                     <br/>
-                                    <Link to={`/article/${props.slug}`}>
+                                    <Link onClick={props.handleClose} to={`/article/${props.slug}`}>
                                         Full article page>>>
                                     </Link>
                                 </Row>
