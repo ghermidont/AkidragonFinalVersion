@@ -14,8 +14,7 @@
     display: block;
     max-width: 70rem;
     height: 40rem;
-    margin: 0 auto;
-    margin-bottom: 8rem;
+    margin: 0 auto 8rem;
     transition: opacity 0.3s;
 
     &:hover,
@@ -30,6 +29,7 @@
   }
   &__btn {
     margin: 6rem auto;
+    display: block;
   }
 
   &__slider {

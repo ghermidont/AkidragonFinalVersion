@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {useDataFromFirestore, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import logoSection from '../assets/images/dest/logo-section.png';
+import vsIcon from '../assets/images/dest/icons/vsIcon.png';
 import {useLanguageContext} from "../context/LanguageContext";
 
 function TournamentsPage() {
@@ -82,15 +83,7 @@ function TournamentsPage() {
 
     return (
         <li className="tab__item">
-          <div className="tab__image"
-               style={{
-                 background: "blue",
-                 url: "#",
-                 position: "center",
-                 backgroundSize: "cover",
-                 backgroundRepeat: "no-repeat"
-               }}>
-          </div>
+          <img src="" className="tab__image"/>
           <div className="tab__content">
             <a className="tab__title">Category: {doc.eventCategory}</a>
             <div className="tab__name">Title: {doc.eventTitle}</div>
@@ -114,7 +107,7 @@ function TournamentsPage() {
               <a className="" href={doc.eventVideoLink}>Watch</a>
             </button>
             <button className="tab__link-info">
-              <a className="" href={doc.eventInfoPage}>Info</a>Info
+              <a className="" href={doc.eventInfoPage}>Info</a>
             </button>
           </div>
         </li>
@@ -126,15 +119,7 @@ function TournamentsPage() {
     let parsedDate = date.toString();
 
     return (<li className="tab__item">
-      <div className="tab__image"
-           style={{
-             background: "blue",
-             url: "#",
-             position: "center",
-             backgroundSize: "cover",
-             backgroundRepeat: "no-repeat"
-           }}>
-      </div>
+      <img src="" className="tab__image"/>
       <div className="tab__content">
         <a className="tab__title">Category: {doc.eventCategory}</a>
         <div className="tab__name">Title: {doc.eventTitle}</div>
@@ -156,7 +141,7 @@ function TournamentsPage() {
           <a className="" href={doc.eventVideoLink}>Watch</a>
         </button>
         <button className="tab__link-info">
-          <a className="" href={doc.eventInfoPage}>Info</a>Info
+          <a className="" href={doc.eventInfoPage}>Info</a>
         </button>
       </div>
     </li>);
@@ -167,15 +152,7 @@ function TournamentsPage() {
     let parsedDate = date.toString();
 
     return (<li className="tab__item">
-      <div className="tab__image"
-           style={{
-             background: "blue",
-             url: "#",
-             position: "center",
-             backgroundSize: "cover",
-             backgroundRepeat: "no-repeat"
-           }}>
-      </div>
+      <img src="" className="tab__image"/>
       <div className="tab__content">
         <a className="tab__title">Category: {doc.eventCategory}</a>
         <div className="tab__name">Title: {doc.eventTitle}</div>
@@ -190,6 +167,12 @@ function TournamentsPage() {
                 src={doc.pictureURL1?doc.pictureURL1:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
                 alt=""/>
           </a>
+        </li>
+        <li className="tab__item-icon">
+            <img
+                className="tab__img-icon"
+                src={vsIcon}
+                alt=""/>
         </li>
         <li className="tab__item-icon">
           <a className="tab__link-icon">
@@ -216,15 +199,7 @@ function TournamentsPage() {
     let parsedDate = date.toString();
 
     return (<li className="tab__item">
-      <div className="tab__image"
-           style={{
-             background: "blue",
-             url: "#",
-             position: "center",
-             backgroundSize: "cover",
-             backgroundRepeat: "no-repeat"
-           }}>
-      </div>
+      <img src="" className="tab__image"/>
       <div className="tab__content">
         <a className="tab__title">Category: {doc.eventCategory}</a>
         <div className="tab__name">Title: {doc.eventTitle}</div>

@@ -120,7 +120,7 @@ export default function NavBar() {
                 </li>
               </ul>
             </li>
-            <div>Current language is "{appLanguage}"</div>
+            {/*<div>Current language is "{appLanguage}"</div>*/}
             <li className="menu__item">
               <ul className="box-user__list">
                 <li className="box-user__item">
@@ -166,49 +166,3 @@ export default function NavBar() {
   );
 }
 
-// <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-//     <a className="navbar-brand" href="/">AkiDragon</a>
-//     <Link to="/P2LoginSignUpForm">
-//         {!currentUser && <button type="button" className="btn btn-primary">Login/Signup</button>}
-//     </Link>
-//
-//     <div className="container-fluid">
-//         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-//                 data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-//                 aria-label="Toggle navigation">
-//             <span className="navbar-toggler-icon">icon</span>
-//         </button>
-//         <div className="collapse navbar-collapse" id="navbarCollapse">
-//             <ul className="navbar-nav me-auto mb-2 mb-md-0">
-//                 <li className="nav-item">
-//                     <Link to="/ContactUsPage">
-//                         <a className="nav-link">{t("NavBar.Links.ContactUs")}</a>
-//                     </Link>
-//                 </li>
-//                 <li className="nav-item">
-//                     <Link to="/Content">
-//                         <a className="nav-link">Content</a>
-//                     </Link>
-//                 </li>
-//                 <li className="nav-item">
-//                     <Link to="/BlogPage">
-//                         <a className="nav-link">{t("NavBar.Links.Blog")}</a>
-//                     </Link>
-//                 </li>
-//                 <li className="nav-item">
-//                     <Link to="/SponsorshipPage">
-//                         <a className="nav-link">{t("NavBar.Links.Link3")}</a>
-//                     </Link>
-//                 </li>
-//             </ul>
-//             <div className="btn-group" role="group" aria-label="Basic outlined example">
-//                 <button type="button" className="btn btn-outline-primary" onClick={() => changeLanguage("en")}>en</button>
-//                 <button type="button" className="btn btn-outline-primary" onClick={() => changeLanguage("it")}>de</button>
-//             </div>
-//             <form className="d-flex">
-//                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-//                 <button className="btn btn-outline-success" type="submit">{t("NavBar.SearchButton")}Button</button>
-//             </form>
-//         </div>
-//     </div>
-// </nav>

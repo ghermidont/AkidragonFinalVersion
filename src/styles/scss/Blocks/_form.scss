@@ -4,6 +4,9 @@
   width: 100%;
   margin: 0 auto;
 
+  &__label{
+    display: block;
+  }
   input {
     padding: 0.8rem 2rem;
     font-size: 1.8rem;
@@ -72,6 +75,7 @@
       opacity: 0.8;
     }
   }
+
   &__send {
     padding: 1rem 2rem;
     border-radius: 0.6rem;

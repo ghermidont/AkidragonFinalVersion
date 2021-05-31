@@ -65,22 +65,22 @@ export default function BlogPage() {
                     <div className="tab__body">
                         <ul className="nav nav-tabs tab__btn-list" id="myTab" role="tablist">
                             <li className="nav-item tab__btn-item" >
-                                <a className="tab__btn active" id="all-tab" data-toggle="tab" href="#all" role="tab"
+                                <a className="tab__btn-news active" id="all-tab" data-toggle="tab" href="#all" role="tab"
                                    aria-controls="all" aria-selected="true">All</a>
                             </li>
 
                             <li className="nav-item tab__btn-item">
-                                <a className="tab__btn" id="videogames-tab" data-toggle="tab" href="#videogames" role="tab"
+                                <a className="tab__btn-news" id="videogames-tab" data-toggle="tab" href="#videogames" role="tab"
                                    aria-controls="videogames" aria-selected="false">Video games</a>
                             </li>
 
                             <li className="nav-item tab__btn-item">
-                                <a className="tab__btn" id="movies-tab" data-toggle="tab" href="#movies" role="tab"
+                                <a className="tab__btn-news" id="movies-tab" data-toggle="tab" href="#movies" role="tab"
                                    aria-controls="movies" aria-selected="false">Movies</a>
                             </li>
 
                             <li className="nav-item tab__btn-item">
-                                <a className="tab__btn" id="music-tab" data-toggle="tab" href="#music" role="tab"
+                                <a className="tab__btn-news" id="music-tab" data-toggle="tab" href="#music" role="tab"
                                    aria-controls="music" aria-selected="false">Music</a>
                             </li>
                         </ul>
