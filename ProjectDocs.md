@@ -17,6 +17,11 @@ https://www.infoq.com/articles/reduce-react-load-time/
 //https://blog.logrocket.com/use-hooks-and-context-not-react-and-redux/
 //https://javascript.plainenglish.io/react-context-why-am-i-getting-unnecessary-re-renders-b61836d224a7
 //https://medium.com/@nazmifeeroz/how-to-use-react-usecontext-and-usestate-hooks-as-a-global-store-1b4f1898034f
+
+#Security:
+https://www.npmjs.com/package/serialize-javascript
+https://www.npmjs.com/package/@braintree/sanitize-url
+
 To implement:
 https://reactjs.org/docs/react-api.html#reactlazy
 https://github.com/bvaughn/react-window
