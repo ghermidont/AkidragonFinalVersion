@@ -88,30 +88,27 @@ export default function ContactUsForm() {
          </textarea>
 
       <div className="form__box-btn">
-
-        <div className="form__box-btn">
-          {sizeExceededError && <error>Max file size exceeded</error>}
-          <p>Attach file:</p>
-          <label className='btn-upload'>Upload
-          <input className='visually-hidden' type="file" name="attachment" id="fileInput" onChange={e => setFileSize(e.target.files[0].size)}/>
-          </label>
-          <input className='btn-upload' type="submit" value="Submit"/>
-        </div>
-
-        {/*<button*/}
-        {/*    className="form__upload"*/}
-        {/*    type="file"*/}
-        {/*><span className="icon-upload2"></span>*/}
-        {/*    Upload*/}
-        {/*</button>*/}
-
-        {/*<button className="form__send" type="submit">Submit</button>*/}
-
+        {sizeExceededError && <error>Max file size exceeded</error>}
+        <label className='btn-upload'>Upload
+          <input className='visually-hidden' type="file" name="attachment" id="fileInput"
+                 onChange={e => setFileSize(e.target.files[0].size)}/>
+        </label>
+        <button className='btn-upload' type="submit">Submit</button>
       </div>
 
-      <label>
+      {/*<button*/}
+      {/*    className="form__upload"*/}
+      {/*    type="file"*/}
+      {/*><span className="icon-upload2"></span>*/}
+      {/*    Upload*/}
+      {/*</button>*/}
+
+      {/*<button className="form__send" type="submit">Submit</button>*/}
+
+
+      <label className='form__check-label'>
         <input
-          className="form-check"
+          className="form__check"
           type="checkbox"
           value={!checkBoxState ? "I consent to the processing of my personal data" : ''}
           name="checkbox"

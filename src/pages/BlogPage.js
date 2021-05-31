@@ -63,7 +63,7 @@ export default function BlogPage() {
                     <p className="news-banner__subtitle">{appLanguage==="it"?ITMainText:ENMainText}</p>
 
                     <div className="tab__body">
-                        <ul className="nav nav-tabs tab__btn-list" id="myTab" role="tablist">
+                        <ul className="nav nav-tabs tab__btn-list tab__news" id="myTab" role="tablist">
                             <li className="nav-item tab__btn-item" >
                                 <a className="tab__btn-news active" id="all-tab" data-toggle="tab" href="#all" role="tab"
                                    aria-controls="all" aria-selected="true">All</a>

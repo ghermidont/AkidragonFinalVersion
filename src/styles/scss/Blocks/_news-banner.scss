@@ -65,7 +65,8 @@
       margin-bottom: 2rem;
     }
   }
-  .nav.nav-tabs.tab__btn-list{
-    flex-direction: column;
+  .nav.nav-tabs.tab__btn-list.tab__news{
+    flex-direction: column !important;
+    text-align: center;
   }
 }

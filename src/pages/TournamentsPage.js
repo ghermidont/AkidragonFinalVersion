@@ -75,7 +75,6 @@ function TournamentsPage() {
                 src={doc.eventBanner}
                 alt="some text"/>
           </div>
-          <img src="" className="tab__image"/>
           <div className="tab__content">
             <a className="tab__title">Category: {doc.eventCategory}</a>
             <div className="tab__name">Title: {doc.eventTitle}</div>
