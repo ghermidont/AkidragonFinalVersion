@@ -76,7 +76,8 @@ function SearchBar(props) {
                                     title = {post.content[appLanguage].title}
                                     text = {post.content[appLanguage].text}
                                     description = {post.content[appLanguage].description}
-                                    image = {post.content.image}
+                                    image = {post.content[appLanguage].image}
+                                    handleClose = {handleClose}
                                 />
                             ))
                         ) : ''}

@@ -6,7 +6,7 @@ import {useAuthContext} from "../../../context/AuthContext";
 
 function CMSAboutUsPageEdit() {
     let publishBtnRef = useRef();
-    let cancelBtnRef = useRef();
+    //let cancelBtnRef = useRef();
     const {currentUser} = useAuthContext();
     const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
     //const [error, setError] = useState("");
@@ -725,18 +725,17 @@ function CMSAboutUsPageEdit() {
         }
     };
 
-
     const clearInput = () => {
         const storageRef1 = uploadedPicFileENBanner?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFileENBanner.name):"";
         const storageRef2 = uploadedPicFileITBanner?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFileITBanner.name):"";
-        const storageRef3 = setUploadedPicFileAvatar1?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(setUploadedPicFileAvatar1.name):"";
-        const storageRef4 = setUploadedPicFileAvatar2?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(setUploadedPicFileAvatar2.name):"";
-        const storageRef5 = setUploadedPicFileAvatar3?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(setUploadedPicFileAvatar3.name):"";
-        const storageRef6 = setUploadedPicFileAvatar4?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(setUploadedPicFileAvatar4.name):"";
-        const storageRef7 = setUploadedPicFileAvatar5?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(setUploadedPicFileAvatar5.name):"";
-        const storageRef8 = setUploadedPicFileAvatar6?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(setUploadedPicFileAvatar6.name):"";
-        const storageRef9 = setUploadedPicFileAvatar7?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(setUploadedPicFileAvatar7.name):"";
-        const storageRef10 = setUploadedPicFileAvatar8?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(setUploadedPicFileAvatar8.name):"";
+        const storageRef3 = setUploadedPicFileAvatar1?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFileAvatar1.name):"";
+        const storageRef4 = setUploadedPicFileAvatar2?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFileAvatar2.name):"";
+        const storageRef5 = setUploadedPicFileAvatar3?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFileAvatar3.name):"";
+        const storageRef6 = setUploadedPicFileAvatar4?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFileAvatar4.name):"";
+        const storageRef7 = setUploadedPicFileAvatar5?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFileAvatar5.name):"";
+        const storageRef8 = setUploadedPicFileAvatar6?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFileAvatar6.name):"";
+        const storageRef9 = setUploadedPicFileAvatar7?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFileAvatar7.name):"";
+        const storageRef10 = setUploadedPicFileAvatar8?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFileAvatar8.name):"";
         const storageRef11 = uploadedPicFilePartnerLogo1?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFilePartnerLogo1.name):"";
         const storageRef12 = uploadedPicFilePartnerLogo2?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFilePartnerLogo2.name):"";
         const storageRef13 = uploadedPicFilePartnerLogo3?projectStorage.ref(`CMS-pictures/aboutUsPage/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedPicFilePartnerLogo3.name):"";
@@ -1555,7 +1554,18 @@ function CMSAboutUsPageEdit() {
                                         { picFileENFileTypeError!=="" && <div className="error">{ picFileENFileTypeError }</div> }
                                         {ENBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENBannerUrl} alt=""/></div> }
                                     </div>
-
+                                    <label className='form-article__label'>
+                                        Mission title:
+                                        <textarea
+                                            className='form-article__input'
+                                            rows='2'
+                                            name="countent"
+                                            value={ENMissionTitle}
+                                            onChange={
+                                                (e)=>setENMissionTitle(e.target.value)
+                                            }
+                                        ></textarea>
+                                    </label>
                                     <label className='form-article__label'>
                                         Mission text:
                                         <textarea

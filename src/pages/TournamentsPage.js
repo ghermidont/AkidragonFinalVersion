@@ -29,7 +29,7 @@ function TournamentsPage() {
         return doc.eventStatus === "future";
       });
       setFutureEvents(futureEvents);
-  });
+  }, [docsFromHook]);
 
   let selectedDoc = "";
 
@@ -56,33 +56,25 @@ function TournamentsPage() {
     }
   }, [docsFromHookCMS]);
 
-  // const tabsBtn = document.querySelectorAll('.tab__body-btn');
-  // const tabsItems = document.querySelectorAll('.tab__list');
-  // tabsBtn.forEach(function (item) {
-  //   item.addEventListener('click', function () {
-  //     let currentBtn = item;
-  //     let tabId = currentBtn.getAttribute('data-tab');
-  //     let currentTab = document.querySelector(tabId);
-  //
-  //     tabsBtn.forEach(function (item) {
-  //       item.classList.remove('active');
-  //     });
-  //     tabsItems.forEach(function (item) {
-  //       item.classList.remove('active');
-  //     });
-  //
-  //     currentBtn.classList.add('active');
-  //     currentTab.classList.add('active');
-  //   });
-  // });
-
-//Templates
+ //Templates
   const PassedMatchTemp = (doc) => {
     let date = new Date(doc.eventDate);
     let parsedDate = date.toString();
 
     return (
         <li className="tab__item">
+          <div className="tab__image"
+               style={{
+
+                 position: "center",
+                 backgroundSize: "cover",
+                 backgroundRepeat: "no-repeat"
+               }}>
+                   <img
+                className="tab__img"
+                src={doc.eventBanner}
+                alt="some text"/>
+          </div>
           <img src="" className="tab__image"/>
           <div className="tab__content">
             <a className="tab__title">Category: {doc.eventCategory}</a>
@@ -119,7 +111,17 @@ function TournamentsPage() {
     let parsedDate = date.toString();
 
     return (<li className="tab__item">
-      <img src="" className="tab__image"/>
+      <div className="tab__image"
+           style={{
+             position: "center",
+             backgroundSize: "cover",
+             backgroundRepeat: "no-repeat"
+           }}>
+             <img
+                className="tab__img"
+                src={doc.eventBanner}
+                alt="some text"/>
+      </div>
       <div className="tab__content">
         <a className="tab__title">Category: {doc.eventCategory}</a>
         <div className="tab__name">Title: {doc.eventTitle}</div>
@@ -152,7 +154,17 @@ function TournamentsPage() {
     let parsedDate = date.toString();
 
     return (<li className="tab__item">
-      <img src="" className="tab__image"/>
+      <div className="tab__image"
+           style={{
+             position: "center",
+             backgroundSize: "cover",
+             backgroundRepeat: "no-repeat"
+           }}>
+               <img
+                className="tab__img"
+                src={doc.eventBanner}
+                alt="some text"/>
+      </div>
       <div className="tab__content">
         <a className="tab__title">Category: {doc.eventCategory}</a>
         <div className="tab__name">Title: {doc.eventTitle}</div>
@@ -199,7 +211,17 @@ function TournamentsPage() {
     let parsedDate = date.toString();
 
     return (<li className="tab__item">
-      <img src="" className="tab__image"/>
+      <div className="tab__image"
+           style={{
+             position: "center",
+             backgroundSize: "cover",
+             backgroundRepeat: "no-repeat"
+           }}>
+               <img
+                className="tab__img"
+                src={doc.eventBanner}
+                alt="some text"/>
+      </div>
       <div className="tab__content">
         <a className="tab__title">Category: {doc.eventCategory}</a>
         <div className="tab__name">Title: {doc.eventTitle}</div>

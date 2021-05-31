@@ -1,0 +1,32 @@
+REACT_APP_FIRE_BASE_API_KEY = "AIzaSyC7RNmD4u4bMzmNjOCGOhL71UvOchW6EQM"
+REACT_APP_FIRE_BASE_AUTH_DOMAIN = "aki-dragon.firebaseapp.com"
+REACT_APP_FIRE_BASE_DB_URL = "https://aki-dragon.firebaseio.com"
+REACT_APP_FIRE_BASE_PROJECT_ID = "aki-dragon"
+REACT_APP_FIRE_BASE_STORAGE_BUCKET = "aki-dragon.appspot.com"
+REACT_APP_FIRE_BASE_MESSAGING_SENDER_ID = "1090752375152"
+REACT_APP_FIRE_BASE_APP_ID = "1:1090752375152:web:d364a8bce2401a97ae87b5"
+REACT_APP_FIRE_BASE_MEASUREMENT_ID = "G-02Q9RDR4DQ"
+
+REACT_APP_UN = "akidragon@akidragon.com"
+REACT_APP_PS = "123456"
+
+#Freancesco settings:
+#    apiKey: "AIzaSyC7RNmD4u4bMzmNjOCGOhL71UvOchW6EQM",
+#    authDomain: "aki-dragon.firebaseapp.com",
+#    databaseURL: "https://aki-dragon.firebaseio.com",
+#    projectId: "aki-dragon",
+#    storageBucket: "aki-dragon.appspot.com",
+#    messagingSenderId: "1090752375152",
+#    appId: "1:1090752375152:web:d364a8bce2401a97ae87b5",
+#    measurementId: "G-02Q9RDR4DQ"
+
+#My test DB:
+#REACT_APP_FIRE_BASE_API_KEY = "AIzaSyBC-2iuFdcWQME2_0P5c35MiJa9aXi2pVU"
+#REACT_APP_FIRE_BASE_AUTH_DOMAIN = "simplelogin-405ec.firebaseapp.com"
+#REACT_APP_FIRE_BASE_DB_URL = "https://simplelogin-405ec-default-rtdb.europe-west1.firebasedatabase.app"
+#REACT_APP_FIRE_BASE_PROJECT_ID = "simplelogin-405ec"
+#REACT_APP_FIRE_BASE_STORAGE_BUCKET = "simplelogin-405ec.appspot.com"
+#REACT_APP_FIRE_BASE_MESSAGING_SENDER_ID = "1043614064825"
+#REACT_APP_FIRE_BASE_APP_ID = "1:1043614064825:web:dacd90cbd848872559bb68"
+
+
