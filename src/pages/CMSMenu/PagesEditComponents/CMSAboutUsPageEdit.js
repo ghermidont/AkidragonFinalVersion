@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom";
 import {projectFirestore, projectStorage} from "../../../fireBase";
 import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
 import {useAuthContext} from "../../../context/AuthContext";
+import { BsDashCircleFill,  BsPlusCircleFill} from "react-icons/bs";
 
 function CMSAboutUsPageEdit() {
     let publishBtnRef = useRef();
@@ -176,6 +177,40 @@ function CMSAboutUsPageEdit() {
     const [ENTitleText, setENTitleText] = useState("");
     const [ITTitleText, setITTitleText] = useState("");
 
+    const [teamMembersArr, setTeamMembersArr] = useState([]);
+    // const [name, setName] = useState("");
+    // const [avatar, setAvatar] = useState("");
+    // const [title, setTitle] = useState("");
+
+    const handleAddFields = () => {
+        setTeamMembersArr([...teamMembersArr, { name: "",  avatar: "", title:"" }])
+    }
+
+    const handleRemoveFields = id => {
+        const values  = [...teamMembersArr];
+        values.splice(values.findIndex(value => value.id === id), 1);
+        setTeamMembersArr(values);
+    }
+
+    const handleChangeInput = (id, event) => {
+        const newInputFields = teamMembersArr.map(i => {
+            if(id === i.id) {
+                i[event.target.name] = event.target.value
+            }
+            return i;
+        })
+
+        setTeamMembersArr(newInputFields);
+    }
+
+    // const Member = (Name, Avatar, Title) => {
+    //     this.name = Name;
+    //     this.avatar = Avatar;
+    //     this.title = Title;
+    // }
+
+    //const teamMember = new Member(name, avatar, title);
+
     const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
 
     let selectedDoc = "";
@@ -190,9 +225,14 @@ function CMSAboutUsPageEdit() {
         }
     });
 
+    let membersArr = [];
+
     useEffect(() => {
+
         if (selectedDoc !== "") {
             selectedDoc.map(doc => {
+                doc.members.map(member => membersArr.push(member));
+                setTeamMembersArr(membersArr);
                 setENTitle(doc.title.en);
                 setITTitle(doc.title.it);
                 setENTitleText(doc.titleText.en);
@@ -276,6 +316,8 @@ function CMSAboutUsPageEdit() {
                 setENPositionName8(doc.teamMembers.member8.title.en);
                 setITPositionName8(doc.teamMembers.member8.title.it);
             })
+            console.log(membersArr);
+            console.log(teamMembersArr);
         }
     }, [docsFromHookCMS]);
 
@@ -870,6 +912,7 @@ function CMSAboutUsPageEdit() {
 
             collectionRef.set(
                 {
+                    "members": teamMembersArr,
                     "banner": {
                         "en": ENBannerUrl,
                         "it": ITBannerUrl
@@ -1593,6 +1636,57 @@ function CMSAboutUsPageEdit() {
                                     </label>
 
                                     {/*Team members:*/}
+
+                                    <div>Team members list:
+                                        { teamMembersArr.map(inputField => (
+                                            <div key={inputField.id}>
+                                                <label className='form-article__label'>
+                                                    Name:
+                                                    <input
+                                                        name="name"
+                                                        className='form-article__input'
+                                                        type="text"
+                                                        value={name1}
+                                                        onChange={event => handleChangeInput(inputField.id, event)}
+                                                    />
+                                                </label>
+                                                <div>
+                                                    Current avatar:
+                                                    <img style={{width: "25%", height: "auto"}} src={oldAvatar3Url} alt=""/>
+                                                </div>
+
+                                                <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+                                                    <input
+                                                        name="file"
+                                                        className='form-article__btn visually-hidden'
+                                                        type="file"
+                                                        placeholder='file'
+                                                        onChange={event => handleChangeInput(inputField.id, event)}
+                                                    />
+                                                </label>
+                                                <div className="output">
+                                                    { picFileAvatarUploadError3!=="" && <div className="error">{ picFileAvatarUploadError3 }</div>}
+                                                    {picFileAvatarFileTypeError3!=="" && <div className="error">{ picFileAvatarFileTypeError3 }</div> }
+                                                    {avatar3FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/></div> }
+                                                </div>
+
+                                                <label className='form-article__label'>
+                                                    Title:
+                                                    <input
+                                                        name="title"
+                                                        className='form-article__input'
+                                                        type="text"
+                                                        value={name1}
+                                                        onChange={event => handleChangeInput(inputField.id, event)}
+                                                    />
+                                                </label>
+
+                                                <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                                <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(inputField.id)}/>
+                                            </div>
+                                        )) }
+
+                                    </div>
                                     {/*Member1*/}
                                     <div>Team members list:</div>
                                     <div>Member 1:</div>

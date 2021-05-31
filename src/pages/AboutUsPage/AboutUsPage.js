@@ -29,24 +29,6 @@ function AboutUsPage() {
   const [partnerLogo4Url, setPartnerLogo4Url] = useState("");
   const [partnerLogo5Url, setPartnerLogo5Url] = useState("");
 
-  const [oldENBannerUrl, setOldENBannerUrl] = useState("");
-  const [oldITBannerUrl, setOldITBannerUrl] = useState("");
-
-  const [oldAvatar1Url, setOldAvatar1Url] = useState("");
-  const [oldAvatar2Url, setOldAvatar2Url] = useState("");
-  const [oldAvatar3Url, setOldAvatar3Url] = useState("");
-  const [oldAvatar4Url, setOldAvatar4Url] = useState("");
-  const [oldAvatar5Url, setOldAvatar5Url] = useState("");
-  const [oldAvatar6Url, setOldAvatar6Url] = useState("");
-  const [oldAvatar7Url, setOldAvatar7Url] = useState("");
-  const [oldAvatar8Url, setOldAvatar8Url] = useState("");
-
-  const [oldPartnerLogo1Url, setOldPartnerLogo1Url] = useState("");
-  const [oldPartnerLogo2Url, setOldPartnerLogo2Url] = useState("");
-  const [oldPartnerLogo3Url, setOldPartnerLogo3Url] = useState("");
-  const [oldPartnerLogo4Url, setOldPartnerLogo4Url] = useState("");
-  const [oldPartnerLogo5Url, setOldPartnerLogo5Url] = useState("");
-
   // Text
   const [ENCareerTitle, setENCareerTitle] = useState("");
   const [ITCareerTitle, setITCareerTitle] = useState("");
@@ -210,7 +192,7 @@ function AboutUsPage() {
             </div>
             <h2 className="mission__title title">{appLanguage==="it"?ITMissionTitle:ENMissionTitle}</h2>
             <p className="mission__text">
-              {appLanguage==="it"?ITMissionText:ITMissionText}
+              {appLanguage==="it"?ITMissionText:ENMissionText}
             </p>
           </div>
         </div>
