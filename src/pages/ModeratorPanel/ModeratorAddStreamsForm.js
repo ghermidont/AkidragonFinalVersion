@@ -6,6 +6,7 @@ import {useAuthContext} from "../../context/AuthContext";
 import {Dropdown} from "react-bootstrap";
 //import Loader from "react-loader-spinner";
 import ReactPlayer from "react-player/lazy";
+import {sanitizeUrl} from "@braintree/sanitize-url";
 
 export default function ModeratorAddStreamsForm(){
   console.log("ModeratorAddStreamsForm worked");
@@ -20,12 +21,12 @@ export default function ModeratorAddStreamsForm(){
   const [loading, setLoading] = useState(true);
   const [url, setUrl] = useState('');
   const [fileSuccess, setFileSuccess] = useState(false);
-  const [uploadedPicFile, setUploadedPicFile] = useState('');
+  //const [uploadedPicFile, setUploadedPicFile] = useState('');
 
   const fileUploadEventListener = (e) => {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-      setUploadedPicFile(uploadedFile);
+      //setUploadedPicFile(uploadedFile);
       async function putFile(uploadedFile){
         e.preventDefault();
         try {
@@ -47,7 +48,7 @@ export default function ModeratorAddStreamsForm(){
       }
       putFile(uploadedFile).then(()=>console.log(url));
     } else {
-      setUploadedPicFile('');
+      //setUploadedPicFile('');
       setError('Please select an image file (png or jpg)');
     }
   };
@@ -76,24 +77,24 @@ export default function ModeratorAddStreamsForm(){
     e.preventDefault();
   }
 
-  const clearInput = () => {
-    //setArticleCategory("");
-    setVideoURL("");
-    setUrl("");
-    setUploadedPicFile('');
-    setUrl('');
-    setFileSuccess(false);
-
-    const desertRef = projectStorage.ref('streams_pictures/').child(uploadedPicFile.name);
-
-    if(desertRef){
-      desertRef.delete().then(() => {
-        console.log("uploaded image removed successfully");
-      }).catch((error) => {
-        console.log("could not delete the file because:" + error);
-      });
-    }
-  }
+  // const clearInput = () => {
+  //   //setArticleCategory("");
+  //   setVideoURL("");
+  //   setUrl("");
+  //   setUploadedPicFile('');
+  //   setUrl('');
+  //   setFileSuccess(false);
+  //
+  //   const desertRef = projectStorage.ref('streams_pictures/').child(uploadedPicFile.name);
+  //
+  //   if(desertRef){
+  //     desertRef.delete().then(() => {
+  //       console.log("uploaded image removed successfully");
+  //     }).catch((error) => {
+  //       console.log("could not delete the file because:" + error);
+  //     });
+  //   }
+  // }
 
   return (
     <>
@@ -116,7 +117,7 @@ export default function ModeratorAddStreamsForm(){
                 value={videoURL}
                 required
                 onChange={
-                  (e)=>setVideoURL(e.target.value)
+                  (e)=>setVideoURL(sanitizeUrl(e.target.value))
                 }
             />
 
