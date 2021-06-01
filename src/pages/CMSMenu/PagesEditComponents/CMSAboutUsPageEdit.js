@@ -1188,6 +1188,8 @@ function CMSAboutUsPageEdit() {
                                         { picFileAvatarFileTypeError1!=="" && <div className="error">{ picFileAvatarFileTypeError1 }</div> }
                                         {avatar1FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar1Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1231,6 +1233,8 @@ function CMSAboutUsPageEdit() {
                                         { picFileAvatarFileTypeError2!=="" && <div className="error">{ picFileAvatarFileTypeError2 }</div> }
                                         {avatar2FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar2Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1274,6 +1278,8 @@ function CMSAboutUsPageEdit() {
                                         {picFileAvatarFileTypeError3!=="" && <div className="error">{ picFileAvatarFileTypeError3 }</div> }
                                         {avatar3FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1317,6 +1323,8 @@ function CMSAboutUsPageEdit() {
                                         { picFileAvatarFileTypeError4!=="" && <div className="error">{ picFileAvatarFileTypeError4 }</div> }
                                         {avatar4FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar4Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1329,6 +1337,8 @@ function CMSAboutUsPageEdit() {
                                             }
                                         />
                                     </label>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     {/*Member5*/}
                                     <div>Member 5:</div>
@@ -1360,6 +1370,8 @@ function CMSAboutUsPageEdit() {
                                         { picFileAvatarFileTypeError5!=="" && <div className="error">{ picFileAvatarFileTypeError5 }</div> }
                                         {avatar5FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar5Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1372,6 +1384,8 @@ function CMSAboutUsPageEdit() {
                                             }
                                         />
                                     </label>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     {/*Member6*/}
                                     <div>Member 6:</div>
@@ -1403,6 +1417,8 @@ function CMSAboutUsPageEdit() {
                                         { picFileAvatarFileTypeError6!=="" && <div className="error">{ picFileAvatarFileTypeError6 }</div> }
                                         {avatar6FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar6Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1446,6 +1462,8 @@ function CMSAboutUsPageEdit() {
                                         { picFileAvatarFileTypeError7!=="" && <div className="error">{ picFileAvatarFileTypeError7}</div> }
                                         {avatar7FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar7Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1489,6 +1507,8 @@ function CMSAboutUsPageEdit() {
                                         { picFileAvatarFileTypeError8!=="" && <div className="error">{ picFileAvatarFileTypeError8 }</div> }
                                         {avatar8FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar8Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1714,10 +1734,14 @@ function CMSAboutUsPageEdit() {
                                         />
                                     </label>
                                     <div className="output">
+
                                         { picFileAvatarFileTypeError1!=="" && <div className="error">{ picFileAvatarFileTypeError1}</div>}
                                         { picFileAvatarUploadError1!=="" && <div className="error">{ picFileAvatarUploadError1 }</div> }
                                         {avatar1FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar1Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
+
 
                                     <label className='form-article__label'>
                                         Title
@@ -1761,6 +1785,8 @@ function CMSAboutUsPageEdit() {
                                         { picFileAvatarFileTypeError2!=="" && <div className="error">{ picFileAvatarFileTypeError2 }</div> }
                                         {avatar2FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar2Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1804,6 +1830,8 @@ function CMSAboutUsPageEdit() {
                                         { picFileAvatarFileTypeError3!=="" && <div className="error">{ picFileAvatarFileTypeError3 }</div> }
                                         {avatar3FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1847,6 +1875,8 @@ function CMSAboutUsPageEdit() {
                                         { picFileAvatarFileTypeError4!=="" && <div className="error">{ picFileAvatarFileTypeError4 }</div> }
                                         {avatar4FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar4Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1890,6 +1920,8 @@ function CMSAboutUsPageEdit() {
                                         { picFileAvatarFileTypeError5!=="" && <div className="error">{ picFileAvatarFileTypeError5 }</div> }
                                         {avatar5FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar5Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1933,6 +1965,8 @@ function CMSAboutUsPageEdit() {
                                         { picFileAvatarFileTypeError6!=="" && <div className="error">{ picFileAvatarFileTypeError6 }</div> }
                                         {avatar6FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar6Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1976,6 +2010,8 @@ function CMSAboutUsPageEdit() {
                                         { picFileAvatarFileTypeError7!=="" && <div className="error">{ picFileAvatarFileTypeError7 }</div> }
                                         {avatar7FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar7Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -2020,6 +2056,8 @@ function CMSAboutUsPageEdit() {
                                         { picFileAvatarFileTypeError8!=="" && <div className="error">{ picFileAvatarFileTypeError8 }</div> }
                                         {avatar8FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar8Url} alt=""/></div> }
                                     </div>
+                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -2205,22 +2243,3 @@ function CMSAboutUsPageEdit() {
 }
 
 export default CMSAboutUsPageEdit;
-
-
-//For Devs keys list:
-// "ENBanner"
-// "ITBanner"
-// "partnerLogo1"
-// "partnerLogo2"
-// "partnerLogo3"
-// "partnerLogo4"
-// "partnerLogo5"
-// "avatar1"
-// "avatar2"
-// "avatar3"
-// "avatar4"
-// "avatar5"
-// "avatar6"
-// "avatar7"
-// "avatar8"
-
