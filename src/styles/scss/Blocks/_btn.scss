@@ -1,14 +1,12 @@
 /*====Btn====*/
 .btn {
-  width: 19rem;
-  display: block;
+  display: inline-block;
   font-size: 2rem;
   font-weight: 700;
   padding: 0.8rem 1.5rem;
   border-radius: 1rem;
   color: var(--blue);
   text-transform: uppercase;
-  display: block;
   text-align: center;
   margin: 0 auto;
   background-color: var(--btnBg);
@@ -51,6 +49,8 @@
   height: 4.2rem;
   border-radius: 0.6rem;
   color: var(--blueDark);
+  font-size: 1.8rem;
+  font-style: normal;
   background-color: var(--blue);
   cursor: pointer;
   transition: opacity 0.3s;
@@ -62,5 +62,13 @@
 
   &--tournament {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .btn-upload{
+    font-size: 1.5rem;
+    padding: .8rem 1.5rem;
+    height: 3.4rem;
   }
 }

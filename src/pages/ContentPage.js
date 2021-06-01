@@ -8,72 +8,73 @@ import {useLanguageContext} from "../context/LanguageContext";
 
 export default function Contents() {
   console.log("Contents component worked.");
-    const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
-    const [ITBannerTitle, setITBannerTitle] = useState("");
-    const [ITBannerText, setITBannerText] = useState("");
-    const [ITSwiper1Title, setITSwiper1Title] = useState("");
-    const [ITSwiper2Title, setITSwiper2Title] = useState("");
+  const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
+  const [ITBannerTitle, setITBannerTitle] = useState("");
+  const [ITBannerText, setITBannerText] = useState("");
+  const [ITSwiper1Title, setITSwiper1Title] = useState("");
+  const [ITSwiper2Title, setITSwiper2Title] = useState("");
 
-    const [ENBannerTitle, setENBannerTitle] = useState("");
-    const [ENBannerText, setENBannerText] = useState("");
-    const [ENSwiper1Title, setENSwiper1Title] = useState("");
-    const [ENSwiper2Title, setENSwiper2Title] = useState("");
-    const {appLanguage} = useLanguageContext();
+  const [ENBannerTitle, setENBannerTitle] = useState("");
+  const [ENBannerText, setENBannerText] = useState("");
+  const [ENSwiper1Title, setENSwiper1Title] = useState("");
+  const [ENSwiper2Title, setENSwiper2Title] = useState("");
+  const {appLanguage} = useLanguageContext();
 
-    let selectedDoc = "";
+  let selectedDoc = "";
 
-    useEffect(() => {
-        console.log(docsFromHookCMS);
-        if (docsFromHookCMS) {
-            selectedDoc = docsFromHookCMS.filter(function (doc) {
-                return doc.id === "contentPage";
-            });
-            console.log(selectedDoc);
-        }
-    });
+  useEffect(() => {
+    console.log(docsFromHookCMS);
+    if (docsFromHookCMS) {
+      selectedDoc = docsFromHookCMS.filter(function (doc) {
+        return doc.id === "contentPage";
+      });
+      console.log(selectedDoc);
+    }
+  });
 
-    useEffect(() => {
-        if (selectedDoc !== "") {
-            selectedDoc.map(doc => {
-                setITBannerTitle(doc.bannerTitle.it);
-                setITBannerText(doc.bannerText.it);
-                setITSwiper1Title(doc.swiper1.it);
-                setITSwiper2Title(doc.swiper2.it);
+  useEffect(() => {
+    if (selectedDoc !== "") {
+      selectedDoc.map(doc => {
+        setITBannerTitle(doc.bannerTitle.it);
+        setITBannerText(doc.bannerText.it);
+        setITSwiper1Title(doc.swiper1.it);
+        setITSwiper2Title(doc.swiper2.it);
 
-                setENBannerTitle(doc.bannerTitle.en);
-                setENBannerText(doc.bannerText.en);
-                setENSwiper1Title(doc.swiper1.en);
-                setENSwiper2Title(doc.swiper2.en);
-            })
-        }
-    }, [docsFromHookCMS]);
+        setENBannerTitle(doc.bannerTitle.en);
+        setENBannerText(doc.bannerText.en);
+        setENSwiper1Title(doc.swiper1.en);
+        setENSwiper2Title(doc.swiper2.en);
+      })
+    }
+  }, [docsFromHookCMS]);
 
-    return (
+  return (
     <main className="page">
       <section className="video-page">
         <div className="container">
-            <div className="info__logo logo-section">
-                <img src={logoSection} alt="" className="info__img"/>
-            </div>
-          <h1 className="video-page__title title"><span>{appLanguage==="it"?ITBannerTitle:ENBannerTitle}</span></h1>
+          <div className="info__logo logo-section">
+            <img src={logoSection} alt="" className="info__img"/>
+          </div>
+          <h1 className="video-page__title title"><span>{appLanguage === "it" ? ITBannerTitle : ENBannerTitle}</span>
+          </h1>
           <p className="video-page__subtitle">
-              {appLanguage==="it"?ITBannerText:ENBannerText}
+            {appLanguage === "it" ? ITBannerText : ENBannerText}
           </p>
         </div>
       </section>
 
       <section className="video">
         <div className="container">
-            <h2 className="video__title">{appLanguage==="it"?ITSwiper1Title:ENSwiper1Title}</h2>
-            <div className="video__wrapper"></div>
-             <EntertainmentSwiper/>
-             <button className="video__btn btn">Guarda altri</button>
+          <h2 className="video__title">{appLanguage === "it" ? ITSwiper1Title : ENSwiper1Title}</h2>
+          <div className="video__wrapper"></div>
+          <EntertainmentSwiper/>
+          <button className="video__btn btn">Guarda altri</button>
         </div>
       </section>
 
       <section className="video">
         <div className="container">
-          <h2 className="video__title">{appLanguage==="it"?ITSwiper2Title:ENSwiper2Title}</h2>
+          <h2 className="video__title">{appLanguage === "it" ? ITSwiper2Title : ENSwiper2Title}</h2>
           <MatchesTournamentsSwiper/>
           <button className="video__btn btn">Guarda altri</button>
         </div>

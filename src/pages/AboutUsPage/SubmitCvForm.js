@@ -54,6 +54,7 @@ export default function SubmitCvForm() {
             Name
             <input
                 className='form-update__input'
+                placeholder='Name'
                 id="name"
                 type="text"
                 required
@@ -73,9 +74,9 @@ export default function SubmitCvForm() {
             />
           </label>
 
-          <label className="form-article__label-check form-cv">
+          <label className="form-article__label-check form-cv ml-4">
             <input
-                className="form-check-input mt-0"
+                className="form-check-input mr"
                 type="checkbox"
                 value={!checkBoxState?"I consent to the processing of my personal data.":''}
                 name="checkbox"
@@ -94,12 +95,9 @@ export default function SubmitCvForm() {
             {/*</label>*/}
 
             {sizeExceededError&&<error>Max file size exceeded</error>}
-            <label>Attach file:</label>
-            <input type="file" name="attachment" id="fileInput" onChange={e=>setFileSize(e.target.files[0].size)}/>
-            <input type="submit" value="Submit" />
-
-            <button className="form-article__btn">Submit</button>
-
+            <label style={{display:"block"}}>Attach file:</label>
+            <input className='form__name' type="file" name="attachment" id="fileInput" onChange={e=>setFileSize(e.target.files[0].size)}/>
+            <input className='btn-upload' type="submit" value="Submit" />
           </div>
         </form>
       </div>

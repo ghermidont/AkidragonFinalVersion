@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {useDataFromFirestore, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import logoSection from '../assets/images/dest/logo-section.png';
+import vsIcon from '../assets/images/dest/icons/vsIcon.png';
 import {useLanguageContext} from "../context/LanguageContext";
 
 function TournamentsPage() {
@@ -59,12 +60,12 @@ function TournamentsPage() {
   const PassedMatchTemp = (doc) => {
     let date = new Date(doc.eventDate);
     let parsedDate = date.toString();
-   
+
     return (
         <li className="tab__item">
           <div className="tab__image"
                style={{
-              
+
                  position: "center",
                  backgroundSize: "cover",
                  backgroundRepeat: "no-repeat"
@@ -72,7 +73,7 @@ function TournamentsPage() {
                    <img
                 className="tab__img"
                 src={doc.eventBanner}
-                alt="some text"/>  
+                alt="some text"/>
           </div>
           <div className="tab__content">
             <a className="tab__title">Category: {doc.eventCategory}</a>
@@ -97,7 +98,7 @@ function TournamentsPage() {
               <a className="" href={doc.eventVideoLink}>Watch</a>
             </button>
             <button className="tab__link-info">
-              <a className="" href={doc.eventInfoPage}>Info</a>Info
+              <a className="" href={doc.eventInfoPage}>Info</a>
             </button>
           </div>
         </li>
@@ -107,7 +108,7 @@ function TournamentsPage() {
   const PassedTournTemp = (doc) => {
     let date = new Date(doc.eventDate);
     let parsedDate = date.toString();
-    
+
     return (<li className="tab__item">
       <div className="tab__image"
            style={{
@@ -118,7 +119,7 @@ function TournamentsPage() {
              <img
                 className="tab__img"
                 src={doc.eventBanner}
-                alt="some text"/>  
+                alt="some text"/>
       </div>
       <div className="tab__content">
         <a className="tab__title">Category: {doc.eventCategory}</a>
@@ -141,7 +142,7 @@ function TournamentsPage() {
           <a className="" href={doc.eventVideoLink}>Watch</a>
         </button>
         <button className="tab__link-info">
-          <a className="" href={doc.eventInfoPage}>Info</a>Info
+          <a className="" href={doc.eventInfoPage}>Info</a>
         </button>
       </div>
     </li>);
@@ -161,7 +162,7 @@ function TournamentsPage() {
                <img
                 className="tab__img"
                 src={doc.eventBanner}
-                alt="some text"/>  
+                alt="some text"/>
       </div>
       <div className="tab__content">
         <a className="tab__title">Category: {doc.eventCategory}</a>
@@ -177,6 +178,12 @@ function TournamentsPage() {
                 src={doc.pictureURL1?doc.pictureURL1:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
                 alt=""/>
           </a>
+        </li>
+        <li className="tab__item-icon">
+            <img
+                className="tab__img-icon"
+                src={vsIcon}
+                alt=""/>
         </li>
         <li className="tab__item-icon">
           <a className="tab__link-icon">
@@ -212,7 +219,7 @@ function TournamentsPage() {
                <img
                 className="tab__img"
                 src={doc.eventBanner}
-                alt="some text"/>  
+                alt="some text"/>
       </div>
       <div className="tab__content">
         <a className="tab__title">Category: {doc.eventCategory}</a>
@@ -335,3 +342,34 @@ function TournamentsPage() {
 }
 
 export default TournamentsPage;
+
+
+  {/*<div className="tournament__tab tab">*/}
+  {/*  <div className="tab__body">*/}
+  {/*    <ul className="tab__body-list">*/}
+  {/*      <li className="tab__body-item">*/}
+  {/*        <button className="tab__body-btn active" type="button"*/}
+  {/*                data-tab="#tab_1">Eventi passati*/}
+  {/*        </button>*/}
+  {/*      </li>*/}
+  {/*      <li className="tab__body-item">*/}
+  {/*        <button className="tab__body-btn" type="button"*/}
+  {/*                data-tab="#tab_2">Prossimi eventi*/}
+  {/*        </button>*/}
+  {/*      </li>*/}
+  {/*    </ul>*/}
+
+  {/*    <ul className="tab__list active" id="tab_1">*/}
+  {/*      {passedEvents && passedEvents.slice(0, 4).map(doc =>*/}
+  {/*        doc.eventCategory === "match" ? PassedMatchTemp(doc) : PassedTournTemp(doc)*/}
+  {/*      )}*/}
+  {/*    </ul>*/}
+
+  {/*    <ul className="tab__list active" id="tab_2">*/}
+  {/*      {futureEvents && futureEvents.slice(0, 4).map(doc =>*/}
+  {/*        doc.eventCategory === "match" ? FutureMatchTemp(doc) : FutureTournTemp(doc)*/}
+  {/*      )}*/}
+  {/*    </ul>*/}
+
+  {/*  </div>*/}
+  {/*</div>*/}

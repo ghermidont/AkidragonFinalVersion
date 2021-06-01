@@ -81,15 +81,16 @@ const LoginSignUpForm = () => {
              ):(
              <>
                <form>
-                 <label>
-                   <input type="file" onChange={fileUploadEventListener} />
+                 <label className='btn-upload'>
+                   Upload File
+                   <input className='visually-hidden' type="file" onChange={fileUploadEventListener} />
                  </label>
                  <div className="output">
                    { error && <div className="error">{ error }</div>}
 
                  </div>
                </form>
-               <div>
+               <div className='form__intro-text'>
                   <p>
                      Have an account?
                   </p>

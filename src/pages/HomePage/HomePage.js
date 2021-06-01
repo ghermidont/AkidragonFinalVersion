@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 //import {useAuthContext} from "../../context/AuthContext";
 import {useLanguageContext} from "../../context/LanguageContext";
 import logoSection from '../../assets/images/dest/logo-section.png';
-//import logoBig from '../../assets/images/dest/logo-big.png';
+import logoBig from '../../assets/images/dest/logo-big.png';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 
@@ -69,7 +69,8 @@ export default function HomePage() {
           <section className="banner">
             <div className="container">
               <div className="banner__image">
-                <img className="banner__img" src={appLanguage==="it"?ITBannerUrl:ENBannerUrl} alt="Akidragon banner"/>
+                {/*<img className="banner__img" src={appLanguage==="it"?ITBannerUrl:ENBannerUrl} alt="Akidrago banner"/>*/}
+                <img className="banner__img" src={logoBig} alt="Akidrago banner"/>
               </div>
             </div>
           </section>
