@@ -4,8 +4,21 @@ import {projectFirestore, projectStorage} from "../../../fireBase";
 import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
 import {useAuthContext} from "../../../context/AuthContext";
 import { BsDashCircleFill,  BsPlusCircleFill} from "react-icons/bs";
+import { v4 as uuidv4 } from 'uuid';
+
+//TODO Figure out how to output the uploaded file.
 
 function CMSAboutUsPageEdit() {
+    const ColoredLine = ({ color }) => (
+        <hr
+            style={{
+                color: color,
+                backgroundColor: color,
+                height: 5
+            }}
+        />
+    );
+
     let publishBtnRef = useRef();
     //let cancelBtnRef = useRef();
     const {currentUser} = useAuthContext();
@@ -177,41 +190,30 @@ function CMSAboutUsPageEdit() {
     const [ENTitleText, setENTitleText] = useState("");
     const [ITTitleText, setITTitleText] = useState("");
 
-    const [teamMembersArr, setTeamMembersArr] = useState([]);
-    // const [name, setName] = useState("");
-    // const [avatar, setAvatar] = useState("");
-    // const [title, setTitle] = useState("");
+    const [generalTeamMembersArr, setGeneralTeamMembersArr] = useState([]);
 
     const handleAddFields = () => {
-        setTeamMembersArr([...teamMembersArr, { name: "",  avatar: "", title:"" }])
+        setGeneralTeamMembersArr([...generalTeamMembersArr, { name: "",  avatar: "", title: {en: "", it: "" }}])
     }
 
     const handleRemoveFields = id => {
-        const values  = [...teamMembersArr];
+        const values  = [...generalTeamMembersArr];
         values.splice(values.findIndex(value => value.id === id), 1);
-        setTeamMembersArr(values);
+        setGeneralTeamMembersArr(values);
     }
 
     const handleChangeInput = (id, event) => {
-        const newInputFields = teamMembersArr.map(i => {
+        const newInputFields = generalTeamMembersArr.map(i => {
             if(id === i.id) {
                 i[event.target.name] = event.target.value
             }
             return i;
         })
-
-        setTeamMembersArr(newInputFields);
+        setGeneralTeamMembersArr(newInputFields);
     }
 
-    // const Member = (Name, Avatar, Title) => {
-    //     this.name = Name;
-    //     this.avatar = Avatar;
-    //     this.title = Title;
-    // }
-
-    //const teamMember = new Member(name, avatar, title);
-
     const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
+    console.log(docsFromHookCMS);
 
     let selectedDoc = "";
 
@@ -231,8 +233,9 @@ function CMSAboutUsPageEdit() {
 
         if (selectedDoc !== "") {
             selectedDoc.map(doc => {
-                doc.members.map(member => membersArr.push(member));
-                setTeamMembersArr(membersArr);
+                doc.members.map(member => membersArr.push({...member, id: uuidv4()}));
+                setGeneralTeamMembersArr(membersArr);
+
                 setENTitle(doc.title.en);
                 setITTitle(doc.title.it);
                 setENTitleText(doc.titleText.en);
@@ -316,8 +319,8 @@ function CMSAboutUsPageEdit() {
                 setENPositionName8(doc.teamMembers.member8.title.en);
                 setITPositionName8(doc.teamMembers.member8.title.it);
             })
-            console.log(membersArr);
-            console.log(teamMembersArr);
+            console.log("This is the generalTeamMembersArr");
+            console.log(generalTeamMembersArr);
         }
     }, [docsFromHookCMS]);
 
@@ -912,7 +915,7 @@ function CMSAboutUsPageEdit() {
 
             collectionRef.set(
                 {
-                    "members": teamMembersArr,
+                    "members": generalTeamMembersArr,
                     "banner": {
                         "en": ENBannerUrl,
                         "it": ITBannerUrl
@@ -1189,7 +1192,7 @@ function CMSAboutUsPageEdit() {
                                         {avatar1FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar1Url} alt=""/></div> }
                                     </div>
                                     <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
+                                    <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1234,7 +1237,7 @@ function CMSAboutUsPageEdit() {
                                         {avatar2FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar2Url} alt=""/></div> }
                                     </div>
                                     <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
+                                    <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1279,7 +1282,7 @@ function CMSAboutUsPageEdit() {
                                         {avatar3FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/></div> }
                                     </div>
                                     <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
+                                    <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1324,7 +1327,7 @@ function CMSAboutUsPageEdit() {
                                         {avatar4FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar4Url} alt=""/></div> }
                                     </div>
                                     <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
+                                    <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1338,7 +1341,7 @@ function CMSAboutUsPageEdit() {
                                         />
                                     </label>
                                     <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
+                                    <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
 
                                     {/*Member5*/}
                                     <div>Member 5:</div>
@@ -1371,7 +1374,7 @@ function CMSAboutUsPageEdit() {
                                         {avatar5FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar5Url} alt=""/></div> }
                                     </div>
                                     <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
+                                    <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1385,7 +1388,7 @@ function CMSAboutUsPageEdit() {
                                         />
                                     </label>
                                     <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
+                                    <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
 
                                     {/*Member6*/}
                                     <div>Member 6:</div>
@@ -1418,7 +1421,7 @@ function CMSAboutUsPageEdit() {
                                         {avatar6FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar6Url} alt=""/></div> }
                                     </div>
                                     <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
+                                    <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1463,7 +1466,7 @@ function CMSAboutUsPageEdit() {
                                         {avatar7FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar7Url} alt=""/></div> }
                                     </div>
                                     <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
+                                    <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1508,7 +1511,7 @@ function CMSAboutUsPageEdit() {
                                         {avatar8FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar8Url} alt=""/></div> }
                                     </div>
                                     <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
+                                    <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
 
                                     <label className='form-article__label'>
                                         Title
@@ -1658,21 +1661,24 @@ function CMSAboutUsPageEdit() {
                                     {/*Team members:*/}
 
                                     <div>Team members list:
-                                        { teamMembersArr.map(inputField => (
+                                        { generalTeamMembersArr.map(inputField => (
+                                            <>
                                             <div key={inputField.id}>
+                                                <h1>Test member</h1>
+                                                <h1>{console.log(inputField)}></h1>
                                                 <label className='form-article__label'>
                                                     Name:
                                                     <input
                                                         name="name"
                                                         className='form-article__input'
                                                         type="text"
-                                                        value={name1}
+                                                        value={inputField.name}
                                                         onChange={event => handleChangeInput(inputField.id, event)}
                                                     />
                                                 </label>
                                                 <div>
                                                     Current avatar:
-                                                    <img style={{width: "25%", height: "auto"}} src={oldAvatar3Url} alt=""/>
+                                                    <img style={{width: "25%", height: "auto"}} src={inputField.photo} alt=""/>
                                                 </div>
 
                                                 <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
@@ -1686,8 +1692,8 @@ function CMSAboutUsPageEdit() {
                                                 </label>
                                                 <div className="output">
                                                     { picFileAvatarUploadError3!=="" && <div className="error">{ picFileAvatarUploadError3 }</div>}
-                                                    {picFileAvatarFileTypeError3!=="" && <div className="error">{ picFileAvatarFileTypeError3 }</div> }
-                                                    {avatar3FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/></div> }
+                                                    { picFileAvatarFileTypeError3!=="" && <div className="error">{ picFileAvatarFileTypeError3 }</div> }
+                                                    { avatar3FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/></div> }
                                                 </div>
 
                                                 <label className='form-article__label'>
@@ -1696,381 +1702,21 @@ function CMSAboutUsPageEdit() {
                                                         name="title"
                                                         className='form-article__input'
                                                         type="text"
-                                                        value={name1}
+                                                        value={inputField.title.en}
                                                         onChange={event => handleChangeInput(inputField.id, event)}
                                                     />
                                                 </label>
 
-                                                <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                                <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(inputField.id)}/>
+                                                <BsPlusCircleFill style={{marginRight: "2em"}} onClick={()=>handleAddFields()}/>
+                                                <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(inputField.id)}/>
+                                                <ColoredLine color="red" />
                                             </div>
+                                            <br />
+                                            </>
+
                                         )) }
 
                                     </div>
-                                    {/*Member1*/}
-                                    <div>Team members list:</div>
-                                    <div>Member 1:</div>
-                                    <label className='form-article__label'>
-                                        Name:
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={name1}
-                                            onChange={
-                                                (e)=>setName1(e.target.value)
-                                            }
-                                        />
-                                    </label>
-                                    <div>
-                                        Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar1Url} alt=""/>
-                                    </div>
-                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
-                                        <input
-                                            className='form-article__btn visually-hidden'
-                                            type="file"
-                                            placeholder='file'
-                                            onChange={avatar1FileUploadEventListener}
-                                        />
-                                    </label>
-                                    <div className="output">
-
-                                        { picFileAvatarFileTypeError1!=="" && <div className="error">{ picFileAvatarFileTypeError1}</div>}
-                                        { picFileAvatarUploadError1!=="" && <div className="error">{ picFileAvatarUploadError1 }</div> }
-                                        {avatar1FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar1Url} alt=""/></div> }
-                                    </div>
-                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
-
-
-                                    <label className='form-article__label'>
-                                        Title
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={ENPositionName1}
-                                            onChange={
-                                                (e)=>setENPositionName1(e.target.value)
-                                            }
-                                        />
-                                    </label>
-
-                                    {/*Member2*/}
-                                    <div>Member 2:</div>
-                                    <label className='form-article__label'>
-                                        Name:
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={name2}
-                                            onChange={
-                                                (e)=>setName2(e.target.value)
-                                            }
-                                        />
-                                    </label>
-                                    <div>
-                                        Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar2Url} alt=""/>
-                                    </div>
-                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
-                                        <input
-                                            className='form-article__btn visually-hidden'
-                                            type="file"
-                                            placeholder='file'
-                                            onChange={avatar2FileUploadEventListener}
-                                        />
-                                    </label>
-                                    <div className="output">
-                                        { picFileAvatarUploadError2!=="" && <div className="error">{ picFileAvatarUploadError2 }</div>}
-                                        { picFileAvatarFileTypeError2!=="" && <div className="error">{ picFileAvatarFileTypeError2 }</div> }
-                                        {avatar2FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar2Url} alt=""/></div> }
-                                    </div>
-                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
-
-                                    <label className='form-article__label'>
-                                        Title
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={ENPositionName2}
-                                            onChange={
-                                                (e)=>setENPositionName2(e.target.value)
-                                            }
-                                        />
-                                    </label>
-
-                                    {/*Member3*/}
-                                    <div>Member 3:</div>
-                                    <label className='form-article__label'>
-                                        Name:
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={name3}
-                                            onChange={
-                                                (e)=>setName3(e.target.value)
-                                            }
-                                        />
-                                    </label>
-                                    <div>
-                                        Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar3Url} alt=""/>
-                                    </div>
-                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
-                                        <input
-                                            className='form-article__btn visually-hidden'
-                                            type="file"
-                                            placeholder='file'
-                                            onChange={avatar3FileUploadEventListener}
-                                        />
-                                    </label>
-                                    <div className="output">
-                                        { picFileAvatarUploadError3!=="" && <div className="error">{ picFileAvatarUploadError3 }</div>}
-                                        { picFileAvatarFileTypeError3!=="" && <div className="error">{ picFileAvatarFileTypeError3 }</div> }
-                                        {avatar3FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/></div> }
-                                    </div>
-                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
-
-                                    <label className='form-article__label'>
-                                        Title
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={ENPositionName3}
-                                            onChange={
-                                                (e)=>setENPositionName3(e.target.value)
-                                            }
-                                        />
-                                    </label>
-
-                                    {/*Member4*/}
-                                    <div>Member 4:</div>
-                                    <label className='form-article__label'>
-                                        Name:
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={name4}
-                                            onChange={
-                                                (e)=>setName4(e.target.value)
-                                            }
-                                        />
-                                    </label>
-                                    <div>
-                                        Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar4Url} alt=""/>
-                                    </div>
-                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
-                                        <input
-                                            className='form-article__btn visually-hidden'
-                                            type="file"
-                                            placeholder='file'
-                                            onChange={avatar4FileUploadEventListener}
-                                        />
-                                    </label>
-                                    <div className="output">
-                                        { picFileAvatarUploadError4!=="" && <div className="error">{ picFileAvatarUploadError4 }</div>}
-                                        { picFileAvatarFileTypeError4!=="" && <div className="error">{ picFileAvatarFileTypeError4 }</div> }
-                                        {avatar4FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar4Url} alt=""/></div> }
-                                    </div>
-                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
-
-                                    <label className='form-article__label'>
-                                        Title
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={ENPositionName4}
-                                            onChange={
-                                                (e)=>setENPositionName4(e.target.value)
-                                            }
-                                        />
-                                    </label>
-
-                                    {/*Member5*/}
-                                    <div>Member 5:</div>
-                                    <label className='form-article__label'>
-                                        Name:
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={name5}
-                                            onChange={
-                                                (e)=>setName5(e.target.value)
-                                            }
-                                        />
-                                    </label>
-                                    <div>
-                                        Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar5Url} alt=""/>
-                                    </div>
-                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
-                                        <input
-                                            className='form-article__btn visually-hidden'
-                                            type="file"
-                                            placeholder='file'
-                                            onChange={avatar5FileUploadEventListener}
-                                        />
-                                    </label>
-                                    <div className="output">
-                                        { picFileAvatarUploadError5!=="" && <div className="error">{ picFileAvatarUploadError5 }</div>}
-                                        { picFileAvatarFileTypeError5!=="" && <div className="error">{ picFileAvatarFileTypeError5 }</div> }
-                                        {avatar5FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar5Url} alt=""/></div> }
-                                    </div>
-                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
-
-                                    <label className='form-article__label'>
-                                        Title
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={ENPositionName5}
-                                            onChange={
-                                                (e)=>setENPositionName5(e.target.value)
-                                            }
-                                        />
-                                    </label>
-
-                                    {/*Member6*/}
-                                    <div>Member 6:</div>
-                                    <label className='form-article__label'>
-                                        Name:
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={name6}
-                                            onChange={
-                                                (e)=>setName6(e.target.value)
-                                            }
-                                        />
-                                    </label>
-                                    <div>
-                                        Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar6Url} alt=""/>
-                                    </div>
-                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
-                                        <input
-                                            className='form-article__btn visually-hidden'
-                                            type="file"
-                                            placeholder='file'
-                                            onChange={avatar6FileUploadEventListener}
-                                        />
-                                    </label>
-                                    <div className="output">
-                                        { picFileAvatarUploadError6!=="" && <div className="error">{ picFileAvatarUploadError6 }</div>}
-                                        { picFileAvatarFileTypeError6!=="" && <div className="error">{ picFileAvatarFileTypeError6 }</div> }
-                                        {avatar6FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar6Url} alt=""/></div> }
-                                    </div>
-                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
-
-                                    <label className='form-article__label'>
-                                        Title
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={ENPositionName6}
-                                            onChange={
-                                                (e)=>setENPositionName6(e.target.value)
-                                            }
-                                        />
-                                    </label>
-
-                                    {/*Member7*/}
-                                    <div>Member 7:</div>
-                                    <label className='form-article__label'>
-                                        Name:
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={name7}
-                                            onChange={
-                                                (e)=>setName7(e.target.value)
-                                            }
-                                        />
-                                    </label>
-                                    <div>
-                                        Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar7Url} alt=""/>
-                                    </div>
-                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
-                                        <input
-                                            className='form-article__btn visually-hidden'
-                                            type="file"
-                                            placeholder='file'
-                                            onChange={avatar7FileUploadEventListener}
-                                        />
-                                    </label>
-                                    <div className="output">
-                                        { picFileAvatarUploadError7!=="" && <div className="error">{ picFileAvatarUploadError7}</div>}
-                                        { picFileAvatarFileTypeError7!=="" && <div className="error">{ picFileAvatarFileTypeError7 }</div> }
-                                        {avatar7FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar7Url} alt=""/></div> }
-                                    </div>
-                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
-
-                                    <label className='form-article__label'>
-                                        Title
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={ENPositionName7}
-                                            onChange={
-                                                (e)=>setENPositionName7(e.target.value)
-                                            }
-                                        />
-                                    </label>
-
-                                    {/*Member8*/}
-                                    <div>Member 8:</div>
-                                    <label className='form-article__label'>
-                                        Name:
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-                                            value={name8}
-                                            onChange={
-                                                (e)=>setName8(e.target.value)
-                                            }
-                                        />
-                                    </label>
-                                    <div>
-                                        Current avatar:
-                                        <img style={{width: "25%", height: "auto"}} src={oldAvatar8Url} alt=""/>
-                                    </div>
-                                    <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
-                                        <input
-                                            className='form-article__btn visually-hidden'
-                                            type="file"
-
-                                            placeholder='file'
-                                            onChange={avatar8FileUploadEventListener}
-                                        />
-                                    </label>
-                                    <div className="output">
-                                        { picFileAvatarUploadError8!=="" && <div className="error">{ picFileAvatarUploadError8 }</div>}
-                                        { picFileAvatarFileTypeError8!=="" && <div className="error">{ picFileAvatarFileTypeError8 }</div> }
-                                        {avatar8FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar8Url} alt=""/></div> }
-                                    </div>
-                                    <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
-                                    <BsDashCircleFill disabled={teamMembersArr.length === 1} onClick={() => handleRemoveFields(teamMembersArr.id)}/>
-
-                                    <label className='form-article__label'>
-                                        Title
-                                        <input
-                                            className='form-article__input'
-                                            type="text"
-
-                                            value={ENPositionName8}
-                                            onChange={
-                                                (e)=>setENPositionName8(e.target.value)
-                                            }
-                                        />
-                                    </label>
 
                                     <label className='form-article__label'>
                                         Partners title:
@@ -2243,3 +1889,369 @@ function CMSAboutUsPageEdit() {
 }
 
 export default CMSAboutUsPageEdit;
+
+//
+// {/*Member1*/}
+// <div>Team members list:</div>
+// <div>Member 1:</div>
+// <label className='form-article__label'>
+//     Name:
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={name1}
+//         onChange={
+//             (e)=>setName1(e.target.value)
+//         }
+//     />
+// </label>
+// <div>
+//     Current avatar:
+//     <img style={{width: "25%", height: "auto"}} src={oldAvatar1Url} alt=""/>
+// </div>
+// <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+//     <input
+//         className='form-article__btn visually-hidden'
+//         type="file"
+//         placeholder='file'
+//         onChange={avatar1FileUploadEventListener}
+//     />
+// </label>
+// <div className="output">
+//
+//     { picFileAvatarFileTypeError1!=="" && <div className="error">{ picFileAvatarFileTypeError1}</div>}
+//     { picFileAvatarUploadError1!=="" && <div className="error">{ picFileAvatarUploadError1 }</div> }
+//     {avatar1FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar1Url} alt=""/></div> }
+// </div>
+// <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+// <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
+//
+//
+// <label className='form-article__label'>
+//     Title
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={ENPositionName1}
+//         onChange={
+//             (e)=>setENPositionName1(e.target.value)
+//         }
+//     />
+// </label>
+//
+// {/*Member2*/}
+// <div>Member 2:</div>
+// <label className='form-article__label'>
+//     Name:
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={name2}
+//         onChange={
+//             (e)=>setName2(e.target.value)
+//         }
+//     />
+// </label>
+// <div>
+//     Current avatar:
+//     <img style={{width: "25%", height: "auto"}} src={oldAvatar2Url} alt=""/>
+// </div>
+// <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+//     <input
+//         className='form-article__btn visually-hidden'
+//         type="file"
+//         placeholder='file'
+//         onChange={avatar2FileUploadEventListener}
+//     />
+// </label>
+// <div className="output">
+//     { picFileAvatarUploadError2!=="" && <div className="error">{ picFileAvatarUploadError2 }</div>}
+//     { picFileAvatarFileTypeError2!=="" && <div className="error">{ picFileAvatarFileTypeError2 }</div> }
+//     {avatar2FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar2Url} alt=""/></div> }
+// </div>
+// <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+// <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
+//
+// <label className='form-article__label'>
+//     Title
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={ENPositionName2}
+//         onChange={
+//             (e)=>setENPositionName2(e.target.value)
+//         }
+//     />
+// </label>
+//
+// {/*Member3*/}
+// <div>Member 3:</div>
+// <label className='form-article__label'>
+//     Name:
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={name3}
+//         onChange={
+//             (e)=>setName3(e.target.value)
+//         }
+//     />
+// </label>
+// <div>
+//     Current avatar:
+//     <img style={{width: "25%", height: "auto"}} src={oldAvatar3Url} alt=""/>
+// </div>
+// <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+//     <input
+//         className='form-article__btn visually-hidden'
+//         type="file"
+//         placeholder='file'
+//         onChange={avatar3FileUploadEventListener}
+//     />
+// </label>
+// <div className="output">
+//     { picFileAvatarUploadError3!=="" && <div className="error">{ picFileAvatarUploadError3 }</div>}
+//     { picFileAvatarFileTypeError3!=="" && <div className="error">{ picFileAvatarFileTypeError3 }</div> }
+//     {avatar3FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/></div> }
+// </div>
+// <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+// <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
+//
+// <label className='form-article__label'>
+//     Title
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={ENPositionName3}
+//         onChange={
+//             (e)=>setENPositionName3(e.target.value)
+//         }
+//     />
+// </label>
+//
+// {/*Member4*/}
+// <div>Member 4:</div>
+// <label className='form-article__label'>
+//     Name:
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={name4}
+//         onChange={
+//             (e)=>setName4(e.target.value)
+//         }
+//     />
+// </label>
+// <div>
+//     Current avatar:
+//     <img style={{width: "25%", height: "auto"}} src={oldAvatar4Url} alt=""/>
+// </div>
+// <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+//     <input
+//         className='form-article__btn visually-hidden'
+//         type="file"
+//         placeholder='file'
+//         onChange={avatar4FileUploadEventListener}
+//     />
+// </label>
+// <div className="output">
+//     { picFileAvatarUploadError4!=="" && <div className="error">{ picFileAvatarUploadError4 }</div>}
+//     { picFileAvatarFileTypeError4!=="" && <div className="error">{ picFileAvatarFileTypeError4 }</div> }
+//     {avatar4FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar4Url} alt=""/></div> }
+// </div>
+// <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+// <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
+//
+// <label className='form-article__label'>
+//     Title
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={ENPositionName4}
+//         onChange={
+//             (e)=>setENPositionName4(e.target.value)
+//         }
+//     />
+// </label>
+//
+// {/*Member5*/}
+// <div>Member 5:</div>
+// <label className='form-article__label'>
+//     Name:
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={name5}
+//         onChange={
+//             (e)=>setName5(e.target.value)
+//         }
+//     />
+// </label>
+// <div>
+//     Current avatar:
+//     <img style={{width: "25%", height: "auto"}} src={oldAvatar5Url} alt=""/>
+// </div>
+// <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+//     <input
+//         className='form-article__btn visually-hidden'
+//         type="file"
+//         placeholder='file'
+//         onChange={avatar5FileUploadEventListener}
+//     />
+// </label>
+// <div className="output">
+//     { picFileAvatarUploadError5!=="" && <div className="error">{ picFileAvatarUploadError5 }</div>}
+//     { picFileAvatarFileTypeError5!=="" && <div className="error">{ picFileAvatarFileTypeError5 }</div> }
+//     {avatar5FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar5Url} alt=""/></div> }
+// </div>
+// <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+// <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
+//
+// <label className='form-article__label'>
+//     Title
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={ENPositionName5}
+//         onChange={
+//             (e)=>setENPositionName5(e.target.value)
+//         }
+//     />
+// </label>
+//
+// {/*Member6*/}
+// <div>Member 6:</div>
+// <label className='form-article__label'>
+//     Name:
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={name6}
+//         onChange={
+//             (e)=>setName6(e.target.value)
+//         }
+//     />
+// </label>
+// <div>
+//     Current avatar:
+//     <img style={{width: "25%", height: "auto"}} src={oldAvatar6Url} alt=""/>
+// </div>
+// <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+//     <input
+//         className='form-article__btn visually-hidden'
+//         type="file"
+//         placeholder='file'
+//         onChange={avatar6FileUploadEventListener}
+//     />
+// </label>
+// <div className="output">
+//     { picFileAvatarUploadError6!=="" && <div className="error">{ picFileAvatarUploadError6 }</div>}
+//     { picFileAvatarFileTypeError6!=="" && <div className="error">{ picFileAvatarFileTypeError6 }</div> }
+//     {avatar6FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar6Url} alt=""/></div> }
+// </div>
+// <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+// <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
+//
+// <label className='form-article__label'>
+//     Title
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={ENPositionName6}
+//         onChange={
+//             (e)=>setENPositionName6(e.target.value)
+//         }
+//     />
+// </label>
+//
+// {/*Member7*/}
+// <div>Member 7:</div>
+// <label className='form-article__label'>
+//     Name:
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={name7}
+//         onChange={
+//             (e)=>setName7(e.target.value)
+//         }
+//     />
+// </label>
+// <div>
+//     Current avatar:
+//     <img style={{width: "25%", height: "auto"}} src={oldAvatar7Url} alt=""/>
+// </div>
+// <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+//     <input
+//         className='form-article__btn visually-hidden'
+//         type="file"
+//         placeholder='file'
+//         onChange={avatar7FileUploadEventListener}
+//     />
+// </label>
+// <div className="output">
+//     { picFileAvatarUploadError7!=="" && <div className="error">{ picFileAvatarUploadError7}</div>}
+//     { picFileAvatarFileTypeError7!=="" && <div className="error">{ picFileAvatarFileTypeError7 }</div> }
+//     {avatar7FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar7Url} alt=""/></div> }
+// </div>
+// <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+// <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
+//
+// <label className='form-article__label'>
+//     Title
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={ENPositionName7}
+//         onChange={
+//             (e)=>setENPositionName7(e.target.value)
+//         }
+//     />
+// </label>
+//
+// {/*Member8*/}
+// <div>Member 8:</div>
+// <label className='form-article__label'>
+//     Name:
+//     <input
+//         className='form-article__input'
+//         type="text"
+//         value={name8}
+//         onChange={
+//             (e)=>setName8(e.target.value)
+//         }
+//     />
+// </label>
+// <div>
+//     Current avatar:
+//     <img style={{width: "25%", height: "auto"}} src={oldAvatar8Url} alt=""/>
+// </div>
+// <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+//     <input
+//         className='form-article__btn visually-hidden'
+//         type="file"
+//
+//         placeholder='file'
+//         onChange={avatar8FileUploadEventListener}
+//     />
+// </label>
+// <div className="output">
+//     { picFileAvatarUploadError8!=="" && <div className="error">{ picFileAvatarUploadError8 }</div>}
+//     { picFileAvatarFileTypeError8!=="" && <div className="error">{ picFileAvatarFileTypeError8 }</div> }
+//     {avatar8FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar8Url} alt=""/></div> }
+// </div>
+// <BsPlusCircleFill style={{marginRight: "2em"}} onClick={handleAddFields}/>
+// <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(generalTeamMembersArr.id)}/>
+//
+// <label className='form-article__label'>
+//     Title
+//     <input
+//         className='form-article__input'
+//         type="text"
+//
+//         value={ENPositionName8}
+//         onChange={
+//             (e)=>setENPositionName8(e.target.value)
+//         }
+//     />
+// </label>
