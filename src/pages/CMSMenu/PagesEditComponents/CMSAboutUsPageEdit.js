@@ -1678,7 +1678,7 @@ function CMSAboutUsPageEdit() {
                                                 </label>
                                                 <div>
                                                     Current avatar:
-                                                    <img style={{width: "25%", height: "auto"}} src={inputField.photo} alt=""/>
+                                                    <img style={{width: "25%", height: "auto"}} src={inputField.avatar} alt=""/>
                                                 </div>
 
                                                 <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
