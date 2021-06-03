@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import logoBig from '../../assets/images/dest/logo-big.png';
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
+import {v4 as uuidv4} from "uuid";
 
 function AboutUsPage() {
   console.log("AboutUsPage worked");
@@ -74,11 +75,15 @@ function AboutUsPage() {
   const [ENPositionName8, setENPositionName8] = useState("");
   const [ITPositionName8, setITPositionName8] = useState("");
 
+  const [generalTeamMembersArr, setGeneralTeamMembersArr] = useState([]);
+
   const [ENTitle, setENTitle] = useState("");
   const [ITTitle, setITTitle] = useState("");
 
   const [ENTitleText, setENTitleText] = useState("");
   const [ITTitleText, setITTitleText] = useState("");
+
+  let membersArr = [];
   let selectedDoc = "";
 
   useEffect(() => {
@@ -94,6 +99,9 @@ function AboutUsPage() {
   useEffect(() => {
     if (selectedDoc !== "") {
       selectedDoc.map(doc => {
+        doc.members.map(member => membersArr.push({...member}));
+        setGeneralTeamMembersArr(membersArr);
+
         setENTitle(doc.title.en);
         setITTitle(doc.title.it);
         setENTitleText(doc.titleText.en);
@@ -203,48 +211,51 @@ function AboutUsPage() {
           <div className="team__wrapper">
             <h2 className="team__title title">{appLanguage==="it"?ITCrewTitle:ENCrewTitle}</h2>
             <ul className="team__list">
-              <li className="team__item">
-                <img src={avatar1Url} alt="" className="team__image"/>
-                <div className="team__name">{name1}</div>
-                <div className="team__position">{appLanguage==="it"?ITPositionName1:ENPositionName1}</div>
-              </li>
-              <li className="team__item">
-                <img src={avatar2Url} alt="" className="team__image"/>
-                <div className="team__name">{name2}</div>
-                <div className="team__position">{appLanguage==="it"?ITPositionName2:ENPositionName2}</div>
-              </li>
-              <li className="team__item">
-                <img src={avatar3Url} alt="" className="team__image"/>
-                <div className="team__name">{name3}</div>
-                <div className="team__position">{appLanguage==="it"?ITPositionName3:ENPositionName3}</div>
-              </li>
-            </ul>
-            <ul className="team__list team__list--second">
-              <li className="team__item">
-                <img src={avatar4Url} alt="" className="team__image"/>
-                <div className="team__name">{name4}</div>
-                <div className="team__position">{appLanguage==="it"?ITPositionName4:ENPositionName4}</div>
-              </li>
-              <li className="team__item">
-                <img src={avatar5Url} alt="" className="team__image"/>
-                <div className="team__name">{name5}</div>
-                <div className="team__position">{appLanguage==="it"?ITPositionName5:ENPositionName5}</div>
-              </li>
-              <li className="team__item">
-                <img src={avatar6Url} alt="" className="team__image"/>
-                <div className="team__name">{name6}</div>
-                <div className="team__position">{appLanguage==="it"?ITPositionName6:ENPositionName6}</div>
-              </li>
-              <li className="team__item">
-                <img src={avatar7Url} alt="" className="team__image"/>
-                <div className="team__name">{name7}</div>
-                <div className="team__position">{appLanguage==="it"?ITPositionName7:ENPositionName7}</div>
-              </li>
-              <li className="team__item">
-                <img src={avatar8Url} alt="" className="team__image"/>
-                <div className="team__name">{name8}</div>
-                <div className="team__position">{appLanguage==="it"?ITPositionName8:ENPositionName8}</div>
-              </li>
+              { generalTeamMembersArr.map(doc =>
+                    <li className="team__item">
+                    <img src={doc.avatar} alt="" className="team__image"/>
+                    <div className="team__name">{doc.name}</div>
+                    <div className="team__position">{appLanguage==="it"?doc.title.it:doc.title.en}</div>
+                  </li>
+                )
+              }
+            {/*  <li className="team__item">*/}
+            {/*    <img src={avatar2Url} alt="" className="team__image"/>*/}
+            {/*    <div className="team__name">{name2}</div>*/}
+            {/*    <div className="team__position">{appLanguage==="it"?ITPositionName2:ENPositionName2}</div>*/}
+            {/*  </li>*/}
+            {/*  <li className="team__item">*/}
+            {/*    <img src={avatar3Url} alt="" className="team__image"/>*/}
+            {/*    <div className="team__name">{name3}</div>*/}
+            {/*    <div className="team__position">{appLanguage==="it"?ITPositionName3:ENPositionName3}</div>*/}
+            {/*  </li>*/}
+            {/*</ul>*/}
+            {/*<ul className="team__list team__list--second">*/}
+            {/*  <li className="team__item">*/}
+            {/*    <img src={avatar4Url} alt="" className="team__image"/>*/}
+            {/*    <div className="team__name">{name4}</div>*/}
+            {/*    <div className="team__position">{appLanguage==="it"?ITPositionName4:ENPositionName4}</div>*/}
+            {/*  </li>*/}
+            {/*  <li className="team__item">*/}
+            {/*    <img src={avatar5Url} alt="" className="team__image"/>*/}
+            {/*    <div className="team__name">{name5}</div>*/}
+            {/*    <div className="team__position">{appLanguage==="it"?ITPositionName5:ENPositionName5}</div>*/}
+            {/*  </li>*/}
+            {/*  <li className="team__item">*/}
+            {/*    <img src={avatar6Url} alt="" className="team__image"/>*/}
+            {/*    <div className="team__name">{name6}</div>*/}
+            {/*    <div className="team__position">{appLanguage==="it"?ITPositionName6:ENPositionName6}</div>*/}
+            {/*  </li>*/}
+            {/*  <li className="team__item">*/}
+            {/*    <img src={avatar7Url} alt="" className="team__image"/>*/}
+            {/*    <div className="team__name">{name7}</div>*/}
+            {/*    <div className="team__position">{appLanguage==="it"?ITPositionName7:ENPositionName7}</div>*/}
+            {/*  </li>*/}
+            {/*  <li className="team__item">*/}
+            {/*    <img src={avatar8Url} alt="" className="team__image"/>*/}
+            {/*    <div className="team__name">{name8}</div>*/}
+            {/*    <div className="team__position">{appLanguage==="it"?ITPositionName8:ENPositionName8}</div>*/}
+            {/*  </li>*/}
             </ul>
           </div>
         </div>

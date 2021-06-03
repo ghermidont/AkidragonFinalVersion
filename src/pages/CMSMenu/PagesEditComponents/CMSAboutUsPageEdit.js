@@ -190,6 +190,7 @@ function CMSAboutUsPageEdit() {
     const [ENTitleText, setENTitleText] = useState("");
     const [ITTitleText, setITTitleText] = useState("");
 
+    // Test START
     const [generalTeamMembersArr, setGeneralTeamMembersArr] = useState([]);
 
     const handleAddFields = () => {
@@ -203,14 +204,56 @@ function CMSAboutUsPageEdit() {
     }
 
     const handleChangeInput = (id, event) => {
-        const newInputFields = generalTeamMembersArr.map(i => {
-            if(id === i.id) {
-                i[event.target.name] = event.target.value
+        const newInputFields = generalTeamMembersArr.map(doc => {
+            if(id === doc.id) {
+                doc[event.target.name] = event.target.value;
             }
-            return i;
+            return doc;
         })
         setGeneralTeamMembersArr(newInputFields);
     }
+
+    const handleChangeInputTitle = (id, event, lng) => {
+        const newInputField = generalTeamMembersArr.map(doc => {
+            if(id === doc.id) {
+                doc[event.target.name][lng] = event.target.value;
+            }
+            return doc;
+        })
+        setGeneralTeamMembersArr(newInputField);
+    }
+
+    const fileChangeInput = (id, e) =>{
+        let uploadedFile = e.target.files[0];
+        const newInputFields = generalTeamMembersArr.map(doc => {
+            if(id === doc.id) {
+                if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
+                    async function putFile(uploadedFile){
+                        e.preventDefault();
+                        try {
+                            const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                            storageRef.put(uploadedFile).on('state_changed', (err) => {
+                            },  (err) => {
+                                window.alert(err);
+                            }, async()=>{
+                                const finalUrl = await storageRef.getDownloadURL();
+                                if(finalUrl!==undefined)doc[e.target.name]=finalUrl;                                ;
+                            });
+                        } catch {
+                            return window.alert("Failed to upload file");
+                        }
+                    }
+                    putFile(uploadedFile).then(()=>console.log());
+                } else {
+                    return window.alert("Please select an image file (png or jpg)");
+                }
+            }
+            return doc;
+        })
+        setGeneralTeamMembersArr(newInputFields);
+    }
+
+    // Test END
 
     const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
     console.log(docsFromHookCMS);
@@ -230,7 +273,6 @@ function CMSAboutUsPageEdit() {
     let membersArr = [];
 
     useEffect(() => {
-
         if (selectedDoc !== "") {
             selectedDoc.map(doc => {
                 doc.members.map(member => membersArr.push({...member, id: uuidv4()}));
@@ -1658,42 +1700,38 @@ function CMSAboutUsPageEdit() {
                                         ></textarea>
                                     </label>
 
-                                    {/*Team members:*/}
+                                    {/*Team members: START*/}
 
                                     <div>Team members list:
-                                        { generalTeamMembersArr.map(inputField => (
+                                        { generalTeamMembersArr.map(member => (
                                             <>
-                                            <div key={inputField.id}>
-                                                <h1>Test member</h1>
-                                                <h1>{console.log(inputField)}></h1>
+                                            <div key={member.id}>
                                                 <label className='form-article__label'>
                                                     Name:
                                                     <input
                                                         name="name"
                                                         className='form-article__input'
                                                         type="text"
-                                                        value={inputField.name}
-                                                        onChange={event => handleChangeInput(inputField.id, event)}
+                                                        placeholder={member.name}
+                                                        onChange={event => handleChangeInput(member.id, event)}
                                                     />
                                                 </label>
                                                 <div>
                                                     Current avatar:
-                                                    <img style={{width: "25%", height: "auto"}} src={inputField.avatar} alt=""/>
+                                                    <img style={{width: "25%", height: "auto"}} src={member.avatar} alt=""/>
                                                 </div>
 
                                                 <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
                                                     <input
-                                                        name="file"
+                                                        name="avatar"
                                                         className='form-article__btn visually-hidden'
                                                         type="file"
                                                         placeholder='file'
-                                                        onChange={event => handleChangeInput(inputField.id, event)}
+                                                        onChange={event => fileChangeInput(member.id, event)}
                                                     />
                                                 </label>
                                                 <div className="output">
-                                                    { picFileAvatarUploadError3!=="" && <div className="error">{ picFileAvatarUploadError3 }</div>}
-                                                    { picFileAvatarFileTypeError3!=="" && <div className="error">{ picFileAvatarFileTypeError3 }</div> }
-                                                    { avatar3FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/></div> }
+                                                   { avatar3FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/></div> }
                                                 </div>
 
                                                 <label className='form-article__label'>
@@ -1702,19 +1740,21 @@ function CMSAboutUsPageEdit() {
                                                         name="title"
                                                         className='form-article__input'
                                                         type="text"
-                                                        value={inputField.title.en}
-                                                        onChange={event => handleChangeInput(inputField.id, event)}
+                                                        placeholder={member.title.en}
+                                                        onChange={event => handleChangeInputTitle(member.id, event, "en")}
                                                     />
                                                 </label>
 
                                                 <BsPlusCircleFill style={{marginRight: "2em"}} onClick={()=>handleAddFields()}/>
-                                                <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(inputField.id)}/>
+                                                <BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(member.id)}/>
                                                 <ColoredLine color="red" />
                                             </div>
                                             <br />
                                             </>
 
                                         )) }
+
+                                        {/*Team members: END*/}
 
                                     </div>
 
