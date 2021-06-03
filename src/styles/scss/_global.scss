@@ -85,6 +85,18 @@ input {
   outline: none;
   border: none;
   transition: all .3s;
+  padding: 0.8rem 2rem;
+    font-size: 1.8rem;
+    color: var(--blueDark);
+    background-color: var(--blueLight);
+    border-radius: 0.4rem;
+    margin-bottom: 2rem;
+
+    &::placeholder {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--blueDark);
+    }
 
   &:hover,
   &:focus {

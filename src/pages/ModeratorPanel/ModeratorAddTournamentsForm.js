@@ -408,8 +408,9 @@ export default function ModeratorAddTournamentsForm() {
 
   return (
     <>
-      <div className='form-update__body form-add-tournament'>
-        <form className="form-update">
+      <div className='form__body'>
+        <h1 className="title form__title">Add Tournamentss</h1>
+        <form className="form">
           <div className="form-dropdown">
             <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">

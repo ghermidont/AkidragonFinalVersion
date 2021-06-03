@@ -97,9 +97,9 @@ export default function ModeratorAddStreamsForm(){
 
   return (
     <>
-      <div className='form-update__body form-login__body'>
-        <h1 className="title form-title">Add Stream</h1>
-        <form className="form-update">
+      <div className='form__body'>
+        <h1 className="title form__title">Add Stream</h1>
+        <form className="form">
           {videoURL&&
             <ReactPlayer
                 url={videoURL ? videoURL : ""}
@@ -108,11 +108,12 @@ export default function ModeratorAddStreamsForm(){
                 playing={false}
             />
           }
-          <label className='form-update__label'>
+          <label className='btn-upload input'>
             Video URL
             <input
-                className='form-update__input'
+                className='form-update__input visually-hidden'
                 type="text"
+                placeholder='URL Video'
                 value={videoURL}
                 required
                 onChange={
@@ -152,7 +153,7 @@ export default function ModeratorAddStreamsForm(){
             </div>
 
             <button
-                className="form-article__btn"
+                className="btn-upload"
                 onClick={addStreamsWithFBCallback}
             >
               Submit

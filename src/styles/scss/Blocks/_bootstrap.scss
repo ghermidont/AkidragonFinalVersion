@@ -80,7 +80,6 @@
 .tab-content {
   border: .4rem solid var(--blue);
   border-radius: 0 1rem 1rem 1rem;
-
 }
 
 .nav-tabs {
@@ -101,5 +100,18 @@
       transform: scale(1.1);
       margin-left: 1rem;
     }
+  }
+}
+.addArticle{
+  padding: 1rem;
+}
+.tab-pane.fade.active.show{
+  .form__body{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 460px){
+  .tab-content.addArticle{
+    padding: 0;
   }
 }

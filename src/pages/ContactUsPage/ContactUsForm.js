@@ -49,7 +49,7 @@ export default function ContactUsForm() {
     <form className="form contact-intro__form" id="contact-form" onSubmit={sendEmail} method="POST">
 
       <div className="form__box">
-        <input className="form__name"
+        <input className="input"
                placeholder="Name"
                id="name"
                type="text"
@@ -58,7 +58,7 @@ export default function ContactUsForm() {
         />
       </div>
       <input
-        className="form__mail"
+        className="input"
         type="email"
         aria-describedby="emailHelp"
         name="email"
@@ -67,7 +67,7 @@ export default function ContactUsForm() {
         id="email"
       />
       <input
-        className="form__mail"
+        className="input"
         aria-describedby="Subject"
         placeholder="Subject"
         id="subject"
@@ -77,7 +77,7 @@ export default function ContactUsForm() {
       />
 
       <textarea
-        className="form__text"
+        className="input"
         cols="30"
         rows="1"
         id="message"
@@ -89,7 +89,9 @@ export default function ContactUsForm() {
 
       <div className="form__box-btn">
         {sizeExceededError && <error>Max file size exceeded</error>}
-        <label className='btn-upload'>Upload
+        <label className='btn-upload label'>
+          <span className='icon-upload2'></span>
+          Upload
           <input className='visually-hidden' type="file" name="attachment" id="fileInput"
                  onChange={e => setFileSize(e.target.files[0].size)}/>
         </label>

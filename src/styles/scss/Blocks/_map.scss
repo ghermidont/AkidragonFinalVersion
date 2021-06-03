@@ -6,12 +6,14 @@
     display: flex;
     justify-content: space-between;
   }
+
   &__map-inner {
     max-width: 60rem;
     width: 100%;
     height: 30rem;
     background-color: var(--blue);
   }
+
   &__map-inner {
     iframe {
       width: 100%;
@@ -19,22 +21,23 @@
       object-fit: cover;
     }
   }
-  &__list {
-    margin-left: 2rem;
-  }
+
   &__item {
     margin-bottom: 3rem;
   }
 }
+
 @media screen and (max-width: 768px) {
   .map {
     &__inner {
       flex-direction: column;
       align-items: center;
     }
+
     &__content {
       margin-left: 0;
     }
+
     &__map-inner {
       margin-bottom: 3rem;
     }
