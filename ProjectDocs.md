@@ -21,6 +21,9 @@ https://www.infoq.com/articles/reduce-react-load-time/
 #Security:
 https://www.npmjs.com/package/serialize-javascript
 https://www.npmjs.com/package/@braintree/sanitize-url
+https://snyk.io/blog/10-react-security-best-practices/
+https://jscrambler.com/?gclid=CjwKCAjwtdeFBhBAEiwAKOIy58i5V6qRaU-MsO9BSn-hZRYnQPEQ7Ak3zTaby4ov5zLxn9UMhFS48xoCmg0QAvD_BwE
+https://upplabs.com/blog/react-js-security-best-practices/
 
 To implement:
 https://reactjs.org/docs/react-api.html#reactlazy
@@ -70,3 +73,11 @@ https://javascript.info/async-await
 
 #pagination
 https://material-ui.com/components/pagination/#pagination
+
+#Generate dynamic elements
+https://jarombek.com/blog/apr-30-2018-react-dynamic-jsx-elements
+https://www.educative.io/blog/react-hooks-tutorial-todo-list
+
+var hege = ["Cecilie", "Lone"];
+var stale = ["Emil", "Tobias", "Linus"];
+var children = hege.concat(stale); 
