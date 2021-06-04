@@ -13,13 +13,10 @@
   box-shadow: 8px 8px 0px var(--black);
   transition: opacity 0.3s;
 
-  &__strim{
+  &__stream {
     margin: 0 auto;
     display: block;
     max-width: 200px;
-  }
-  &-delete{
-    color: var(--red);
   }
 
   span {
@@ -73,9 +70,50 @@
     width: 100%;
   }
 }
+.btn__inner{
+  display: flex;
+  justify-content: center;
+}
+.btn-settings {
+  padding: .8rem;
+  line-height: 1;
+  background-color: var(--blue);
+  border: none;
+  box-shadow: none;
+  font-size: inherit;
+  transition: all .3s;
+  margin: 0;
+
+  &:hover,
+  &:focus {
+    background-color: var(--blue);
+    color: var(--white);
+    opacity: .8;
+  }
+
+  span {
+    &:hover,
+    &:focus {
+      color: var(--white);
+      opacity: .8;
+    }
+  }
+}
+.btn-minus{
+  border-radius: .4rem 0 0 .4rem;
+}
+.btn-update{
+  border-radius: 0 .4rem .4rem 0;
+}
+
+@media screen and (max-width: 580px){
+  .btn-settings{
+    margin-bottom: 2rem;
+  }
+}
 
 @media screen and (max-width: 460px) {
-  .btn-upload{
+  .btn-upload {
     font-size: 1.5rem;
     padding: .8rem 1.5rem;
     height: 3.4rem;

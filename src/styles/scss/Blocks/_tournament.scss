@@ -2,13 +2,23 @@
 .tournament {
   padding: 14rem 0 8rem;
 
+  &__btn{
+    display: block;
+    margin: 0 auto 4rem;
+    width: 24rem;
+    text-align: center;
+
+    &:hover,
+    &:focus{
+      color: var(--white);
+    }
+  }
   &__title {
     margin-bottom: 5rem;
   }
   &__image {
     max-width: 80rem;
     height: auto;
-    margin-bottom: 1rem;
     display: block;
     margin: 0 auto 3rem;
   }

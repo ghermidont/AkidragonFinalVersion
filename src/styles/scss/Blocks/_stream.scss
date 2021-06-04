@@ -1,0 +1,95 @@
+/*====Stream====*/
+.stream {
+  &__inner {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__content {
+    max-width: 30rem;
+    width: 100%;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-style: normal;
+    margin-bottom: 3rem;
+
+    span {
+      font-weight: 700;
+      color: var(--blue);
+    }
+  }
+
+  &__image {
+    height: 80%;
+  }
+
+  &__box-btn {
+    display: flex;
+    justify-content: center !important;
+    margin: 4rem 0;
+  }
+
+  &__btn {
+    margin: 0;
+
+    &:first-child {
+      margin-right: 2rem;
+    }
+
+    &:last-child {
+      box-shadow: none;
+    }
+  }
+
+  &__video {
+    max-width: 60rem;
+    width: 100%;
+    margin-left: 3rem;
+    padding-left: 1.5rem;
+    border-left: 4px solid var(--blue);
+  }
+
+  &__player {
+    max-height: 30rem;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .stream {
+    &__item{
+      margin-bottom: 6rem;
+    }
+    &__inner {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__content {
+      margin-bottom: 4rem;
+    }
+
+    &__video {
+      margin-left: 0;
+      padding-left: 0;
+      border-left: none;
+      height: 30rem;
+    }
+  }
+}
+
+@media screen and (max-width: 460px){
+  .stream{
+    &__image{
+      max-width: 25rem;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+    &__video{
+      height: 20rem;
+    }
+  }
+}

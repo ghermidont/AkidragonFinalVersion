@@ -80,6 +80,7 @@
 .tab-content {
   border: .4rem solid var(--blue);
   border-radius: 0 1rem 1rem 1rem;
+  padding: 1rem;
 }
 
 .nav-tabs {
@@ -113,5 +114,13 @@
 @media screen and (max-width: 460px){
   .tab-content.addArticle{
     padding: 0;
+  }
+}
+@media screen and (max-width: 580px){
+  .tab{
+    &__btn{
+      width: 100%;
+      display: block;
+    }
   }
 }
