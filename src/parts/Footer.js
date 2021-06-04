@@ -1,10 +1,13 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 
 export default function Footer() {
+  const {t} = useTranslation();
+
   return (
     <footer className="footer">
       <div className="container">
-        <h2 className="social__title">Seguici sui social</h2>
+        <h2 className="social__title"> {t('Footer.SocialMessage')}</h2>
         <ul className="social__list">
           <li className="social__item">
             <a href="https://www.facebook.com/" className="social__link">

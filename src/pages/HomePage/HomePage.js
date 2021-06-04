@@ -8,8 +8,10 @@ import logoSection from '../../assets/images/dest/logo-section.png';
 import logoBig from '../../assets/images/dest/logo-big.png';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
+import {useTranslation} from "react-i18next";
 
 export default function HomePage() {
+  const {t} = useTranslation();
   console.log("HomePage component worked.");
   const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
   const {appLanguage} = useLanguageContext();
@@ -69,8 +71,8 @@ export default function HomePage() {
           <section className="banner">
             <div className="container">
               <div className="banner__image">
-                {/*<img className="banner__img" src={appLanguage==="it"?ITBannerUrl:ENBannerUrl} alt="Akidrago banner"/>*/}
-                <img className="banner__img" src={logoBig} alt="Akidrago banner"/>
+                <img className="banner__img" src={appLanguage==="it"?ITBannerUrl:ENBannerUrl} alt="Akidrago banner"/>
+                {/*<img className="banner__img" src={logoBig} alt="Akidrago banner"/>*/}
               </div>
             </div>
           </section>
@@ -90,7 +92,7 @@ export default function HomePage() {
                              src={appLanguage==="it"?ITTournamentsBannerUrl:ENTournamentsBannerUrl}
                              alt=""/>
                       </div>
-                      <h3 className="info__item-title">Tournaments</h3>
+                      <h3 className="info__item-title">{t('HomePage.Card1')}</h3>
                     </a>
                   </Link>
                 </li>
@@ -102,7 +104,7 @@ export default function HomePage() {
                              src={appLanguage==="it"?ITGameTeamsBannerUrl:ENGameTeamsBannerUrl}
                              alt=""/>
                       </div>
-                      <h3 className="info__item-title">Game teams</h3>
+                      <h3 className="info__item-title">{t('HomePage.Card2')}</h3>
                     </a>
                   </Link>
                 </li>
@@ -114,7 +116,7 @@ export default function HomePage() {
                              src={appLanguage==="it"?ITSalesBannerUrl:ENSalesBannerUrl}//"https://en.parisinfo.com/var/otcp/sites/images/node_43/node_51/joueurs-d'esport-%7C-630x405-%7C-%C2%A9-dr/19307954-1-fre-FR/Joueurs-d'Esport-%7C-630x405-%7C-%C2%A9-DR.jpg"
                              alt=""/>
                       </div>
-                      <h3 className="info__item-title">Game sales</h3>
+                      <h3 className="info__item-title">{t('HomePage.Card3')}</h3>
                     </a>
                   </Link>
                 </li>
@@ -128,13 +130,13 @@ export default function HomePage() {
                 <img src={logoSection} alt="" className="info__img"/>
               </div>
               <h2 className="news__title title">
-                <span>Latest</span> articles
+                {t('HomePage.LatestArticlesTitle')}
               </h2>
               <div className="news__inner">
                 <ShortArticlesList/>
               </div>
               <Link className='btn-more' to="/BlogPage">
-                <button className="news__btn btn"><span>Other</span> articles</button>
+                <button className="news__btn btn">{t('HomePage.OtherArticlesButton')}</button>
               </Link>
             </div>
 
@@ -143,13 +145,13 @@ export default function HomePage() {
           <section className="slider">
             <div className="container">
               <h2 className="slider__title title">
-                <span>Ultimi</span> contenuti dei nostri streamer
+                {t('HomePage.LatestStreamsTitle')}
               </h2>
 
               <LatestStreamsSwiper/>
 
               <Link className='btn-more btn-more__home-slider' to="/ContentPage">
-                <button className="slider__btn btn"><span>Altri</span> video</button>
+                <button className="slider__btn btn">{t('HomePage.OtherVideosButton')}</button>
               </Link>
             </div>
           </section>
@@ -162,7 +164,7 @@ export default function HomePage() {
                     <img src={appLanguage==="it"?ITSponsorshipBannerUrl:ENSponsorshipBannerUrl} alt="" className="feed__img"/>
                   </div>
                   <Link className="feed__link" to="/">
-                    <a className="feed__link">Sponsorship</a>
+                    <a className="feed__link">{t('HomePage.SponsorshipBanner')}</a>
                   </Link>
                 </div>
                 <div className="feed__item">
@@ -170,7 +172,7 @@ export default function HomePage() {
                     <img src={appLanguage==="it"?ITContactsBannerUrl:ENContactsBannerUrl} alt="" className="feed__img"/>
                   </div>
                   <Link className="feed__link" to="ContactUsPage">
-                    <a className="feed__link">Contacts</a>
+                    <a className="feed__link">{t('HomePage.ContactsBanner')}</a>
                   </Link>
                 </div>
               </div>
@@ -179,7 +181,7 @@ export default function HomePage() {
 
           <div className="contact__btn">
             <Link className="contact__btn-link" to="/ContactUsPage">
-              Contacts
+              {t('HomePage.ContactsButton')}
             </Link>
           </div>
         </main>

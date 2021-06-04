@@ -78,6 +78,3 @@ https://material-ui.com/components/pagination/#pagination
 https://jarombek.com/blog/apr-30-2018-react-dynamic-jsx-elements
 https://www.educative.io/blog/react-hooks-tutorial-todo-list
 
-var hege = ["Cecilie", "Lone"];
-var stale = ["Emil", "Tobias", "Linus"];
-var children = hege.concat(stale); 

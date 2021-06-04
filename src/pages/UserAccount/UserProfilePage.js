@@ -4,9 +4,11 @@ import {Link} from "react-router-dom";
 import {useAuthContext} from "../../context/AuthContext";
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
 import {projectFirestore} from "../../fireBase";
+import {useTranslation} from "react-i18next";
 
 export default function UserProfilePage() {
   console.log("UserProfilePage");
+    const {t} = useTranslation();
   const { currentUser } = useAuthContext();
   const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
   //const {docsFromHook} = useDataFromFirestore('user-profiles');
@@ -83,18 +85,18 @@ export default function UserProfilePage() {
                 }
               </div>
               <ul className="profile__list">
-                <li className="profile__item"> {moderator?<strong>Moderator page:</strong>:<strong>Profile page:</strong>}</li>
+                <li className="profile__item"> {moderator?<strong>{t('UserProfilePage.ModeratorPage')}:</strong>:<strong>{t('UserProfilePage.ProfilePage')}:</strong>}</li>
                 <li className="profile__item">Email: {currentUser?currentUser.email:CurrentUserFromLS.email}</li>
-                <li className="profile__item">Email verified: {currentUser?currentUser.emailVerified===false||CurrentUserFromLS.emailVerified===false?"false":"true":""}</li>
+                <li className="profile__item">{t('UserProfilePage.EmailVerified')}: {currentUser?currentUser.emailVerified===false||CurrentUserFromLS.emailVerified===false?"false":"true":""}</li>
                 {currentUserExtraInfoFB&&
                     <>
-                      <li className="profile__item">First name: {currentUserExtraInfoFB.firstName}</li>
-                      <li className="profile__item">Last name: {currentUserExtraInfoFB.lastName}</li>
+                      <li className="profile__item">{t('UserProfilePage.FirstName')}: {currentUserExtraInfoFB.firstName}</li>
+                      <li className="profile__item">{t('UserProfilePage.LastName')}: {currentUserExtraInfoFB.lastName}</li>
                     </>
                 }
                 {currentUserDbPointsInfo?
-                  <li className="profile__item">Available points: {currentUserDbPointsInfo.value}</li>:
-                  <li className="profile__item">Available points: 0</li>
+                  <li className="profile__item">{t('UserProfilePage.AvailablePoints')}: {currentUserDbPointsInfo.value}</li>:
+                  <li className="profile__item">{t('UserProfilePage.AvailablePoints')}: 0</li>
                 }
                 <br/>
               </ul>
@@ -103,36 +105,36 @@ export default function UserProfilePage() {
             <ul className="profile__settings">
               <li>
                 <div className="profile__settings-title">
-                  <span className="icon-cog"></span> Actions:
+                  <span className="icon-cog"></span> {t('UserProfilePage.Actions')}:
                 </div>
                 <ul className="profile__settings-list">
                   <li className="profile__settings-item">
-                    <Link className='profile__settings-link' to='/ModeratorAddStreamsForm'>Add streams</Link>
+                    <Link className='profile__settings-link' to='/ModeratorAddStreamsForm'>{t('UserProfilePage.Add streams')}</Link>
                   </li>
                   <li className="profile__settings-item">
-                    <Link className='profile__settings-link' to='/ModeratorAddTournamentsForm'>Add tournaments</Link>
+                    <Link className='profile__settings-link' to='/ModeratorAddTournamentsForm'>{t('UserProfilePage.AddTournaments')}</Link>
                   </li>
                   <li className="profile__settings-item">
-                    <Link className='profile__settings-link' to='/AddArticlesForm'>Add articles</Link>
+                    <Link className='profile__settings-link' to='/AddArticlesForm'>{t('UserProfilePage.AddArticles')}</Link>
                   </li>
                   <li className="profile__settings-item">
-                    <Link className='profile__settings-link' to='/ManageArticlesPage'>Manage articles</Link>
+                    <Link className='profile__settings-link' to='/ManageArticlesPage'>{t('UserProfilePage.ManageArticles')}</Link>
                   </li>
                   <li className="profile__settings-item">
-                    <Link className='profile__settings-link' to='/ManageStreamsPage'>Manage streams</Link>
+                    <Link className='profile__settings-link' to='/ManageStreamsPage'>{t('UserProfilePage.ManageStreams')}</Link>
                   </li>
                   <li className="profile__settings-item">
-                    <Link className='profile__settings-link' to='/ManageTournamentsPage'>Manage tournaments</Link>
+                    <Link className='profile__settings-link' to='/ManageTournamentsPage'>{t('UserProfilePage.ManageTournaments')}</Link>
                   </li>
                   <li className="profile__settings-item">
-                    <Link className='profile__settings-link' to='/ApproveArticlesPage'>Approve Articles</Link>
+                    <Link className='profile__settings-link' to='/ApproveArticlesPage'>{t('UserProfilePage.ApproveArticles')}</Link>
                   </li>
                   <li className="profile__settings-item">
-                    <Link className='profile__settings-link' to='/CMSMenu'>Edit Static Content</Link>
+                    <Link className='profile__settings-link' to='/CMSMenu'>{t('UserProfilePage.EditStaticContent')}</Link>
                   </li>
-                  <li className="profile__settings-item">
-                    <Link className='profile__settings-link' to='/MainSurveyPage'>Take the survey</Link>
-                  </li>
+                  {/*<li className="profile__settings-item">*/}
+                  {/*  <Link className='profile__settings-link' to='/MainSurveyPage'>Take the survey</Link>*/}
+                  {/*</li>*/}
                 </ul>
               </li>
             </ul>

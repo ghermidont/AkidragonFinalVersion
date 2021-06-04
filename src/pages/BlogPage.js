@@ -6,9 +6,11 @@ import {Link} from "react-router-dom";
 import {useDataFromFirestore, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import logoSection from '../assets/images/dest/logo-section.png';
 import {useLanguageContext} from "../context/LanguageContext";
+import {useTranslation} from "react-i18next";
 
 export default function BlogPage() {
     console.log("ArticlesPage worked!");
+    const {t} = useTranslation();
     const {appLanguage} = useLanguageContext();
     const {docsFromHook} = useDataFromFirestore('articles');
     const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
@@ -66,22 +68,22 @@ export default function BlogPage() {
                         <ul className="nav nav-tabs tab__btn-list tab__news" id="myTab" role="tablist">
                             <li className="nav-item tab__btn-item" >
                                 <a className="tab__btn-news active" id="all-tab" data-toggle="tab" href="#all" role="tab"
-                                   aria-controls="all" aria-selected="true">All</a>
+                                   aria-controls="all" aria-selected="true">{t('BlogPage.All')}</a>
                             </li>
 
                             <li className="nav-item tab__btn-item">
                                 <a className="tab__btn-news" id="videogames-tab" data-toggle="tab" href="#videogames" role="tab"
-                                   aria-controls="videogames" aria-selected="false">Video games</a>
+                                   aria-controls="videogames" aria-selected="false">{t('BlogPage.VideoGames')}</a>
                             </li>
 
                             <li className="nav-item tab__btn-item">
                                 <a className="tab__btn-news" id="movies-tab" data-toggle="tab" href="#movies" role="tab"
-                                   aria-controls="movies" aria-selected="false">Movies</a>
+                                   aria-controls="movies" aria-selected="false">{t('BlogPage.Movies')}</a>
                             </li>
 
                             <li className="nav-item tab__btn-item">
                                 <a className="tab__btn-news" id="music-tab" data-toggle="tab" href="#music" role="tab"
-                                   aria-controls="music" aria-selected="false">Music</a>
+                                   aria-controls="music" aria-selected="false">{t('BlogPage.Music')}</a>
                             </li>
                         </ul>
 
@@ -198,8 +200,8 @@ export default function BlogPage() {
                 <div className="container">
                     <h2 className="contact__title">{appLanguage==="it"?ITFooterText:ENFooterText}</h2>
                     <div className="contact__btn">
-                        <Link to="/ContacUsPage" className="contact__btn-link contact__btn-link--blog-page">
-                           Contact Us
+                        <Link to="/ContactUsPage" className="contact__btn-link contact__btn-link--blog-page">
+                            {t('BlogPage.ContactsButton')}
                         </Link>
                     </div>
                 </div>

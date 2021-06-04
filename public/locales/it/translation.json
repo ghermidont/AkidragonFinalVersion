@@ -1,34 +1,28 @@
 {
   "title": "Italian version of the app",
   "NavBar": {
-    "LoginSignUpButton": "Entra/Registrati",
-    "SearchButton": "Ricerca",
-    "LogoutButton": "Disconnettersi",
-    "WelcomeMessage": "Benvenuto",
     "Menu": {
-      "Our universe": {
-        "Blog": "Blog",
-        "GameTeams": "Team e giochi",
-        "Game Sales": "Vendite di giochi"
+      "OurUniverse": {
+        "OurUniverse": "Il nostro universo",
+        "Tournaments": "Tornei"
       },
       "Community": {
-        "News": "Notizia",
+        "Community": "Comunità",
+        "Blog": "Blog",
         "Content": "Contenuti"
       },
       "TheBrand": {
+        "TheBrand": "La marca",
         "AboutUs": "Chi siamo",
         "Sponsorship": "Sponsorizzazione"
       },
-      "Contacts": {
-        "Form": "Modulo",
-        "ContactInfo": "Informazioni di contatto"
-      }
+      "Contacts": "Contatti"
     }
   },
   "Footer": {
-    "ContactsButton": "Contatti",
     "SocialMessage": "Seguici sui social network"
   },
+
   "HomePage": {
     "BannerText": "ESPLORA L'UNIVERSO AKIDRAGON",
     "Card1": "TORNEI",
@@ -39,6 +33,41 @@
     "LatestStreamsTitle": "I NOSTRI ULTIMI STREAM",
     "OtherVideosButton": "ALTRI VIDEO",
     "SponsorshipBanner": "SPONSORIZZAZIONE",
-    "ContactsBanner": "CONTATTI"
+    "ContactsBanner": "CONTATTI",
+    "ContactsButton": "Contatti"
+  },
+
+  "BlogPage": {
+    "All": "Tutti",
+    "VideoGames": "Videogiochi",
+    "Movies": "Film",
+    "Music": "Musica",
+    "ContactsButton": "Contatti"
+  },
+
+  "TournamentsPage": {
+    "AkidragonTournaments": "Tornei Akidragon",
+    "PassedEvents": "Eventi passati",
+    "FutureEvents": "Eventi futuri",
+    "ContactsButton": "Contatti"
+  },
+
+  "UserProfilePage": {
+    "ModeratorPage" : "Pagina moderatore",
+    "ProfilePage" : "Pagina profilo",
+    "EmailVerified": "Email verificata",
+    "FirstName" : "Nome di battesimo",
+    "LastName" : "Cognome",
+    "Actions": "Azioni",
+    "Add streams": "Aggiungi streams",
+    "AddTournaments": "Aggiungi tornei",
+    "AddArticles": "Aggiungi articoli",
+    "ManageArticles": "Gestisci articoli",
+    "ManageStreams": "Gestire streams",
+    "ManageTournaments": "Gestisci tornei",
+    "ApproveArticles": "Approva articoli",
+    "EditStaticContent": "Modifica contenuto statico",
+    "AvailablePoints" : "Punti disponibili"
   }
+
 }
