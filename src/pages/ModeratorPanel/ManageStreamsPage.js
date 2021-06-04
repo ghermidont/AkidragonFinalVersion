@@ -17,7 +17,7 @@ const ManageStreamsPage = () => {
             <section className='articles-page' >
                 <div className="container">
                     <h1 className="articles-page__title title">Manage streams</h1>
-                    <Link className='btn ' to='/ModeratorAddStreamsForm'>Add streams</Link>
+                    <Link className='btn btn__strim' to='/ModeratorAddStreamsForm'>Add streams</Link>
                     <div className="articles-page__tab tab">
                         <div className="articles-page__tab-body">
                             <ul className="articles-page__tab-list active">
@@ -39,7 +39,7 @@ const ManageStreamsPage = () => {
                                                 </div>
                                             </div>
                                         </article>
-                                        <Link
+                                        <Link className='btn-upload'
                                             onClick={()=> {
                                             setChosenModifyStreamNumber(doc.id);
                                             history.push(`/edit-stream/${doc.id}`, {from: "/ManageStreamsPage"});
@@ -47,8 +47,7 @@ const ManageStreamsPage = () => {
                                         > Update stream >>>
                                         </Link>
                                         <Button
-                                            style={{float:'right', marginBottom: "5em"}}
-                                            variant="danger"
+                                          className='btn-upload btn-delete'
                                             onClick={()=>{
                                                 projectFirestore.collection("streams").doc(doc.id).delete().then(() => {
                                                     console.log("Document successfully deleted!");
