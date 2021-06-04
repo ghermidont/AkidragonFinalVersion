@@ -1,34 +1,29 @@
 {
   "title": "English version of the app",
   "NavBar": {
-    "LoginSignUpButton": "Login/Signup",
-    "SearchButton": "Search",
-    "LogoutButton": "Logout",
-    "WelcomeMessage": "Welcome",
     "Menu": {
-      "Our universe": {
-        "Blog": "Blog",
-        "GameTeams": "Game Teams",
-        "Game Sales": "Game Sales"
+      "OurUniverse": {
+        "OurUniverse": "Our universe",
+        "Tournaments": "Tournaments"
       },
       "Community": {
-        "News": "News",
+        "Community": "Community",
+        "Blog": "Blog",
         "Content": "Content"
       },
       "TheBrand": {
+        "TheBrand": "The brand",
         "AboutUs": "About Us",
         "Sponsorship": "Sponsorship"
       },
-      "Contacts": {
-        "Form": "Form",
-        "ContactInfo": "Contact Info"
-      }
+      "Contacts": "Contacts"
     }
   },
+
   "Footer": {
-    "ContactsButton": "Contacts",
-    "SocialMessage": "Follow us on social networks"
+     "SocialMessage": "Follow us on social networks"
   },
+
   "HomePage": {
     "BannerText": "EXPLORE THE AKIDRAGON UNIVERSE",
     "Card1": "TOURNAMENTS",
@@ -39,6 +34,41 @@
     "LatestStreamsTitle": "OUR LATEST STREAMS",
     "OtherVideosButton": "OTHER VIDEOS",
     "SponsorshipBanner": "SPONSORSHIP",
-    "ContactsBanner": "CONTACTS"
+    "ContactsBanner": "CONTACTS",
+    "ContactsButton": "Contacts"
+  },
+
+  "BlogPage": {
+    "All": "All",
+    "VideoGames": "Video games",
+    "Movies": "Movies",
+    "Music": "Music",
+    "ContactsButton": "Contacts"
+  },
+
+  "TournamentsPage": {
+    "AkidragonTournaments": "Akidragon tournaments",
+    "PassedEvents": "Passed events",
+    "FutureEvents": "Future events",
+    "ContactsButton": "Contacts"
+  },
+
+  "UserProfilePage": {
+    "ModeratorPage" : "Moderator page",
+    "ProfilePage" : "Profile page",
+    "EmailVerified": "Email verified",
+    "FirstName" : "First name",
+    "LastName" : "Last name",
+    "Actions": "Actions",
+    "Add streams": "Add streams",
+    "AddTournaments": "Add tournaments",
+    "AddArticles": "Add articles",
+    "ManageArticles": "Manage articles",
+    "ManageStreams": "Manage streams",
+    "ManageTournaments": "Manage tournaments",
+    "ApproveArticles": "Approve Articles",
+    "EditStaticContent": "Edit Static Content",
+    "AvailablePoints" : "Available points"
   }
+
 }

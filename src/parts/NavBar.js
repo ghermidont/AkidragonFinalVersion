@@ -36,13 +36,13 @@ export default function NavBar() {
           </div>
           <ul className="menu__list">
             <li className="menu__item">
-              <a className="menu__link">OUR UNIVERSE</a>
+              <a className="menu__link">{t('NavBar.Menu.OurUniverse.OurUniverse')}</a>
 
               <span className="icon-angle-down arrow"></span>
               <ul className="sub-menu__list">
                 <li className="sub-menu__item">
                   <Link className="sub-menu__link" onClick={() => setToggleMenu('')} to="/TournamentsPage">
-                    Tournaments
+                    {t('NavBar.Menu.OurUniverse.Tournaments')}
                   </Link>
                 </li>
                 {/*Phase 2*/}
@@ -60,34 +60,34 @@ export default function NavBar() {
             </li>
 
             <li className="menu__item">
-              <a className="menu__link">Community</a>
+              <a className="menu__link">{t('NavBar.Menu.Community.Community')}</a>
               <span className="icon-angle-down arrow"></span>
               <ul className="sub-menu__list">
                 <li className="sub-menu__item">
                   <Link className="sub-menu__link" onClick={() => setToggleMenu('')} to="/BlogPage">
-                    Blog
+                    {t('NavBar.Menu.Community.Blog')}
                   </Link>
                 </li>
                 <li className="sub-menu__item">
                   <Link className="sub-menu__link" onClick={() => setToggleMenu('')} to="/ContentPage">
-                    Content
+                    {t('NavBar.Menu.Community.Content')}
                   </Link>
                 </li>
               </ul>
             </li>
 
             <li className="menu__item">
-              <a className="menu__link">THE BRAND</a>
+              <a className="menu__link">{t('NavBar.Menu.TheBrand.TheBrand')}</a>
               <span className="icon-angle-down arrow"></span>
               <ul className="sub-menu__list">
                 <li className="sub-menu__item">
                   <Link className="sub-menu__link" onClick={() => setToggleMenu('')} to="/AboutUsPage">
-                    About Us
+                    {t('NavBar.Menu.TheBrand.AboutUs')}
                   </Link>
                 </li>
                 <li className="sub-menu__item">
                   <Link className="sub-menu__link" onClick={() => setToggleMenu('')} to="/SponsorshipPage">
-                    SPONSORSHIP
+                    {t('NavBar.Menu.TheBrand.Sponsorship')}
                   </Link>
                 </li>
               </ul>
@@ -95,9 +95,10 @@ export default function NavBar() {
 
             <li className="menu__item">
               <Link className="menu__link menu__link--contact" to="/ContactUsPage">
-                Contact
+                {t('NavBar.Menu.Contacts')}
               </Link>
             </li>
+
             <li className="menu__item">
               <ul className="lang header__lang">
                 <li className="lang__item">

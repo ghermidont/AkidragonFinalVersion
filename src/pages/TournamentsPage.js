@@ -2,11 +2,13 @@ import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {useDataFromFirestore, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import logoSection from '../assets/images/dest/logo-section.png';
-import vsIcon from '../assets/images/dest/icons/vsIcon.png';
+//import vsIcon from '../assets/images/dest/icons/vsIcon.png';
 import {useLanguageContext} from "../context/LanguageContext";
+import {useTranslation} from "react-i18next";
 
 function TournamentsPage() {
   console.log("TournamentsPage() worked");
+  const {t} = useTranslation();
   const [passedEvents, setPassedEvents] = useState();
   const [futureEvents, setFutureEvents] = useState();
   const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
@@ -182,7 +184,7 @@ function TournamentsPage() {
         <li className="tab__item-icon">
             <img
                 className="tab__img-icon"
-                src={vsIcon}
+                //src={vsIcon}
                 alt=""/>
         </li>
         <li className="tab__item-icon">
@@ -281,7 +283,7 @@ function TournamentsPage() {
               <img src={logoSection} alt="" className="info__img"/>
             </div>
             <h1 className="tournament__title title">
-              <span>Akidragon</span> tournaments
+              {t('TournamentsPage.AkidragonTournaments')}
             </h1>
             <div className="tournament__image">
               <img className="tournament__img" src={appLanguage==="it"?ITBannerUrl:ENBannerUrl} alt=""/>
@@ -297,12 +299,12 @@ function TournamentsPage() {
 
                 <li className="nav-item tab__btn-item" >
                   <a className="tab__btn active" id="passed-tab" data-toggle="tab" href="#passed" role="tab"
-                     aria-controls="passed" aria-selected="true">Passed events</a>
+                     aria-controls="passed" aria-selected="true">{t('TournamentsPage.PassedEvents')}</a>
                 </li>
 
                 <li className="nav-item tab__btn-item">
                   <a className="tab__btn" id="future-tab" data-toggle="tab" href="#future" role="tab"
-                     aria-controls="future" aria-selected="false">Future events</a>
+                     aria-controls="future" aria-selected="false">{t('TournamentsPage.FutureEvents')}</a>
                 </li>
 
              </ul>
@@ -331,7 +333,7 @@ function TournamentsPage() {
             <h2 className="contact__title">{appLanguage==="it"?ITFooterMessage:ENFooterMessage}</h2>
             <div className="contact__btn">
               <Link to="/ContactUsPage">
-                <a className="contact__btn-link">Contacts</a>
+                <a className="contact__btn-link">{t('TournamentsPage.ContactsButton')}</a>
               </Link>
             </div>
           </div>
