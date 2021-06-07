@@ -66,126 +66,129 @@ export default function HomePage() {
   }, [docsFromHookCMS]);
 
   return (
-      <>
-        <main className="page">
-          <section className="banner">
-            <div className="container">
-              <div className="banner__image">
-                <img className="banner__img" src={appLanguage==="it"?ITBannerUrl:ENBannerUrl} alt="Akidrago banner"/>
-                {/*<img className="banner__img" src={logoBig} alt="Akidrago banner"/>*/}
-              </div>
+    <>
+      <main className="page">
+        <section className="banner">
+          <div className="container">
+            <div className="banner__image">
+              <img className="banner__img" src={appLanguage === "it" ? ITBannerUrl : ENBannerUrl}
+                   alt="Akidrago banner"/>
+              {/*<img className="banner__img" src={logoBig} alt="Akidrago banner"/>*/}
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section className="info">
-            <div className="container">
-              <h2 className="title info__title">
-                {appLanguage==="it"?ITBannerText:ENBannerText}
-                {/*Esplora l'unniverso <span>aki</span>dragon*/}
-              </h2>
-              <ul className="info__list">
-                <li className="info__item">
-                  <Link to="/TournamentsPage">
-                    <a className="info__link">
-                      <div className="info__image">
-                        <img className="info__img"
-                             src={appLanguage==="it"?ITTournamentsBannerUrl:ENTournamentsBannerUrl}
-                             alt=""/>
-                      </div>
-                      <h3 className="info__item-title">{t('HomePage.Card1')}</h3>
-                    </a>
-                  </Link>
-                </li>
-                <li className="info__item">
-                  <Link to="/AboutUsPage">
-                    <a className="info__link">
-                      <div className="info__image">
-                        <img className="info__img"
-                             src={appLanguage==="it"?ITGameTeamsBannerUrl:ENGameTeamsBannerUrl}
-                             alt=""/>
-                      </div>
-                      <h3 className="info__item-title">{t('HomePage.Card2')}</h3>
-                    </a>
-                  </Link>
-                </li>
-                <li className="info__item">
-                  <Link to="/">
-                    <a className="info__link">
-                      <div className="info__image">
-                        <img className="info__img"
-                             src={appLanguage==="it"?ITSalesBannerUrl:ENSalesBannerUrl}//"https://en.parisinfo.com/var/otcp/sites/images/node_43/node_51/joueurs-d'esport-%7C-630x405-%7C-%C2%A9-dr/19307954-1-fre-FR/Joueurs-d'Esport-%7C-630x405-%7C-%C2%A9-DR.jpg"
-                             alt=""/>
-                      </div>
-                      <h3 className="info__item-title">{t('HomePage.Card3')}</h3>
-                    </a>
-                  </Link>
-                </li>
-              </ul>
+        <section className="info">
+          <div className="container">
+            <h2 className="title info__title">
+              {appLanguage === "it" ? ITBannerText : ENBannerText}
+              {/*Esplora l'unniverso <span>aki</span>dragon*/}
+            </h2>
+            <ul className="info__list">
+              <li className="info__item">
+                <Link to="/TournamentsPage">
+                  <a className="info__link">
+                    <div className="info__image">
+                      <img className="info__img"
+                           src={appLanguage === "it" ? ITTournamentsBannerUrl : ENTournamentsBannerUrl}
+                           alt=""/>
+                    </div>
+                    <h3 className="info__item-title">{t('HomePage.Card1')}</h3>
+                  </a>
+                </Link>
+              </li>
+              <li className="info__item">
+                <Link to="/AboutUsPage">
+                  <a className="info__link">
+                    <div className="info__image">
+                      <img className="info__img"
+                           src={appLanguage === "it" ? ITGameTeamsBannerUrl : ENGameTeamsBannerUrl}
+                           alt=""/>
+                    </div>
+                    <h3 className="info__item-title">{t('HomePage.Card2')}</h3>
+                  </a>
+                </Link>
+              </li>
+              <li className="info__item">
+                <Link to="/">
+                  <a className="info__link">
+                    <div className="info__image">
+                      <img className="info__img"
+                           src={appLanguage === "it" ? ITSalesBannerUrl : ENSalesBannerUrl}//"https://en.parisinfo.com/var/otcp/sites/images/node_43/node_51/joueurs-d'esport-%7C-630x405-%7C-%C2%A9-dr/19307954-1-fre-FR/Joueurs-d'Esport-%7C-630x405-%7C-%C2%A9-DR.jpg"
+                           alt=""/>
+                    </div>
+                    <h3 className="info__item-title">{t('HomePage.Card3')}</h3>
+                  </a>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="news">
+          <div className="container">
+            <div className="info__logo logo-section">
+              <img src={logoSection} alt="" className="info__img"/>
             </div>
-          </section>
-
-          <section className="news">
-            <div className="container">
-              <div className="info__logo logo-section">
-                <img src={logoSection} alt="" className="info__img"/>
-              </div>
-              <h2 className="news__title title">
-                {t('HomePage.LatestArticlesTitle')}
-              </h2>
-              <div className="news__inner">
-                <ShortArticlesList/>
-              </div>
-              <Link className='btn-more' to="/BlogPage">
-                <button className="news__btn btn">{t('HomePage.OtherArticlesButton')}</button>
-              </Link>
+            <h2 className="news__title title">
+              {t('HomePage.LatestArticlesTitle')}
+            </h2>
+            <div className="news__inner">
+              <ShortArticlesList/>
             </div>
-
-          </section>
-
-          <section className="slider">
-            <div className="container">
-              <h2 className="slider__title title">
-                {t('HomePage.LatestStreamsTitle')}
-              </h2>
-
-              <LatestStreamsSwiper/>
-
-              <Link className='btn-more btn-more__home-slider' to="/ContentPage">
-                <button className="slider__btn btn">{t('HomePage.OtherVideosButton')}</button>
-              </Link>
-            </div>
-          </section>
-
-          <section className="feed">
-            <div className="container">
-              <div className="feed__inner">
-                <div className="feed__item">
-                  <div className="feed__image">
-                    <img src={appLanguage==="it"?ITSponsorshipBannerUrl:ENSponsorshipBannerUrl} alt="" className="feed__img"/>
-                  </div>
-                  <Link className="feed__link" to="/">
-                    <a className="feed__link">{t('HomePage.SponsorshipBanner')}</a>
-                  </Link>
-                </div>
-                <div className="feed__item">
-                  <div className="feed__image">
-                    <img src={appLanguage==="it"?ITContactsBannerUrl:ENContactsBannerUrl} alt="" className="feed__img"/>
-                  </div>
-                  <Link className="feed__link" to="ContactUsPage">
-                    <a className="feed__link">{t('HomePage.ContactsBanner')}</a>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <div className="contact__btn">
-            <Link className="contact__btn-link" to="/ContactUsPage">
-              {t('HomePage.ContactsButton')}
+            <Link className='btn-more' to="/BlogPage">
+              <button className="news__btn btn">{t('HomePage.OtherArticlesButton')}</button>
             </Link>
           </div>
-        </main>
-      </>
+
+        </section>
+
+        <section className="slider">
+          <div className="container">
+            <h2 className="slider__title title">
+              {t('HomePage.LatestStreamsTitle')}
+            </h2>
+
+            <LatestStreamsSwiper/>
+
+            <Link className='btn-more btn-more__home-slider' to="/ContentPage">
+              <button className="slider__btn btn">{t('HomePage.OtherVideosButton')}</button>
+            </Link>
+          </div>
+        </section>
+
+        <section className="feed">
+          <div className="container">
+            <div className="feed__inner">
+              <div className="feed__item">
+                <div className="feed__image">
+                  <img src={appLanguage === "it" ? ITSponsorshipBannerUrl : ENSponsorshipBannerUrl} alt=""
+                       className="feed__img"/>
+                </div>
+                <Link className="feed__link" to="/">
+                  <a className="feed__link">{t('HomePage.SponsorshipBanner')}</a>
+                </Link>
+              </div>
+              <div className="feed__item">
+                <div className="feed__image">
+                  <img src={appLanguage === "it" ? ITContactsBannerUrl : ENContactsBannerUrl} alt=""
+                       className="feed__img"/>
+                </div>
+                <Link className="feed__link" to="ContactUsPage">
+                  <a className="feed__link">{t('HomePage.ContactsBanner')}</a>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div className="contact__btn">
+          <Link className="contact__btn-link" to="/ContactUsPage">
+            {t('HomePage.ContactsButton')}
+          </Link>
+        </div>
+      </main>
+    </>
   );
 }
 

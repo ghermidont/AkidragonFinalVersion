@@ -1,0 +1,19 @@
+@import "./src/styles/scss/mixin";
+
+.container {
+  padding: 16rem 0 10rem;
+}
+
+.title {
+  @include title;
+  margin-bottom: 6rem;
+}
+
+.input{
+  width: 100%;
+}
+
+.label{
+  @include btn;
+  margin-bottom: 2rem;
+}

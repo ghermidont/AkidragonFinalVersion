@@ -18,3 +18,31 @@
   font-style: italic;
   font-display: swap;
 }
+
+@mixin title {
+  font-size: 3.6rem;
+  font-weight: 700;
+  color: var(--blue);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@mixin btn {
+  padding: 1rem 2rem;
+  display: inline-block;
+  height: 4.2rem;
+  border-radius: 0.6rem;
+  color: var(--white);
+  font-size: 1.8rem;
+  font-style: normal;
+  text-align: center;
+  background-color: var(--blue);
+  cursor: pointer;
+  transition: opacity 0.3s;
+
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+    color: var(--white);
+  }
+}

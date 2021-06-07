@@ -1,0 +1,54 @@
+@import "./src/styles/scss/mixin";
+
+.title {
+  @include title;
+  margin-bottom: 6rem;
+}
+
+.article {
+  display: flex;
+}
+
+.btn {
+  @include btn;
+  margin-bottom: 1rem;
+
+  &Inner {
+    display: flex;
+    margin-top: 3rem;
+  }
+
+  &Del {
+    box-shadow: none;
+    font-size: 1.8rem;
+    font-style: normal;
+    height: 4.2rem;
+    margin: 0 0 0 2rem;
+    border-radius: .6rem;
+    border: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .article {
+    flex-direction: column;
+
+    div{
+      margin: 0 0 3rem 0;
+    }
+  }
+  .btnInner{
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 420px){
+  .btnInner{
+    flex-direction: column;
+    .btn{
+    }
+    .btnDel{
+      margin-left: 0;
+    }
+  }
+}

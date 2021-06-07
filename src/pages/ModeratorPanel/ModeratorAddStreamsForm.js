@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import classes from "./styles/ModeratorAddStreamsForm.module.scss";
 //import {useArticlesContext} from "../../context/ArticlesContext";
 import {projectFirestore, projectStorage} from "../../fireBase";
 import {useHistory} from 'react-router-dom';
@@ -98,8 +99,8 @@ export default function ModeratorAddStreamsForm(){
 
   return (
     <>
-      <div className='form__body'>
-        <h1 className="title form__title">Add Stream</h1>
+      <div className={classes.container}>
+        <h1 className={classes.title}>Add Stream</h1>
         <form className="form">
           {videoURL&&
             <ReactPlayer
@@ -134,7 +135,7 @@ export default function ModeratorAddStreamsForm(){
             </Dropdown.Menu>
           </Dropdown>
           <br/>
-          <div className="form-article__box-btn">
+          <div className={classes.btnInner}>
             <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload thumbnail
               <input
                   className='form-article__btn visually-hidden'

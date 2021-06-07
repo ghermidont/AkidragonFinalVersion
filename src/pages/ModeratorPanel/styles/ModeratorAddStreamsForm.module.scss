@@ -1,0 +1,28 @@
+@import "./src/styles/scss/mixin";
+
+.container {
+  padding: 20rem 1.5rem 10rem;
+  margin: 0 auto;
+}
+
+.title {
+  @include title;
+  margin-bottom: 6rem;
+}
+
+.btnInner {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 2.6rem;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .title {
+    font-size: 2.2rem;
+  }
+}

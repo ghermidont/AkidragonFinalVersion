@@ -4,6 +4,7 @@ import {useHistory} from 'react-router-dom';
 import {useAuthContext} from "../../context/AuthContext";
 import {Dropdown} from "react-bootstrap";
 import ReactPlayer from "react-player/lazy";
+import classes from './styles/ModeratorAddTournament.module.scss';
 
 export default function ModeratorAddTournamentsForm() {
   console.log("ModeratorAddTournamentsForm worked");
@@ -16,7 +17,7 @@ export default function ModeratorAddTournamentsForm() {
   const [eventCategory, setEventCategory] = useState('');
   const [eventTitle, setEventTitle] = useState('');
   const [eventStatus, setEventStatus] = useState('');
-  const [eventVideoLink, setEventVideoLink] =useState('');
+  const [eventVideoLink, setEventVideoLink] = useState('');
   const [eventDate, setEventDate] = useState('');
   const [eventInfoPageLink, setEventInfoPageLink] = useState('');
 //Errors
@@ -35,7 +36,7 @@ export default function ModeratorAddTournamentsForm() {
   const [fileSuccessWin1, setFileSuccessWin1] = useState(false);
   const [fileSuccessWin2, setFileSuccessWin2] = useState(false);
   const [fileSuccessBanner, setFileSuccessBanner] = useState(false);
-   //loadings
+  //loadings
   const [loading1, setLoading1] = useState(true);
   const [loading2, setLoading2] = useState(true);
   const [loading3, setLoading3] = useState(true);
@@ -59,30 +60,32 @@ export default function ModeratorAddTournamentsForm() {
   const [urlWin1, setUrlWin1] = useState("");
   const [urlWin2, setUrlWin2] = useState("");
   const [urlBanner, setUrlBanner] = useState("");
-  
+
   //Event listeners
   const file1UploadEventListener = (e) => {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
       setUploadedPicFile1(uploadedFile);
-      async function putFile(uploadedFile){
+
+      async function putFile(uploadedFile) {
         e.preventDefault();
         try {
           setLoading1(true);
           setError1("");
-          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedFile.name);
-          storageRef.put(uploadedFile).on('state_changed', 
-          async()=>{
-            const finalUrl = await storageRef.getDownloadURL();
-            finalUrl!==undefined?setFileSuccess1(true):setFileSuccess1(false);
-            setUrl1(finalUrl);
-          });
+          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedFile.name);
+          storageRef.put(uploadedFile).on('state_changed',
+            async () => {
+              const finalUrl = await storageRef.getDownloadURL();
+              finalUrl !== undefined ? setFileSuccess1(true) : setFileSuccess1(false);
+              setUrl1(finalUrl);
+            });
         } catch {
           setError1("Failed to upload file");
         }
         setLoading1(false);
       }
-      putFile(uploadedFile).then(()=>console.log(url1));
+
+      putFile(uploadedFile).then(() => console.log(url1));
     } else {
       setUploadedPicFile1('');
       setError1('Please select an image file (png or jpg)');
@@ -93,24 +96,26 @@ export default function ModeratorAddTournamentsForm() {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
       setUploadedPicFile2(uploadedFile);
-       async function putFile(uploadedFile){
+
+      async function putFile(uploadedFile) {
         e.preventDefault();
         try {
           setLoading2(true);
           setError2("");
-          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedFile.name);
-          storageRef.put(uploadedFile).on('state_changed', 
-          async()=>{
-            const finalUrl = await storageRef.getDownloadURL();
-            finalUrl!==undefined?setFileSuccess2(true):setFileSuccess2(false);
-            setUrl2(finalUrl);
-          });
+          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedFile.name);
+          storageRef.put(uploadedFile).on('state_changed',
+            async () => {
+              const finalUrl = await storageRef.getDownloadURL();
+              finalUrl !== undefined ? setFileSuccess2(true) : setFileSuccess2(false);
+              setUrl2(finalUrl);
+            });
         } catch {
           setError2("Failed to upload file");
         }
         setLoading2(false);
       }
-      putFile(uploadedFile).then(()=>console.log(url2));
+
+      putFile(uploadedFile).then(() => console.log(url2));
     } else {
       setUploadedPicFile2('');
       setError2('Please select an image file (png or jpg)');
@@ -121,24 +126,26 @@ export default function ModeratorAddTournamentsForm() {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
       setUploadedPicFile3(uploadedFile);
-      async function putFile(uploadedFile){
+
+      async function putFile(uploadedFile) {
         e.preventDefault();
         try {
           setLoading3(true);
           setError3("");
-          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedFile.name);
-          storageRef.put(uploadedFile).on('state_changed', 
-          async()=>{
-            const finalUrl = await storageRef.getDownloadURL();
-            finalUrl!==undefined?setFileSuccess3(true):setFileSuccess3(false);
-            setUrl3(finalUrl);
-          });
+          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedFile.name);
+          storageRef.put(uploadedFile).on('state_changed',
+            async () => {
+              const finalUrl = await storageRef.getDownloadURL();
+              finalUrl !== undefined ? setFileSuccess3(true) : setFileSuccess3(false);
+              setUrl3(finalUrl);
+            });
         } catch {
           setError3("Failed to upload file");
         }
         setLoading3(false);
       }
-      putFile(uploadedFile).then(()=>console.log(url3));
+
+      putFile(uploadedFile).then(() => console.log(url3));
     } else {
       setUploadedPicFile3('');
       setError3('Please select an image file (png or jpg)');
@@ -150,24 +157,25 @@ export default function ModeratorAddTournamentsForm() {
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
       setUploadedPicFile4(uploadedFile);
 
-      async function putFile(uploadedFile){
+      async function putFile(uploadedFile) {
         e.preventDefault();
         try {
           setLoading4(true);
           setError4("");
-          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedFile.name);
+          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedFile.name);
           storageRef.put(uploadedFile).on('state_changed',
-          async()=>{
-            const finalUrl = await storageRef.getDownloadURL();
-            finalUrl!==undefined?setFileSuccess4(true):setFileSuccess4(false);
-            setUrl4(finalUrl);
-          });
+            async () => {
+              const finalUrl = await storageRef.getDownloadURL();
+              finalUrl !== undefined ? setFileSuccess4(true) : setFileSuccess4(false);
+              setUrl4(finalUrl);
+            });
         } catch {
           setError4("Failed to upload file");
         }
         setLoading4(false);
       }
-      putFile(uploadedFile).then(()=>console.log(url4));
+
+      putFile(uploadedFile).then(() => console.log(url4));
     } else {
       setUploadedPicFile4('');
       setError4('Please select an image file (png or jpg)');
@@ -178,24 +186,26 @@ export default function ModeratorAddTournamentsForm() {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
       setUploadedPicFileWin1(uploadedFile);
-      async function putFile(uploadedFile){
+
+      async function putFile(uploadedFile) {
         e.preventDefault();
         try {
           setLoadingWin1(true);
           setErrorWin1("");
-          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedFile.name);
-          storageRef.put(uploadedFile).on('state_changed', 
-          async()=>{
-            const finalUrl = await storageRef.getDownloadURL();
-            finalUrl!==undefined?setFileSuccessWin1(true):setFileSuccessWin1(false);
-            setUrlWin1(finalUrl);
-          });
+          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedFile.name);
+          storageRef.put(uploadedFile).on('state_changed',
+            async () => {
+              const finalUrl = await storageRef.getDownloadURL();
+              finalUrl !== undefined ? setFileSuccessWin1(true) : setFileSuccessWin1(false);
+              setUrlWin1(finalUrl);
+            });
         } catch {
           setErrorWin1("Failed to upload file");
         }
         setLoadingWin1(false);
       }
-      putFile(uploadedFile).then(()=>console.log(urlWin1));
+
+      putFile(uploadedFile).then(() => console.log(urlWin1));
     } else {
       setUploadedPicFileWin1('');
       setErrorWin1('Please select an image file (png or jpg)');
@@ -206,24 +216,26 @@ export default function ModeratorAddTournamentsForm() {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
       setUploadedPicFileWin2(uploadedFile);
-      async function putFile(uploadedFile){
+
+      async function putFile(uploadedFile) {
         e.preventDefault();
         try {
           setLoadingWin2(true);
           setErrorWin2("");
-          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedFile.name);
-          storageRef.put(uploadedFile).on('state_changed', 
-          async()=>{
-            const finalUrl = await storageRef.getDownloadURL();
-            finalUrl!==undefined?setFileSuccessWin2(true):setFileSuccessWin2(false);
-            setUrlWin2(finalUrl);
-          });
+          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedFile.name);
+          storageRef.put(uploadedFile).on('state_changed',
+            async () => {
+              const finalUrl = await storageRef.getDownloadURL();
+              finalUrl !== undefined ? setFileSuccessWin2(true) : setFileSuccessWin2(false);
+              setUrlWin2(finalUrl);
+            });
         } catch {
           setErrorWin2("Failed to upload file");
         }
         setLoadingWin2(false);
       }
-      putFile(uploadedFile).then(()=>console.log(urlWin2));
+
+      putFile(uploadedFile).then(() => console.log(urlWin2));
     } else {
       setUploadedPicFileWin2('');
       setErrorWin2('Please select an image file (png or jpg)');
@@ -234,24 +246,26 @@ export default function ModeratorAddTournamentsForm() {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
       setUploadedBannerPicFile(uploadedFile);
-      async function putFile(uploadedFile){
+
+      async function putFile(uploadedFile) {
         e.preventDefault();
         try {
           setLoadingBanner(true);
           setErrorBanner("");
-          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
-          storageRef.put(uploadedFile).on('state_changed', 
-          async()=>{
-            const finalUrl = await storageRef.getDownloadURL();
-            finalUrl!==undefined?setFileSuccessBanner(true):setFileSuccessBanner(false);
-            setUrlBanner(finalUrl);
-          });
+          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedFile.name);
+          storageRef.put(uploadedFile).on('state_changed',
+            async () => {
+              const finalUrl = await storageRef.getDownloadURL();
+              finalUrl !== undefined ? setFileSuccessBanner(true) : setFileSuccessBanner(false);
+              setUrlBanner(finalUrl);
+            });
         } catch {
           setErrorBanner("Failed to upload file");
         }
         setLoadingBanner(false);
       }
-      putFile(uploadedFile).then(()=>console.log(urlBanner));
+
+      putFile(uploadedFile).then(() => console.log(urlBanner));
     } else {
       setUploadedBannerPicFile('');
       setErrorBanner('Please select an image file (png or jpg)');
@@ -297,15 +311,15 @@ export default function ModeratorAddTournamentsForm() {
     setUrlWin1('');
     setUrlWin2('');
 
-    const storageRef1 = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedPicFile1.name);
-    const storageRef2 = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedPicFile2.name);
-    const storageRef3 = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedPicFile3.name);
-    const storageRef4 = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedPicFile4.name);
-    const storageRefWin1 = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedPicFileWin1.name);
-    const storageRefWin2 = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedPicFileWin2.name);
-    const storageReBanner = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(Date.now()+uploadedBannerPicFile.name);
-    
-    if(storageReBanner){
+    const storageRef1 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedPicFile1.name);
+    const storageRef2 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedPicFile2.name);
+    const storageRef3 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedPicFile3.name);
+    const storageRef4 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedPicFile4.name);
+    const storageRefWin1 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedPicFileWin1.name);
+    const storageRefWin2 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedPicFileWin2.name);
+    const storageReBanner = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedBannerPicFile.name);
+
+    if (storageReBanner) {
       storageReBanner.delete().then(() => {
         console.log("uploaded image removed successfully");
       }).catch((error) => {
@@ -313,7 +327,7 @@ export default function ModeratorAddTournamentsForm() {
       });
     }
 
-    if(storageRef1){
+    if (storageRef1) {
       storageRef1.delete().then(() => {
         console.log("uploaded image removed successfully");
       }).catch((error) => {
@@ -321,7 +335,7 @@ export default function ModeratorAddTournamentsForm() {
       });
     }
 
-    if(storageRef2){
+    if (storageRef2) {
       storageRef1.delete().then(() => {
         console.log("uploaded image removed successfully");
       }).catch((error) => {
@@ -329,7 +343,7 @@ export default function ModeratorAddTournamentsForm() {
       });
     }
 
-    if(storageRef3){
+    if (storageRef3) {
       storageRef1.delete().then(() => {
         console.log("uploaded image removed successfully");
       }).catch((error) => {
@@ -337,7 +351,7 @@ export default function ModeratorAddTournamentsForm() {
       });
     }
 
-    if(storageRef4){
+    if (storageRef4) {
       storageRef1.delete().then(() => {
         console.log("uploaded image removed successfully");
       }).catch((error) => {
@@ -345,7 +359,7 @@ export default function ModeratorAddTournamentsForm() {
       });
     }
 
-    if(storageRefWin1){
+    if (storageRefWin1) {
       storageRef1.delete().then(() => {
         console.log("uploaded image removed successfully");
       }).catch((error) => {
@@ -353,7 +367,7 @@ export default function ModeratorAddTournamentsForm() {
       });
     }
 
-    if(storageRefWin2){
+    if (storageRefWin2) {
       storageRef1.delete().then(() => {
         console.log("uploaded image removed successfully");
       }).catch((error) => {
@@ -365,60 +379,60 @@ export default function ModeratorAddTournamentsForm() {
   //FB write function
   const addTournamentWithFBCallback = () => {
     const collectionRef = projectFirestore.collection('tournaments').doc();
-    if(loadingBanner===false&&(loading1=== false &&
-        loading2=== false &&
-        loading3=== false &&
-        loading4=== false) ||
-       (loading1=== false &&
-        loading2=== false) ||
-        (loading3=== false &&
-        loading4=== false) ||
-        loadingWin1 === false ||
-        ( loadingWin1 === false &&
-          loadingWin2 === false)
+    if (loadingBanner === false && (loading1 === false &&
+      loading2 === false &&
+      loading3 === false &&
+      loading4 === false) ||
+      (loading1 === false &&
+        loading2 === false) ||
+      (loading3 === false &&
+        loading4 === false) ||
+      loadingWin1 === false ||
+      (loadingWin1 === false &&
+        loadingWin2 === false)
     ) {
       collectionRef.set(
-          {
-            "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
-            "eventCategory": eventCategory,
-            "eventStatus": eventStatus,
-            "eventBanner": urlBanner,
-            "eventTitle": eventTitle,
-            "eventWinner1": urlWin1,
-            "eventWinner2": urlWin2,
-            "eventInfoPage": eventInfoPageLink,
-            "eventDate": Date.parse(eventDate),
-            "eventVideoLink": eventVideoLink,
-            "pictureURL1": url1,
-            "pictureURL2": url2,
-            "pictureURL3": url3,
-            "pictureURL4": url4,
-            "createdAt": Date.now()
-          })
-          .then(() => {
-            window.alert("Tournament added successfully!");
-            history.push("/TournamentsPage", {from: "/ModeratorAddTournamentsForm"});
-            return console.log("tournaments document added successfully.");
-          })
-          .catch((error) => {
-            console.error(error.code + " " + error.message + "" + error.details);
-          });
+        {
+          "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
+          "eventCategory": eventCategory,
+          "eventStatus": eventStatus,
+          "eventBanner": urlBanner,
+          "eventTitle": eventTitle,
+          "eventWinner1": urlWin1,
+          "eventWinner2": urlWin2,
+          "eventInfoPage": eventInfoPageLink,
+          "eventDate": Date.parse(eventDate),
+          "eventVideoLink": eventVideoLink,
+          "pictureURL1": url1,
+          "pictureURL2": url2,
+          "pictureURL3": url3,
+          "pictureURL4": url4,
+          "createdAt": Date.now()
+        })
+        .then(() => {
+          window.alert("Tournament added successfully!");
+          history.push("/TournamentsPage", {from: "/ModeratorAddTournamentsForm"});
+          return console.log("tournaments document added successfully.");
+        })
+        .catch((error) => {
+          console.error(error.code + " " + error.message + "" + error.details);
+        });
     }
   }
 
   return (
     <>
-      <div className='form__body'>
-        <h1 className="title form__title">Add Tournamentss</h1>
-        <form className="form">
+      <div className={classes.container}>
+        <h1 className={classes.title}>Add Tournamentss</h1>
+        <form className='form'>
           <div className="form-dropdown">
             <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
-                {eventCategory!==''? eventCategory : "Event category"}
+                {eventCategory !== '' ? eventCategory : "Event category"}
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item onClick={()=>setEventCategory("match")}>Match</Dropdown.Item>
-                <Dropdown.Item onClick={()=>setEventCategory("tournament")}>Tournament</Dropdown.Item>
+                <Dropdown.Item onClick={() => setEventCategory("match")}>Match</Dropdown.Item>
+                <Dropdown.Item onClick={() => setEventCategory("tournament")}>Tournament</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>
@@ -426,198 +440,201 @@ export default function ModeratorAddTournamentsForm() {
           <div className="form-dropdown">
             <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
-                {eventStatus!==''? eventStatus : "Event status"}
+                {eventStatus !== '' ? eventStatus : "Event status"}
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item onClick={()=>setEventStatus("future")}>Future</Dropdown.Item>
-                <Dropdown.Item onClick={()=>setEventStatus("passed")}>Passed</Dropdown.Item>
+                <Dropdown.Item onClick={() => setEventStatus("future")}>Future</Dropdown.Item>
+                <Dropdown.Item onClick={() => setEventStatus("passed")}>Passed</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>
 
-          <label className='form-update__label'>
-            Event title
-            <input
-                className='form-update__input'
-                type="text"
-                required
-                onChange={
-                  (e)=>setEventTitle(e.target.value)
-                }
-            />
-          </label>
-         
+          <input
+            className={classes.input}
+            type="text"
+            placeholder='Event title'
+            required
+            onChange={
+              (e) => setEventTitle(e.target.value)
+            }
+          />
+
           <label
-              className='form-update__label btn-upload btn-upload--tournament'>
+            className={classes.label}>
              <span
-              className='icon-upload2'>
+               className='icon-upload2'>
+               &ensp;
             </span>
             Event banner
             <input
-                className='form-update__btn visually-hidden'
-                type="file"
-                placeholder='file'
-                required
-                onChange={bannerLoadEventListener}
+              className='visually-hidden'
+              type="file"
+              required
+              onChange={bannerLoadEventListener}
             />
           </label>
           <div className="output">
-              { errorBanner && <div className="error">{ errorBanner }</div>}
-              {fileSuccessBanner&&<div>Banner image uploaded successfully: <img style={{width: "25%", height: "auto"}} src={urlBanner} alt=""/></div> }
-            </div>
+            {errorBanner && <div className="error">{errorBanner}</div>}
+            {fileSuccessBanner &&
+            <div>Banner image uploaded successfully: <img style={{width: "25%", height: "auto"}} src={urlBanner}
+                                                          alt=""/></div>}
+          </div>
 
-          {eventStatus==="future"&&
+          {eventStatus === "future" &&
           <>
-          <label className='form-update__label btn-upload btn-upload--tournament'> <span className='icon-upload2'></span> Picture team 1
-            <input
+            <label className='form-update__label btn-upload btn-upload--tournament'> <span
+              className='icon-upload2'></span> Picture team 1
+              <input
                 className='form-update__btn visually-hidden'
                 type="file"
                 placeholder='file'
                 onChange={file1UploadEventListener}
-            />
+              />
 
-          </label>
+            </label>
             <div className="output">
-              { error1 && <div className="error">{ error1 }</div>}
-              {fileSuccess1&&<div>Image 1 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url1} alt=""/></div> }
+              {error1 && <div className="error">{error1}</div>}
+              {fileSuccess1 &&
+              <div>Image 1 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url1} alt=""/></div>}
             </div>
             <br/>
-          <label className='form-update__label btn-upload btn-upload--tournament'> <span className='icon-upload2'></span> Picture team 2
-            <input
+            <label className='form-update__label btn-upload btn-upload--tournament'> <span
+              className='icon-upload2'></span> Picture team 2
+              <input
                 className='form-update__btn visually-hidden'
                 type="file"
                 placeholder='file'
                 onChange={file2UploadEventListener}
-            />
+              />
 
-          </label>
+            </label>
             <div className="output">
-              { error2 && <div className="error">{ error2 }</div>}
-              {fileSuccess2&&<div>Image 2 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url2} alt=""/></div> }
+              {error2 && <div className="error">{error2}</div>}
+              {fileSuccess2 &&
+              <div>Image 2 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url2} alt=""/></div>}
             </div>
             <br/>
           </>
           }
 
-          {(eventCategory==="tournament"&&eventStatus==="future")&&
-              <>
-            <label className='form-update__label btn-upload btn-upload--tournament'><span className='icon-upload2'></span> Picture team 3
+          {(eventCategory === "tournament" && eventStatus === "future") &&
+          <>
+            <label className='form-update__label btn-upload btn-upload--tournament'><span
+              className='icon-upload2'></span> Picture team 3
               <input
-                  className='form-update__btn visually-hidden'
-                  type="file"
-                  placeholder='file'
-                  onChange={file3UploadEventListener}
-              />
-              </label>
-                <div className="output">
-                  { error3 && <div className="error">{ error3 }</div>}
-                  {fileSuccess3&&<div>Image 3 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url3} alt=""/></div> }
-                </div>
-            <br/>
-            <label className='form-update__label btn-upload btn-upload--tournament'> <span className='icon-upload2'></span> Picture team 4
-              <input
-                  className='form-update__btn visually-hidden'
-                  type="file"
-                  placeholder='file'
-                  onChange={file4UploadEventListener}
-              />
-
-            </label>
-                <div className="output">
-                  { error4 && <div className="error">{ error4 }</div>}
-                  {fileSuccess4&&<div>Image 4 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url4} alt=""/></div> }
-                </div>
-                <br/>
-            </>
-          }
-          {eventVideoLink&&
-            <ReactPlayer
-                url={eventVideoLink ? eventVideoLink : ""}
-                controls={true}
-                light={true}
-                playing={false}
-            />
-          }
-          <label className='form-update__label'>
-            Video Link
-            <input
-                className='form-update__input'
-                type="text"
-                required
-                onChange={
-                  (e)=>setEventVideoLink(e.target.value)
-                }
-            />
-          </label>
-
-          <label className='form-update__label'>
-            Info Page
-            <input
-                className='form-update__input'
-                type="text"
-                required
-                onChange={
-                  (e)=>setEventInfoPageLink(e.target.value)
-                }
-            />
-          </label>
-
-          <label className='form-update__label'>
-            Date/Hour
-            <input
-                className='form-update__input date'
-                type="date"
-                min="2021-05-03"
-                max="2022-12-31"
-                onChange={
-                  (e)=>setEventDate(e.target.value)
-                }
-            />
-          </label>
-
-          {eventStatus === "passed" &&
-          <label
-              className='form-update__label btn-upload btn-upload--tournament'>
-            <span
-                className='icon-upload2'>
-            </span>
-            Event winner 1
-            <input
                 className='form-update__btn visually-hidden'
                 type="file"
                 placeholder='file'
-                onChange={fileWin1UploadEventListener}
+                onChange={file3UploadEventListener}
+              />
+            </label>
+            <div className="output">
+              {error3 && <div className="error">{error3}</div>}
+              {fileSuccess3 &&
+              <div>Image 3 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url3} alt=""/></div>}
+            </div>
+            <br/>
+            <label className='form-update__label btn-upload btn-upload--tournament'> <span
+              className='icon-upload2'></span> Picture team 4
+              <input
+                className='form-update__btn visually-hidden'
+                type="file"
+                placeholder='file'
+                onChange={file4UploadEventListener}
+              />
+
+            </label>
+            <div className="output">
+              {error4 && <div className="error">{error4}</div>}
+              {fileSuccess4 &&
+              <div>Image 4 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url4} alt=""/></div>}
+            </div>
+            <br/>
+          </>
+          }
+          {eventVideoLink &&
+          <ReactPlayer
+            url={eventVideoLink ? eventVideoLink : ""}
+            controls={true}
+            light={true}
+            playing={false}
+          />
+          }
+          <input
+            className={classes.input}
+            type="text"
+            placeholder='Video Link'
+            required
+            onChange={
+              (e) => setEventVideoLink(e.target.value)
+            }
+          />
+
+          <input
+            className={classes.input}
+            type="text"
+            placeholder='Info Page'
+            required
+            onChange={
+              (e) => setEventInfoPageLink(e.target.value)
+            }
+          />
+
+          <input
+            className={classes.input}
+            type="date"
+            min="2021-05-03"
+            max="2022-12-31"
+            onChange={
+              (e) => setEventDate(e.target.value)
+            }
+          />
+
+          {eventStatus === "passed" &&
+          <label
+            className='form-update__label btn-upload btn-upload--tournament'>
+            <span
+              className='icon-upload2'>
+            </span>
+            Event winner 1
+            <input
+              className='visually-hidden'
+              type="file"
+              onChange={fileWin1UploadEventListener}
             />
             <div className="output">
-              { errorWin1 && <div className="error">{ errorWin1 }</div>}
-              {fileSuccessWin1&&<div>Image Win1 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={urlWin1} alt=""/></div> }
+              {errorWin1 && <div className="error">{errorWin1}</div>}
+              {fileSuccessWin1 &&
+              <div>Image Win1 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={urlWin1} alt=""/>
+              </div>}
             </div>
           </label>
           }
-          {(eventStatus === "passed" && eventCategory === "match")&&
+          {(eventStatus === "passed" && eventCategory === "match") &&
           <label
-              className='form-update__label btn-upload btn-upload--tournament'>
+            className='form-update__label btn-upload btn-upload--tournament'>
             <span
               className='icon-upload2'>
             </span>
             Event winner 2
             <input
-                className='form-update__btn visually-hidden'
-                type="file"
-                placeholder='file'
-                onChange={fileWin2UploadEventListener}
+              className='form-update__btn visually-hidden'
+              type="file"
+              placeholder='file'
+              onChange={fileWin2UploadEventListener}
             />
             <div className="output">
-              { errorWin2 && <div className="error">{ errorWin2 }</div>}
-              {fileSuccessWin2&&<div>Image Win2 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={urlWin2} alt=""/></div> }
+              {errorWin2 && <div className="error">{errorWin2}</div>}
+              {fileSuccessWin2 &&
+              <div>Image Win2 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={urlWin2} alt=""/>
+              </div>}
             </div>
 
           </label>
           }
-
           <button
-              className="form-article__btn"
-              onClick={()=>addTournamentWithFBCallback()}
+            className="btn-upload"
+            onClick={() => addTournamentWithFBCallback()}
           >
             Submit
           </button>

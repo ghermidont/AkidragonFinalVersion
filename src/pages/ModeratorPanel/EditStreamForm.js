@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 //import {useArticlesContext} from "../../context/ArticlesContext";
+import classes from './styles/EditStreamForm.module.scss';
 import {projectFirestore, projectStorage} from "../../fireBase";
 import {useHistory} from 'react-router-dom';
 import {useAuthContext} from "../../context/AuthContext";
@@ -131,7 +132,8 @@ export default function EditStreamForm(){
     return (
         <>
             <div className='form-update__body form-login__body'>
-                <h1 className="title form-title">Add Stream</h1>
+                {/*<h1 className="title form-title">Add Stream</h1>*/}
+                <h1 className={classes.title}>Add Stream</h1>
                 <form className="form-update" style={{marginTop: "30em"}}>
                     <ReactPlayer
                         url = {videoURL?videoURL:""}

@@ -1,4 +1,5 @@
 import React, {useState, useRef} from 'react';
+import classes from './styles/AddArticlesForm.module.scss';
 //import {useArticlesContext} from "../../../context/ArticlesContext";
 import {projectStorage, functions} from "../../../fireBase";
 import {useHistory} from 'react-router-dom';
@@ -345,55 +346,53 @@ export default function AddArticlesForm() {
             </div>
           </div>
 
-          <div className="label">
+          <h4 className={classes.title}>
             Article category:
-          </div>
+          </h4>
 
-          <ul className='form__list'>
-            <li className='form__item'>
-              <label className="label__small">
-                <input className='checkbox'
-                  type="checkbox"
-                  onChange={() => videoGamesSwitch === 0 ? setVideoGamesSwitch(1) : setVideoGamesSwitch(0)}
+          <ul className={classes.list}>
+            <li className={classes.item}>
+              <label className={classes.label}>
+                <input className={classes.checkbox}
+                       type="checkbox"
+                       onChange={() => videoGamesSwitch === 0 ? setVideoGamesSwitch(1) : setVideoGamesSwitch(0)}
                 /> Video game
               </label>
             </li>
-            <li className='form__item'>
-              <label className="label__small">
-                <input className='checkbox'
-                  type="checkbox"
-                  onChange={() => musicSwitch === 0 ? setMusicSwitch(1) : setMusicSwitch(0)}
+            <li className={classes.item}>
+              <label className={classes.label}>
+                <input className={classes.checkbox}
+                       type="checkbox"
+                       onChange={() => musicSwitch === 0 ? setMusicSwitch(1) : setMusicSwitch(0)}
                 /> Music
               </label>
             </li>
-            <li className='form__item'>
-              <label className="label__small">
-                <input className='checkbox'
-                  type="checkbox"
-                  onChange={() => moviesSwitch === 0 ? setMoviesSwitch(1) : setMoviesSwitch(0)}
+            <li className={classes.item}>
+              <label className={classes.label}>
+                <input className={classes.checkbox}
+                       type="checkbox"
+                       onChange={() => moviesSwitch === 0 ? setMoviesSwitch(1) : setMoviesSwitch(0)}
                 /> Movie
               </label>
             </li>
           </ul>
 
-          <div className="form-article__box-btn">
+          <button
+            ref={publishBtnRef}
+            className={classes.btn}
+            onClick={() => publishArticleCFTrigger()}
+          >
+            Publish
+          </button>
 
-            <button
-              ref={publishBtnRef}
-              className="btn-upload"
-              onClick={() => publishArticleCFTrigger()}
-            >
-              Publish
-            </button>
+          {/*<button*/}
+          {/*    ref={cancelBtnRef}*/}
+          {/*    className="form-article__btn"*/}
+          {/*    onClick={clearInput}*/}
+          {/*>*/}
+          {/*    Cancel*/}
+          {/*</button>*/}
 
-            {/*<button*/}
-            {/*    ref={cancelBtnRef}*/}
-            {/*    className="form-article__btn"*/}
-            {/*    onClick={clearInput}*/}
-            {/*>*/}
-            {/*    Cancel*/}
-            {/*</button>*/}
-          </div>
         </div>
       </section>
     </>

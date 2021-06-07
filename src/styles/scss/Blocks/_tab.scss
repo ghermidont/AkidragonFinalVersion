@@ -101,11 +101,12 @@
   }
 
   &__btn {
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 1rem .6rem;
+
+
   }
 
   &__link-strim {
@@ -358,7 +359,6 @@
       width: 100%;
       flex-direction: row;
       justify-content: space-between;
-      height: auto;
     }
 
     &__link-strim {
