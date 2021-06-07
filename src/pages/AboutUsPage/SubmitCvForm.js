@@ -2,11 +2,13 @@ import React, {useEffect, useState} from 'react';
 import emailjs from 'emailjs-com';
 import{ init } from 'emailjs-com';
 import {useHistory} from 'react-router-dom';
+import {useTranslation} from "react-i18next";
 init("user_ryi2yglqohFlHpuZyAqiJ");
 
 export default function SubmitCvForm() {
   console.log("ResumeForm worked");
 
+  const {t} = useTranslation();
   const [checkBoxState, setCheckBoxState] = useState(true);
   const [sizeExceededError, setSizeExceededError] = useState();
   const [fileSize, setFileSize] = useState(0);
@@ -54,7 +56,7 @@ export default function SubmitCvForm() {
             Name
             <input
                 className='form-update__input'
-                placeholder='Name'
+                placeholder={t('SubmitCVForm.NamePlaceHolder')}
                 id="name"
                 type="text"
                 required
@@ -84,7 +86,7 @@ export default function SubmitCvForm() {
                   !checkBoxState?setCheckBoxState(true):setCheckBoxState(false);
                   console.log(checkBoxState)}}
             />
-            I consent to the processing of my personal data
+              {t('SubmitCVForm.Consent')}
           </label>
 
           <div className="form-article__box-btn">
@@ -95,9 +97,9 @@ export default function SubmitCvForm() {
             {/*</label>*/}
 
             {sizeExceededError&&<error>Max file size exceeded</error>}
-            <label style={{display:"block"}}>Attach file:</label>
+            <label style={{display:"block"}}>Attach File:</label>
             <input className='form__name' type="file" name="attachment" id="fileInput" onChange={e=>setFileSize(e.target.files[0].size)}/>
-            <input className='btn-upload' type="submit" value="Submit" />
+            <input className='btn-upload' type="submit" value={t("SubmitCVForm.SubmitButton")} />
           </div>
         </form>
       </div>

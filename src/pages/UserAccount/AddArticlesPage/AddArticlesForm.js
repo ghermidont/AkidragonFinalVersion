@@ -2,10 +2,12 @@ import React, {useState, useRef} from 'react';
 //import {useArticlesContext} from "../../../context/ArticlesContext";
 import {projectStorage, functions} from "../../../fireBase";
 import {useHistory} from 'react-router-dom';
+import {useTranslation} from "react-i18next";
 
 export default function AddArticlesForm() {
 
   console.log("AddArticlesPage worked");
+  const {t} = useTranslation();
   let publishBtnRef = useRef();
   let cancelBtnRef = useRef();
   // const {currentUser} = useAuthContext();
@@ -95,7 +97,7 @@ export default function AddArticlesForm() {
             setITUrl(finalUrl);
           });
         } catch {
-          setITFileUploadError("Failed to upload file");
+          setITFileUploadError("Impossibile caricare il file");
         }
         //setLoading1(false);
       }
@@ -103,7 +105,7 @@ export default function AddArticlesForm() {
       putFile(uploadedFile).then(() => console.log(ENUrl));
     } else {
       setITUploadedPicFile('');
-      setITFileTypeError('Please select an image file (png or jpg)');
+      setITFileTypeError('Seleziona un file immagine (png o jpg)');
     }
   };
 
@@ -203,7 +205,7 @@ export default function AddArticlesForm() {
               role="tab"
               aria-controls="home"
               aria-selected="true"
-            >Italian</a>
+            >Italiana</a>
           </li>
           <li className="nav-item">
             <a className="nav-link tab__btn"
@@ -225,13 +227,13 @@ export default function AddArticlesForm() {
             role="tabpanel"
             aria-labelledby="home-tab">
             <div className='form__body'>
-              <h2 className="title form__title">Add Article</h2>
+              <h2 className="title form__title">Aggiungi articolo</h2>
               <form className="form">
 
                 <input
                   className='input'
                   type="text"
-                  placeholder='Title'
+                  placeholder='Titolo'
                   required
                   value={ITTitle}
                   onChange={
@@ -242,7 +244,7 @@ export default function AddArticlesForm() {
                   className='input'
                   rows='1'
                   name="text"
-                  placeholder='Description'
+                  placeholder='Descrizione'
                   required
                   value={ITDescription}
                   onChange={
@@ -252,7 +254,7 @@ export default function AddArticlesForm() {
                 <textarea
                   className='input'
                   rows='3'
-                  placeholder='Content'
+                  placeholder='Contenuti'
                   required
                   name="countent"
                   value={ITText}
@@ -260,7 +262,7 @@ export default function AddArticlesForm() {
                     (e) => setITText(e.target.value)
                   }
                 ></textarea>
-                <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload IT
+                <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Caricare
                   <input
                     className='form-article__btn visually-hidden'
                     type="file"
@@ -273,7 +275,7 @@ export default function AddArticlesForm() {
                   {ITFileUploadError && <div className="error">{ITFileUploadError}</div>}
                   {ITFileTypeError && <div className="error">{ITFileTypeError}</div>}
                   {ITFileSuccess &&
-                  <div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITUrl} alt=""/>
+                  <div>Immagine caricata con successo: <img style={{width: "25%", height: "auto"}} src={ITUrl} alt=""/>
                   </div>}
                 </div>
               </form>
@@ -325,7 +327,7 @@ export default function AddArticlesForm() {
                     (e) => setENText(e.target.value)
                   }
                 ></textarea>
-                <label className='btn-upload'> <span className='icon-upload2'></span> Upload EN
+                <label className='btn-upload'> <span className='icon-upload2'></span>  Upload
                   <input
                     className='form-article__btn visually-hidden'
                     type="file"
@@ -346,7 +348,7 @@ export default function AddArticlesForm() {
           </div>
 
           <div className="label">
-            Article category:
+            {t('AddArticlesForm.ArticleCategory')}:
           </div>
 
           <ul className='form__list'>
@@ -355,7 +357,7 @@ export default function AddArticlesForm() {
                 <input className='checkbox'
                   type="checkbox"
                   onChange={() => videoGamesSwitch === 0 ? setVideoGamesSwitch(1) : setVideoGamesSwitch(0)}
-                /> Video game
+                /> {t('AddArticlesForm.VideoGameCategory')}
               </label>
             </li>
             <li className='form__item'>
@@ -363,15 +365,16 @@ export default function AddArticlesForm() {
                 <input className='checkbox'
                   type="checkbox"
                   onChange={() => musicSwitch === 0 ? setMusicSwitch(1) : setMusicSwitch(0)}
-                /> Music
+                /> {t('AddArticlesForm.MusicCategory')}
               </label>
+
             </li>
             <li className='form__item'>
               <label className="label__small">
                 <input className='checkbox'
                   type="checkbox"
                   onChange={() => moviesSwitch === 0 ? setMoviesSwitch(1) : setMoviesSwitch(0)}
-                /> Movie
+                /> {t('AddArticlesForm.MoviesCategory')}
               </label>
             </li>
           </ul>
@@ -383,7 +386,7 @@ export default function AddArticlesForm() {
               className="btn-upload"
               onClick={() => publishArticleCFTrigger()}
             >
-              Publish
+              {t('AddArticlesForm.PublishButton')}
             </button>
 
             {/*<button*/}

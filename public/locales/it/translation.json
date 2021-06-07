@@ -42,14 +42,20 @@
     "VideoGames": "Videogiochi",
     "Movies": "Film",
     "Music": "Musica",
-    "ContactsButton": "Contatti"
+    "ContactsButton": "Contatti",
+    "NewsTitle": "Notizia"
   },
 
   "TournamentsPage": {
     "AkidragonTournaments": "Tornei Akidragon",
     "PassedEvents": "Eventi passati",
     "FutureEvents": "Eventi futuri",
-    "ContactsButton": "Contatti"
+    "ContactsButton": "Contatti",
+    "Category": "Categoria",
+    "Title":"Titolo",
+    "EventDate": "Data dell'evento",
+    "WatchButton": "Guardare",
+    "InfoButton": "Informazioni"
   },
 
   "UserProfilePage": {
@@ -68,6 +74,60 @@
     "ApproveArticles": "Approva articoli",
     "EditStaticContent": "Modifica contenuto statico",
     "AvailablePoints" : "Punti disponibili"
-  }
+  },
 
+  "UserProfileArticlesPage": {
+    "PageTitle": "Articoli",
+    "AddArticlesButton": "Aggiungi articoli",
+    "NewArticlesTab": "Nuovi articoli",
+    "PersonalArticlesTab": "Articoli personali",
+    "NotApproved": "Non ancora approvato",
+    "DeleteButton": "Elimina",
+    "UpdateButton": "Aggiornare"
+  },
+
+  "ContactUsForm": {
+    "NamePlaceHolder": "Nome",
+    "EmailPlaceHolder": "Email",
+    "SubjectPlaceHolder": "Soggetto",
+    "MessagePlaceHolder": "Messaggio",
+    "UploadButton": "Caricare",
+    "SubmitButton": "Invia",
+    "Consent": "Acconsento al trattamento dei miei dati personali",
+    "WhatsAppMessage": "Scrivici su Whatsapp"
+  },
+
+  "AboutUsPage": {
+    "FindOutMoreButton": "Scopri di piu su Gold Fox Gaming",
+    "SubmitCVButton": "Invia il tuo CV"
+  },
+
+  "SubmitCVForm": {
+    "NamePlaceHolder": "Nome",
+    "Consent": "Acconsento al trattamento dei miei dati personali",
+    "SubmitButton": "Invia",
+    "AttachFile:": "Allega file"
+  },
+
+  "SponsorshipPage": {
+    "PageTitle": "Sponsorizzazione",
+    "CooperationOffers": "Offerte di cooperazione",
+    "NamePlaceHolder": "Nome",
+    "MessagePlaceHolder": "Messaggio",
+    "SubmitButton": "Invia",
+    "MessageSentAlert": "Il tuo messaggio è stato inviato. Ti contatteremo a breve."
+  },
+
+  "ContentPage": {
+    "OtherStreams": "Guarda altri",
+    "ContactUs": "Contattaci"
+  },
+
+  "AddArticlesForm": {
+    "ArticleCategory": "Categoria articolo",
+    "VideoGameCategory": "Videogiochi",
+    "MusicCategory": "Musica",
+    "MoviesCategory": "Film",
+    "PublishButton": "Publish"
+  }
 }

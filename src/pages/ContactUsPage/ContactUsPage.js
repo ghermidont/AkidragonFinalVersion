@@ -2,11 +2,13 @@ import React, {useEffect, useState} from 'react';
 import ContactUsForm from "./ContactUsForm";
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
+import {useTranslation} from "react-i18next";
 
 function ContactUsPage(props) {
+  const {t} = useTranslation();
   const {appLanguage} = useLanguageContext();
   const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
-
+  //States
   const [ENAddress, setENAddress] = useState("");
   const [ITAddress, setITAddress] = useState("");
   const [ENText, setENText] = useState("");
@@ -67,7 +69,7 @@ function ContactUsPage(props) {
               </li>
               <li className="map__item map__chat">
                 <span className="icon-whatsapp"> </span>
-                Scrivici su Whatsapp
+                {t('ContactUsForm.WhatsAppMessage')}
               </li>
             </ul>
           </div>

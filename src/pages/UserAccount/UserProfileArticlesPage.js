@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Link, useHistory} from "react-router-dom";
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
 //import {useLanguageContext} from "../../context/LanguageContext";
@@ -7,9 +7,12 @@ import {useArticlesContext} from "../../context/ArticlesContext";
 import {useLanguageContext} from "../../context/LanguageContext";
 import {Button} from "react-bootstrap";
 import {projectFirestore} from "../../fireBase";
+import {useTranslation} from "react-i18next";
 
 const UserProfileArticlesPage = () => {
-  console.log("UserProfileArticlesPage ");
+  console.log("UserProfileArticlesPage");
+
+  const {t} = useTranslation();
   const {docsFromHook} = useDataFromFirestore('articles');
   const {currentUser} = useAuthContext();
   const {appLanguage} = useLanguageContext();
@@ -58,14 +61,14 @@ const UserProfileArticlesPage = () => {
     <>
       <section className='articles-page'>
         <div className="container">
-          <h1 className="articles-page__title title">Articles</h1>
-          <Link className='btn ' to='/AddArticlesForm'>Add Articles</Link>
+          <h1 className="articles-page__title title"> {t('UserProfileArticlesPage.PageTitle')}</h1>
+          <Link className='btn ' to='/AddArticlesForm'> {t('UserProfileArticlesPage.AddArticlesButton')}</Link>
           <div className="articles-page__tab tab">
 
             <div className="articles-page__tab-body">
               <div className="articles-page__tab-btn-inner">
-                <button className="articles-page__tab-btn active" type="button" data-tab="#tab_1">New Articles</button>
-                <button className="articles-page__tab-btn" type="button" data-tab="#tab_2">Personal Articles</button>
+                <button className="articles-page__tab-btn active" type="button" data-tab="#tab_1"> {t('UserProfileArticlesPage.NewArticlesTab')}</button>
+                <button className="articles-page__tab-btn" type="button" data-tab="#tab_2"> {t('UserProfileArticlesPage.PersonalArticlesTab')}</button>
               </div>
 
               <ul className="articles-page__tab-list active" id="tab_1">
@@ -106,9 +109,7 @@ const UserProfileArticlesPage = () => {
                       <img src={doc.content[appLanguage].image} alt="" className="articles-page__img"/>
                     </div>
                     <div className="articles-page__content">
-
                         <h3 className="articles-page__content-title">{doc.content[appLanguage].title}</h3>
-
                       <div className="articles-page__content-info">
                          <time className="articles-page__content-date"></time>
                       </div>
@@ -116,14 +117,14 @@ const UserProfileArticlesPage = () => {
                           {doc.content[appLanguage].text}
                         </p>
                     </div>
-                    {doc.approved===false&&<div>Not approve yet</div>}
+                    {doc.approved===false&&<div> {t('UserProfileArticlesPage.NotApproved')}</div>}
                   </article>
                   <Link onClick={()=> {
                     setChosenModifyArticleNumber(doc.id);
-                    history.push(`/modify-article/${doc.id}`, {from: "/ManageArticlesPage"});
+                    history.push(`/edit-article/${doc.id}`, {from: "/UserProfileArticlesPage"});
                   }}>
                     <Button>
-                      UPDATE
+                      {t('UserProfileArticlesPage.UpdateButton')}
                     </Button>
                   </Link>
                   <Button
@@ -136,12 +137,13 @@ const UserProfileArticlesPage = () => {
                         });
                       }}
                   >
-                    DELETE
+                    {t('UserProfileArticlesPage.DeleteButton')}
                   </Button>
                 </li>
                 ))}
               </ul>
             </div>
+
           </div>
         </div>
       </section>

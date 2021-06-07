@@ -78,10 +78,10 @@ function TournamentsPage() {
                 alt="some text"/>
           </div>
           <div className="tab__content">
-            <a className="tab__title">Category: {doc.eventCategory}</a>
-            <div className="tab__name">Title: {doc.eventTitle}</div>
+            <a className="tab__title">{t('TournamentsPage.Category')}: {doc.eventCategory}</a>
+            <div className="tab__name">{t('TournamentsPage.Title')}: {doc.eventTitle}</div>
             <br/>
-            <date className="tab__date">Event date: {parsedDate}</date>
+            <date className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</date>
           </div>
           <ul className="tab__icon">
             <li className="tab__item-icon">
@@ -97,10 +97,10 @@ function TournamentsPage() {
           </ul>
           <div className="tab__btn">
             <button className="tab__link-strim">
-              <a className="" href={doc.eventVideoLink}>Watch</a>
+              <a className="" href={doc.eventVideoLink}>{t('TournamentsPage.WatchButton')}</a>
             </button>
             <button className="tab__link-info">
-              <a className="" href={doc.eventInfoPage}>Info</a>
+              <a className="" href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>
             </button>
           </div>
         </li>
@@ -124,10 +124,10 @@ function TournamentsPage() {
                 alt="some text"/>
       </div>
       <div className="tab__content">
-        <a className="tab__title">Category: {doc.eventCategory}</a>
-        <div className="tab__name">Title: {doc.eventTitle}</div>
+        <a className="tab__title">{t('TournamentsPage.Category')}: {doc.eventCategory}</a>
+        <div className="tab__name">{t('TournamentsPage.Title')}: {doc.eventTitle}</div>
         <br/>
-        <date className="tab__date">Event date: {parsedDate}</date>
+        <date className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</date>
       </div>
       <ul className="tab__icon">
         <li className="tab__item-icon">
@@ -141,10 +141,10 @@ function TournamentsPage() {
       </ul>
       <div className="tab__btn">
         <button className="tab__link-strim">
-          <a className="" href={doc.eventVideoLink}>Watch</a>
+          <a className="" href={doc.eventVideoLink}>{t('TournamentsPage.WatchButton')}</a>
         </button>
         <button className="tab__link-info">
-          <a className="" href={doc.eventInfoPage}>Info</a>
+          <a className="" href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>
         </button>
       </div>
     </li>);
@@ -167,10 +167,10 @@ function TournamentsPage() {
                 alt="some text"/>
       </div>
       <div className="tab__content">
-        <a className="tab__title">Category: {doc.eventCategory}</a>
-        <div className="tab__name">Title: {doc.eventTitle}</div>
+        <a className="tab__title">{t('TournamentsPage.Category')}: {doc.eventCategory}</a>
+        <div className="tab__name">{t('TournamentsPage.Title')}: {doc.eventTitle}</div>
         <br/>
-        <date className="tab__date">Event date: {parsedDate}</date>
+        <date className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</date>
       </div>
       <ul className="tab__icon">
         <li className="tab__item-icon">
@@ -198,10 +198,10 @@ function TournamentsPage() {
       </ul>
       <div className="tab__btn">
         <button className="tab__link-strim">
-          <a className="" href={doc.eventVideoLink}>Watch</a>
+          <a className="" href={doc.eventVideoLink}>{t('TournamentsPage.WatchButton')}</a>
         </button>
         <button className="tab__link-info">
-          <a className="" href={doc.eventInfoPage}>Info</a>Info
+          <a className="" href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>Info
         </button>
       </div>
     </li>);
@@ -224,10 +224,10 @@ function TournamentsPage() {
                 alt="some text"/>
       </div>
       <div className="tab__content">
-        <a className="tab__title">Category: {doc.eventCategory}</a>
-        <div className="tab__name">Title: {doc.eventTitle}</div>
+        <a className="tab__title">{t('TournamentsPage.Category')}: {doc.eventCategory}</a>
+        <div className="tab__name">{t('TournamentsPage.Title')}: {doc.eventTitle}</div>
         <br/>
-        <date className="tab__date">Event date: {parsedDate}</date>
+        <date className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</date>
       </div>
       <ul className="tab__icon">
         <li className="tab__item-icon">
@@ -264,10 +264,10 @@ function TournamentsPage() {
       </ul>
       <div className="tab__btn">
         <button className="tab__link-strim">
-          <a className="" href={doc.eventVideoLink}>Watch</a>
+          <a className="" href={doc.eventVideoLink}>{t('TournamentsPage.WatchButton')}</a>
         </button>
         <button className="tab__link-info">
-          <a className="" href={doc.eventInfoPage}>Info</a>Info
+          <a className="" href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>Info
         </button>
       </div>
     </li>);

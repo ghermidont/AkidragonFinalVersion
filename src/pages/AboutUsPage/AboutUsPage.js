@@ -3,11 +3,13 @@ import {Link} from "react-router-dom";
 import logoBig from '../../assets/images/dest/logo-big.png';
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
+import {useTranslation} from "react-i18next";
 //import {v4 as uuidv4} from "uuid";
 
 function AboutUsPage() {
   console.log("AboutUsPage worked");
 
+  const {t} = useTranslation();
   const {appLanguage} = useLanguageContext();
 
   const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
@@ -185,7 +187,7 @@ function AboutUsPage() {
               {appLanguage==="it"?ITTitleText:ENTitleText}
               </p>
               <button className="about__btn">
-                Scopri di piu su Gold Fox Gaming
+                {t('AboutUsPage.FindOutMoreButton')}
               </button>
             </div>
           </div>
@@ -285,7 +287,7 @@ function AboutUsPage() {
               <p className="career__text">
               {appLanguage==="it"?ITCareerText:ENCareerText}
               </p>
-              <Link className="career__btn" to='/SubmitCvForm'>Invia il tuo CV</Link>
+              <Link className="career__btn" to='/SubmitCvForm'>{t('AboutUsPage.SubmitCVButton')}</Link>
             </div>
           </div>
         </div>
