@@ -5,8 +5,8 @@ import {useHistory} from 'react-router-dom';
 import {useTranslation} from "react-i18next";
 
 export default function AddArticlesForm() {
-
   console.log("AddArticlesPage worked");
+
   const {t} = useTranslation();
   let publishBtnRef = useRef();
   let cancelBtnRef = useRef();

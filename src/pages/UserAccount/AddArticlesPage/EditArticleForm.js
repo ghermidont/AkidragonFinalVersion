@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 //import {useArticlesContext} from "../../../context/ArticlesContext";
 import {projectStorage, functions} from "../../../fireBase";
 import {useHistory} from 'react-router-dom';
@@ -10,6 +10,8 @@ const queryString = require('query-string');
 
 export default function EditArticleForm() {
     console.log("EditArticleForm worked");
+
+    const saveBtnRef = useRef();
     const {docsFromHook} = useDataFromFirestore('articles');
     const fileTypesArray = ['image/png', 'image/jpeg'];
     const history = useHistory();
@@ -415,8 +417,9 @@ export default function EditArticleForm() {
                         /> Movie
                     </label>
 
-
+//TODO finsh the buttons double click prevention logic
                         <button
+                            ref={saveBtnRef}
                             className="form-article__btn"
                             onClick={()=>publishArticleCFTrigger()}
                         >
