@@ -419,7 +419,6 @@ export default function EditArticleForm() {
                         /> Movie
                     </label>
 
-//TODO finsh the buttons double click prevention logic
                         <button
                             ref={publishBtnRef}
                             className="form-article__btn"

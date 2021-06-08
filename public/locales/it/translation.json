@@ -23,6 +23,14 @@
     "SocialMessage": "Seguici sui social network"
   },
 
+  "Step2CompleteProfilePage": {
+    "CompleteProfile": "Profilo completo",
+    "FirstName": "Nome di battesimo",
+    "LastName": "Cognome",
+    "DisplayName": "Nome da visualizzare",
+    "Submit": "Invia"
+  },
+
   "HomePage": {
     "BannerText": "ESPLORA L'UNIVERSO AKIDRAGON",
     "Card1": "TORNEI",
@@ -154,6 +162,12 @@
     "ChangePasswordButton": "Cambia la password",
     "ChangeEmailButton": "Cambia email",
     "DeleteAccountButton" : "Eliminare l'account"
+  },
+
+  "DeleteProfilePage":{
+    "ConfirmProfileDeletion": "Conferma la cancellazione del profilo",
+    "CancelButton": "Annulla",
+    "DeleteProfileButton": "Elimina profilo"
   }
 
 }

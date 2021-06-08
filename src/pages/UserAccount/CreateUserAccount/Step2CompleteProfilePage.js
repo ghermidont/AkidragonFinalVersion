@@ -1,11 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useAuthContext} from "../../../context/AuthContext";
 import {functions, projectStorage} from "../../../fireBase";
 import {useHistory} from 'react-router-dom';
 import useStorage from "../../../customHooks/useStorage";
+import {useTranslation} from "react-i18next";
 
 export default function Step2CompleteProfilePage() {
     console.log("Step2CompleteProfilePage");
+
+    const {t} = useTranslation();
+    let publishBtnRef = useRef();
     const history = useHistory();
     const {userUploadedPictureUrl} = useAuthContext();
     // const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
@@ -40,6 +44,7 @@ export default function Step2CompleteProfilePage() {
         console.log("Step2CompleteProfilePage cloudFunctionTrigger()");
         console.log("Step2 photo url:");
         console.log(userUploadedPictureUrl);
+        publishBtnRef.current&&publishBtnRef.current.setAttribute("disabled", "disabled");
 
         const addData = functions.httpsCallable('setUserData');
         addData({
@@ -49,6 +54,7 @@ export default function Step2CompleteProfilePage() {
             "displayName": currentDisplayName
         })
             .then((result) => {
+                publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
                 history.push("/UserProfilePage", {from: "/Step2CompleteProfilePage"});
                 return console.log(" Step2 cloud function worked. \n User profile info completed successfully!");
             }
@@ -60,10 +66,10 @@ export default function Step2CompleteProfilePage() {
     return(
         <>
             <div className='form-article__body form-login__body'>
-                <h1 className="title form-title">Complete Profile</h1>
+                <h1 className="title form-title">{t('Step2CompleteProfilePage.CompleteProfile')}</h1>
                 <form className="form-article">
                     <label className='form-article__label'>
-                        First Name
+                        {t('Step2CompleteProfilePage.FirstName')}
                         <input
                                autoFocus
                                required
@@ -75,7 +81,7 @@ export default function Step2CompleteProfilePage() {
                         />
                         </label>
                     <label className='form-article__label'>
-                        Last Name
+                        {t('Step2CompleteProfilePage.LastName')}
                         <input
                             type="text"
                             required
@@ -85,7 +91,7 @@ export default function Step2CompleteProfilePage() {
                             className='form-article__input' type="text"/>
                     </label>
                     <label className='form-article__label'>
-                        Display Name
+                        {t('Step2CompleteProfilePage.DisplayName')}
                         <input
                             required
                             value={currentDisplayName}
@@ -95,10 +101,11 @@ export default function Step2CompleteProfilePage() {
                             type="text"/>
                     </label>
                     <button
+                        ref={publishBtnRef}
                         className="form-article__btn"
                         onClick={cloudFunctionTrigger}
                     >
-                        Save
+                        {t('Step2CompleteProfilePage.Submit')}
                     </button>
                 </form>
             </div>
