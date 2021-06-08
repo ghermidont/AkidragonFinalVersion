@@ -9,7 +9,7 @@ export default function AddArticlesForm() {
 
   const {t} = useTranslation();
   let publishBtnRef = useRef();
-  let cancelBtnRef = useRef();
+  //let cancelBtnRef = useRef();
   // const {currentUser} = useAuthContext();
   // const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
   //const [error, setError] = useState("");
@@ -111,11 +111,10 @@ export default function AddArticlesForm() {
 
   const publishArticleCFTrigger = (e) => {
     const addData = functions.httpsCallable('publishArticle');
-
-    if (publishBtnRef.current && cancelBtnRef.current) {
-      publishBtnRef.current.setAttribute("disabled", "disabled");
-      cancelBtnRef.current.setAttribute("disabled", "disabled");
-    }
+    //if (publishBtnRef.current && cancelBtnRef.current) {
+    publishBtnRef.current&&publishBtnRef.current.setAttribute("disabled", "disabled");
+      //cancelBtnRef.current.setAttribute("", "disabled");
+    //}
 
     addData({
       "content": {
@@ -137,8 +136,8 @@ export default function AddArticlesForm() {
 
     })
       .then((result) => {
-        publishBtnRef.current.removeAttribute("disabled", "disabled");
-        cancelBtnRef.current.removeAttribute("disabled", "disabled");
+        publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
+        // cancelBtnRef.current.removeAttribute("disabled");
         window.alert("Article added successfully!");
         history.push("/UserProfilePage", {from: "/AddArticlesForm"});
         return console.log("article collection added successfully.");

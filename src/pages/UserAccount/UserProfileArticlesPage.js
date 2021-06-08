@@ -131,9 +131,9 @@ const UserProfileArticlesPage = () => {
                       variant="danger"
                       onClick={()=>{
                         projectFirestore.collection("articles").doc(doc.id).delete().then(() => {
-                          console.log("Document successfully deleted!");
+                         window.alert("Article deleted");
                         }).catch((error) => {
-                          console.error("Error removing document: ", error);
+                          console.error("Error removing article: ", error);
                         });
                       }}
                   >

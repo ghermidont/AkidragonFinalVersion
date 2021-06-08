@@ -64,10 +64,9 @@ function TournamentsPage() {
     let parsedDate = date.toString();
 
     return (
-        <li className="tab__item">
+        <li className="tab__item" key={doc.id}>
           <div className="tab__image"
                style={{
-
                  position: "center",
                  backgroundSize: "cover",
                  backgroundRepeat: "no-repeat"
@@ -81,7 +80,7 @@ function TournamentsPage() {
             <a className="tab__title">{t('TournamentsPage.Category')}: {doc.eventCategory}</a>
             <div className="tab__name">{t('TournamentsPage.Title')}: {doc.eventTitle}</div>
             <br/>
-            <date className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</date>
+            <div className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</div>
           </div>
           <ul className="tab__icon">
             <li className="tab__item-icon">
@@ -111,7 +110,8 @@ function TournamentsPage() {
     let date = new Date(doc.eventDate);
     let parsedDate = date.toString();
 
-    return (<li className="tab__item">
+    return (
+      <li className="tab__item" key={doc.id}>
       <div className="tab__image"
            style={{
              position: "center",
@@ -127,7 +127,7 @@ function TournamentsPage() {
         <a className="tab__title">{t('TournamentsPage.Category')}: {doc.eventCategory}</a>
         <div className="tab__name">{t('TournamentsPage.Title')}: {doc.eventTitle}</div>
         <br/>
-        <date className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</date>
+        <div className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</div>
       </div>
       <ul className="tab__icon">
         <li className="tab__item-icon">
@@ -154,7 +154,8 @@ function TournamentsPage() {
     let date = new Date(doc.eventDate);
     let parsedDate = date.toString();
 
-    return (<li className="tab__item">
+    return (
+      <li className="tab__item" key={doc.id}>
       <div className="tab__image"
            style={{
              position: "center",
@@ -170,7 +171,7 @@ function TournamentsPage() {
         <a className="tab__title">{t('TournamentsPage.Category')}: {doc.eventCategory}</a>
         <div className="tab__name">{t('TournamentsPage.Title')}: {doc.eventTitle}</div>
         <br/>
-        <date className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</date>
+        <div className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</div>
       </div>
       <ul className="tab__icon">
         <li className="tab__item-icon">
@@ -211,7 +212,8 @@ function TournamentsPage() {
     let date = new Date(doc.eventDate);
     let parsedDate = date.toString();
 
-    return (<li className="tab__item">
+    return (
+        <li className="tab__item" key={doc.id}>
       <div className="tab__image"
            style={{
              position: "center",
@@ -227,7 +229,7 @@ function TournamentsPage() {
         <a className="tab__title">{t('TournamentsPage.Category')}: {doc.eventCategory}</a>
         <div className="tab__name">{t('TournamentsPage.Title')}: {doc.eventTitle}</div>
         <br/>
-        <date className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</date>
+        <div className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</div>
       </div>
       <ul className="tab__icon">
         <li className="tab__item-icon">

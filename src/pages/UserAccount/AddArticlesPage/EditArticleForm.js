@@ -11,7 +11,7 @@ const queryString = require('query-string');
 export default function EditArticleForm() {
     console.log("EditArticleForm worked");
 
-    const saveBtnRef = useRef();
+    let publishBtnRef = useRef();
     const {docsFromHook} = useDataFromFirestore('articles');
     const fileTypesArray = ['image/png', 'image/jpeg'];
     const history = useHistory();
@@ -147,6 +147,7 @@ export default function EditArticleForm() {
 
     const publishArticleCFTrigger = (e) => {
         const addData = functions.httpsCallable('publishArticle');
+        publishBtnRef.current&&publishBtnRef.current.setAttribute("disabled", "disabled");
 
             addData({
                 "id": stringifiedSlug,
@@ -168,7 +169,8 @@ export default function EditArticleForm() {
 
             })
                 .then((result) => {
-                        window.alert("Article added successfully!");
+                        publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
+                        window.alert("Article edited successfully!");
                         history.push("/UserProfilePage", {from: "/EditArticleForm"});
                         return console.log("Article edited successfully.");
                     }
@@ -419,7 +421,7 @@ export default function EditArticleForm() {
 
 //TODO finsh the buttons double click prevention logic
                         <button
-                            ref={saveBtnRef}
+                            ref={publishBtnRef}
                             className="form-article__btn"
                             onClick={()=>publishArticleCFTrigger()}
                         >

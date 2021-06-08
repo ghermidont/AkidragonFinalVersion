@@ -33,7 +33,7 @@ export default function SubmitCvForm() {
       emailjs.sendForm('service_neq4dxf', 'template_cmcxzgs', '#resume-form', 'user_ryi2yglqohFlHpuZyAqiJ')
           .then((result) => {
             console.log("The result is: " + result.text);
-            result.text && history.push("/MessageSentPage", {from: "/ResumeForm"});
+            result.text && history.push("/", {from: "/SubmitCVForm"});
           }, (error) => {
             console.log("An error intervened:" + error.text);
             alert("Your message was not sent because " + error.text);
@@ -96,7 +96,7 @@ export default function SubmitCvForm() {
             {/*  <input className='form-article__btn visually-hidden' type="file" placeholder='file'/>*/}
             {/*</label>*/}
 
-            {sizeExceededError&&<error>Max file size exceeded</error>}
+            {sizeExceededError&&<error>{t("SubmitCVForm.MaxFileSizeExceeded")}</error>}
             <label style={{display:"block"}}>Attach File:</label>
             <input className='form__name' type="file" name="attachment" id="fileInput" onChange={e=>setFileSize(e.target.files[0].size)}/>
             <input className='btn-upload' type="submit" value={t("SubmitCVForm.SubmitButton")} />

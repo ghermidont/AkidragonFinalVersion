@@ -23,7 +23,7 @@ export default function ApproveArticlesPage() {
         const addData = functions.httpsCallable('approveArticle');
         addData({
             articleId: id
-        }).then().catch(err=>console.log("Improvement process went wrong "+err));
+        }).then(()=>window.alert("Article approved")).catch(err=>console.log("Improvement process went wrong "+err));
     }
 
     const deleteCloudFunctTrigger = (id) => {
@@ -31,7 +31,7 @@ export default function ApproveArticlesPage() {
         const addData = functions.httpsCallable('deleteArticle');
         addData({
             articleId: id
-        }).then().catch(err=>console.log("Improvement process went wrong "+err));
+        }).then(()=>window.alert("Article deleted")).catch(err=>console.log("Improvement process went wrong "+err));
     }
 
     const linkName = readMore ? 'Read Less << ' : 'Read More >> ';

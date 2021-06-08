@@ -23,7 +23,7 @@ export default function SponsorshipForm() {
       'user_ryi2yglqohFlHpuZyAqiJ'
     )
       .then((result) => {
-        window.alert("You message has been sent. We will contact you shortly.");
+        window.alert(t('SponsorshipPage.MessageSentAlert'));
         console.log("The result is: " + result.text);
         result.text && history.push("/", {from: "/SponsorshipPage"});
       }, (error) => {

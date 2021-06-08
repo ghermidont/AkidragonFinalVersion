@@ -214,7 +214,7 @@ function AboutUsPage() {
             <h2 className="team__title title">{appLanguage==="it"?ITCrewTitle:ENCrewTitle}</h2>
             <ul className="team__list">
               { generalTeamMembersArr.map(doc =>
-                    <li className="team__item">
+                    <li className="team__item" key={doc.id}>
                     <img src={doc.avatar} alt="" className="team__image"/>
                     <div className="team__name">{doc.name}</div>
                     <div className="team__position">{appLanguage==="it"?doc.title.it:doc.title.en}</div>

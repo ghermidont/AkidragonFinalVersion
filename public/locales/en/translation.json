@@ -106,7 +106,8 @@
     "NamePlaceHolder": "Name",
     "Consent": "I consent to the processing of my personal data",
     "SubmitButton": "Submit",
-    "AttachFile:": "Attach File"
+    "AttachFile:": "Attach File",
+    "MaxFileSizeExceeded": "Max file size exceeded"
   },
 
   "SponsorshipPage": {
@@ -129,5 +130,29 @@
     "MusicCategory": "Music",
     "MoviesCategory": "Movies",
     "PublishButton": "Publish"
+  },
+
+  "UpdateUserProfilePage": {
+    "Upload": "Upload",
+    "UpdateAvatarButton": "Update avatar",
+    "ImageUploadedSuccessfully": "Image Uploaded successfully",
+    "BirthDate" : "Birth date",
+    "CurrentBirthDate" : "Current date of birth",
+    "UpdateBirthDateButton" : "Update birth date",
+    "DisplayName" : "Display name",
+    "UpdateDisplayNameButton" : "Update display name",
+    "FirstName" : "First name",
+    "UpdateFirstNameButton" : "Update first name",
+    "LastName" : "Last name",
+    "UpdateLastNameButton": "Update last name",
+    "Address" : "Address",
+    "UpdateAddressButton" : "Update address",
+    "Biography": "Biography",
+    "UpdateBiographyButton" : "Update biography",
+    "Password" : "Password",
+    "ConfirmPassword" : "Confirm password",
+    "ChangePasswordButton": "Change password",
+    "ChangeEmailButton": "Change email",
+    "DeleteAccountButton" : "Delete Account"
   }
 }

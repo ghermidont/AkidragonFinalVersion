@@ -39,6 +39,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
+    "react-whatsapp": "^0.2.1",
     "serialize-javascript": "^5.0.1",
     "swiper": "^6.7.0",
     "uuid": "^8.3.2",
