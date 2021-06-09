@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {Link, useHistory} from "react-router-dom";
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
+import classes from './CreateUserAccount/styles/UserProfileArticlesPage.module.scss';
 //import {useLanguageContext} from "../../context/LanguageContext";
 import {useAuthContext} from "../../context/AuthContext";
 import {useArticlesContext} from "../../context/ArticlesContext";
@@ -122,11 +123,12 @@ const UserProfileArticlesPage = () => {
                     setChosenModifyArticleNumber(doc.id);
                     history.push(`/modify-article/${doc.id}`, {from: "/ManageArticlesPage"});
                   }}>
-                    <Button>
+                    <Button className={classes.btn}>
                       UPDATE
                     </Button>
                   </Link>
                   <Button
+                      className={classes.btnDel}
                       variant="danger"
                       onClick={()=>{
                         projectFirestore.collection("articles").doc(doc.id).delete().then(() => {

@@ -1,0 +1,19 @@
+@import "./src/styles/scss/mixin";
+
+.btn {
+  @include btn;
+
+  transform: scale(.8);
+  margin: 1rem 0 2rem;
+
+  &Del {
+    box-shadow: none;
+    font-size: 1.8rem;
+    font-style: normal;
+    height: 4.2rem;
+    margin: 1rem 0 2rem;
+    border-radius: .6rem;
+    border: none;
+    transform: scale(.8);
+  }
+}
