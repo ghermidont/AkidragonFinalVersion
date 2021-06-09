@@ -202,7 +202,7 @@ function TournamentsPage() {
           <a className="" href={doc.eventVideoLink}>{t('TournamentsPage.WatchButton')}</a>
         </button>
         <button className="tab__link-info">
-          <a className="" href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>Info
+          <a className="" href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>
         </button>
       </div>
     </li>);
@@ -269,7 +269,7 @@ function TournamentsPage() {
           <a className="" href={doc.eventVideoLink}>{t('TournamentsPage.WatchButton')}</a>
         </button>
         <button className="tab__link-info">
-          <a className="" href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>Info
+          <a className="" href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>
         </button>
       </div>
     </li>);
@@ -346,34 +346,3 @@ function TournamentsPage() {
 }
 
 export default TournamentsPage;
-
-
-  {/*<div className="tournament__tab tab">*/}
-  {/*  <div className="tab__body">*/}
-  {/*    <ul className="tab__body-list">*/}
-  {/*      <li className="tab__body-item">*/}
-  {/*        <button className="tab__body-btn active" type="button"*/}
-  {/*                data-tab="#tab_1">Eventi passati*/}
-  {/*        </button>*/}
-  {/*      </li>*/}
-  {/*      <li className="tab__body-item">*/}
-  {/*        <button className="tab__body-btn" type="button"*/}
-  {/*                data-tab="#tab_2">Prossimi eventi*/}
-  {/*        </button>*/}
-  {/*      </li>*/}
-  {/*    </ul>*/}
-
-  {/*    <ul className="tab__list active" id="tab_1">*/}
-  {/*      {passedEvents && passedEvents.slice(0, 4).map(doc =>*/}
-  {/*        doc.eventCategory === "match" ? PassedMatchTemp(doc) : PassedTournTemp(doc)*/}
-  {/*      )}*/}
-  {/*    </ul>*/}
-
-  {/*    <ul className="tab__list active" id="tab_2">*/}
-  {/*      {futureEvents && futureEvents.slice(0, 4).map(doc =>*/}
-  {/*        doc.eventCategory === "match" ? FutureMatchTemp(doc) : FutureTournTemp(doc)*/}
-  {/*      )}*/}
-  {/*    </ul>*/}
-
-  {/*  </div>*/}
-  {/*</div>*/}

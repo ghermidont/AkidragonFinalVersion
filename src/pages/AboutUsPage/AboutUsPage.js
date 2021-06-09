@@ -4,7 +4,6 @@ import logoBig from '../../assets/images/dest/logo-big.png';
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
 import {useTranslation} from "react-i18next";
-//import {v4 as uuidv4} from "uuid";
 
 function AboutUsPage() {
   console.log("AboutUsPage worked");
@@ -16,21 +15,6 @@ function AboutUsPage() {
 
   const [ENBannerUrl, setENBannerUrl] = useState("");
   const [ITBannerUrl, setITBannerUrl] = useState("");
-
-  // const [avatar1Url, setAvatar1Url] = useState("");
-  // const [avatar2Url, setAvatar2Url] = useState("");
-  // const [avatar3Url, setAvatar3Url] = useState("");
-  // const [avatar4Url, setAvatar4Url] = useState("");
-  // const [avatar5Url, setAvatar5Url] = useState("");
-  // const [avatar6Url, setAvatar6Url] = useState("");
-  // const [avatar7Url, setAvatar7Url] = useState("");
-  // const [avatar8Url, setAvatar8Url] = useState("");
-
-  const [partnerLogo1Url, setPartnerLogo1Url] = useState("");
-  const [partnerLogo2Url, setPartnerLogo2Url] = useState("");
-  const [partnerLogo3Url, setPartnerLogo3Url] = useState("");
-  const [partnerLogo4Url, setPartnerLogo4Url] = useState("");
-  const [partnerLogo5Url, setPartnerLogo5Url] = useState("");
 
   // Text
   const [ENCareerTitle, setENCareerTitle] = useState("");
@@ -51,33 +35,8 @@ function AboutUsPage() {
   const [ENPartnersTitle, setENPartnersTitle] = useState("");
   const [ITPartnersTitle, setITPartnersTitle] = useState("");
 
-  // const [name1, setName1] = useState("");
-  // const [name2, setName2] = useState("");
-  // const [name3, setName3] = useState("");
-  // const [name4, setName4] = useState("");
-  // const [name5, setName5] = useState("");
-  // const [name6, setName6] = useState("");
-  // const [name7, setName7] = useState("");
-  // const [name8, setName8] = useState("");
-
-  // const [ENPositionName1, setENPositionName1] = useState("");
-  // const [ITPositionName1, setITPositionName1] = useState("");
-  // const [ENPositionName2, setENPositionName2] = useState("");
-  // const [ITPositionName2, setITPositionName2] = useState("");
-  // const [ENPositionName3, setENPositionName3] = useState("");
-  // const [ITPositionName3, setITPositionName3] = useState("");
-  // const [ENPositionName4, setENPositionName4] = useState("");
-  // const [ITPositionName4, setITPositionName4] = useState("");
-  // const [ENPositionName5, setENPositionName5] = useState("");
-  // const [ITPositionName5, setITPositionName5] = useState("");
-  // const [ENPositionName6, setENPositionName6] = useState("");
-  // const [ITPositionName6, setITPositionName6] = useState("");
-  // const [ENPositionName7, setENPositionName7] = useState("");
-  // const [ITPositionName7, setITPositionName7] = useState("");
-  // const [ENPositionName8, setENPositionName8] = useState("");
-  // const [ITPositionName8, setITPositionName8] = useState("");
-
   const [generalTeamMembersArr, setGeneralTeamMembersArr] = useState([]);
+  const [generalPartnersLogoArr, setGeneralPartnersLogoArr] = useState([]);
 
   const [ENTitle, setENTitle] = useState("");
   const [ITTitle, setITTitle] = useState("");
@@ -86,6 +45,7 @@ function AboutUsPage() {
   const [ITTitleText, setITTitleText] = useState("");
 
   let membersArr = [];
+  let partnersArr = [];
   let selectedDoc = "";
 
   useEffect(() => {
@@ -103,6 +63,9 @@ function AboutUsPage() {
       selectedDoc.map(doc => {
         doc.members.map(member => membersArr.push({...member}));
         setGeneralTeamMembersArr(membersArr);
+
+        doc.partners.map(partner => partnersArr.push({...partner}));
+        setGeneralPartnersLogoArr(partnersArr);
 
         setENTitle(doc.title.en);
         setITTitle(doc.title.it);
@@ -123,51 +86,10 @@ function AboutUsPage() {
         setENPartnersTitle(doc.partnersTitle.en);
         setITPartnersTitle(doc.partnersTitle.it);
 
-        // setName1(doc.teamMembers.member1.name);
-        // setName2(doc.teamMembers.member2.name);
-        // setName3(doc.teamMembers.member3.name);
-        // setName4(doc.teamMembers.member4.name);
-        // setName5(doc.teamMembers.member5.name);
-        // setName6(doc.teamMembers.member6.name);
-        // setName7(doc.teamMembers.member7.name);
-        // setName8(doc.teamMembers.member8.name);
-
         setENCareerTitle(doc.careerTitle.en);
         setITCareerTitle(doc.careerTitle.it);
         setENCareerText(doc.careerText.en);
         setITCareerText(doc.careerText.it);
-
-        // setENPositionName1(doc.teamMembers.member1.title.en);
-        // setITPositionName1(doc.teamMembers.member1.title.it);
-        // setENPositionName2(doc.teamMembers.member2.title.en);
-        // setITPositionName2(doc.teamMembers.member2.title.it);
-        // setENPositionName3(doc.teamMembers.member3.title.en);
-        // setITPositionName3(doc.teamMembers.member3.title.it);
-        // setENPositionName4(doc.teamMembers.member4.title.en);
-        // setITPositionName4(doc.teamMembers.member4.title.it);
-        // setENPositionName5(doc.teamMembers.member5.title.en);
-        // setITPositionName5(doc.teamMembers.member5.title.it);
-        // setENPositionName6(doc.teamMembers.member6.title.en);
-        // setITPositionName6(doc.teamMembers.member6.title.it);
-        // setENPositionName7(doc.teamMembers.member7.title.en);
-        // setITPositionName7(doc.teamMembers.member7.title.it);
-        // setENPositionName8(doc.teamMembers.member8.title.en);
-        // setITPositionName8(doc.teamMembers.member8.title.it);
-
-        // setAvatar1Url(doc.teamMembers.member1.photo);
-        // setAvatar2Url(doc.teamMembers.member2.photo);
-        // setAvatar3Url(doc.teamMembers.member3.photo);
-        // setAvatar4Url(doc.teamMembers.member4.photo);
-        // setAvatar5Url(doc.teamMembers.member5.photo);
-        // setAvatar6Url(doc.teamMembers.member6.photo);
-        // setAvatar7Url(doc.teamMembers.member7.photo);
-        // setAvatar8Url(doc.teamMembers.member8.photo);
-
-        setPartnerLogo1Url(doc.partnersLogos.partner1);
-        setPartnerLogo2Url(doc.partnersLogos.partner2);
-        setPartnerLogo3Url(doc.partnersLogos.partner3);
-        setPartnerLogo4Url(doc.partnersLogos.partner4);
-        setPartnerLogo5Url(doc.partnersLogos.partner5);
       })
     }
   }, [docsFromHookCMS]);
@@ -187,7 +109,7 @@ function AboutUsPage() {
               {appLanguage==="it"?ITTitleText:ENTitleText}
               </p>
               <button className="about__btn">
-                {t('AboutUsPage.FindOutMoreButton')}
+                <a className="" href="https://www.goldfoxgaming.it/">{t('AboutUsPage.FindOutMoreButton')}</a>
               </button>
             </div>
           </div>
@@ -221,43 +143,7 @@ function AboutUsPage() {
                   </li>
                 )
               }
-            {/*  <li className="team__item">*/}
-            {/*    <img src={avatar2Url} alt="" className="team__image"/>*/}
-            {/*    <div className="team__name">{name2}</div>*/}
-            {/*    <div className="team__position">{appLanguage==="it"?ITPositionName2:ENPositionName2}</div>*/}
-            {/*  </li>*/}
-            {/*  <li className="team__item">*/}
-            {/*    <img src={avatar3Url} alt="" className="team__image"/>*/}
-            {/*    <div className="team__name">{name3}</div>*/}
-            {/*    <div className="team__position">{appLanguage==="it"?ITPositionName3:ENPositionName3}</div>*/}
-            {/*  </li>*/}
-            {/*</ul>*/}
-            {/*<ul className="team__list team__list--second">*/}
-            {/*  <li className="team__item">*/}
-            {/*    <img src={avatar4Url} alt="" className="team__image"/>*/}
-            {/*    <div className="team__name">{name4}</div>*/}
-            {/*    <div className="team__position">{appLanguage==="it"?ITPositionName4:ENPositionName4}</div>*/}
-            {/*  </li>*/}
-            {/*  <li className="team__item">*/}
-            {/*    <img src={avatar5Url} alt="" className="team__image"/>*/}
-            {/*    <div className="team__name">{name5}</div>*/}
-            {/*    <div className="team__position">{appLanguage==="it"?ITPositionName5:ENPositionName5}</div>*/}
-            {/*  </li>*/}
-            {/*  <li className="team__item">*/}
-            {/*    <img src={avatar6Url} alt="" className="team__image"/>*/}
-            {/*    <div className="team__name">{name6}</div>*/}
-            {/*    <div className="team__position">{appLanguage==="it"?ITPositionName6:ENPositionName6}</div>*/}
-            {/*  </li>*/}
-            {/*  <li className="team__item">*/}
-            {/*    <img src={avatar7Url} alt="" className="team__image"/>*/}
-            {/*    <div className="team__name">{name7}</div>*/}
-            {/*    <div className="team__position">{appLanguage==="it"?ITPositionName7:ENPositionName7}</div>*/}
-            {/*  </li>*/}
-            {/*  <li className="team__item">*/}
-            {/*    <img src={avatar8Url} alt="" className="team__image"/>*/}
-            {/*    <div className="team__name">{name8}</div>*/}
-            {/*    <div className="team__position">{appLanguage==="it"?ITPositionName8:ENPositionName8}</div>*/}
-            {/*  </li>*/}
+
             </ul>
           </div>
         </div>
@@ -267,11 +153,9 @@ function AboutUsPage() {
         <div className="container">
           <h2 className="partner__title title">{appLanguage==="it"?ITPartnersTitle:ENPartnersTitle}</h2>
           <ul className="partner__list">
-            <li className="partner__item"><img src={partnerLogo1Url} alt="" className="partner__image"/></li>
-            <li className="partner__item"><img src={partnerLogo2Url} alt="" className="partner__image"/></li>
-            <li className="partner__item"><img src={partnerLogo3Url} alt="" className="partner__image"/></li>
-            <li className="partner__item"><img src={partnerLogo4Url} alt="" className="partner__image"/></li>
-            <li className="partner__item"><img src={partnerLogo5Url} alt="" className="partner__image"/></li>
+            { generalPartnersLogoArr.map(doc =>
+                <li className="partner__item" key={doc.id}><img src={doc.logo} alt="" className="partner__image"/></li>
+            )}
           </ul>
         </div>
       </section>

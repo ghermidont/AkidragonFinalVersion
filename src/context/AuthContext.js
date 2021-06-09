@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from "react";
 //auth is the auth function we created in the firebase.js file. All functions called after auth. are firebase functions.
-import {auth, projectFirestore, FBProvider} from "../fireBase";
+import {auth, projectFirestore} from "../fireBase";
 const authContext = React.createContext();
 
 export function useAuthContext(){

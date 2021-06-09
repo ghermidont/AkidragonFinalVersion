@@ -4,7 +4,7 @@ import {useAuthContext} from '../../context/AuthContext';
 import {useTranslation} from "react-i18next";
 
 export default function DeleteProfilePage(){
-
+    const {handleLogout} = useAuthContext();
     const {currentUser} = useAuthContext;
     //const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
     console.log("DeleteProfilePage worked.");
@@ -16,9 +16,8 @@ export default function DeleteProfilePage(){
             currentUser.delete().then(function () {
                 window.alert("Profile deleted.");
                 console.log("deleteCurrentUser() worked.");
-                //TODO implement sign out here
+                handleLogout();
                 history.push('/');
-
             }).catch(function (error) {
                window.alert(error);
             });

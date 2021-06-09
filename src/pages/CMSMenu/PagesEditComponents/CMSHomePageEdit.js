@@ -6,7 +6,7 @@ import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
 function CMSHomePageEdit() {
 
     let publishBtnRef = useRef();
-    let cancelBtnRef = useRef();
+    //let cancelBtnRef = useRef();
     const fileTypesArray = ['image/png', 'image/jpeg'];
     const history = useHistory();
 
