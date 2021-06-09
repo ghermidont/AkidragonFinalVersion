@@ -17,3 +17,18 @@
     transform: scale(.8);
   }
 }
+.tabBtnInner{
+  display: inline-block;
+  border-radius: .6rem .6rem 0 0;
+  overflow: hidden;
+}
+.tabBtn{
+  font-size: 1.6rem;
+  font-style: normal;
+  padding: .4rem 1rem;
+  color: var(--blueDark);
+  background-color: var(--blueLight);
+  .active{
+
+  }
+}

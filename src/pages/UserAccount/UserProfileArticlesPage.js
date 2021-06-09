@@ -64,9 +64,9 @@ const UserProfileArticlesPage = () => {
           <div className="articles-page__tab tab">
 
             <div className="articles-page__tab-body">
-              <div className="articles-page__tab-btn-inner">
-                <button className="articles-page__tab-btn active" type="button" data-tab="#tab_1">New Articles</button>
-                <button className="articles-page__tab-btn" type="button" data-tab="#tab_2">Personal Articles</button>
+              <div className={classes.tabBtnInner}>
+                <button className={`${classes.tabBtn} ${classes.active}`} type="button" data-tab="#tab_1">New Articles</button>
+                <button className={classes.tabBtn} type="button" data-tab="#tab_2">Personal Articles</button>
               </div>
 
               <ul className="articles-page__tab-list active" id="tab_1">
