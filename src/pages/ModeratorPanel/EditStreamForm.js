@@ -133,7 +133,8 @@ export default function EditStreamForm(){
         <>
             <div className='form-update__body form-login__body'>
                 {/*<h1 className="title form-title">Add Stream</h1>*/}
-                <h1 className={classes.title}>Add Stream</h1>
+                {/*TODO edit elements positioning*/}
+                <h1 className={classes.title}>Edit Stream</h1>
                 <form className="form-update" style={{marginTop: "30em"}}>
                     <ReactPlayer
                         url = {videoURL?videoURL:""}

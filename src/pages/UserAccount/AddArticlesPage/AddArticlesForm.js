@@ -1,14 +1,15 @@
 import React, {useState, useRef} from 'react';
-import classes from './styles/AddArticlesForm.module.scss';
 //import {useArticlesContext} from "../../../context/ArticlesContext";
 import {projectStorage, functions} from "../../../fireBase";
 import {useHistory} from 'react-router-dom';
+import {useTranslation} from "react-i18next";
 
 export default function AddArticlesForm() {
-
   console.log("AddArticlesPage worked");
+
+  const {t} = useTranslation();
   let publishBtnRef = useRef();
-  let cancelBtnRef = useRef();
+  //let cancelBtnRef = useRef();
   // const {currentUser} = useAuthContext();
   // const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
   //const [error, setError] = useState("");
@@ -96,7 +97,7 @@ export default function AddArticlesForm() {
             setITUrl(finalUrl);
           });
         } catch {
-          setITFileUploadError("Failed to upload file");
+          setITFileUploadError("Impossibile caricare il file");
         }
         //setLoading1(false);
       }
@@ -104,17 +105,16 @@ export default function AddArticlesForm() {
       putFile(uploadedFile).then(() => console.log(ENUrl));
     } else {
       setITUploadedPicFile('');
-      setITFileTypeError('Please select an image file (png or jpg)');
+      setITFileTypeError('Seleziona un file immagine (png o jpg)');
     }
   };
 
   const publishArticleCFTrigger = (e) => {
     const addData = functions.httpsCallable('publishArticle');
-
-    if (publishBtnRef.current && cancelBtnRef.current) {
-      publishBtnRef.current.setAttribute("disabled", "disabled");
-      cancelBtnRef.current.setAttribute("disabled", "disabled");
-    }
+    //if (publishBtnRef.current && cancelBtnRef.current) {
+    publishBtnRef.current&&publishBtnRef.current.setAttribute("disabled", "disabled");
+    //cancelBtnRef.current.setAttribute("", "disabled");
+    //}
 
     addData({
       "content": {
@@ -135,16 +135,16 @@ export default function AddArticlesForm() {
       "categories": categoryArr.filter(value => value !== "")
 
     })
-      .then((result) => {
-        publishBtnRef.current.removeAttribute("disabled", "disabled");
-        cancelBtnRef.current.removeAttribute("disabled", "disabled");
-        window.alert("Article added successfully!");
-        history.push("/UserProfilePage", {from: "/AddArticlesForm"});
-        return console.log("article collection added successfully.");
-      })
-      .catch((error) => {
-        console.log(error.code + " " + error.message + "" + error.details);
-      });
+        .then((result) => {
+          publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
+          // cancelBtnRef.current.removeAttribute("disabled");
+          window.alert("Article added successfully!");
+          history.push("/UserProfilePage", {from: "/AddArticlesForm"});
+          return console.log("article collection added successfully.");
+        })
+        .catch((error) => {
+          console.log(error.code + " " + error.message + "" + error.details);
+        });
 
   }
 
@@ -192,212 +192,212 @@ export default function AddArticlesForm() {
   }
 
   return (
-    <>
-      <section className='form form__addArticle' style={{paddingTop: "20em"}}>
-        <ul className="nav nav-tabs" id="myTab" role="tablist">
-          <li className="nav-item">
-            <a
-              className="nav-link tab__btn active"
-              id="home-tab"
-              data-toggle="tab"
-              href="#tab1"
-              role="tab"
-              aria-controls="home"
-              aria-selected="true"
-            >Italian</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link tab__btn"
-               id="profile-tab"
-               data-toggle="tab"
-               href="#tab2"
-               role="tab"
-               aria-controls="profile"
-               aria-selected="false"
-            >English</a>
-          </li>
-        </ul>
-        <div className="tab-content addArticle" id="myTabContent">
-
-          {/*Tab1*/}
-          <div
-            className="tab-pane fade show active"
-            id="tab1"
-            role="tabpanel"
-            aria-labelledby="home-tab">
-            <div className='form__body'>
-              <h2 className="title form__title">Add Article</h2>
-              <form className="form">
-
-                <input
-                  className='input'
-                  type="text"
-                  placeholder='Title'
-                  required
-                  value={ITTitle}
-                  onChange={
-                    (e) => setITTitle(e.target.value)
-                  }
-                />
-                <textarea
-                  className='input'
-                  rows='1'
-                  name="text"
-                  placeholder='Description'
-                  required
-                  value={ITDescription}
-                  onChange={
-                    (e) => setITDescription(e.target.value)
-                  }
-                ></textarea>
-                <textarea
-                  className='input'
-                  rows='3'
-                  placeholder='Content'
-                  required
-                  name="countent"
-                  value={ITText}
-                  onChange={
-                    (e) => setITText(e.target.value)
-                  }
-                ></textarea>
-                <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload IT
-                  <input
-                    className='form-article__btn visually-hidden'
-                    type="file"
-                    required
-                    placeholder='file'
-                    onChange={ITFileUploadEventListener}
-                  />
-                </label>
-                <div className="output">
-                  {ITFileUploadError && <div className="error">{ITFileUploadError}</div>}
-                  {ITFileTypeError && <div className="error">{ITFileTypeError}</div>}
-                  {ITFileSuccess &&
-                  <div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITUrl} alt=""/>
-                  </div>}
-                </div>
-              </form>
-            </div>
-          </div>
-
-          {/*Tab2*/}
-
-          <div
-            className="tab-pane fade"
-            id="tab2"
-            role="tabpanel"
-            aria-labelledby="profile-tab"
-          >
-            <div className='form__body'>
-              <h2 className="title form__title">Add Article</h2>
-              <form className="form">
-
-                <input
-                  className='input'
-                  type="text"
-                  placeholder='Title'
-                  required
-                  value={ENTitle}
-                  onChange={
-                    (e) => setENTitle(e.target.value)
-                  }/>
-                <textarea
-                  className='input'
-                  rows='1'
-                  placeholder='Description'
-                  name="text"
-                  value={ENDescription}
-                  required
-                  onChange={
-                    (e) => setENDescription(e.target.value)
-                  }
-                ></textarea>
-
-
-                <textarea
-                  className='input'
-                  placeholder='Content'
-                  rows='3'
-                  name="countent"
-                  value={ENText}
-                  required
-                  onChange={
-                    (e) => setENText(e.target.value)
-                  }
-                ></textarea>
-                <label className='btn-upload'> <span className='icon-upload2'></span> Upload EN
-                  <input
-                    className='form-article__btn visually-hidden'
-                    type="file"
-                    required
-                    placeholder='file'
-                    onChange={ENFileUploadEventListener}
-                  />
-                </label>
-                <div className="output">
-                  {ENFileUploadError && <div className="error">{ENFileUploadError}</div>}
-                  {ENFileTypeError && <div className="error">{ENFileTypeError}</div>}
-                  {ENFileSuccess &&
-                  <div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENUrl} alt=""/>
-                  </div>}
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <h4 className={classes.title}>
-            Article category:
-          </h4>
-
-          <ul className={classes.list}>
-            <li className={classes.item}>
-              <label className={classes.label}>
-                <input className={classes.checkbox}
-                       type="checkbox"
-                       onChange={() => videoGamesSwitch === 0 ? setVideoGamesSwitch(1) : setVideoGamesSwitch(0)}
-                /> Video game
-              </label>
+      <>
+        <section className='form form__addArticle' style={{paddingTop: "20em"}}>
+          <ul className="nav nav-tabs" id="myTab" role="tablist">
+            <li className="nav-item">
+              <a
+                  className="nav-link tab__btn active"
+                  id="home-tab"
+                  data-toggle="tab"
+                  href="#tab1"
+                  role="tab"
+                  aria-controls="home"
+                  aria-selected="true"
+              >Italiana</a>
             </li>
-            <li className={classes.item}>
-              <label className={classes.label}>
-                <input className={classes.checkbox}
-                       type="checkbox"
-                       onChange={() => musicSwitch === 0 ? setMusicSwitch(1) : setMusicSwitch(0)}
-                /> Music
-              </label>
-            </li>
-            <li className={classes.item}>
-              <label className={classes.label}>
-                <input className={classes.checkbox}
-                       type="checkbox"
-                       onChange={() => moviesSwitch === 0 ? setMoviesSwitch(1) : setMoviesSwitch(0)}
-                /> Movie
-              </label>
+            <li className="nav-item">
+              <a className="nav-link tab__btn"
+                 id="profile-tab"
+                 data-toggle="tab"
+                 href="#tab2"
+                 role="tab"
+                 aria-controls="profile"
+                 aria-selected="false"
+              >English</a>
             </li>
           </ul>
+          <div className="tab-content addArticle" id="myTabContent">
 
-          <button
-            ref={publishBtnRef}
-            className={classes.btn}
-            onClick={() => publishArticleCFTrigger()}
-          >
-            Publish
-          </button>
+            {/*Tab1*/}
+            <div
+                className="tab-pane fade show active"
+                id="tab1"
+                role="tabpanel"
+                aria-labelledby="home-tab">
+              <div className='form__body'>
+                <h2 className="title form__title">Aggiungi articolo</h2>
+                <form className="form">
 
-          {/*<button*/}
-          {/*    ref={cancelBtnRef}*/}
-          {/*    className="form-article__btn"*/}
-          {/*    onClick={clearInput}*/}
-          {/*>*/}
-          {/*    Cancel*/}
-          {/*</button>*/}
+                  <input
+                      className='input'
+                      type="text"
+                      placeholder='Titolo'
+                      required
+                      value={ITTitle}
+                      onChange={
+                        (e) => setITTitle(e.target.value)
+                      }
+                  />
+                  <textarea
+                      className='input'
+                      rows='1'
+                      name="text"
+                      placeholder='Descrizione'
+                      required
+                      value={ITDescription}
+                      onChange={
+                        (e) => setITDescription(e.target.value)
+                      }
+                  ></textarea>
+                  <textarea
+                      className='input'
+                      rows='3'
+                      placeholder='Contenuti'
+                      required
+                      name="countent"
+                      value={ITText}
+                      onChange={
+                        (e) => setITText(e.target.value)
+                      }
+                  ></textarea>
+                  <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Caricare
+                    <input
+                        className='form-article__btn visually-hidden'
+                        type="file"
+                        required
+                        placeholder='file'
+                        onChange={ITFileUploadEventListener}
+                    />
+                  </label>
+                  <div className="output">
+                    {ITFileUploadError && <div className="error">{ITFileUploadError}</div>}
+                    {ITFileTypeError && <div className="error">{ITFileTypeError}</div>}
+                    {ITFileSuccess &&
+                    <div>Immagine caricata con successo: <img style={{width: "25%", height: "auto"}} src={ITUrl} alt=""/>
+                    </div>}
+                  </div>
+                </form>
+              </div>
+            </div>
 
-        </div>
-      </section>
-    </>
+            {/*Tab2*/}
+
+            <div
+                className="tab-pane fade"
+                id="tab2"
+                role="tabpanel"
+                aria-labelledby="profile-tab"
+            >
+              <div className='form__body'>
+                <h2 className="title form__title">Add Article</h2>
+                <form className="form">
+
+                  <input
+                      className='input'
+                      type="text"
+                      placeholder='Title'
+                      required
+                      value={ENTitle}
+                      onChange={
+                        (e) => setENTitle(e.target.value)
+                      }/>
+                  <textarea
+                      className='input'
+                      rows='1'
+                      placeholder='Description'
+                      name="text"
+                      value={ENDescription}
+                      required
+                      onChange={
+                        (e) => setENDescription(e.target.value)
+                      }
+                  ></textarea>
+
+
+                  <textarea
+                      className='input'
+                      placeholder='Content'
+                      rows='3'
+                      name="countent"
+                      value={ENText}
+                      required
+                      onChange={
+                        (e) => setENText(e.target.value)
+                      }
+                  ></textarea>
+                  <label className='btn-upload'> <span className='icon-upload2'></span>  Upload
+                    <input
+                        className='form-article__btn visually-hidden'
+                        type="file"
+                        required
+                        placeholder='file'
+                        onChange={ENFileUploadEventListener}
+                    />
+                  </label>
+                  <div className="output">
+                    {ENFileUploadError && <div className="error">{ENFileUploadError}</div>}
+                    {ENFileTypeError && <div className="error">{ENFileTypeError}</div>}
+                    {ENFileSuccess &&
+                    <div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENUrl} alt=""/>
+                    </div>}
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div className="label">
+              {t('AddArticlesForm.ArticleCategory')}:
+            </div>
+
+            <ul className='form__list'>
+              <li className='form__item'>
+                <label className="label__small">
+                  <input className='checkbox'
+                         type="checkbox"
+                         onChange={() => videoGamesSwitch === 0 ? setVideoGamesSwitch(1) : setVideoGamesSwitch(0)}
+                  /> {t('AddArticlesForm.VideoGameCategory')}
+                </label>
+              </li>
+              <li className='form__item'>
+                <label className="label__small">
+                  <input className='checkbox'
+                         type="checkbox"
+                         onChange={() => musicSwitch === 0 ? setMusicSwitch(1) : setMusicSwitch(0)}
+                  /> {t('AddArticlesForm.MusicCategory')}
+                </label>
+
+              </li>
+              <li className='form__item'>
+                <label className="label__small">
+                  <input className='checkbox'
+                         type="checkbox"
+                         onChange={() => moviesSwitch === 0 ? setMoviesSwitch(1) : setMoviesSwitch(0)}
+                  /> {t('AddArticlesForm.MoviesCategory')}
+                </label>
+              </li>
+            </ul>
+
+            <div className="form-article__box-btn">
+
+              <button
+                  ref={publishBtnRef}
+                  className="btn-upload"
+                  onClick={() => publishArticleCFTrigger()}
+              >
+                {t('AddArticlesForm.PublishButton')}
+              </button>
+
+              {/*<button*/}
+              {/*    ref={cancelBtnRef}*/}
+              {/*    className="form-article__btn"*/}
+              {/*    onClick={clearInput}*/}
+              {/*>*/}
+              {/*    Cancel*/}
+              {/*</button>*/}
+            </div>
+          </div>
+        </section>
+      </>
   );
 }
-
-// Removing dublicate values
-// [...new Set(inputArrUpd)]

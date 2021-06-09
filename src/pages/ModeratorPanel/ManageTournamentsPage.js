@@ -133,11 +133,12 @@ function ManageTournamentsPage() {
             </button>
           </div>
           <div className="btn__inner">
+              {/*TODO modify the delete and update buttons*/}
             <Button
               className='btn-settings btn-minus'
               variant="danger"
               onClick={() => {
-                projectFirestore.collection("TEMP-tournaments").doc(doc.id).delete().then(() => {
+                projectFirestore.collection("tournaments").doc(doc.id).delete().then(() => {
                   window.alert("Document successfully deleted!");
                 }).catch((error) => {
                   console.error("Error removing document: ", error);

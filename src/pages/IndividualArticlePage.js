@@ -5,6 +5,7 @@ import {useLanguageContext} from "../context/LanguageContext";
 const queryString = require('query-string');
 
 export default function Article() {
+    //TODO edit the page structure
     console.log("Individual article component worked!");
     const {docsFromHook} = useDataFromFirestore('articles');
     const {appLanguage} = useLanguageContext();
@@ -55,8 +56,7 @@ export default function Article() {
                             Content: {doc.content[appLanguage].text}
                         </p>
                         <div className="new-article__info">
-                        <br/>
-                            <date className="new-article__date">Created at: </date>
+
                         </div>
                         <div>
                             <br/>
