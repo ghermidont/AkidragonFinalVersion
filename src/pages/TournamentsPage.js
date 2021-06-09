@@ -64,10 +64,9 @@ function TournamentsPage() {
     let parsedDate = date.toString();
 
     return (
-        <li className="tab__item">
+        <li className="tab__item" key={doc.id}>
           <div className="tab__image"
                style={{
-
                  position: "center",
                  backgroundSize: "cover",
                  backgroundRepeat: "no-repeat"
@@ -78,10 +77,10 @@ function TournamentsPage() {
                 alt="some text"/>
           </div>
           <div className="tab__content">
-            <a className="tab__title">Category: {doc.eventCategory}</a>
-            <div className="tab__name">Title: {doc.eventTitle}</div>
+            <a className="tab__title">{t('TournamentsPage.Category')}: {doc.eventCategory}</a>
+            <div className="tab__name">{t('TournamentsPage.Title')}: {doc.eventTitle}</div>
             <br/>
-            <date className="tab__date">Event date: {parsedDate}</date>
+            <div className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</div>
           </div>
           <ul className="tab__icon">
             <li className="tab__item-icon">
@@ -97,10 +96,10 @@ function TournamentsPage() {
           </ul>
           <div className="tab__btn">
             <button className="tab__link-strim">
-              <a className="" href={doc.eventVideoLink}>Watch</a>
+              <a className="" href={doc.eventVideoLink}>{t('TournamentsPage.WatchButton')}</a>
             </button>
             <button className="tab__link-info">
-              <a className="" href={doc.eventInfoPage}>Info</a>
+              <a className="" href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>
             </button>
           </div>
         </li>
@@ -111,7 +110,8 @@ function TournamentsPage() {
     let date = new Date(doc.eventDate);
     let parsedDate = date.toString();
 
-    return (<li className="tab__item">
+    return (
+      <li className="tab__item" key={doc.id}>
       <div className="tab__image"
            style={{
              position: "center",
@@ -124,10 +124,10 @@ function TournamentsPage() {
                 alt="some text"/>
       </div>
       <div className="tab__content">
-        <a className="tab__title">Category: {doc.eventCategory}</a>
-        <div className="tab__name">Title: {doc.eventTitle}</div>
+        <a className="tab__title">{t('TournamentsPage.Category')}: {doc.eventCategory}</a>
+        <div className="tab__name">{t('TournamentsPage.Title')}: {doc.eventTitle}</div>
         <br/>
-        <date className="tab__date">Event date: {parsedDate}</date>
+        <div className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</div>
       </div>
       <ul className="tab__icon">
         <li className="tab__item-icon">
@@ -141,10 +141,10 @@ function TournamentsPage() {
       </ul>
       <div className="tab__btn">
         <button className="tab__link-strim">
-          <a className="" href={doc.eventVideoLink}>Watch</a>
+          <a className="" href={doc.eventVideoLink}>{t('TournamentsPage.WatchButton')}</a>
         </button>
         <button className="tab__link-info">
-          <a className="" href={doc.eventInfoPage}>Info</a>
+          <a className="" href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>
         </button>
       </div>
     </li>);
@@ -154,7 +154,8 @@ function TournamentsPage() {
     let date = new Date(doc.eventDate);
     let parsedDate = date.toString();
 
-    return (<li className="tab__item">
+    return (
+      <li className="tab__item" key={doc.id}>
       <div className="tab__image"
            style={{
              position: "center",
@@ -167,10 +168,10 @@ function TournamentsPage() {
                 alt="some text"/>
       </div>
       <div className="tab__content">
-        <a className="tab__title">Category: {doc.eventCategory}</a>
-        <div className="tab__name">Title: {doc.eventTitle}</div>
+        <a className="tab__title">{t('TournamentsPage.Category')}: {doc.eventCategory}</a>
+        <div className="tab__name">{t('TournamentsPage.Title')}: {doc.eventTitle}</div>
         <br/>
-        <date className="tab__date">Event date: {parsedDate}</date>
+        <div className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</div>
       </div>
       <ul className="tab__icon">
         <li className="tab__item-icon">
@@ -198,10 +199,10 @@ function TournamentsPage() {
       </ul>
       <div className="tab__btn">
         <button className="tab__link-strim">
-          <a className="" href={doc.eventVideoLink}>Watch</a>
+          <a className="" href={doc.eventVideoLink}>{t('TournamentsPage.WatchButton')}</a>
         </button>
         <button className="tab__link-info">
-          <a className="" href={doc.eventInfoPage}>Info</a>Info
+          <a className="" href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>
         </button>
       </div>
     </li>);
@@ -211,7 +212,8 @@ function TournamentsPage() {
     let date = new Date(doc.eventDate);
     let parsedDate = date.toString();
 
-    return (<li className="tab__item">
+    return (
+        <li className="tab__item" key={doc.id}>
       <div className="tab__image"
            style={{
              position: "center",
@@ -224,10 +226,10 @@ function TournamentsPage() {
                 alt="some text"/>
       </div>
       <div className="tab__content">
-        <a className="tab__title">Category: {doc.eventCategory}</a>
-        <div className="tab__name">Title: {doc.eventTitle}</div>
+        <a className="tab__title">{t('TournamentsPage.Category')}: {doc.eventCategory}</a>
+        <div className="tab__name">{t('TournamentsPage.Title')}: {doc.eventTitle}</div>
         <br/>
-        <date className="tab__date">Event date: {parsedDate}</date>
+        <div className="tab__date">{t('TournamentsPage.EventDate')}: {parsedDate}</div>
       </div>
       <ul className="tab__icon">
         <li className="tab__item-icon">
@@ -264,10 +266,10 @@ function TournamentsPage() {
       </ul>
       <div className="tab__btn">
         <button className="tab__link-strim">
-          <a className="" href={doc.eventVideoLink}>Watch</a>
+          <a className="" href={doc.eventVideoLink}>{t('TournamentsPage.WatchButton')}</a>
         </button>
         <button className="tab__link-info">
-          <a className="" href={doc.eventInfoPage}>Info</a>Info
+          <a className="" href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>
         </button>
       </div>
     </li>);
@@ -344,34 +346,3 @@ function TournamentsPage() {
 }
 
 export default TournamentsPage;
-
-
-  {/*<div className="tournament__tab tab">*/}
-  {/*  <div className="tab__body">*/}
-  {/*    <ul className="tab__body-list">*/}
-  {/*      <li className="tab__body-item">*/}
-  {/*        <button className="tab__body-btn active" type="button"*/}
-  {/*                data-tab="#tab_1">Eventi passati*/}
-  {/*        </button>*/}
-  {/*      </li>*/}
-  {/*      <li className="tab__body-item">*/}
-  {/*        <button className="tab__body-btn" type="button"*/}
-  {/*                data-tab="#tab_2">Prossimi eventi*/}
-  {/*        </button>*/}
-  {/*      </li>*/}
-  {/*    </ul>*/}
-
-  {/*    <ul className="tab__list active" id="tab_1">*/}
-  {/*      {passedEvents && passedEvents.slice(0, 4).map(doc =>*/}
-  {/*        doc.eventCategory === "match" ? PassedMatchTemp(doc) : PassedTournTemp(doc)*/}
-  {/*      )}*/}
-  {/*    </ul>*/}
-
-  {/*    <ul className="tab__list active" id="tab_2">*/}
-  {/*      {futureEvents && futureEvents.slice(0, 4).map(doc =>*/}
-  {/*        doc.eventCategory === "match" ? FutureMatchTemp(doc) : FutureTournTemp(doc)*/}
-  {/*      )}*/}
-  {/*    </ul>*/}
-
-  {/*  </div>*/}
-  {/*</div>*/}

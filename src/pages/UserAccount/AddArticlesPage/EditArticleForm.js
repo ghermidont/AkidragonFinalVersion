@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 //import {useArticlesContext} from "../../../context/ArticlesContext";
 import {projectStorage, functions} from "../../../fireBase";
 import {useHistory} from 'react-router-dom';
@@ -10,6 +10,8 @@ const queryString = require('query-string');
 
 export default function EditArticleForm() {
     console.log("EditArticleForm worked");
+
+    let publishBtnRef = useRef();
     const {docsFromHook} = useDataFromFirestore('articles');
     const fileTypesArray = ['image/png', 'image/jpeg'];
     const history = useHistory();
@@ -145,6 +147,7 @@ export default function EditArticleForm() {
 
     const publishArticleCFTrigger = (e) => {
         const addData = functions.httpsCallable('publishArticle');
+        publishBtnRef.current&&publishBtnRef.current.setAttribute("disabled", "disabled");
 
             addData({
                 "id": stringifiedSlug,
@@ -166,7 +169,8 @@ export default function EditArticleForm() {
 
             })
                 .then((result) => {
-                        window.alert("Article added successfully!");
+                        publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
+                        window.alert("Article edited successfully!");
                         history.push("/UserProfilePage", {from: "/EditArticleForm"});
                         return console.log("Article edited successfully.");
                     }
@@ -415,8 +419,8 @@ export default function EditArticleForm() {
                         /> Movie
                     </label>
 
-
                         <button
+                            ref={publishBtnRef}
                             className="form-article__btn"
                             onClick={()=>publishArticleCFTrigger()}
                         >
