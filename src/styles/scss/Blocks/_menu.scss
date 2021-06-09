@@ -129,6 +129,7 @@
   }
 
   &__item {
+    background-color: var(--blueDark);
     &:first-child {
       padding-top: 1.2rem;
     }
@@ -239,6 +240,7 @@
     }
 
     &__item {
+      background-color: transparent;
       &:first-child {
         padding-top: 0;
       }
