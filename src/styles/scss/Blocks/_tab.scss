@@ -106,7 +106,10 @@
     justify-content: space-between;
     padding: 1rem .6rem;
 
-
+    &-inner {
+      margin-bottom: 1.5rem;
+      border-bottom: .3rem solid var(--blue);
+    }
   }
 
   &__link-strim {
@@ -406,20 +409,20 @@
     padding: .4rem 2rem !important;
     font-size: 1.4rem !important;
   }
-  .tab__link-strim{
+  .tab__link-strim {
     margin-bottom: 3rem;
   }
-  .tab__link-info{
+  .tab__link-info {
     margin-bottom: 3rem;
   }
 }
 
 @media screen and (max-width: 400px) {
-  .tab__link-strim{
+  .tab__link-strim {
     margin-bottom: 5rem;
     height: 2.7rem;
   }
-  .tab__link-info{
+  .tab__link-info {
     margin-bottom: 7rem;
   }
 }
@@ -441,6 +444,21 @@
 
     & .tab__body-list {
       top: -3rem;
+    }
+
+    &__btn {
+      &-inner {
+        display: flex;
+        flex-direction: column;
+        .articles-page__tab-btn{
+          border-radius: .6rem;
+          margin-bottom: 2rem;
+          &:last-child{
+            margin-left: 0;
+            border-bottom: .3rem solid var(--blue);
+          }
+        }
+      }
     }
   }
 }

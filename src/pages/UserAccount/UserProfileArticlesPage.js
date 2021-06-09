@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Link, useHistory} from "react-router-dom";
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
-import classes from './CreateUserAccount/styles/UserProfileArticlesPage.module.scss';
+import classes from './style/UserProfileArticlesPage.module.scss';
 //import {useLanguageContext} from "../../context/LanguageContext";
 import {useAuthContext} from "../../context/AuthContext";
 import {useArticlesContext} from "../../context/ArticlesContext";
@@ -64,9 +64,9 @@ const UserProfileArticlesPage = () => {
           <div className="articles-page__tab tab">
 
             <div className="articles-page__tab-body">
-              <div className={classes.tabBtnInner}>
-                <button className={`${classes.tabBtn} ${classes.active}`} type="button" data-tab="#tab_1">New Articles</button>
-                <button className={classes.tabBtn} type="button" data-tab="#tab_2">Personal Articles</button>
+              <div className="tab__btn-inner">
+                <button className="articles-page__tab-btn active" type="button" data-tab="#tab_1">New Articles</button>
+                <button className="articles-page__tab-btn" type="button" data-tab="#tab_2">Personal Articles</button>
               </div>
 
               <ul className="articles-page__tab-list active" id="tab_1">
@@ -123,12 +123,12 @@ const UserProfileArticlesPage = () => {
                     setChosenModifyArticleNumber(doc.id);
                     history.push(`/modify-article/${doc.id}`, {from: "/ManageArticlesPage"});
                   }}>
-                    <Button className={classes.btn}>
+                    <Button className='btn-article btn-upload'>
                       UPDATE
                     </Button>
                   </Link>
                   <Button
-                      className={classes.btnDel}
+                    className='btn-article btn-upload'
                       variant="danger"
                       onClick={()=>{
                         projectFirestore.collection("articles").doc(doc.id).delete().then(() => {

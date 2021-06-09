@@ -106,6 +106,15 @@
   border-radius: 0 .4rem .4rem 0;
 }
 
+.btn-article{
+  box-shadow: none;
+  transform: scale(.8);
+  margin: 1rem 0 2rem;
+  &:first-child{
+    margin-right: 2rem;
+  }
+}
+
 @media screen and (max-width: 580px){
   .btn-settings{
     margin-bottom: 2rem;

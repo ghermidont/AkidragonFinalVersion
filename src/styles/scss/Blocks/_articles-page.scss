@@ -110,3 +110,19 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .articles-page{
+    &__post{
+      flex-direction: column;
+      margin-bottom: 6rem;
+    }
+    &__image{
+      margin-bottom: 4rem;
+    }
+    &__content{
+      margin-left: 0;
+      height: auto;
+    }
+  }
+}
