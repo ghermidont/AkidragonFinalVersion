@@ -864,7 +864,7 @@ function CMSAboutUsPageEdit() {
                                             <img style={{width: "25%", height: "auto"}} src={partner.logo} alt=""/>
                                         </div>
 
-                                        <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+                                        <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload
                                             <input
                                                 name="logo"
                                                 className='form-article__btn visually-hidden'
