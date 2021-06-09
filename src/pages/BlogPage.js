@@ -61,7 +61,7 @@ export default function BlogPage() {
                     <div className="info__logo logo-section">
                         <img src={logoSection} alt="" className="info__img"/>
                     </div>
-                    <h1 className="news-banner__title title"><span>News</span></h1>
+                    <h1 className="news-banner__title title"><span>{t('BlogPage.NewsTitle')}</span></h1>
                     <p className="news-banner__subtitle">{appLanguage==="it"?ITMainText:ENMainText}</p>
 
                     <div className="tab__body">

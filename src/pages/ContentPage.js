@@ -5,9 +5,11 @@ import {Link} from "react-router-dom";
 import logoSection from '../assets/images/dest/logo-section.png';
 import {useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import {useLanguageContext} from "../context/LanguageContext";
+import {useTranslation} from "react-i18next";
 
 export default function Contents() {
   console.log("Contents component worked.");
+  const {t} = useTranslation();
   const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
   const [ITBannerTitle, setITBannerTitle] = useState("");
   const [ITBannerText, setITBannerText] = useState("");
@@ -68,7 +70,7 @@ export default function Contents() {
           <h2 className="video__title">{appLanguage === "it" ? ITSwiper1Title : ENSwiper1Title}</h2>
           <div className="video__wrapper"></div>
           <EntertainmentSwiper/>
-          <button className="video__btn btn">Guarda altri</button>
+          <button className="video__btn btn">{t('ContentPage.OtherStreams')}</button>
         </div>
       </section>
 
@@ -76,13 +78,13 @@ export default function Contents() {
         <div className="container">
           <h2 className="video__title">{appLanguage === "it" ? ITSwiper2Title : ENSwiper2Title}</h2>
           <MatchesTournamentsSwiper/>
-          <button className="video__btn btn">Guarda altri</button>
+          <button className="video__btn btn">{t('ContentPage.OtherStreams')}</button>
         </div>
       </section>
 
       <div className="contact__btn">
         <Link to="/ContactUsPage">
-          <a className="contact__btn-link">Contattaci</a>
+          <a className="contact__btn-link">{t('ContentPage.ContactUs')}</a>
         </Link>
       </div>
     </main>

@@ -1,6 +1,6 @@
 //https://www.youtube.com/watch?v=NgWGllOjkbs
 //https://www.geeksforgeeks.org/how-to-send-attachments-and-email-using-nodemailer-in-node-js/
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import emailjs from 'emailjs-com';
 import{ init } from 'emailjs-com';
 init("user_CT1XM0LjSnypYte1fnGI7");
@@ -8,9 +8,10 @@ init("user_CT1XM0LjSnypYte1fnGI7");
 
 export default function SponsorshipForm (){
 
+    let publishBtnRef = useRef();
+
     function sendSponsorshipEmail(e) {
         e.preventDefault();
-
         emailjs.sendForm('service_jhhv0ki', 'template_dim3yck', '#sponsorship-form', 'user_CT1XM0LjSnypYte1fnGI7')
             .then((result) => {
                 console.log("The result is: " + result.text);

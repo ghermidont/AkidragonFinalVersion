@@ -78,3 +78,5 @@ https://material-ui.com/components/pagination/#pagination
 https://jarombek.com/blog/apr-30-2018-react-dynamic-jsx-elements
 https://www.educative.io/blog/react-hooks-tutorial-todo-list
 
+#WhatsApp link npm
+https://www.npmjs.com/package/react-whatsapp

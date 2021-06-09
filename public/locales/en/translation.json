@@ -24,6 +24,14 @@
      "SocialMessage": "Follow us on social networks"
   },
 
+  "Step2CompleteProfilePage": {
+    "CompleteProfile": "Complete Profile",
+    "FirstName": "First Name",
+    "LastName": "Last Name",
+    "DisplayName": "Display Name",
+    "Submit": "Submit"
+  },
+
   "HomePage": {
     "BannerText": "EXPLORE THE AKIDRAGON UNIVERSE",
     "Card1": "TOURNAMENTS",
@@ -50,7 +58,12 @@
     "AkidragonTournaments": "Akidragon tournaments",
     "PassedEvents": "Passed events",
     "FutureEvents": "Future events",
-    "ContactsButton": "Contacts"
+    "ContactsButton": "Contacts",
+    "Category": "Category",
+    "Title":"Title",
+    "EventDate": "Event date",
+    "WatchButton": "Watch",
+    "InfoButton": "Info"
   },
 
   "UserProfilePage": {
@@ -69,6 +82,91 @@
     "ApproveArticles": "Approve Articles",
     "EditStaticContent": "Edit Static Content",
     "AvailablePoints" : "Available points"
-  }
+  },
 
+  "UserProfileArticlesPage": {
+    "PageTitle": "Articles",
+    "AddArticlesButton": "Add Articles",
+    "NewArticlesTab": "New Articles",
+    "PersonalArticlesTab": "Personal Articles",
+    "NotApproved": "Not approve yet",
+    "DeleteButton": "Delete",
+    "UpdateButton": "Update"
+  },
+
+  "ContactUsForm": {
+    "NamePlaceHolder": "Name",
+    "EmailPlaceHolder": "Email",
+    "SubjectPlaceHolder": "Subject",
+    "MessagePlaceHolder": "Message",
+    "UploadButton": "Upload",
+    "SubmitButton": "Submit",
+    "Consent": "I consent to the processing of my personal data",
+    "WhatsAppMessage": "Write us on Whatsapp"
+  },
+
+  "AboutUsPage": {
+    "FindOutMoreButton": "Find out more about Gold Fox Gaming",
+    "SubmitCVButton": "Submit your CV"
+  },
+
+  "SubmitCVForm": {
+    "NamePlaceHolder": "Name",
+    "Consent": "I consent to the processing of my personal data",
+    "SubmitButton": "Submit",
+    "AttachFile:": "Attach File",
+    "MaxFileSizeExceeded": "Max file size exceeded"
+  },
+
+  "SponsorshipPage": {
+    "PageTitle": "Sponsorship",
+    "CooperationOffers": "Cooperation offers",
+    "NamePlaceHolder": "Name",
+    "MessagePlaceHolder": "Message",
+    "SubmitButton": "Submit",
+    "MessageSentAlert": "You message has been sent. We will contact you shortly."
+  },
+
+  "ContentPage": {
+    "OtherStreams": "Other streams",
+    "ContactUs": "Contact Us"
+  },
+
+  "AddArticlesForm": {
+    "ArticleCategory": "Article category",
+    "VideoGameCategory": "Video games",
+    "MusicCategory": "Music",
+    "MoviesCategory": "Movies",
+    "PublishButton": "Publish"
+  },
+
+  "UpdateUserProfilePage": {
+    "Upload": "Upload",
+    "UpdateAvatarButton": "Update avatar",
+    "ImageUploadedSuccessfully": "Image Uploaded successfully",
+    "BirthDate" : "Birth date",
+    "CurrentBirthDate" : "Current date of birth",
+    "UpdateBirthDateButton" : "Update birth date",
+    "DisplayName" : "Display name",
+    "UpdateDisplayNameButton" : "Update display name",
+    "FirstName" : "First name",
+    "UpdateFirstNameButton" : "Update first name",
+    "LastName" : "Last name",
+    "UpdateLastNameButton": "Update last name",
+    "Address" : "Address",
+    "UpdateAddressButton" : "Update address",
+    "Biography": "Biography",
+    "UpdateBiographyButton" : "Update biography",
+    "Password" : "Password",
+    "ConfirmPassword" : "Confirm password",
+    "ChangePasswordButton": "Change password",
+    "ChangeEmailButton": "Change email",
+    "DeleteAccountButton" : "Delete Account"
+  },
+
+  "DeleteProfilePage":{
+    "ConfirmProfileDeletion": "Confirm profile deletion",
+    "CancelButton": "Cancel",
+    "DeleteProfileButton": "Delete profile"
+  }
 }

@@ -5,18 +5,25 @@ import {functions, projectStorage} from "../../fireBase";
 import {Button} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {useAuthContext} from "../../context/AuthContext";
+import {useTranslation} from "react-i18next";
 
 //TODO see the date format issue
 
 export default function UpdateUserProfilePage() {
   console.log("UpdateUserProfilePage() worked");
+
+  const {t} = useTranslation();
   const {currentUser} = useAuthContext();
   const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
   const {docsFromHookUserInfo} = useDataFromFirestoreUserInfo('user-profiles');
+  const fileTypesArray = ['image/png', 'image/jpeg'];
 
+  //Refs
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const emailRef = useRef();
+
+  //States
   const [passwordError, setPasswordError] = useState('');
   const [url, setUrl] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -24,11 +31,9 @@ export default function UpdateUserProfilePage() {
   const [displayName, setDisplayName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState();
   const [oldDateOfBirth, setOldDateOfBirth] = useState();
-
   const [address, setAddress] = useState('');
   const [bio, setBio] = useState('');
   const [email, setEmail] = useState('');
-  const fileTypesArray = ['image/png', 'image/jpeg'];
   //const [uploadedPicFile, setUploadedPicFile] = useState('');
   const [fileSuccess, setFileSuccess] = useState(false);
   //const [loading, setLoading] = useState(true);
@@ -166,7 +171,7 @@ export default function UpdateUserProfilePage() {
                 alt=""/>
 
           </div>
-          <label className='form-update__label btn-upload'> <span className='icon-upload2'></span> Upload
+          <label className='form-update__label btn-upload'> <span className='icon-upload2'></span> {t('UpdateUserProfilePage.Upload')}Upload
             <input
                 className='form-update__btn visually-hidden'
                 type="file"
@@ -178,16 +183,16 @@ export default function UpdateUserProfilePage() {
               className="form-article__btn"
               onClick={()=>cloudFunctionTrigger()}
           >
-            Update avatar
+            {t('UpdateUserProfilePage.UpdateAvatarButton')}
           </button>
           <div className="output">
             { error && <div className="error">{ error }</div>}
-            {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url} alt=""/></div> }
+            {fileSuccess&&<div>{t('UpdateUserProfilePage.ImageUploadedSuccessfully')}: <img style={{width: "25%", height: "auto"}} src={url} alt=""/></div> }
           </div>
           <br />
           <label className='form-update__label'>
-            <strong> Birth date </strong> <br />
-            Current date of birth: {oldDateOfBirth}
+            <strong> {t('UpdateUserProfilePage.BirthDate')}</strong> <br />
+            {t('UpdateUserProfilePage.CurrentBirthDate')}: {oldDateOfBirth}
             <input
                 className='form-update__input date'
                 type="date"
@@ -201,13 +206,13 @@ export default function UpdateUserProfilePage() {
               className="form-article__btn"
               onClick={()=>cloudFunctionTrigger()}
           >
-            Update birth date
+            {t('UpdateUserProfilePage.UpdateBirthDateButton')}
           </button>
 
           <br />
 
           <label className='form-update__label'>
-            <strong> Display name </strong>
+            <strong> {t('UpdateUserProfilePage.DisplayName')}</strong>
             <input
                 className='form-update__input'
                 value={displayName}
@@ -220,13 +225,13 @@ export default function UpdateUserProfilePage() {
               className="form-article__btn"
               onClick={()=>cloudFunctionTrigger()}
           >
-            Update display name
+            {t('UpdateUserProfilePage.UpdateDisplayNameButton')}
           </button>
 
           <br />
 
           <label className='form-update__label'>
-            <strong> First name </strong>
+            <strong> {t('UpdateUserProfilePage.FirstName')}</strong>
             <input
                 className='form-update__input'
                 value={firstName}
@@ -238,13 +243,13 @@ export default function UpdateUserProfilePage() {
               className="form-article__btn"
               onClick={()=>cloudFunctionTrigger()}
           >
-            Update first name
+            {t('UpdateUserProfilePage.UpdateFirstNameButton')}
           </button>
 
           <br />
 
           <label className='form-update__label'>
-            <strong> Last name </strong>
+            <strong> {t('UpdateUserProfilePage.LastName')}</strong>
             <input
                 className='form-update__input'
                 value={lastName}
@@ -258,13 +263,13 @@ export default function UpdateUserProfilePage() {
               className="form-article__btn"
               onClick={()=>cloudFunctionTrigger()}
           >
-            Update last name
+            {t('UpdateUserProfilePage.UpdateLastNameButton')}
           </button>
 
           <br />
 
           <label className='form-update__label'>
-            <strong> Address </strong>
+            <strong> {t('UpdateUserProfilePage.Address')}</strong>
             <input
                 className='form-update__input'
                 value={address}
@@ -277,12 +282,12 @@ export default function UpdateUserProfilePage() {
           <button
               className="form-article__btn"
               onClick={()=>cloudFunctionTrigger()}
-          >Update address</button>
+          >{t('UpdateUserProfilePage.UpdateAddressButton')}</button>
 
           <br />
 
           <label className='form-update__label'>
-            <strong> Bio </strong>
+            <strong> {t('UpdateUserProfilePage.Biography')}</strong>
             <textarea
                 className='form-update__input'
                 type="text"
@@ -296,13 +301,13 @@ export default function UpdateUserProfilePage() {
               className="form-article__btn"
               onClick={()=>cloudFunctionTrigger()}
           >
-            Update bio
+            {t('UpdateUserProfilePage.UpdateBiographyButton')}
           </button>
 
           <br />
 
           <label className='form-update__label'>
-            <strong> Password </strong>
+            <strong> {t('UpdateUserProfilePage.Password')}</strong>
             <input
                 className='form-update__input'
                 ref={passwordRef}
@@ -310,11 +315,11 @@ export default function UpdateUserProfilePage() {
             />
           </label>
           <label className='form-update__label'>
-            <strong> Confirm password </strong>
+            <strong> {t('UpdateUserProfilePage.ConfirmPassword')}</strong>
             <input className='form-update__input' ref={passwordConfirmRef} type="password" />
           </label>
           {passwordError&&<div>{passwordError}</div>}
-          <button className="form-article__btn" onClick={()=>updatePassword()}>Change password</button>
+          <button className="form-article__btn" onClick={()=>updatePassword()}>{t('UpdateUserProfilePage.ChangePasswordButton')}</button>
 
           <br />
 
@@ -331,13 +336,13 @@ export default function UpdateUserProfilePage() {
               className="form-article__btn"
               onClick={()=>updateEmail()}
           >
-            Change email
+            {t('UpdateUserProfilePage.ChangeEmailButton')}
           </button>
 
           <br />
 
           <Link to="/DeleteProfilePage">
-            <Button variant="danger">Delete Account</Button>
+            <Button variant="danger">{t('UpdateUserProfilePage.DeleteAccountButton')}</Button>
           </Link>
 
         </form>
