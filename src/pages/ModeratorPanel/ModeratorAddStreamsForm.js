@@ -110,10 +110,9 @@ export default function ModeratorAddStreamsForm(){
                 playing={false}
             />
           }
-          <label className='btn-upload input'>
-            Video URL
+
             <input
-                className='form-update__input visually-hidden'
+                className='input'
                 type="text"
                 placeholder='URL Video'
                 value={videoURL}
@@ -123,7 +122,7 @@ export default function ModeratorAddStreamsForm(){
                 }
             />
 
-          </label>
+
           <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               {streamCategory!==''? streamCategory: "Stream category"}

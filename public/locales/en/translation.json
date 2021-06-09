@@ -48,6 +48,7 @@
 
   "BlogPage": {
     "All": "All",
+    "NewsTitle": "News",
     "VideoGames": "Video games",
     "Movies": "Movies",
     "Music": "Music",
@@ -114,7 +115,7 @@
     "NamePlaceHolder": "Name",
     "Consent": "I consent to the processing of my personal data",
     "SubmitButton": "Submit",
-    "AttachFile:": "Attach File",
+    "AttachFile": "Attach File",
     "MaxFileSizeExceeded": "Max file size exceeded"
   },
 

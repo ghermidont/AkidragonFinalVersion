@@ -29,20 +29,29 @@ export default function ContactUsForm() {
   function sendEmail(e) {
     //This default function prevents the page from refreshing when we click the submit button;
     e.preventDefault();
-
-    if (sizeExceededError === false) {
-      e.preventDefault();
-
-      emailjs.sendForm('service_neq4dxf', 'template_sij1vgl', '#contactus-form', 'user_ryi2yglqohFlHpuZyAqiJ')
-          .then((result) => {
-            console.log("The result is: " + result.text);
-            result.text && history.push("/MessageSentPage", {from: "/ContactUsForm"});
-          }, (error) => {
-            console.log("An error intervened:" + error.text);
-            alert("Your message was not sent because " + error.text);
-          });
-      e.target.reset();
+    if(fileSize>0) {
+        if (sizeExceededError === false) {
+            emailjs.sendForm('service_neq4dxf', 'template_sij1vgl', '#contactus-form', 'user_ryi2yglqohFlHpuZyAqiJ')
+                .then((result) => {
+                    console.log("The result is: " + result.text);
+                    return result.text && history.push("/MessageSentPage", {from: "/ContactUsForm"});
+                }, (error) => {
+                    window.alert("Your message was not sent due to a connection error");
+                });
+            e.target.reset();
+        }
     }
+      if(fileSize===0) {
+          emailjs.sendForm('service_neq4dxf', 'template_sij1vgl', '#contactus-form', 'user_ryi2yglqohFlHpuZyAqiJ')
+              .then((result) => {
+                  console.log("The result is: " + result.text);
+                  result.text && history.push("/MessageSentPage", {from: "/ContactUsForm"});
+              }, (error) => {
+                  console.log("An error intervened:" + error.text);
+                  alert("Your message was not sent because " + error.text);
+              });
+          e.target.reset();
+      }
   }
 
   return (
@@ -89,14 +98,25 @@ export default function ContactUsForm() {
          </textarea>
 
         <div className="form__box-btn">
-          {sizeExceededError && <error>Max file size exceeded</error>}
-          <label className='btn-upload label'>
+            {sizeExceededError===true&&<error style={{color: "red"}}>{t("SubmitCVForm.MaxFileSizeExceeded")}</error>}
+            <label className='btn-upload label'>
             <span className='icon-upload2'></span>
             {t('ContactUsForm.UploadButton')}
-            <input className='visually-hidden' type="file" name="attachment" id="fileInput"
-                   onChange={e => setFileSize(e.target.files[0].size)}/>
+                {/*TODO create class*/}
+                <p className="">Maximum file size 500kb</p>
+            <input
+                className='visually-hidden'
+                type="file"
+                name="attachment"
+                id="fileInput"
+                onChange={e => setFileSize(e.target.files[0].size)}
+            />
+              { fileSize!==0&&<div style={{marginTop: "1em"}}>File uploaded</div>}
           </label>
-          <button className='btn-upload' type="submit">{t('ContactUsForm.SubmitButton')}</button>
+          <button
+              className='btn-upload'
+              type="submit">{t('ContactUsForm.SubmitButton')}
+          </button>
         </div>
 
         {/*<button*/}

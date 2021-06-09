@@ -47,11 +47,11 @@
 
   "BlogPage": {
     "All": "Tutti",
+    "NewsTitle": "Notizia",
     "VideoGames": "Videogiochi",
     "Movies": "Film",
     "Music": "Musica",
-    "ContactsButton": "Contatti",
-    "NewsTitle": "Notizia"
+    "ContactsButton": "Contatti"
   },
 
   "TournamentsPage": {
@@ -114,7 +114,7 @@
     "NamePlaceHolder": "Nome",
     "Consent": "Acconsento al trattamento dei miei dati personali",
     "SubmitButton": "Invia",
-    "AttachFile:": "Allega file",
+    "AttachFile": "Allega file",
     "MaxFileSizeExceeded": "Dimensione massima del file superata"
   },
 
