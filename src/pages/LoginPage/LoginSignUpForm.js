@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAuthContext} from '../../context/AuthContext';
 
 //Implement the Enter key stroke login and signup
@@ -8,6 +8,7 @@ const LoginSignUpForm = () => {
   const [error, setError] = useState(null);
 
   const {
+    clearInput,
     email,
     setEmail,
     password,
@@ -19,8 +20,13 @@ const LoginSignUpForm = () => {
     emailError,
     passwordError,
     setSignUpFormUserUploadedFile
-
   } = useAuthContext();
+
+    //useEffect(() => {
+
+    //}, []);
+
+
 
  const fileUploadEventListener = (e) => {
     let uploadedFile = e.target.files[0];

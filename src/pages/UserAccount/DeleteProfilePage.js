@@ -27,13 +27,13 @@ export default function DeleteProfilePage(){
     return(
         <div style={{marginTop: "10em"}}>
              <div className="modal-body">
-                <p>{t('DeleteProfilePage.ConfirmProfileDeletion')}Confirm profile deletion</p>
+                <p>{t('DeleteProfilePage.ConfirmProfileDeletion')}</p>
             </div>
             <div className="modal-footer">
                 <Link to="/MainLoginPage">
-                    <button type="button" className="btn btn-secondary" onClick={()=>history.push('/UserProfilePage')} data-bs-dismiss="modal">{t('DeleteProfilePage.CancelButton')}Cancel</button>
+                    <button type="button" className="btn btn-secondary" onClick={()=>history.push('/UserProfilePage')} data-bs-dismiss="modal">{t('DeleteProfilePage.CancelButton')}</button>
                 </Link>
-                <button type="button" className="btn btn-primary" onClick={()=>deleteCurrentUser()}>{t('DeleteProfilePage.DeleteProfileButton')}Delete profile</button>
+                <button type="button" className="btn btn-primary" onClick={()=>deleteCurrentUser()}>{t('DeleteProfilePage.DeleteProfileButton')}</button>
             </div>
         </div>
     );

@@ -6,10 +6,10 @@ import {useTranslation} from 'react-i18next';
 import SearchBar from "../components/SearchBar/SearchBar";
 import logo from '../assets/images/src/DragonLogo.png';
 import {useAuthContext} from "../context/AuthContext";
-import UpdateUserProfilePage from "../pages/UserAccount/UpdateUserProfilePage";
+//import UpdateUserProfilePage from "../pages/UserAccount/UpdateUserProfilePage";
 
 export default function NavBar() {
-  const {currentUser, handleLogout} = useAuthContext();
+  const {currentUser, handleLogout, clearInput} = useAuthContext();
   const {setAppLanguage, appLanguage} = useLanguageContext();
   const {t, i18n} = useTranslation();
 
@@ -148,7 +148,7 @@ export default function NavBar() {
                 </li>
                 <li className="box-user__item">
                   {currentUser &&
-                  <button className='box-user__exit' onClick={handleLogout}>
+                  <button className='box-user__exit' onClick={()=>{handleLogout(); clearInput();}}>
                     <span className="icon-exit box-user__icon"></span>
                   </button>
                   }

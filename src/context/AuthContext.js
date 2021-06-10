@@ -75,10 +75,9 @@ export function AuthContextProvider({ children }) {
     }
 
     const handleLogout = () => {
-        console.log("handleLogout() worked!");
+        //clearInput();
         auth.signOut().then(()=>{
-            console.log("Signed out successfully.");
-            localStorage.clear();
+           localStorage.clear();
         });
     };
 
@@ -111,7 +110,7 @@ export function AuthContextProvider({ children }) {
     }
 
     const value = {
-
+        clearInput,
         currentUserModerator,
         createSurveyCheckInUserDoc,
         userSurveyPassedStatus,

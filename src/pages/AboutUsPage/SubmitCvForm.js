@@ -99,6 +99,7 @@ export default function SubmitCvForm() {
                 style={{display:"block"}}
             > {t("SubmitCVForm.AttachFile")}:
                 {/*TODO create class*/}
+                {/*TODO translate*/}
                 <p className="">Maximum file size 500kb</p>
             <input
                 className='form__name visually-hidden'
@@ -108,6 +109,7 @@ export default function SubmitCvForm() {
                 id="fileInput"
                 onChange={e=>setFileSize(e.target.files[0].size)}
             />
+                {/*TODO translate*/}
                 { fileSize!==0&&<div style={{marginTop: "1em"}}>File uploaded</div>}
             </label>
             <input
