@@ -48,7 +48,7 @@ function App() {
 
    const [loginPassed, setLoginPassed] = useState(false);
 
-    // if(loginPassed===true) {
+    if(loginPassed===true) {
     return(
         <div className="App">
             <AuthContextProvider>
@@ -101,9 +101,9 @@ function App() {
             </AuthContextProvider>
         </div>
     );
-// }else{
-//     return(<FirstLoginForm setLoginPassed={setLoginPassed}/>);
-// }
+}else{
+    return(<FirstLoginForm setLoginPassed={setLoginPassed}/>);
+}
 }
 
 export default App;
