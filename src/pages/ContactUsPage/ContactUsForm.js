@@ -98,12 +98,12 @@ export default function ContactUsForm() {
          </textarea>
 
         <div className="form__box-btn">
-            {sizeExceededError===true&&<error style={{color: "red"}}>{t("SubmitCVForm.MaxFileSizeExceeded")}</error>}
+
             <label className='btn-upload label'>
             <span className='icon-upload2'></span>
             {t('ContactUsForm.UploadButton')}
                 {/*TODO create class*/}
-                <p className="">Maximum file size 500kb</p>
+
             <input
                 className='visually-hidden'
                 type="file"
@@ -117,6 +117,12 @@ export default function ContactUsForm() {
               className='btn-upload'
               type="submit">{t('ContactUsForm.SubmitButton')}
           </button>
+        </div>
+        <div className='form__alert' style={{marginTop: "40px"}}>
+          <p>Maximum file size 500kb</p>
+          <div>
+            {sizeExceededError===true&&<error style={{color: "red"}}>{t("SubmitCVForm.MaxFileSizeExceeded")}</error>}
+          </div>
         </div>
 
         {/*<button*/}

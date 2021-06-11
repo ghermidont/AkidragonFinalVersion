@@ -21,7 +21,7 @@ const formStyle = {
     border: '2px solid #430F6B',
     borderRadius: '5px',
     background: '#f5f5f5',
-    width: '220px',
+    width: '290px',
     display: 'block',
     color: '#3085d6'
 };

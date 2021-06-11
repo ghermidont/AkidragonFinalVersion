@@ -4,6 +4,9 @@
   width: 100%;
   margin: 0 auto;
 
+  &__alert{
+    margin-top: 4rem!important;
+  }
   &__title{
     display: block;
   }
@@ -86,10 +89,6 @@
     &:focus {
       opacity: 0.8;
     }
-  }
-
-  &__check {
-    margin: 2rem 2rem 0 0;
   }
 }
 
