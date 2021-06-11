@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useAuthContext} from '../../context/AuthContext';
+import classes from './LoginSignUpForm.module.scss';
 
 //Implement the Enter key stroke login and signup
 const LoginSignUpForm = () => {
@@ -20,21 +21,16 @@ const LoginSignUpForm = () => {
     emailError,
     passwordError,
     setSignUpFormUserUploadedFile
+
   } = useAuthContext();
-
-    //useEffect(() => {
-
-    //}, []);
-
-
 
  const fileUploadEventListener = (e) => {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-        //localStorage.setItem("userPicture", uploadedFile);
-        setSignUpFormUserUploadedFile(uploadedFile);
+      //localStorage.setItem("userPicture", uploadedFile);
+      setSignUpFormUserUploadedFile(uploadedFile);
     } else {
-        //localStorage.removeItem("userPicture");
+      //localStorage.removeItem("userPicture");
       //setUploadedPicFile('');
       setError('Please select an image file (png or jpg)');
     }
@@ -42,72 +38,85 @@ const LoginSignUpForm = () => {
 
   return (
     <>
-      <div className='form-article__body form-login__body'>
-        <h1 className="title form-title">
-          Login/SignUp
-        </h1>
-        <form className='form-article' >
-          <label className='form-article__label'>Username</label>
+      <div className="container">
+        <div className={classes.formBody}>
+          <h1 className="title form__title">
+            Login/SignUp
+          </h1>
+          <form className={classes.form}>
             <input
-                className='form-article__input'
-                type="email"
-                autoFocus
-                required
-                value={email}
-                onChange={
-                  (e) => setEmail(e.target.value)
-                }
+              className='form-article__input'
+              type="email"
+              placeholder='Username'
+              autoFocus
+              required
+              value={email}
+              onChange={
+                (e) => setEmail(e.target.value)
+              }
             />
             <p className="errorMsg">{emailError}</p>
 
           <label className='form-article__label'>Password</label>
             <input
-                className='form-article__input'
-                type="password"
-                required
-                value={password}
-                onChange={
-                  (e)=>setPassword(e.target.value)
-                }
+              className='form-article__input'
+              type="password"
+              placeholder='Password'
+              required
+              value={password}
+              onChange={
+                (e) => setPassword(e.target.value)
+              }
             />
             <p className="passwordError">{passwordError}</p>
 
-          <div className='form-article__box-btn'>
-            {hasAccount ? (
+            <div className='form-article__box-btn'>
+              {hasAccount ? (
                 <>
-                 <button className="form-article__btn" style={{marginLeft: '20px'}} type="button" onClick={handleLogin}>Sign in</button>
-                <p>
-                  Don't have an account?
-                  <span onClick={()=>setHasAccount(!hasAccount)}>Sign up</span>
-                </p>
-
-
-
-              </>
-             ):(
-             <>
-               <form>
-                 <label className='btn-upload'>
-                   Upload File
-                   <input className='visually-hidden' type="file" onChange={fileUploadEventListener} />
-                 </label>
-                 <div className="output">
-                   { error && <div className="error">{ error }</div>}
-
-                 </div>
-               </form>
-               <div className='form__intro-text'>
+                  <button className="form-article__btn" style={{marginLeft: '20px'}} type="button"
+                          onClick={handleLogin}>Sign in
+                  </button>
                   <p>
-                     Have an account?
+                    Don't have an account?
+                    <span onClick={() => setHasAccount(!hasAccount)}>Sign up</span>
                   </p>
-               <span onClick={()=>setHasAccount(!hasAccount)}>Sign in</span>
-               </div>
-               <div> <button className="form-article__btn" type="button" onClick={handleSignup}>Sign up</button></div>
-             </>
-             )}
-          </div>
-        </form>
+
+
+                </>
+              ) : (
+                <>
+                  <div className={classes.inner}>
+                    <div className={classes.btnInner}>
+                      <form>
+                        <label className='btn-upload'>
+                          Upload File
+                          <input className='visually-hidden' type="file" onChange={fileUploadEventListener}/>
+                        </label>
+                        <div className="output">
+                          {error && <div className="error">{error}</div>}
+                        </div>
+                      </form>
+
+                      <div>
+                        <button className="form-article__btn" type="button" onClick={handleSignup}>Sign up</button>
+                      </div>
+                    </div>
+
+                    <div className={classes.formText}>
+                      <p>
+                        Have an account?
+                      </p>
+                      <span className={classes.linkIn} onClick={() => setHasAccount(!hasAccount)}>Sign in</span>
+                    </div>
+                  </div>
+
+                </>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
+
     </>
   );
 }

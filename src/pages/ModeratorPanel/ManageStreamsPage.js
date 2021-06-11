@@ -51,7 +51,7 @@ const ManageStreamsPage = () => {
                               setChosenModifyStreamNumber(doc.id);
                               history.push(`/edit-stream/${doc.id}`, {from: "/ManageStreamsPage"});
                             }}
-                      > Update stream >>>
+                      > Update stream
                       </Link>
                       <Button
                         className='btn-upload stream__btn'

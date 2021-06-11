@@ -1,0 +1,43 @@
+.form {
+  max-width: 60rem;
+  width: 100%;
+  margin: 0 auto;
+
+  &Body {
+    padding: 20rem 0 10rem;
+  }
+
+  &Text {
+    font-size: 1.6rem;
+    font-style: normal;
+  }
+}
+
+.btnInner {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.linkIn {
+  color: var(--blue);
+  font-weight: 700;
+}
+.inner{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.formText{
+  margin-left: 2rem;
+}
+
+@media screen and (max-width: 580px) {
+  .formText {
+    margin: 2rem 0 0 ;
+  }
+  .inner{
+    flex-direction: column;
+  }
+
+}

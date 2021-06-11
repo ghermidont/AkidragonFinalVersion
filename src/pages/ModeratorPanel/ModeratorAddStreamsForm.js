@@ -9,7 +9,7 @@ import {Dropdown} from "react-bootstrap";
 import ReactPlayer from "react-player/lazy";
 import {sanitizeUrl} from "@braintree/sanitize-url";
 
-export default function ModeratorAddStreamsForm(){
+export default function ModeratorAddStreamsForm() {
   console.log("ModeratorAddStreamsForm worked");
 
   const [error, setError] = useState(null);
@@ -28,18 +28,18 @@ export default function ModeratorAddStreamsForm(){
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
       //setUploadedPicFile(uploadedFile);
-      async function putFile(uploadedFile){
+      async function putFile(uploadedFile) {
         e.preventDefault();
         try {
           setLoading(true);
           setError("");
           const storageRef = projectStorage.ref('profile_pictures/').child(uploadedFile.name);
           storageRef.put(uploadedFile).on('state_changed', (err) => {
-          },  (err) => {
+          }, (err) => {
             window.alert(err);
-          }, async()=>{
+          }, async () => {
             const finalUrl = await storageRef.getDownloadURL();
-            finalUrl!==undefined?setFileSuccess(true):setFileSuccess(false);
+            finalUrl !== undefined ? setFileSuccess(true) : setFileSuccess(false);
             setUrl(finalUrl);
           });
         } catch {
@@ -47,7 +47,8 @@ export default function ModeratorAddStreamsForm(){
         }
         setLoading(false);
       }
-      putFile(uploadedFile).then(()=>console.log(url));
+
+      putFile(uploadedFile).then(() => console.log(url));
     } else {
       //setUploadedPicFile('');
       setError('Please select an image file (png or jpg)');
@@ -57,23 +58,23 @@ export default function ModeratorAddStreamsForm(){
   const addStreamsWithFBCallback = (e) => {
     const collectionRef = projectFirestore.collection('streams').doc();
 
-    if(loading === false) {
+    if (loading === false) {
       collectionRef.set(
-          {
-            "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
-            "category": streamCategory,
-            "videoURL": videoURL,
-            "imageURL": url,
-            "createdAt": Date.now()
-          })
-          .then(() => {
-            window.alert("Stream added successfully!");
-            history.push("/UserProfilePage", {from: "/ModeratorAddStreamsForm"});
-            return console.log("To streams collection added successfully!");
-          })
-          .catch((error) => {
-            console.error(error.code + " " + error.message + "" + error.details);
-          });
+        {
+          "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
+          "category": streamCategory,
+          "videoURL": videoURL,
+          "imageURL": url,
+          "createdAt": Date.now()
+        })
+        .then(() => {
+          window.alert("Stream added successfully!");
+          history.push("/UserProfilePage", {from: "/ModeratorAddStreamsForm"});
+          return console.log("To streams collection added successfully!");
+        })
+        .catch((error) => {
+          console.error(error.code + " " + error.message + "" + error.details);
+        });
     }
     e.preventDefault();
   }
@@ -102,60 +103,51 @@ export default function ModeratorAddStreamsForm(){
       <div className={classes.container}>
         <h1 className={classes.title}>Add Stream</h1>
         <form className="form">
-          {videoURL&&
-            <ReactPlayer
-                url={videoURL ? videoURL : ""}
-                controls={true}
-                light={true}
-                playing={false}
-            />
+          {videoURL &&
+          <ReactPlayer
+            url={videoURL ? videoURL : ""}
+            controls={true}
+            light={true}
+            playing={false}
+          />
           }
 
-            <input
-                className='input'
-                type="text"
-                placeholder='URL Video'
-                value={videoURL}
-                required
-                onChange={
-                  (e)=>setVideoURL(sanitizeUrl(e.target.value))
-                }
-            />
+          <input
+            className='input'
+            type="text"
+            placeholder='URL Video'
+            value={videoURL}
+            required
+            onChange={
+              (e) => setVideoURL(sanitizeUrl(e.target.value))
+            }
+          />
 
 
           <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
-              {streamCategory!==''? streamCategory: "Stream category"}
+              {streamCategory !== '' ? streamCategory : "Stream category"}
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item onClick={()=>setStreamCategory("entertainment")}>Entertainment</Dropdown.Item>
-              <Dropdown.Item onClick={()=>setStreamCategory("tournaments")}>Tournaments</Dropdown.Item>
+              <Dropdown.Item onClick={() => setStreamCategory("entertainment")}>Entertainment</Dropdown.Item>
+              <Dropdown.Item onClick={() => setStreamCategory("tournaments")}>Tournaments</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           <br/>
           <div className={classes.btnInner}>
-            <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload thumbnail
+            <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload
               <input
-                  className='form-article__btn visually-hidden'
-                  type="file"
-                  placeholder='file'
-                  required
-                  onChange={fileUploadEventListener}
+                className='form-article__btn visually-hidden'
+                type="file"
+                placeholder='file'
+                required
+                onChange={fileUploadEventListener}
               />
             </label>
-            <div className="output">
-              { error && <div className="error">{ error }</div>}
-              {fileSuccess&&
-                <div>Image Uploaded successfully:
-                  <img style={{width: "25%", height: "auto"}} src={url} alt=""/>
-                </div>
-              }
-            </div>
-
             <button
-                className="btn-upload"
-                onClick={addStreamsWithFBCallback}
+              className="btn-upload"
+              onClick={addStreamsWithFBCallback}
             >
               Submit
             </button>
@@ -165,6 +157,14 @@ export default function ModeratorAddStreamsForm(){
             {/*>*/}
             {/*  Cancel*/}
             {/*</button>*/}
+          </div>
+          <div className="output">
+            {error && <div className="error">{error}</div>}
+            {fileSuccess &&
+            <div className='output__image'>Image Uploaded successfully:
+              <img style={{width: "25%", height: "auto"}} src={url} alt=""/>
+            </div>
+            }
           </div>
         </form>
       </div>

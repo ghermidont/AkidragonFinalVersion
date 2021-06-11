@@ -61,7 +61,7 @@ function ManageTournamentsPage() {
               <a className="" href={doc.eventVideoLink}>Watch</a>
             </button>
             <button className="tab__link-info">
-              <a className="" href={doc.eventInfoPage}>Info</a>Info
+              <a className="" href={doc.eventInfoPage}>Info</a>
             </button>
           </div>
           <div className="btn__inner">
@@ -129,11 +129,11 @@ function ManageTournamentsPage() {
               <a className="" href={doc.eventVideoLink}>Watch</a>
             </button>
             <button className="tab__link-info">
-              <a className="" href={doc.eventInfoPage}>Info</a>Info
+              <a className="" href={doc.eventInfoPage}>Info</a>
             </button>
           </div>
           <div className="btn__inner">
-              {/*TODO modify the delete and update buttons*/}
+            {/*TODO modify the delete and update buttons*/}
             <Button
               className='btn-settings btn-minus'
               variant="danger"
@@ -204,33 +204,30 @@ function ManageTournamentsPage() {
               <a className="" href={doc.eventVideoLink}>Watch</a>
             </button>
             <button className="tab__link-info">
-              <a className="" href={doc.eventInfoPage}>Info</a>Info
+              <a className="" href={doc.eventInfoPage}>Info</a>
             </button>
-          </div>
-          <div className="btn__inner">
-            <Button
-              className='btn-settings btn-minus'
-              variant="danger"
-              onClick={() => {
-                projectFirestore.collection("TEMP-tournaments").doc(doc.id).delete().then(() => {
-                  window.alert("Document successfully deleted!");
-                }).catch((error) => {
-                  console.error("Error removing document: ", error);
-                });
-              }}
-            >
-              <span className="icon-minus"></span>
-            </Button>
-            <br/>
             <Link
-              className='btn-settings btn-update'
+              className="tab__link-info"
               onClick={() => {
                 setChosenTournamentNumber(doc.id);
                 history.push(`/edit-tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
               }}
             >
-              <span className='icon-cog'></span>
+              Update
             </Link>
+            <Button
+            className="tab__link-info del"
+            variant="danger"
+            onClick={() => {
+              projectFirestore.collection("TEMP-tournaments").doc(doc.id).delete().then(() => {
+                window.alert("Document successfully deleted!");
+              }).catch((error) => {
+                console.error("Error removing document: ", error);
+              });
+            }}
+          >
+            Delete
+          </Button>
           </div>
         </div>
       </li>
@@ -296,33 +293,31 @@ function ManageTournamentsPage() {
             <button className="tab__link-strim">
               <a className="" href={doc.eventVideoLink}>Watch</a>
             </button>
-            <div className="btn__inner">
-              <Button
-                className='btn-settings btn-minus '
-                variant="danger"
-                onClick={() => {
-                  projectFirestore.collection("tournaments").doc(doc.id).delete().then(() => {
-                    window.alert("Document successfully deleted!");
-                  }).catch((error) => {
-                    console.error("Error removing document: ", error);
-                  });
-                }}
-              >
-                <span className="icon-minus"></span>
-              </Button>
-              <Link
-                className='btn-settings btn-update'
-                onClick={() => {
-                  setChosenTournamentNumber(doc.id);
-                  history.push(`/edit-tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
-                }}
-              >
-                <span className='icon-cog'></span>
-              </Link>
-            </div>
             <button className="tab__link-info">
-              <a className="" href={doc.eventInfoPage}>Info</a>Info
+              <a className="" href={doc.eventInfoPage}>Info</a>
             </button>
+            <Link
+              className="tab__link-info"
+              onClick={() => {
+                setChosenTournamentNumber(doc.id);
+                history.push(`/edit-tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
+              }}
+            >
+              Update
+            </Link>
+            <Button
+              className="tab__link-info del"
+              ariant="danger"
+              onClick={() => {
+                projectFirestore.collection("tournaments").doc(doc.id).delete().then(() => {
+                  window.alert("Document successfully deleted!");
+                }).catch((error) => {
+                  console.error("Error removing document: ", error);
+                });
+              }}
+            >
+              Delete
+            </Button>
           </div>
         </div>
       </li>

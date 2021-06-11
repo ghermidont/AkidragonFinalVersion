@@ -3,6 +3,7 @@ import React, {useState, useRef} from 'react';
 import {projectStorage, functions} from "../../../fireBase";
 import {useHistory} from 'react-router-dom';
 import {useTranslation} from "react-i18next";
+import classes from './styles/AddArticlesForm.module.scss';
 
 export default function AddArticlesForm() {
   console.log("AddArticlesPage worked");
@@ -346,31 +347,31 @@ export default function AddArticlesForm() {
               </div>
             </div>
 
-            <div className="label">
+            <div className={classes.title}>
               {t('AddArticlesForm.ArticleCategory')}:
             </div>
 
-            <ul className='form__list'>
-              <li className='form__item'>
+            <ul className={classes.list}>
+              <li className={classes.item}>
                 <label className="label__small">
-                  <input className='checkbox'
+                  <input className={classes.checkbox}
                          type="checkbox"
                          onChange={() => videoGamesSwitch === 0 ? setVideoGamesSwitch(1) : setVideoGamesSwitch(0)}
                   /> {t('AddArticlesForm.VideoGameCategory')}
                 </label>
               </li>
-              <li className='form__item'>
+              <li className={classes.item}>
                 <label className="label__small">
-                  <input className='checkbox'
+                  <input className={classes.checkbox}
                          type="checkbox"
                          onChange={() => musicSwitch === 0 ? setMusicSwitch(1) : setMusicSwitch(0)}
                   /> {t('AddArticlesForm.MusicCategory')}
                 </label>
 
               </li>
-              <li className='form__item'>
+              <li className={classes.item}>
                 <label className="label__small">
-                  <input className='checkbox'
+                  <input className={classes.checkbox}
                          type="checkbox"
                          onChange={() => moviesSwitch === 0 ? setMoviesSwitch(1) : setMoviesSwitch(0)}
                   /> {t('AddArticlesForm.MoviesCategory')}
@@ -378,7 +379,7 @@ export default function AddArticlesForm() {
               </li>
             </ul>
 
-            <div className="form-article__box-btn">
+            <div className={classes.btnInner}>
 
               <button
                   ref={publishBtnRef}

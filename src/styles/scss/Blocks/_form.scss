@@ -4,6 +4,10 @@
   width: 100%;
   margin: 0 auto;
 
+  &__title{
+    display: block;
+  }
+
   &__label {
     display: block;
   }
@@ -86,7 +90,6 @@
 
   &__check {
     margin: 2rem 2rem 0 0;
-
   }
 }
 

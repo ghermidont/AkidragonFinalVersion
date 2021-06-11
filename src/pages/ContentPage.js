@@ -68,7 +68,7 @@ export default function Contents() {
       <section className="video">
         <div className="container">
           <h2 className="video__title">{appLanguage === "it" ? ITSwiper1Title : ENSwiper1Title}</h2>
-          <div className="video__wrapper"></div>
+          {/*<div className="video__wrapper"></div>*/}
           <EntertainmentSwiper/>
           <button className="video__btn btn">{t('ContentPage.OtherStreams')}</button>
         </div>

@@ -4,6 +4,11 @@
   margin-bottom: 3rem;
 }
 
+.item label{
+  display: flex;
+  align-items: center;
+}
+
 .title {
   font-size: 2rem;
   font-style: normal;
@@ -19,7 +24,7 @@
 }
 
 .checkbox {
-  margin: auto 2rem 0 0;
+  margin: auto 1.5rem 0 0;
 }
 
 .btn {
@@ -27,11 +32,14 @@
 }
 
 @media screen and(max-width: 460px) {
-  .title {
+  .list{
     padding-left: 1rem;
   }
-  .btn {
-    margin: 0 0 1rem 1rem;
+  .title{
+    padding-left: 1rem;
+  }
+  .btnInner {
+    margin: 0 0 0 1rem;
   }
 }
 

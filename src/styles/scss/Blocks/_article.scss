@@ -18,7 +18,6 @@
   }
 
   &__image {
-    //width: 50rem;
     height: 40rem;
   }
 
@@ -69,6 +68,8 @@
 
 @media screen and (max-width: 560px) {
   .article {
+    margin: 0;
+
     &__content {
       padding: 0 1rem;
     }

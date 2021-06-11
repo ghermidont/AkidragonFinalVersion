@@ -26,14 +26,18 @@ export default function MatchesTournamentsSwiper (){
 
     return (
         <div style={{textAlign: "center"}}>
+          <div style={{maxWidth:"640px", height:"auto", margin:"0 auto"}}>
             <ReactPlayer
-                url = {mainMatchVid}
-                controls = {true}
-                light = {true}
-                playing = {false}
-                onStart = {()=>console.log("hello")}
-                style={{margin:"auto"}}
+              url = {mainMatchVid}
+              controls = {true}
+              light = {true}
+              playing = {false}
+              onStart = {()=>console.log("hello")}
+              width={'100%'}
+              style={{margin:"auto"}}
             />
+          </div>
+
             <Swiper
                 effect={'coverflow'}
                 coverflowEffect={

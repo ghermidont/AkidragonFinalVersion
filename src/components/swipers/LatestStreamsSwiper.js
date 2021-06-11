@@ -53,17 +53,19 @@ export default function LatestStreamsSwiper() {
       >
         {docsFromHook && docsFromHook.slice(0, 6).map(doc => (
           <SwiperSlide key={doc.id}>
-            <ReactPlayer
-              ref={player}
-              key={doc.id}
-              url={doc.videoURL}
-              controls={true}
-              width='100%'
-              height='100%'
-              light={true}
-              playing={playState}
-              onStart={() => console.log("hello")}
-            />
+            <div style={{maxWidth: "640px", height: "auto", margin: "0 auto"}}>
+              <ReactPlayer
+                ref={player}
+                key={doc.id}
+                url={doc.videoURL}
+                controls={true}
+                width='100%'
+                height='100%'
+                light={true}
+                playing={playState}
+                onStart={() => console.log("hello")}
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
