@@ -6,7 +6,7 @@ import {Button} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {useAuthContext} from "../../context/AuthContext";
 import {useTranslation} from "react-i18next";
-
+import date from 'date-and-time';
 //TODO see the date format issue
 
 export default function UpdateUserProfilePage() {
@@ -63,13 +63,14 @@ export default function UpdateUserProfilePage() {
   useEffect(() => {
     if (selectedUser !== "") {
       selectedUser.map(doc => {
-        let date = new Date(doc.dateOfBirth);
-        let parsedDate = date.toString();
+        let now = new Date(doc.dateOfBirth);
+        let formatedDate =  date.format(now, 'ddd, MMM DD YYYY');
+
         setFirstName(doc.firstName);
         setLastName(doc.lastName);
         setDisplayName(doc.displayName);
         setDateOfBirth(doc.dateOfBirth);
-        setOldDateOfBirth(parsedDate.slice(0, -49));
+        setOldDateOfBirth(formatedDate);
         setAddress(doc.address ? doc.address : "");
         setBio(doc.bio ? doc.bio : "");
         setEmail(currentUser ? currentUser.email : CurrentUserFromLS.email);

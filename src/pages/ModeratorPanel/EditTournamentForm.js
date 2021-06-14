@@ -21,7 +21,7 @@ export default function EditTournamentsForm() {
     const [eventVideoLink, setEventVideoLink] =useState("");
     const [eventDate, setEventDate] = useState();
     const [eventInfoPageLink, setEventInfoPageLink] = useState("");
-
+    const [createdAt, setCreatedAt] = useState(0);
     const [uploadError1, setUploadError1] = useState("");
     const [uploadError2, setUploadError2] = useState("");
     const [uploadError3, setUploadError3] = useState("");
@@ -29,6 +29,8 @@ export default function EditTournamentsForm() {
     const [uploadErrorWin1, setUploadErrorWin1] = useState("");
     const [uploadErrorWin2, setUploadErrorWin2] = useState("");
     const [uploadErrorBanner, setUploadErrorBanner] = useState("");
+    const [eventBanner, setEventBanner] = useState("");
+    const [authorID, setAuthorID] = useState("");
 
     const [fileSuccess1, setFileSuccess1] = useState(false);
     const [fileSuccess2, setFileSuccess2] = useState(false);
@@ -96,6 +98,11 @@ export default function EditTournamentsForm() {
             selectedTournament && selectedTournament.map(doc => {
                 let date = new Date(doc.eventDate);
                 let parsedDate = date.toString();
+                console.log(doc.eventDate);
+                console.log(parsedDate);
+                setAuthorID(doc.authorID);
+                setCreatedAt(doc.createdAt);
+                setEventBanner(doc.eventBanner);
                 setEventCategory(doc.eventCategory);
                 setEventStatus(doc.eventStatus);
                 setEventTitle(doc.eventTitle);
@@ -393,21 +400,23 @@ export default function EditTournamentsForm() {
         if (eventStatus === "passed" && eventCategory === "match") {
             collectionRef.set(
                 {
-                    "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
+                    "authorID": authorID,
+                    "eventBanner": eventBanner,
                     "eventCategory": eventCategory,
                     "eventStatus": eventStatus,
                     "eventTitle": eventTitle,
                     "eventWinner1": urlWin1,
                     "eventWinner2": urlWin2,
                     "eventInfoPage": eventInfoPageLink,
-                    "eventDate": Date.parse(eventDate),
+                    "eventDate": eventDate,
                     "eventVideoLink": eventVideoLink,
-                    "updatedAt": Date.now()
+                    "updatedAt": Date.now(),
+                    "createdAt": createdAt
                 })
                 .then(() => {
-                    window.alert("Tournament edited successfully!");
+                    window.alert("Event edited successfully!");
                     history.push("/TournamentsPage", {from: "/ModeratorAddTournamentsForm"});
-                    return console.log("Tournament edited successfully.");
+                    return console.log("Event edited successfully.");
                 })
                 .catch((error) => {
                     console.error(error.code + " " + error.message + "" + error.details);
@@ -417,15 +426,17 @@ export default function EditTournamentsForm() {
         if (eventStatus === "passed" && eventCategory === "tournament") {
             collectionRef.set(
                 {
-                    "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
+                    "authorID": authorID,
+                    "eventBanner": eventBanner,
                     "eventCategory": eventCategory,
                     "eventStatus": eventStatus,
                     "eventTitle": eventTitle,
                     "eventWinner1": urlWin1,
                     "eventInfoPage": eventInfoPageLink,
-                    "eventDate": Date.parse(eventDate),
+                    "eventDate": eventDate,
                     "eventVideoLink": eventVideoLink,
-                    "updatedAt": Date.now()
+                    "updatedAt": Date.now(),
+                    "createdAt": createdAt
                 })
                 .then(() => {
                     window.alert("Tournament edited successfully!");
@@ -440,16 +451,18 @@ export default function EditTournamentsForm() {
         if (eventStatus === "future" && eventCategory === "match") {
             collectionRef.set(
                 {
-                    "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
+                    "authorID": authorID,
+                    "eventBanner": eventBanner,
                     "eventCategory": eventCategory,
                     "eventStatus": eventStatus,
                     "eventTitle": eventTitle,
                     "eventInfoPage": eventInfoPageLink,
-                    "eventDate": Date.parse(eventDate),
+                    "eventDate": eventDate,
                     "eventVideoLink": eventVideoLink,
                     "pictureURL1": url1,
                     "pictureURL2": url2,
-                    "updatedAt": Date.now()
+                    "updatedAt": Date.now(),
+                    "createdAt": createdAt
                 })
                 .then(() => {
                     window.alert("Tournament edited successfully!");
@@ -464,7 +477,8 @@ export default function EditTournamentsForm() {
         if (eventStatus === "future" && eventCategory === "tournament") {
             collectionRef.set(
                 {
-                    "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
+                    "authorID": authorID,
+                    "eventBanner": eventBanner,
                     "eventCategory": eventCategory,
                     "eventStatus": eventStatus,
                     "eventTitle": eventTitle,
@@ -475,7 +489,8 @@ export default function EditTournamentsForm() {
                     "pictureURL2": url2,
                     "pictureURL3": url3,
                     "pictureURL4": url4,
-                    "updatedAt": Date.now()
+                    "updatedAt": Date.now(),
+                    "createdAt": createdAt
                 })
                 .then(() => {
                     window.alert("Tournament edited successfully!");

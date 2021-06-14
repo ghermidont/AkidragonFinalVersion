@@ -22,14 +22,17 @@ function TournamentsPage() {
   const {appLanguage} = useLanguageContext();
 
   useEffect(()=>{
+    console.log(docsFromHook);
       const passedEvents = docsFromHook.filter(function (doc) {
         return doc.eventStatus === "passed";
       });
+      console.log(passedEvents);
       setPassedEvents(passedEvents);
 
       const futureEvents = docsFromHook.filter(function (doc) {
         return doc.eventStatus === "future";
       });
+      console.log(futureEvents);
       setFutureEvents(futureEvents);
   }, [docsFromHook]);
 
@@ -65,6 +68,7 @@ function TournamentsPage() {
 
     return (
         <li className="tab__item" key={doc.id}>
+
           <div className="tab__image"
                style={{
                  position: "center",
@@ -112,6 +116,7 @@ function TournamentsPage() {
 
     return (
       <li className="tab__item" key={doc.id}>
+
       <div className="tab__image"
            style={{
              position: "center",
@@ -144,7 +149,7 @@ function TournamentsPage() {
           <a className="" href={doc.eventVideoLink}>{t('TournamentsPage.WatchButton')}</a>
         </button>
         <button className="tab__link-info">
-          <a className="" href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>
+          <a href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>
         </button>
       </div>
     </li>);
@@ -156,6 +161,7 @@ function TournamentsPage() {
 
     return (
       <li className="tab__item" key={doc.id}>
+
       <div className="tab__image"
            style={{
              position: "center",
@@ -214,6 +220,7 @@ function TournamentsPage() {
 
     return (
         <li className="tab__item" key={doc.id}>
+
       <div className="tab__image"
            style={{
              position: "center",
@@ -268,9 +275,11 @@ function TournamentsPage() {
         <button className="tab__link-strim">
           <a className="" href={doc.eventVideoLink}>{t('TournamentsPage.WatchButton')}</a>
         </button>
+
         <button className="tab__link-info">
-          <a className="" href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>
+          <a href={doc.eventInfoPage}>{t('TournamentsPage.InfoButton')}</a>
         </button>
+
       </div>
     </li>);
   }

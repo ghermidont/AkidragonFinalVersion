@@ -299,7 +299,7 @@ export default function EditArticleForm() {
                                 </label>
                                 <div>
                                     Current thumbnail:
-                                    <img style={{width: "25%", height: "auto"}} src={ENUrl} alt=""/>
+                                    <img style={{width: "25%", height: "auto"}} src={OldITUrl} alt=""/>
                                 </div>
                                 <div className="form-article__box-btn">
 
@@ -314,7 +314,7 @@ export default function EditArticleForm() {
                                     <div className="output">
                                         { ITFileUploadError!=="" && <div className="error">{ ITFileUploadError }</div>}
                                         { ITFileTypeError!=="" && <div className="error">{ ITFileTypeError }</div> }
-                                        { ITFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={OldITUrl} alt=""/></div> }
+                                        { ITFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITUrl} alt=""/></div> }
                                     </div>
                                 </div>
                             </form>
@@ -371,7 +371,7 @@ export default function EditArticleForm() {
                                 </label>
                                 <div>
                                     Current thumbnail:
-                                    <img style={{width: "25%", height: "auto"}} src={ITUrl} alt=""/>
+                                    <img style={{width: "25%", height: "auto"}} src={OldENUrl} alt=""/>
                                 </div>
                                 <div className="form-article__box-btn">
 
@@ -386,7 +386,7 @@ export default function EditArticleForm() {
                                     <div className="output">
                                         { ENFileUploadError!=="" && <div className="error">{ ENFileUploadError }</div>}
                                         { ENFileTypeError!=="" && <div className="error">{ ENFileTypeError }</div> }
-                                        { ENFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={OldENUrl} alt=""/></div> }
+                                        { ENFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENUrl} alt=""/></div> }
 
                                     </div>
                                 </div>

@@ -72,7 +72,7 @@ export default function ModeratorAddTournamentsForm() {
         try {
           setLoading1(true);
           setError1("");
-          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedFile.name);
+          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedFile.name);
           storageRef.put(uploadedFile).on('state_changed',
             async () => {
               const finalUrl = await storageRef.getDownloadURL();
@@ -102,7 +102,7 @@ export default function ModeratorAddTournamentsForm() {
         try {
           setLoading2(true);
           setError2("");
-          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedFile.name);
+          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedFile.name);
           storageRef.put(uploadedFile).on('state_changed',
             async () => {
               const finalUrl = await storageRef.getDownloadURL();
@@ -132,7 +132,7 @@ export default function ModeratorAddTournamentsForm() {
         try {
           setLoading3(true);
           setError3("");
-          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedFile.name);
+          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedFile.name);
           storageRef.put(uploadedFile).on('state_changed',
             async () => {
               const finalUrl = await storageRef.getDownloadURL();
@@ -162,7 +162,7 @@ export default function ModeratorAddTournamentsForm() {
         try {
           setLoading4(true);
           setError4("");
-          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedFile.name);
+          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedFile.name);
           storageRef.put(uploadedFile).on('state_changed',
             async () => {
               const finalUrl = await storageRef.getDownloadURL();
@@ -192,7 +192,7 @@ export default function ModeratorAddTournamentsForm() {
         try {
           setLoadingWin1(true);
           setErrorWin1("");
-          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedFile.name);
+          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedFile.name);
           storageRef.put(uploadedFile).on('state_changed',
             async () => {
               const finalUrl = await storageRef.getDownloadURL();
@@ -222,7 +222,7 @@ export default function ModeratorAddTournamentsForm() {
         try {
           setLoadingWin2(true);
           setErrorWin2("");
-          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedFile.name);
+          const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedFile.name);
           storageRef.put(uploadedFile).on('state_changed',
             async () => {
               const finalUrl = await storageRef.getDownloadURL();
@@ -311,13 +311,13 @@ export default function ModeratorAddTournamentsForm() {
     setUrlWin1('');
     setUrlWin2('');
 
-    const storageRef1 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedPicFile1.name);
-    const storageRef2 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedPicFile2.name);
-    const storageRef3 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedPicFile3.name);
-    const storageRef4 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedPicFile4.name);
-    const storageRefWin1 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedPicFileWin1.name);
-    const storageRefWin2 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedPicFileWin2.name);
-    const storageReBanner = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(Date.now() + uploadedBannerPicFile.name);
+    const storageRef1 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedPicFile1.name);
+    const storageRef2 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedPicFile2.name);
+    const storageRef3 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedPicFile3.name);
+    const storageRef4 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedPicFile4.name);
+    const storageRefWin1 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedPicFileWin1.name);
+    const storageRefWin2 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedPicFileWin2.name);
+    const storageReBanner = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedBannerPicFile.name);
 
     if (storageReBanner) {
       storageReBanner.delete().then(() => {
@@ -379,7 +379,7 @@ export default function ModeratorAddTournamentsForm() {
   //FB write function
   const addTournamentWithFBCallback = () => {
     const collectionRef = projectFirestore.collection('tournaments').doc();
-    if (loadingBanner === false && (loading1 === false &&
+    if ((loading1 === false &&
       loading2 === false &&
       loading3 === false &&
       loading4 === false) ||
@@ -389,8 +389,8 @@ export default function ModeratorAddTournamentsForm() {
         loading4 === false) ||
       loadingWin1 === false ||
       (loadingWin1 === false &&
-        loadingWin2 === false)
-    ) {
+        loadingWin2 === false))
+    {
       collectionRef.set(
         {
           "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,

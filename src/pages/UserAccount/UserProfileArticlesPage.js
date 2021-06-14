@@ -121,7 +121,7 @@ const UserProfileArticlesPage = () => {
                   </article>
                   <Link onClick={()=> {
                     setChosenModifyArticleNumber(doc.id);
-                    history.push(`/modify-article/${doc.id}`, {from: "/ManageArticlesPage"});
+                    history.push(`/edit-article/${doc.id}`, {from: "/ManageArticlesPage"});
                   }}>
                     <Button className='btn-article btn-upload'>
                       UPDATE

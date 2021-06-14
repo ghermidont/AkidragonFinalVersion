@@ -9,6 +9,7 @@ function ManageTournamentsPage() {
   const history = useHistory();
   const {docsFromHook} = useDataFromFirestore('tournaments');
   const {setChosenTournamentNumber} = useTournamentsContext();
+    console.log(docsFromHook);
   const passedEvents = docsFromHook.filter(function (doc) {
     return doc.eventStatus === "passed";
   });
@@ -23,21 +24,24 @@ function ManageTournamentsPage() {
     let parsedDate = date.toString();
 
     return (
-      <li className="tab__item">
-        <div className="tab__image"
-             style={{
-               background: "blue",
-               url: "#",
-               position: "center",
-               backgroundSize: "cover",
-               backgroundRepeat: "no-repeat"
-             }}>
-        </div>
+      <li className="tab__item" key={doc.id}>
+
+          <div className="tab__image"
+               style={{
+                   position: "center",
+                   backgroundSize: "cover",
+                   backgroundRepeat: "no-repeat"
+               }}>
+              <img
+                  className="tab__img"
+                  src={doc.eventBanner}
+                  alt="some text"/>
+          </div>
         <div className="tab__content">
           <a className="tab__title">Category: {doc.eventCategory}</a>
           <div className="tab__name">Title: {doc.eventTitle}</div>
           <br/>
-          <date className="tab__date">Event date: {parsedDate}</date>
+          <div className="tab__date">Event date: {parsedDate}</div>
         </div>
         <ul className="tab__icon">
           <li className="tab__item-icon">
@@ -97,21 +101,25 @@ function ManageTournamentsPage() {
     let date = new Date(doc.eventDate);
     let parsedDate = date.toString();
 
-    return (<li className="tab__item">
-        <div className="tab__image"
-             style={{
-               background: "blue",
-               url: "#",
-               position: "center",
-               backgroundSize: "cover",
-               backgroundRepeat: "no-repeat"
-             }}>
-        </div>
+    return (
+        <li className="tab__item" key={doc.id}>
+
+            <div className="tab__image"
+                 style={{
+                     position: "center",
+                     backgroundSize: "cover",
+                     backgroundRepeat: "no-repeat"
+                 }}>
+                <img
+                    className="tab__img"
+                    src={doc.eventBanner}
+                    alt="some text"/>
+            </div>
         <div className="tab__content">
           <a className="tab__title">Category: {doc.eventCategory}</a>
           <div className="tab__name">Title: {doc.eventTitle}</div>
           <br/>
-          <date className="tab__date">Event date: {parsedDate}</date>
+          <div className="tab__date">Event date: {parsedDate}</div>
         </div>
         <ul className="tab__icon">
           <li className="tab__item-icon">
@@ -133,7 +141,7 @@ function ManageTournamentsPage() {
             </button>
           </div>
           <div className="btn__inner">
-            {/*TODO modify the delete and update buttons*/}
+
             <Button
               className='btn-settings btn-minus'
               variant="danger"
@@ -164,21 +172,25 @@ function ManageTournamentsPage() {
     let date = new Date(doc.eventDate);
     let parsedDate = date.toString();
 
-    return (<li className="tab__item">
-        <div className="tab__image"
-             style={{
-               background: "blue",
-               url: "#",
-               position: "center",
-               backgroundSize: "cover",
-               backgroundRepeat: "no-repeat"
-             }}>
-        </div>
+    return (
+        <li className="tab__item" key={doc.id}>
+
+            <div className="tab__image"
+                 style={{
+                     position: "center",
+                     backgroundSize: "cover",
+                     backgroundRepeat: "no-repeat"
+                 }}>
+                <img
+                    className="tab__img"
+                    src={doc.eventBanner}
+                    alt="some text"/>
+            </div>
         <div className="tab__content">
           <a className="tab__title">Category: {doc.eventCategory}</a>
           <div className="tab__name">Title: {doc.eventTitle}</div>
           <br/>
-          <date className="tab__date">Event date: {parsedDate}</date>
+          <div className="tab__date">Event date: {parsedDate}</div>
         </div>
         <ul className="tab__icon">
           <li className="tab__item-icon">
@@ -238,21 +250,25 @@ function ManageTournamentsPage() {
     let date = new Date(doc.eventDate);
     let parsedDate = date.toString();
 
-    return (<li className="tab__item">
-        <div className="tab__image"
-             style={{
-               background: "blue",
-               url: "#",
-               position: "center",
-               backgroundSize: "cover",
-               backgroundRepeat: "no-repeat"
-             }}>
-        </div>
+    return (
+        <li className="tab__item" key={doc.id}>
+
+            <div className="tab__image"
+                 style={{
+                     position: "center",
+                     backgroundSize: "cover",
+                     backgroundRepeat: "no-repeat"
+                 }}>
+                <img
+                    className="tab__img"
+                    src={doc.eventBanner}
+                    alt="some text"/>
+            </div>
         <div className="tab__content">
           <a className="tab__title">Category: {doc.eventCategory}</a>
           <div className="tab__name">Title: {doc.eventTitle}</div>
           <br/>
-          <date className="tab__date">Event date: {parsedDate}</date>
+          <div className="tab__date">Event date: {parsedDate}</div>
         </div>
         <ul className="tab__icon">
           <li className="tab__item-icon">
@@ -332,9 +348,8 @@ function ManageTournamentsPage() {
             <div className="tournament__tab tab">
               <div className="tab__body">
                 <ul className="tab__list active" id="tab_1">
-                  {passedEvents && passedEvents.map(doc => {
-                      doc.eventCategory === "match" ? PassedMatchTemp(doc) : PassedTournTemp(doc);
-                    }
+                  {passedEvents && passedEvents.map(doc =>
+                      doc.eventCategory === "match" ? PassedMatchTemp(doc) : PassedTournTemp(doc)
                   )}
                   {futureEvents && futureEvents.map(doc =>
                     doc.eventCategory === "match" ? FutureMatchTemp(doc) : FutureTournTemp(doc)

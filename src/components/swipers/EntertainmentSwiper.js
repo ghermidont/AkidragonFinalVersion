@@ -1,4 +1,3 @@
-//In future consider implementing the logic of this component through useContext an LocalStorage
 import React, {useState} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import ReactPlayer from "react-player/youtube";
@@ -32,7 +31,7 @@ export default function MatchesTournamentsSwiper (){
               controls = {true}
               light = {true}
               playing = {false}
-              onStart = {()=>console.log("hello")}
+              //onStart = {()=>console.log("hello")}
               width={'100%'}
               style={{margin:"auto"}}
             />

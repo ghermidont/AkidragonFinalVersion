@@ -5,15 +5,15 @@ import {useTranslation} from "react-i18next";
 
 export default function DeleteProfilePage(){
     const {handleLogout} = useAuthContext();
-    const {currentUser} = useAuthContext;
+    const {currentUser} = useAuthContext();
     //const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
     console.log("DeleteProfilePage worked.");
     const history = useHistory();
     const {t} = useTranslation();
 
-    const deleteCurrentUser = () => {
+    const deleteCurrentUser = async () => {
        //if(currentUser) {
-            currentUser.delete().then(function () {
+            await currentUser.delete().then(function () {
                 window.alert("Profile deleted.");
                 console.log("deleteCurrentUser() worked.");
                 handleLogout();
