@@ -8,21 +8,24 @@ import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 export default function PreUserProfilePageCheck(props) {
+    console.log("PreUserProfilePageCheck");
     const {currentUser} = useAuthContext();
     const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
     const [userInfo, setUserInfo] = useState(true);
-    const[loading, setLoading] = useState();
+    const [loading, setLoading] = useState();
 
     async function checkUserFieldsExist() {
+        console.log("***checkUserFieldsExist()***");
         await projectFirestore
             .collection('user-profiles')
             .doc(currentUser.uid?currentUser.uid:CurrentUserFromLS.uid)
             .get()
             .then((doc) => {
                 if (doc.exists) {
-                   return doc.data().displayName===undefined&&setUserInfo(false);
+                   return doc.data().firstName===undefined&&setUserInfo(false);
                 }else{
-                    return setUserInfo(true);
+                   return setUserInfo(true);
+
                 }
        })
     }
@@ -33,7 +36,7 @@ export default function PreUserProfilePageCheck(props) {
             .then(() => {setLoading(false);
                 })
             .catch(err => console.error(err));
-    }, [currentUser]);
+    },[currentUser]);
 
     return (
         <>

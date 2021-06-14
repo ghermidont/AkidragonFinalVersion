@@ -94,6 +94,12 @@ export function AuthContextProvider({ children }) {
             });
     }
 
+    const clearInput = () => {
+        setEmail('');
+        setPassword('');
+        console.log("clearInput() worked!");
+    }
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             localStorage.setItem("LSCurrentUser", JSON.stringify(user));
@@ -102,12 +108,6 @@ export function AuthContextProvider({ children }) {
         });
         return unsubscribe;
     }, [currentUser]);
-
-    const clearInput = () => {
-        setEmail('');
-        setPassword('');
-        console.log("clearInput() worked!");
-    }
 
     const value = {
         clearInput,

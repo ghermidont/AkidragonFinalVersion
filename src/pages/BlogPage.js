@@ -7,9 +7,13 @@ import {useDataFromFirestore, useDataFromFirestoreCMS} from "../customHooks/useF
 import logoSection from '../assets/images/dest/logo-section.png';
 import {useLanguageContext} from "../context/LanguageContext";
 import {useTranslation} from "react-i18next";
+import {useArticlesContext} from "../context/ArticlesContext";
+import {useHistory} from 'react-router-dom';
 
 export default function BlogPage() {
     console.log("ArticlesPage worked!");
+    const {setChosenArticleNumber} = useArticlesContext();
+    const history = useHistory();
     const {t} = useTranslation();
     const {appLanguage} = useLanguageContext();
     const {docsFromHook} = useDataFromFirestore('articles');
@@ -93,7 +97,10 @@ export default function BlogPage() {
                             <div className="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                                 {docsFromHook && docsFromHook.slice(0, 8).map(doc=>
                                     <article className="article" key={doc.id}>
-                                       <Link className="article__link">
+                                        <Link className="article__link" onClick={() => {
+                                            setChosenArticleNumber(doc.id);
+                                            history.push(`/article/${doc.id}`, {from: "/BlogPage"});//check which one works!!!!
+                                        }}>
                                             <img src={doc.content[appLanguage].image?doc.content[appLanguage].image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="article__image"/>
                                             <div className="article__content">
                                                 <img className="article__logo" src={logoSection} alt=""/>
@@ -119,7 +126,10 @@ export default function BlogPage() {
                             >
                                 {videoGamesNews && videoGamesNews.slice(0, 8).map(doc=>
                                     <article className="article" key={doc.id}>
-                                        <Link className="article__link">
+                                        <Link className="article__link" onClick={() => {
+                                            setChosenArticleNumber(doc.id);
+                                            history.push(`/article/${doc.id}`, {from: "/BlogPage"});//check which one works!!!!
+                                        }}>
                                             <img src={doc.content[appLanguage].image?doc.content[appLanguage].image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="article__image"/>
                                             <div className="article__content">
                                                 <img className="article__logo" src={logoSection} alt=""/>
@@ -146,7 +156,10 @@ export default function BlogPage() {
                             >
                                 {moviesNews && moviesNews.slice(0, 8).map(doc=>
                                     <article className="article" key={doc.id}>
-                                        <Link className="article__link">
+                                        <Link className="article__link" onClick={() => {
+                                            setChosenArticleNumber(doc.id);
+                                            history.push(`/article/${doc.id}`, {from: "/BlogPage"});//check which one works!!!!
+                                        }}>
                                             <img src={doc.content[appLanguage].image?doc.content[appLanguage].image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="article__image"/>
                                             <div className="article__content">
                                                 <img className="article__logo" src={logoSection} alt=""/>
@@ -173,7 +186,10 @@ export default function BlogPage() {
                             >
                                 {musicNews && musicNews.slice(0, 8).map(doc=>
                                     <article className="article" key={doc.id}>
-                                        <Link className="article__link">
+                                        <Link className="article__link" onClick={() => {
+                                            setChosenArticleNumber(doc.id);
+                                            history.push(`/article/${doc.id}`, {from: "/BlogPage"});//check which one works!!!!
+                                        }}>
                                             <img src={doc.content[appLanguage].image?doc.content[appLanguage].image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt="" className="article__image"/>
                                             <div className="article__content">
                                                 <img className="article__logo" src={logoSection} alt=""/>

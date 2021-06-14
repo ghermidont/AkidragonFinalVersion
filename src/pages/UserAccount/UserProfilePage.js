@@ -27,11 +27,11 @@ export default function UserProfilePage() {
           if (doc.exists) {
             setCurrentUserExtraInfoFB(doc.data());
           } else {
-            console.log("No such document!");
+            console.log("No user info document!");
           }
         })
             .catch((error) => {
-              console.log("Error getting document:", error);
+              console.log("Error getting user info document:", error);
             });
         }
     }
@@ -58,11 +58,11 @@ export default function UserProfilePage() {
             if(doc.exists){
               setCurrentUserDbPointsInfo(doc.data());
             }else{
-              console.log("No such document!");
+              console.log("No score document!");
             }
           })
           .catch((error) => {
-            console.log("Error getting document:", error);
+            console.log("Error getting score document:", error);
           });
     }
 

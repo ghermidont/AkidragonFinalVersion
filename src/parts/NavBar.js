@@ -13,6 +13,8 @@ export default function NavBar() {
   const {setAppLanguage, appLanguage} = useLanguageContext();
   const {t, i18n} = useTranslation();
 
+//TODO implement the burger menu closing setting in all the buttons.
+
   console.log("NavBar() worked!");
   const [toggleMenu, setToggleMenu] = useState('');
 
@@ -21,6 +23,7 @@ export default function NavBar() {
   };
 
   return (
+
     <header className="header">
       <div className="header__inner">
         <div className="header-burger" onClick={() => setToggleMenu('menu--active')}>
@@ -164,6 +167,6 @@ export default function NavBar() {
         </nav>
       </div>
     </header>
-  );
+     );
 }
 

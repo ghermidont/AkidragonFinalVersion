@@ -30,7 +30,7 @@ export default function UpdateUserProfilePage() {
   const [lastName, setLastName] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState();
-  const [oldDateOfBirth, setOldDateOfBirth] = useState();
+  const [oldDateOfBirth, setOldDateOfBirth] = useState("");
   const [address, setAddress] = useState('');
   const [bio, setBio] = useState('');
   const [email, setEmail] = useState('');
@@ -42,14 +42,14 @@ export default function UpdateUserProfilePage() {
 
   let selectedUser = [];
 
-  const parsedDate = (currentDate) => {
-    if (currentDate!=='') {
-      const date = new Date(currentDate);
-      let parsedDate = date.toString();
-      return parsedDate;
-    }
-    return;
-  }
+  // const parsedDate = (currentDate) => {
+  //   if (currentDate!=='') {
+  //     const date = new Date(currentDate);
+  //     let parsedDate = date.toString();
+  //     return parsedDate;
+  //   }
+  //   return;
+  // }
 
   useEffect(() => {
     if (docsFromHookUserInfo) {
@@ -63,9 +63,13 @@ export default function UpdateUserProfilePage() {
   useEffect(() => {
     if (selectedUser !== "") {
       selectedUser.map(doc => {
-        let now = new Date(doc.dateOfBirth);
-        let formatedDate =  date.format(now, 'ddd, MMM DD YYYY');
-
+        let formatedDate;;
+        if(doc.dateOfBirth===undefined){
+          setOldDateOfBirth("Date of birth not set");
+        }else{
+          let now = new Date(doc.dateOfBirth);
+          formatedDate =  date.format(now, 'ddd, MMM DD YYYY');
+        }
         setFirstName(doc.firstName);
         setLastName(doc.lastName);
         setDisplayName(doc.displayName);

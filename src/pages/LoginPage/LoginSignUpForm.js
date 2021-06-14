@@ -7,6 +7,7 @@ const LoginSignUpForm = () => {
   console.log("LoginSignUpForm() worked");
   const fileTypesArray = ['image/png', 'image/jpeg'];
   const [error, setError] = useState(null);
+  const [fileUploaded, setFileUploaded] = useState(false);
 
   const {
     clearInput,
@@ -21,7 +22,6 @@ const LoginSignUpForm = () => {
     emailError,
     passwordError,
     setSignUpFormUserUploadedFile
-
   } = useAuthContext();
 
  const fileUploadEventListener = (e) => {
@@ -29,6 +29,7 @@ const LoginSignUpForm = () => {
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
       //localStorage.setItem("userPicture", uploadedFile);
       setSignUpFormUserUploadedFile(uploadedFile);
+      setFileUploaded(true);
     } else {
       //localStorage.removeItem("userPicture");
       //setUploadedPicFile('');
@@ -93,6 +94,7 @@ const LoginSignUpForm = () => {
                           <input className='visually-hidden' type="file" onChange={fileUploadEventListener}/>
                         </label>
                         <div className="output">
+                          {fileUploaded===true&& <div className="error">File uploaded.</div>}
                           {error && <div className="error">{error}</div>}
                         </div>
                       </form>

@@ -23,35 +23,11 @@ export default function Step1EmailVerificationPage() {
     useEffect(()=>{
         sendVerifyEmail(User);
         handleLogout();
-        // if (signUpFormUserUploadedFile) {
-        //     async function putFile(File){
-        //         try {
-        //             const storageRef = projectStorage.ref('profile_pictures/').child(File.name);
-        //             storageRef.put(File).on('state_changed', (err) => {
-        //             },  (err) => {
-        //                 console.log(err);
-        //             }, async()=>{
-        //                 const finalUrl = await storageRef.getDownloadURL();
-        //                 finalUrl!==undefined&&setUserUploadedPictureUrl(finalUrl);
-        //                 setUrl(finalUrl);
-        //             });
-        //         } catch {
-        //             console.error("File not uploaded");
-        //         }
-        //     }
-        //     putFile(signUpFormUserUploadedFile).then(()=>console.log(url));
-        // }
     }, []);
 
     return(
         <section style={{paddingTop: "10em"}}>
             <h1>We’ve just sent a link to your email address. Confirm your email address and login to your account.</h1>
-            <Link
-                to="/"
-                className="link-primary">
-                Go back to main page
-                You haven't received any email, Resend the message: <Button type="button" onClick={sendVerifyEmail}>Resend</Button>
-            </Link>
         </section>
     );
 }

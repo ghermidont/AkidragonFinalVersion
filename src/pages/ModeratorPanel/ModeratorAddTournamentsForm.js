@@ -8,6 +8,7 @@ import classes from './styles/ModeratorAddTournament.module.scss';
 
 export default function ModeratorAddTournamentsForm() {
   console.log("ModeratorAddTournamentsForm worked");
+  //TODO add the protocol and domain name prefix checking in the info link.
 
   const {currentUser} = useAuthContext();
   const fileTypesArray = ['image/png', 'image/jpeg'];
