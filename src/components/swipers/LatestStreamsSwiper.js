@@ -59,7 +59,9 @@ export default function LatestStreamsSwiper() {
 
               />
             </div>
+              {console.log(doc.videoURL)}
           </SwiperSlide>
+
         ))}
       </Swiper>
     </div>
