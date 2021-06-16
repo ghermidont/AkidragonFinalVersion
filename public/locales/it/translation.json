@@ -115,7 +115,9 @@
     "Consent": "Acconsento al trattamento dei miei dati personali",
     "SubmitButton": "Invia",
     "AttachFile": "Allega file",
-    "MaxFileSizeExceeded": "Dimensione massima del file superata"
+    "MaxFileSizeExceeded": "Dimensione massima del file superata",
+    "MaxFileSize": "Dimensione massima del file 500 kb",
+    "FileUploaded": "File caricato"
   },
 
   "SponsorshipPage": {

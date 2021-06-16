@@ -2,18 +2,28 @@ import React from 'react';
 import {useDataFromFirestore} from "../customHooks/useFirestore";
 import {Link} from "react-router-dom";
 import {useLanguageContext} from "../context/LanguageContext";
+import { ShareLink } from 'social-media-sharing'
 const queryString = require('query-string');
 
 export default function Article() {
-    //TODO edit the page structure
     console.log("Individual article component worked!");
     const {docsFromHook} = useDataFromFirestore('articles');
     const {appLanguage} = useLanguageContext();
     let parsedWindowLocation = queryString.parse(window.location.hash);
     const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(13);
-
+    console.log("location:");
     console.log("This is the stringified:");
     console.log(stringifiedSlug);
+
+    const location = JSON.stringify(window.location.href);
+    console.log(encodeURIComponent(location));
+
+    const shareFacebook = () => {
+        //let url = location;//`http://mydomainfortesting.ml/#${parsedWindowLocation[0]}`;
+        let socialMediaLinks = new ShareLink("facebook");
+        socialMediaLinks.get({u: `http://mydomainfortesting.ml/#/article/${stringifiedSlug}`});
+        socialMediaLinks.open();
+    }
 
     let selectedArticle = "";
 
@@ -37,7 +47,6 @@ export default function Article() {
                                     <button className="new-article__btn-back">Back <span>news</span></button>
                                 </Link>
                             </div>
-
                         </div>
                         <div className="new-article__image">
                             <img style={{
@@ -56,8 +65,10 @@ export default function Article() {
                             Content: {doc.content[appLanguage].text}
                         </p>
                         <div className="new-article__info">
-
                         </div>
+                            <div className="social__item">
+                                <span className="icon-facebook2" onClick={()=>shareFacebook()}> Share to Facebook >>> </span>
+                            </div>
                         <div>
                             <br/>
                             <Link to = "/BlogPage">

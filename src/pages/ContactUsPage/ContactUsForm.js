@@ -102,7 +102,6 @@ export default function ContactUsForm() {
             <label className='btn-upload label'>
             <span className='icon-upload2'></span>
             {t('ContactUsForm.UploadButton')}
-                {/*TODO create class*/}
 
             <input
                 className='visually-hidden'

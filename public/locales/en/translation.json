@@ -116,7 +116,9 @@
     "Consent": "I consent to the processing of my personal data",
     "SubmitButton": "Submit",
     "AttachFile": "Attach File",
-    "MaxFileSizeExceeded": "Max file size exceeded"
+    "MaxFileSizeExceeded": "Max file size exceeded",
+    "MaxFileSize": "Maximum file size 500kb",
+    "FileUploaded": "File uploaded"
   },
 
   "SponsorshipPage": {

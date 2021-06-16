@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from "./styles/ModeratorAddStreamsForm.module.scss";
 //import {useArticlesContext} from "../../context/ArticlesContext";
 import {projectFirestore, projectStorage} from "../../fireBase";
@@ -8,6 +8,7 @@ import {Dropdown} from "react-bootstrap";
 //import Loader from "react-loader-spinner";
 import ReactPlayer from "react-player/lazy";
 import {sanitizeUrl} from "@braintree/sanitize-url";
+import youtubeThumbnail from "youtube-thumbnail";
 
 export default function ModeratorAddStreamsForm() {
   console.log("ModeratorAddStreamsForm worked");
@@ -18,11 +19,17 @@ export default function ModeratorAddStreamsForm() {
   const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
   const {currentUser} = useAuthContext();
   const [streamCategory, setStreamCategory] = useState('');
-  const [videoURL, setVideoURL] = useState('');
+  const [videoURL, setVideoURL] = useState("");
   const [loading, setLoading] = useState(true);
   const [url, setUrl] = useState('');
   const [fileSuccess, setFileSuccess] = useState(false);
   //const [uploadedPicFile, setUploadedPicFile] = useState('');
+  const [thumbnail, setThumbnail] = useState("");
+
+  useEffect(() => {
+    const getThumbnail = async () => setThumbnail(await youtubeThumbnail(videoURL));
+    getThumbnail().then(()=>console.log("Got the thumbnail")).catch(err=>console.log(err));
+  },[videoURL]);
 
   const fileUploadEventListener = (e) => {
     let uploadedFile = e.target.files[0];
@@ -58,13 +65,12 @@ export default function ModeratorAddStreamsForm() {
   const addStreamsWithFBCallback = (e) => {
     const collectionRef = projectFirestore.collection('streams').doc();
 
-    if (loading === false) {
       collectionRef.set(
         {
           "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
           "category": streamCategory,
           "videoURL": videoURL,
-          "imageURL": url,
+          "imageURL": thumbnail.medium.url,
           "createdAt": Date.now()
         })
         .then(() => {
@@ -75,8 +81,8 @@ export default function ModeratorAddStreamsForm() {
         .catch((error) => {
           console.error(error.code + " " + error.message + "" + error.details);
         });
-    }
-    e.preventDefault();
+
+    //e.preventDefault();
   }
 
   // const clearInput = () => {
@@ -111,7 +117,6 @@ export default function ModeratorAddStreamsForm() {
             playing={false}
           />
           }
-
           <input
             className='input'
             type="text"
@@ -122,8 +127,6 @@ export default function ModeratorAddStreamsForm() {
               (e) => setVideoURL(sanitizeUrl(e.target.value))
             }
           />
-
-
           <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               {streamCategory !== '' ? streamCategory : "Stream category"}
@@ -136,18 +139,18 @@ export default function ModeratorAddStreamsForm() {
           </Dropdown>
           <br/>
           <div className={classes.btnInner}>
-            <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload
-              <input
-                className='form-article__btn visually-hidden'
-                type="file"
-                placeholder='file'
-                required
-                onChange={fileUploadEventListener}
-              />
-            </label>
+            {/*<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload*/}
+            {/*  <input*/}
+            {/*    className='form-article__btn visually-hidden'*/}
+            {/*    type="file"*/}
+            {/*    placeholder='file'*/}
+
+            {/*    onChange={fileUploadEventListener}*/}
+            {/*  />*/}
+            {/*</label>*/}
             <button
               className="btn-upload"
-              onClick={addStreamsWithFBCallback}
+              onClick={()=>addStreamsWithFBCallback()}
             >
               Submit
             </button>
@@ -159,12 +162,15 @@ export default function ModeratorAddStreamsForm() {
             {/*</button>*/}
           </div>
           <div className="output">
-            {error && <div className="error">{error}</div>}
-            {fileSuccess &&
-            <div className='output__image'>Image Uploaded successfully:
-              <img style={{width: "25%", height: "auto"}} src={url} alt=""/>
+            <div className='output__image'>
+              {thumbnail&&<img style={{width: "25%", height: "auto"}} src={thumbnail&&thumbnail.medium.url} alt=""/>}
             </div>
-            }
+            {/*{error && <div className="error">{error}</div>}*/}
+            {/*{fileSuccess &&*/}
+            {/*<div className='output__image'>Image Uploaded successfully:*/}
+            {/*  <img style={{width: "25%", height: "auto"}} src={url} alt=""/>*/}
+            {/*</div>*/}
+            {/*}*/}
           </div>
         </form>
       </div>

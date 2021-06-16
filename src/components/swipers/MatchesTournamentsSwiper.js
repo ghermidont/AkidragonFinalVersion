@@ -49,7 +49,6 @@ export default function MatchesTournamentsSwiper() {
             "slideShadows": true
           }
         }
-
         grabCursor={false}
         centeredSlides={true}
         navigation={false}

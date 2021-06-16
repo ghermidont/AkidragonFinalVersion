@@ -2,14 +2,12 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useHistory} from "react-router-dom";
 import {projectFirestore, projectStorage} from "../../../fireBase";
 import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
-//TODO define the vars and implement the keys
-function CMSHomePageEdit() {
 
+function CMSHomePageEdit() {
     let publishBtnRef = useRef();
     //let cancelBtnRef = useRef();
     const fileTypesArray = ['image/png', 'image/jpeg'];
     const history = useHistory();
-
     //Url
     const [ENBannerUrl, setENBannerUrl] = useState("");
     const [ENContactsBannerUrl, setENContactsBannerUrl] = useState("");
@@ -112,7 +110,6 @@ function CMSHomePageEdit() {
     useEffect(() => {
         if (selectedDoc !== "") {
             selectedDoc.map(doc => {
-
                 setENBannerText(doc.bannerText.it);
                 setITBannerText(doc.bannerText.en);
                 setENBannerUrl(doc.banner.en);
@@ -153,8 +150,8 @@ function CMSHomePageEdit() {
                 try {
                     setENBannerUploadError("");
                     setENBannerFileTypeError("");
-                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
-                    storageRef.put(uploadedFile).on('state_changed', (err) => {
+                    const storageRef = projectStorage.ref("CMS-pictures/homePage").child(uploadedFile.name);
+                    storageRef.put(uploadedFile).on("state_changed", (err) => {
                     },  (err) => {
                         window.alert(err);
                     }, async()=>{
@@ -182,7 +179,7 @@ function CMSHomePageEdit() {
                 try {
                     setENContactsBannerUploadError("");
                     setENContactsBannerFileTypeError("");
-                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    const storageRef = projectStorage.ref('CMS-pictures/homePage').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
@@ -212,7 +209,7 @@ function CMSHomePageEdit() {
                 try {
                     setENGameTeamsBannerUploadError("");
                     setENGameTeamsBannerFileTypeError("");
-                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    const storageRef = projectStorage.ref('CMS-pictures/homePage').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
@@ -241,7 +238,7 @@ function CMSHomePageEdit() {
                 try {
                     setENSalesBannerUploadError("");
                     setENSalesBannerFileTypeError("");
-                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    const storageRef = projectStorage.ref('CMS-pictures/homePage').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
@@ -270,7 +267,7 @@ function CMSHomePageEdit() {
                 try {
                     setENSponsorshipBannerUploadError("");
                     setENSponsorshipBannerFileTypeError("");
-                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    const storageRef = projectStorage.ref('CMS-pictures/homePage').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
@@ -299,7 +296,7 @@ function CMSHomePageEdit() {
                 try {
                     setENTournamentsBannerUploadError("");
                     setENTournamentsBannerUrlFileTypeError("");
-                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    const storageRef = projectStorage.ref('CMS-pictures/homePage').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
@@ -329,7 +326,7 @@ function CMSHomePageEdit() {
                 try {
                     setITBannerUploadError("");
                     setITBannerFileTypeError("");
-                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    const storageRef = projectStorage.ref('CMS-pictures/homePage').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
@@ -358,7 +355,7 @@ function CMSHomePageEdit() {
                 try {
                     setITContactsBannerUploadError("");
                     setITContactsBannerFileTypeError("");
-                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    const storageRef = projectStorage.ref('CMS-pictures/homePage').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
@@ -387,7 +384,7 @@ function CMSHomePageEdit() {
                 try {
                     setITGameTeamsBannerUploadError("");
                     setITGameTeamsBannerFileTypeError("");
-                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    const storageRef = projectStorage.ref('CMS-pictures/homePage').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
@@ -416,7 +413,7 @@ function CMSHomePageEdit() {
                 try {
                     setITSalesBannerFileTypeError("");
                     setITSalesBannerUploadError("");
-                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    const storageRef = projectStorage.ref('CMS-pictures/homePage').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
@@ -445,7 +442,7 @@ function CMSHomePageEdit() {
                 try {
                     setITSponsorshipBannerFileTypeError("");
                     setITSponsorshipBannerUploadError("");
-                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    const storageRef = projectStorage.ref('CMS-pictures/homePage').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
@@ -474,7 +471,7 @@ function CMSHomePageEdit() {
                 try {
                     setITTournamentsBannerUploadError("");
                     setITTournamentsBannerUrlFileTypeError("");
-                    const storageRef = projectStorage.ref('CMS-pictures/tournamentsPage').child(uploadedFile.name);
+                    const storageRef = projectStorage.ref('CMS-pictures/homePage').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);

@@ -165,7 +165,7 @@ export default function HomePage() {
                   <img src={appLanguage === "it" ? ITSponsorshipBannerUrl : ENSponsorshipBannerUrl} alt=""
                        className="feed__img"/>
                 </div>
-                <Link className="feed__link" to="/">
+                <Link className="feed__link" to="SponsorshipPage">
                   <a className="feed__link">{t('HomePage.SponsorshipBanner')}</a>
                 </Link>
               </div>

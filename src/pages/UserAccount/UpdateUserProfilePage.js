@@ -7,7 +7,6 @@ import {Link} from "react-router-dom";
 import {useAuthContext} from "../../context/AuthContext";
 import {useTranslation} from "react-i18next";
 import date from 'date-and-time';
-//TODO see the date format issue
 
 export default function UpdateUserProfilePage() {
   console.log("UpdateUserProfilePage() worked");

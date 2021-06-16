@@ -13,8 +13,6 @@ export default function NavBar() {
   const {setAppLanguage, appLanguage} = useLanguageContext();
   const {t, i18n} = useTranslation();
 
-//TODO implement the burger menu closing setting in all the buttons.
-
   console.log("NavBar() worked!");
   const [toggleMenu, setToggleMenu] = useState('');
 
@@ -23,7 +21,6 @@ export default function NavBar() {
   };
 
   return (
-
     <header className="header">
       <div className="header__inner">
         <div className="header-burger" onClick={() => setToggleMenu('menu--active')}>
@@ -97,7 +94,7 @@ export default function NavBar() {
             </li>
 
             <li className="menu__item">
-              <Link className="menu__link menu__link--contact" to="/ContactUsPage">
+              <Link className="menu__link menu__link--contact" to="/ContactUsPage" onClick={() => setToggleMenu('')}>
                 {t('NavBar.Menu.Contacts')}
               </Link>
             </li>
@@ -129,7 +126,7 @@ export default function NavBar() {
               <ul className="box-user__list">
                 <li className="box-user__item">
                   {!currentUser &&
-                  <Link className='box-user__enter' to='/MainLoginPage'>
+                  <Link className='box-user__enter' to='/MainLoginPage' onClick={() => setToggleMenu('')}>
                     <span className="icon-enter box-user__icon"></span>
                   </Link>
                   }
@@ -137,21 +134,21 @@ export default function NavBar() {
 
                 <li className="box-user__item">
                   {currentUser &&
-                  <Link className="box-user__userpic" to='/UserProfilePage'>
+                  <Link className="box-user__userpic" to='/UserProfilePage' onClick={() => setToggleMenu('')}>
                     <span className="icon-user box-user__icon"></span>
                   </Link>
                   }
                 </li>
                 <li className="box-user__item">
                   {currentUser &&
-                  <Link to='/UpdateUserProfilePage' className='box-user__exit'>
+                  <Link to='/UpdateUserProfilePage' className='box-user__exit' onClick={() => setToggleMenu('')}>
                     <span className="icon-cog box-user__icon"></span>
                   </Link>
                   }
                 </li>
                 <li className="box-user__item">
                   {currentUser &&
-                  <button className='box-user__exit' onClick={()=>{handleLogout(); clearInput();}}>
+                  <button className='box-user__exit' onClick={()=>{handleLogout(); clearInput(); setToggleMenu('')}}>
                     <span className="icon-exit box-user__icon"></span>
                   </button>
                   }
@@ -159,7 +156,7 @@ export default function NavBar() {
               </ul>
             </li>
             <li className="menu__item">
-              <div className="search header__search">
+              <div className="search header__search" onClick={() => setToggleMenu('')}>
                 <SearchBar/>
               </div>
             </li>

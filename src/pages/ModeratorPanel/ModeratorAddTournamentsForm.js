@@ -8,7 +8,6 @@ import classes from './styles/ModeratorAddTournament.module.scss';
 
 export default function ModeratorAddTournamentsForm() {
   console.log("ModeratorAddTournamentsForm worked");
-  //TODO add the protocol and domain name prefix checking in the info link.
 
   const {currentUser} = useAuthContext();
   const fileTypesArray = ['image/png', 'image/jpeg'];
@@ -61,6 +60,17 @@ export default function ModeratorAddTournamentsForm() {
   const [urlWin1, setUrlWin1] = useState("");
   const [urlWin2, setUrlWin2] = useState("");
   const [urlBanner, setUrlBanner] = useState("");
+  const [validation, setValidation] = useState();
+
+  const infoUrlValidation = (input) => {
+    const reg = new RegExp("((http|https)://)(www.)?");
+    if(reg.test(input)){
+      setValidation(true);
+      setEventInfoPageLink(input);
+    } else {
+      setValidation(false);
+    }
+   }
 
   //Event listeners
   const file1UploadEventListener = (e) => {
@@ -424,7 +434,7 @@ export default function ModeratorAddTournamentsForm() {
   return (
     <>
       <div className={classes.container}>
-        <h1 className={classes.title}>Add Tournamentss</h1>
+        <h1 className={classes.title}>Add Tournaments</h1>
         <form className='form'>
           <div className="form-dropdown">
             <Dropdown>
@@ -574,12 +584,13 @@ export default function ModeratorAddTournamentsForm() {
           <input
             className={classes.input}
             type="text"
-            placeholder='Info Page'
+            placeholder="Info Page"
             required
             onChange={
-              (e) => setEventInfoPageLink(e.target.value)
+              (e) => infoUrlValidation(e.target.value)
             }
           />
+          {validation===false&&<strong><div style={{color: "red"}}>Please include the full Url with protocol and domain. Otherwise the link won't work</div></strong>}
 
           <input
             className={classes.input}

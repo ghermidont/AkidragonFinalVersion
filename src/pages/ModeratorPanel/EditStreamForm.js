@@ -8,14 +8,12 @@ import {Dropdown} from "react-bootstrap";
 //import Loader from "react-loader-spinner";
 import ReactPlayer from "react-player/lazy";
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
+import youtubeThumbnail from "youtube-thumbnail";
 const queryString = require('query-string');
 
 export default function EditStreamForm(){
-
     console.log("EditStreamForm worked");
-
     const {docsFromHook} = useDataFromFirestore('streams');
-
     const fileTypesArray = ['image/png', 'image/jpeg'];
     const history = useHistory();
     const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
@@ -29,6 +27,7 @@ export default function EditStreamForm(){
     const [fileSuccess, setFileSuccess] = useState(false);
     const [uploadedPicFile, setUploadedPicFile] = useState("");
     const [createdAt, setCreatedAt] = useState("");
+    const [thumbnail, setThumbnail] = useState("");
 
     let parsedWindowLocation = queryString.parse(window.location.hash);
     const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(17);
@@ -46,6 +45,11 @@ export default function EditStreamForm(){
             console.log(selectedStream);
         }
    });
+
+    useEffect(() => {
+        const getThumbnail = async () => setThumbnail(await youtubeThumbnail(videoURL));
+        getThumbnail().then(()=>console.log("Got the thumbnail")).catch(err=>console.log(err));
+    },[videoURL]);
 
     useEffect(() => {
     if (selectedStream !== "") {
@@ -95,7 +99,7 @@ export default function EditStreamForm(){
                     "authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
                     "category": streamCategory,
                     "createdAt": createdAt,
-                    "imageURL": url,
+                    "imageURL": thumbnail.medium.url,
                     "updatedAt": Date.now(),
                     "videoURL": videoURL,
                 })
@@ -133,7 +137,7 @@ export default function EditStreamForm(){
         <>
             <div className='form-update__body form-login__body'>
                 {/*<h1 className="title form-title">Add Stream</h1>*/}
-                {/*TODO edit elements positioning*/}
+
                 <h1 className={classes.title}>Edit Stream</h1>
                 <form className="form-update" style={{marginTop: "30em"}}>
                     <ReactPlayer
@@ -166,23 +170,28 @@ export default function EditStreamForm(){
                         </Dropdown.Menu>
                     </Dropdown>
                     <div>
-                        Current thumbnail:
-                        <img src={oldUrl} alt=""/>
+                        Thumbnail:
+                        {thumbnail&&<img style={{width: "25%", height: "auto"}} src={thumbnail&&thumbnail.medium.url} alt=""/>}
                     </div>
                     <div className="form-article__box-btn">
-                        <label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload thumbnail
-                            <input
-                                className='form-article__btn visually-hidden'
-                                type="file"
-                                placeholder='file'
-                                onChange={fileUploadEventListener}
-                            />
-                        </label>
+                        {/*<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload thumbnail*/}
+                        {/*    <input*/}
+                        {/*        className='form-article__btn visually-hidden'*/}
+                        {/*        type="file"*/}
+                        {/*        placeholder='file'*/}
+                        {/*        onChange={fileUploadEventListener}*/}
+                        {/*    />*/}
+                        {/*</label>*/}
 
-                        <div className="output">
-                            { error && <div className="error">{ error }</div>}
-                            {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url} alt=""/></div> }
-                        </div>
+                        {/*<div className="output">*/}
+                        {/*    { error && <div className="error">{ error }</div>}*/}
+                        {/*    {fileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url} alt=""/></div> }*/}
+                        {/*</div>*/}
+                        {/*<div className="output">*/}
+                        {/*    <div className='output__image'>*/}
+                        {/*        {thumbnail&&<img style={{width: "25%", height: "auto"}} src={thumbnail&&thumbnail.medium.url} alt=""/>}*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
                        <button
                             className="form-article__btn"

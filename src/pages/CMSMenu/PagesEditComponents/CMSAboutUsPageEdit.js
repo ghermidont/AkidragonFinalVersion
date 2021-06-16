@@ -19,8 +19,8 @@ function CMSAboutUsPageEdit() {
 
     let publishBtnRef = useRef();
     //let cancelBtnRef = useRef();
-    const {currentUser} = useAuthContext();
-    const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
+    // const {currentUser} = useAuthContext();
+    // const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
     //const [error, setError] = useState("");
     const fileTypesArray = ['image/png', 'image/jpeg'];
     const history = useHistory();
@@ -124,7 +124,7 @@ function CMSAboutUsPageEdit() {
                     async function putFile(uploadedFile){
                         e.preventDefault();
                         try {
-                            const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                            const storageRef = projectStorage.ref('CMS-pictures/aboutUsPage/members').child(uploadedFile.name);
                             storageRef.put(uploadedFile).on('state_changed', (err) => {
                             },  (err) => {
                                 window.alert(err);
@@ -154,7 +154,7 @@ function CMSAboutUsPageEdit() {
                     async function putFile(uploadedFile){
                         e.preventDefault();
                         try {
-                            const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                            const storageRef = projectStorage.ref('CMS-pictures/aboutUsPage/partners').child(uploadedFile.name);
                             storageRef.put(uploadedFile).on('state_changed', (err) => {
                             },  (err) => {
                                 window.alert(err);
@@ -251,7 +251,7 @@ function CMSAboutUsPageEdit() {
                 try {
                     setPicFileENBannerUploadError("");
                     setPicFileENFileTypeError("");
-                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    const storageRef = projectStorage.ref('CMS-pictures/aboutUsPage').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
@@ -281,7 +281,7 @@ function CMSAboutUsPageEdit() {
                 try {
                     setPicFileITBannerUploadError("");
                     setPicFileITFileTypeError("");
-                    const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid||CurrentUserFromLS.uid}`).child(uploadedFile.name);
+                    const storageRef = projectStorage.ref('CMS-pictures/aboutUsPage').child(uploadedFile.name);
                     storageRef.put(uploadedFile).on('state_changed', (err) => {
                     },  (err) => {
                         window.alert(err);
@@ -902,7 +902,6 @@ function CMSAboutUsPageEdit() {
                             </div>
                         </div>
                     </div>
-
                 </section>
             </div>
         </>

@@ -100,7 +100,7 @@ const UserProfileArticlesPage = () => {
               </ul>
 
               <ul className="articles-page__tab-list" id="tab_2">
-                {userPersonalArticlesArr && userPersonalArticlesArr.slice(0, 8).map(doc => ( //TODO Consider pagination
+                {userPersonalArticlesArr && userPersonalArticlesArr.slice(0, 8).map(doc => (
                 <li className="articles-page__tab-item">
                   <article className='articles-page__post'>
                     <div className="articles-page__image">
