@@ -43,9 +43,6 @@ export default function ShortArticlesList() {
                 </p>
               </div>
             </div>
-            <div className="article__footer">
-              {/*<img src="" alt=""/>*/}
-            </div>
           </Link>
         </article>
       ))}

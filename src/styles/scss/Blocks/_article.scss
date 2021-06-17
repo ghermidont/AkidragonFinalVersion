@@ -5,6 +5,7 @@
   margin: 2rem;
   height: 100%;
   transition: opacity 0.3s;
+  position: relative;
 
   &:hover,
   &:focus {
@@ -18,7 +19,7 @@
   }
 
   &__image {
-    height: 40rem;
+    height: 50rem;
   }
 
   &__content {
@@ -28,6 +29,10 @@
     padding: 0 2rem;
     height: 5rem;
     background-color: var(--white);
+    position: absolute;
+    left: 0;
+    bottom: 6rem;
+    width: 100%;
   }
 
   &__logo {
@@ -68,7 +73,7 @@
 
 @media screen and (max-width: 560px) {
   .article {
-    margin: 0;
+    margin: 2rem 0;
 
     &__content {
       padding: 0 1rem;
@@ -89,6 +94,17 @@
   }
 }
 
+@media screen and (max-width: 460px){
+  .article{
+    &__image{
+      height: 40rem;
+    }
+    &__content{
+      bottom: 4rem;
+    }
+  }
+}
+
 @media screen and (max-width: 420px) {
   .article {
     &__text {
@@ -98,26 +114,24 @@
     }
 
     &__image {
-      height: 26rem;
+      height: 36rem;
     }
 
-    &__footer {
-      height: 5rem;
-    }
   }
 }
 
 @media screen and (max-width: 360px) {
   .article {
-    margin: 2rem 0;
-
-    &__image {
-      width: 100%;
-      height: 100%;
-    }
+    margin: 1rem 0;
 
     &__text {
       font-size: 1.2rem;
+    }
+    &__image{
+      height: 34rem;
+    }
+    &__content{
+      bottom: 3rem;
     }
   }
 }
