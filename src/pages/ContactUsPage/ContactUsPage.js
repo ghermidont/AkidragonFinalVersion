@@ -69,8 +69,7 @@ function ContactUsPage(props) {
                 <a href="tel:+390636712213">{phone}</a>
               </li>
               <li className="map__item map__chat">
-                {/*<span className="icon-whatsapp"> </span>*/}
-                <ReactWhatsapp className="icon-whatsapp" number="+37360255007" message="Chat to AkiDragon's representative." />
+                <ReactWhatsapp className="icon-whatsapp" number="+390636712213" message="Chat to AkiDragon's representative." />
                 {t('ContactUsForm.WhatsAppMessage')}
               </li>
             </ul>

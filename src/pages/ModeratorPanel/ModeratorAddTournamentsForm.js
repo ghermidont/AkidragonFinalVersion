@@ -1,3 +1,4 @@
+//In future consider the DRY principle, depending on the number of file entries.
 import React, {useState} from 'react';
 import {projectFirestore, projectStorage} from "../../fireBase";
 import {useHistory} from 'react-router-dom';
@@ -43,15 +44,15 @@ export default function ModeratorAddTournamentsForm() {
   const [loading4, setLoading4] = useState(true);
   const [loadingWin1, setLoadingWin1] = useState(true);
   const [loadingWin2, setLoadingWin2] = useState(true);
-  const [loadingBanner, setLoadingBanner] = useState(true);
+  //const [loadingBanner, setLoadingBanner] = useState(true);
 //files
-  const [uploadedPicFile1, setUploadedPicFile1] = useState("");
-  const [uploadedPicFile2, setUploadedPicFile2] = useState("");
-  const [uploadedPicFile3, setUploadedPicFile3] = useState("");
-  const [uploadedPicFile4, setUploadedPicFile4] = useState("");
-  const [uploadedPicFileWin1, setUploadedPicFileWin1] = useState("");
-  const [uploadedPicFileWin2, setUploadedPicFileWin2] = useState("");
-  const [uploadedBannerPicFile, setUploadedBannerPicFile] = useState();
+//   const [uploadedPicFile1, setUploadedPicFile1] = useState("");
+//   const [uploadedPicFile2, setUploadedPicFile2] = useState("");
+//   const [uploadedPicFile3, setUploadedPicFile3] = useState("");
+//   const [uploadedPicFile4, setUploadedPicFile4] = useState("");
+//   const [uploadedPicFileWin1, setUploadedPicFileWin1] = useState("");
+//   const [uploadedPicFileWin2, setUploadedPicFileWin2] = useState("");
+//   const [uploadedBannerPicFile, setUploadedBannerPicFile] = useState();
 //urls
   const [url1, setUrl1] = useState("");
   const [url2, setUrl2] = useState("");
@@ -62,7 +63,7 @@ export default function ModeratorAddTournamentsForm() {
   const [urlBanner, setUrlBanner] = useState("");
   const [validation, setValidation] = useState();
 
-  const infoUrlValidation = (input) => {
+  const infoPageUrlValidation = (input) => {
     const reg = new RegExp("((http|https)://)(www.)?");
     if(reg.test(input)){
       setValidation(true);
@@ -76,7 +77,7 @@ export default function ModeratorAddTournamentsForm() {
   const file1UploadEventListener = (e) => {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-      setUploadedPicFile1(uploadedFile);
+      //setUploadedPicFile1(uploadedFile);
 
       async function putFile(uploadedFile) {
         e.preventDefault();
@@ -98,7 +99,7 @@ export default function ModeratorAddTournamentsForm() {
 
       putFile(uploadedFile).then(() => console.log(url1));
     } else {
-      setUploadedPicFile1('');
+      //setUploadedPicFile1('');
       setError1('Please select an image file (png or jpg)');
     }
   };
@@ -106,7 +107,7 @@ export default function ModeratorAddTournamentsForm() {
   const file2UploadEventListener = (e) => {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-      setUploadedPicFile2(uploadedFile);
+      //setUploadedPicFile2(uploadedFile);
 
       async function putFile(uploadedFile) {
         e.preventDefault();
@@ -128,7 +129,7 @@ export default function ModeratorAddTournamentsForm() {
 
       putFile(uploadedFile).then(() => console.log(url2));
     } else {
-      setUploadedPicFile2('');
+      //setUploadedPicFile2('');
       setError2('Please select an image file (png or jpg)');
     }
   };
@@ -136,7 +137,7 @@ export default function ModeratorAddTournamentsForm() {
   const file3UploadEventListener = (e) => {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-      setUploadedPicFile3(uploadedFile);
+      //setUploadedPicFile3(uploadedFile);
 
       async function putFile(uploadedFile) {
         e.preventDefault();
@@ -158,7 +159,7 @@ export default function ModeratorAddTournamentsForm() {
 
       putFile(uploadedFile).then(() => console.log(url3));
     } else {
-      setUploadedPicFile3('');
+      //setUploadedPicFile3('');
       setError3('Please select an image file (png or jpg)');
     }
   };
@@ -166,7 +167,7 @@ export default function ModeratorAddTournamentsForm() {
   const file4UploadEventListener = (e) => {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-      setUploadedPicFile4(uploadedFile);
+      //setUploadedPicFile4(uploadedFile);
 
       async function putFile(uploadedFile) {
         e.preventDefault();
@@ -188,7 +189,7 @@ export default function ModeratorAddTournamentsForm() {
 
       putFile(uploadedFile).then(() => console.log(url4));
     } else {
-      setUploadedPicFile4('');
+      //setUploadedPicFile4('');
       setError4('Please select an image file (png or jpg)');
     }
   };
@@ -196,7 +197,7 @@ export default function ModeratorAddTournamentsForm() {
   const fileWin1UploadEventListener = (e) => {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-      setUploadedPicFileWin1(uploadedFile);
+      //setUploadedPicFileWin1(uploadedFile);
 
       async function putFile(uploadedFile) {
         e.preventDefault();
@@ -218,7 +219,7 @@ export default function ModeratorAddTournamentsForm() {
 
       putFile(uploadedFile).then(() => console.log(urlWin1));
     } else {
-      setUploadedPicFileWin1('');
+      //setUploadedPicFileWin1('');
       setErrorWin1('Please select an image file (png or jpg)');
     }
   };
@@ -226,7 +227,7 @@ export default function ModeratorAddTournamentsForm() {
   const fileWin2UploadEventListener = (e) => {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-      setUploadedPicFileWin2(uploadedFile);
+      //setUploadedPicFileWin2(uploadedFile);
 
       async function putFile(uploadedFile) {
         e.preventDefault();
@@ -248,7 +249,7 @@ export default function ModeratorAddTournamentsForm() {
 
       putFile(uploadedFile).then(() => console.log(urlWin2));
     } else {
-      setUploadedPicFileWin2('');
+      //setUploadedPicFileWin2('');
       setErrorWin2('Please select an image file (png or jpg)');
     }
   };
@@ -256,12 +257,12 @@ export default function ModeratorAddTournamentsForm() {
   const bannerLoadEventListener = (e) => {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-      setUploadedBannerPicFile(uploadedFile);
+      //setUploadedBannerPicFile(uploadedFile);
 
       async function putFile(uploadedFile) {
         e.preventDefault();
         try {
-          setLoadingBanner(true);
+          //setLoadingBanner(true);
           setErrorBanner("");
           const storageRef = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedFile.name);
           storageRef.put(uploadedFile).on('state_changed',
@@ -273,121 +274,17 @@ export default function ModeratorAddTournamentsForm() {
         } catch {
           setErrorBanner("Failed to upload file");
         }
-        setLoadingBanner(false);
+        //setLoadingBanner(false);
       }
 
       putFile(uploadedFile).then(() => console.log(urlBanner));
     } else {
-      setUploadedBannerPicFile('');
+      //setUploadedBannerPicFile('');
       setErrorBanner('Please select an image file (png or jpg)');
     }
   };
 
-  //Clear input
-  const clearInput = () => {
-    setEventCategory('');
-    setEventTitle('');
-    setEventStatus('');
-    setEventVideoLink('');
-    setEventDate('');
-    setEventInfoPageLink('');
-    setError1(null);
-    setError2(null);
-    setError3(null);
-    setError4(null);
-    setErrorWin1(null);
-    setErrorWin2(null);
-    setFileSuccess1(false);
-    setFileSuccess2(false);
-    setFileSuccess3(false);
-    setFileSuccess4(false);
-    setFileSuccessWin1(false);
-    setFileSuccessWin2(false);
-    setLoading1(true);
-    setLoading2(true);
-    setLoading3(true);
-    setLoading4(true);
-    setLoadingWin1(true);
-    setLoadingWin2(true);
-    setUploadedPicFile1('');
-    setUploadedPicFile2('');
-    setUploadedPicFile3('');
-    setUploadedPicFile4('');
-    setUploadedPicFileWin1('');
-    setUploadedPicFileWin2('');
-    setUrl1('');
-    setUrl2('');
-    setUrl3('');
-    setUrl4('');
-    setUrlWin1('');
-    setUrlWin2('');
-
-    const storageRef1 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedPicFile1.name);
-    const storageRef2 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedPicFile2.name);
-    const storageRef3 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedPicFile3.name);
-    const storageRef4 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedPicFile4.name);
-    const storageRefWin1 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedPicFileWin1.name);
-    const storageRefWin2 = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedPicFileWin2.name);
-    const storageReBanner = projectStorage.ref(`tournaments_pictures/${currentUser.uid || CurrentUserFromLS.uid}`).child(uploadedBannerPicFile.name);
-
-    if (storageReBanner) {
-      storageReBanner.delete().then(() => {
-        console.log("uploaded image removed successfully");
-      }).catch((error) => {
-        console.log("could not delete the file because:" + error);
-      });
-    }
-
-    if (storageRef1) {
-      storageRef1.delete().then(() => {
-        console.log("uploaded image removed successfully");
-      }).catch((error) => {
-        console.log("could not delete the file because:" + error);
-      });
-    }
-
-    if (storageRef2) {
-      storageRef1.delete().then(() => {
-        console.log("uploaded image removed successfully");
-      }).catch((error) => {
-        console.log("could not delete the file because:" + error);
-      });
-    }
-
-    if (storageRef3) {
-      storageRef1.delete().then(() => {
-        console.log("uploaded image removed successfully");
-      }).catch((error) => {
-        console.log("could not delete the file because:" + error);
-      });
-    }
-
-    if (storageRef4) {
-      storageRef1.delete().then(() => {
-        console.log("uploaded image removed successfully");
-      }).catch((error) => {
-        console.log("could not delete the file because:" + error);
-      });
-    }
-
-    if (storageRefWin1) {
-      storageRef1.delete().then(() => {
-        console.log("uploaded image removed successfully");
-      }).catch((error) => {
-        console.log("could not delete the file because:" + error);
-      });
-    }
-
-    if (storageRefWin2) {
-      storageRef1.delete().then(() => {
-        console.log("uploaded image removed successfully");
-      }).catch((error) => {
-        console.log("could not delete the file because:" + error);
-      });
-    }
-  }
-
-  //FB write function
+  //Write to FB:
   const addTournamentWithFBCallback = () => {
     const collectionRef = projectFirestore.collection('tournaments').doc();
     if ((loading1 === false &&
@@ -483,6 +380,7 @@ export default function ModeratorAddTournamentsForm() {
               required
               onChange={bannerLoadEventListener}
             />
+
           </label>
           <div className="output">
             {errorBanner && <div className="error">{errorBanner}</div>}
@@ -587,7 +485,7 @@ export default function ModeratorAddTournamentsForm() {
             placeholder="Info Page"
             required
             onChange={
-              (e) => infoUrlValidation(e.target.value)
+              (e) => infoPageUrlValidation(e.target.value)
             }
           />
           {validation===false&&<strong><div style={{color: "red"}}>Please include the full Url with protocol and domain. Otherwise the link won't work</div></strong>}
@@ -650,12 +548,7 @@ export default function ModeratorAddTournamentsForm() {
           >
             Submit
           </button>
-          {/*<button style={{marginTop: "1em"}}*/}
-          {/*    className="form-article__btn"*/}
-          {/*    onClick={clearInput}*/}
-          {/*>*/}
-          {/*  Cancel*/}
-          {/*</button>*/}
+
         </form>
       </div>
     </>

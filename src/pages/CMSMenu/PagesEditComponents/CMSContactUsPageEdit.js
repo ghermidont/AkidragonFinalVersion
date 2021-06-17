@@ -5,12 +5,9 @@ import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
 
 function CMSContactUpPageEdit() {
     let publishBtnRef = useRef();
-    let cancelBtnRef = useRef();
     const {docsFromHookCMS} = useDataFromFirestoreCMS('web-app-cms');
-    // const {currentUser} = useAuthContext();
-    // const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
-    const history = useHistory();
 
+    //states
     const [ENAddress, setENAddress] = useState("");
     const [ITAddress, setITAddress] = useState("");
     const [ENText, setENText] = useState("");
@@ -233,13 +230,6 @@ function CMSContactUpPageEdit() {
                                 Publish
                             </button>
 
-                            {/*<button*/}
-                            {/*    ref={cancelBtnRef}*/}
-                            {/*    className="form-article__btn"*/}
-                            {/*    onClick={() => history.push("/ContactUsPage")}*/}
-                            {/*>*/}
-                            {/*    Cancel*/}
-                            {/*</button>*/}
                         </div>
                     </div>
                 </section>
