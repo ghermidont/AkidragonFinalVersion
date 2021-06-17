@@ -45,6 +45,12 @@ export default function NavBar() {
                     {t('NavBar.Menu.OurUniverse.Tournaments')}
                   </Link>
                 </li>
+                {/*//test to be deleted in release*/}
+                <li>
+                  <Link className='btn-more' to="/Step2CompleteProfilePage">
+                    <button className="news__btn btn">Complete account</button>
+                  </Link>
+                </li>
                 {/*Phase 2*/}
                 {/*<li className="sub-menu__item">*/}
                 {/*    <Link to="/ContactUsPage">*/}

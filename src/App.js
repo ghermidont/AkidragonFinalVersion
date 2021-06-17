@@ -67,7 +67,7 @@ function App() {
                                             <PrivateRoute path="/UserProfileArticlesPage" component={UserProfileArticlesPage} />
                                             <PrivateRoute path="/UpdateUserProfilePage" component={UpdateUserProfilePage} />
                                             <PrivateRoute path="/ApproveArticlesPage" component={ApproveArticlesPage} />
-                                            <PrivateRoute path="/Step2CompleteProfilePage" component={Step2CompleteProfilePage} />
+                                            {/*<PrivateRoute path="/Step2CompleteProfilePage" component={Step2CompleteProfilePage} />*/}
                                             <PrivateRoute path="/ManageArticlesPage" component={ManageArticlesPage} />
                                             <PrivateRoute path="/ManageStreamsPage" component={ManageStreamsPage} />
                                             <PrivateRoute path="/ManageTournamentsPage" component={ManageTournamentsPage} />
@@ -88,8 +88,7 @@ function App() {
                                             <Route path="/SubmitCvForm" component={SubmitCvForm} />
                                             <Route path="/MainLoginPage" component={MainLoginPage} />
                                             <Route path="/SponsorshipPage" component={SponsorshipPage} />
-
-                                            SponsorshipPage
+                                            <Route path="/Step2CompleteProfilePage" component={Step2CompleteProfilePage} />
                                         </Switch>
                                     </TournamentsContextProvider>
                                 </ArticlesContextProvider>

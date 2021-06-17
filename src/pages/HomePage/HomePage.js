@@ -9,6 +9,7 @@ import logoBig from '../../assets/images/dest/logo-big.png';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 import {useTranslation} from "react-i18next";
+import Step2CompleteProfilePage from "../UserAccount/CreateUserAccount/Step2CompleteProfilePage";
 
 export default function HomePage() {
   const {t} = useTranslation();
@@ -68,6 +69,7 @@ export default function HomePage() {
   return (
     <>
       <main className="page">
+
         <section className="banner">
           <div className="container">
             <div className="banner__image">
