@@ -11,6 +11,7 @@
     max-width: 50rem;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     margin: 0 auto;
   }
 
@@ -34,19 +35,11 @@
     margin-bottom: 2rem;
 
     &-check {
-      display: block;
-      margin-bottom: 1rem;
       font-style: normal;
+
 
       &:last-child {
         margin-bottom: 2rem;
-      }
-
-      input {
-        margin-right: 1rem;
-      }
-      &.form-cv{
-        margin-bottom: 3rem;
       }
     }
   }

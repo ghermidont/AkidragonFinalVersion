@@ -64,8 +64,6 @@ const LoginSignUpForm = () => {
               }
             />
             <p className="errorMsg">{emailError}</p>
-
-          <label className='form-article__label'>Password</label>
             <input
               className='form-article__input'
               type="password"
