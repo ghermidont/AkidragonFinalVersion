@@ -79,7 +79,7 @@ function ManageTournamentsPage() {
                 projectFirestore.collection("tournaments").doc(doc.id).delete().then(() => {
                   window.alert("Document successfully deleted!");
                 }).catch((error) => {
-                  console.error("Error removing document: ", error);
+                  window.alert("Error removing document: ", error);
                 });
               }}
             >
@@ -88,7 +88,6 @@ function ManageTournamentsPage() {
           </div>
         </div>
       </li>
-
     );
   }
 
@@ -98,7 +97,6 @@ function ManageTournamentsPage() {
 
     return (
       <li className="tab__item" key={doc.id}>
-
         <div className="tab__image">
           <img
             className="tab__img"
@@ -121,7 +119,7 @@ function ManageTournamentsPage() {
             </a>
           </li>
         </ul>
-        <div className='tab__btn-body'>
+        <div className="tab__btn-body">
           <div className="tab__btn">
             <button className="tab__link-strim">
               <a className="" href={doc.eventVideoLink}>Watch</a>
@@ -146,7 +144,7 @@ function ManageTournamentsPage() {
                 projectFirestore.collection("tournaments").doc(doc.id).delete().then(() => {
                   window.alert("Document successfully deleted!");
                 }).catch((error) => {
-                  console.error("Error removing document: ", error);
+                  window.alert("Error removing document: " + error);
                 });
               }}
             >
@@ -164,12 +162,11 @@ function ManageTournamentsPage() {
 
     return (
       <li className="tab__item" key={doc.id}>
-
         <div className="tab__image">
           <img
             className="tab__img"
             src={doc.eventBanner}
-            alt="some text"/>
+            alt="banner"/>
         </div>
         <div className="tab__content">
           <a className="tab__title">Category: {doc.eventCategory}</a>
@@ -216,10 +213,10 @@ function ManageTournamentsPage() {
               className="tab__link-info del"
               variant="danger"
               onClick={() => {
-                projectFirestore.collection("TEMP-tournaments").doc(doc.id).delete().then(() => {
+                projectFirestore.collection("tournaments").doc(doc.id).delete().then(() => {
                   window.alert("Document successfully deleted!");
                 }).catch((error) => {
-                  console.error("Error removing document: ", error);
+                  window.alert("Error removing document: " + error);
                 });
               }}
             >
@@ -308,7 +305,7 @@ function ManageTournamentsPage() {
                 projectFirestore.collection("tournaments").doc(doc.id).delete().then(() => {
                   window.alert("Document successfully deleted!");
                 }).catch((error) => {
-                  console.error("Error removing document: ", error);
+                  window.alert("Error removing document: " + error);
                 });
               }}
             >

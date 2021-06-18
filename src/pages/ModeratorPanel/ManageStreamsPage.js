@@ -7,7 +7,6 @@ import {projectFirestore} from "../../fireBase";
 import {useStreamsContext} from "../../context/StreamsContext";
 
 const ManageStreamsPage = () => {
-  console.log("ManageStreamsPage worked");
   const {docsFromHook} = useDataFromFirestore('streams');
   const history = useHistory();
   const {setChosenModifyStreamNumber} = useStreamsContext();
@@ -57,9 +56,9 @@ const ManageStreamsPage = () => {
                         className='btn-upload stream__btn'
                         onClick={() => {
                           projectFirestore.collection("streams").doc(doc.id).delete().then(() => {
-                            console.log("Document successfully deleted!");
+                            window.alert("Document successfully deleted!");
                           }).catch((error) => {
-                            console.error("Error removing document: ", error);
+                            window.alert("Error removing document: " + error);
                           });
                         }}
                       >DELETE</Button>

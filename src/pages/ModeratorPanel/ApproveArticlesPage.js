@@ -4,7 +4,6 @@ import {functions} from "../../fireBase";
 import {useLanguageContext} from "../../context/LanguageContext";
 
 export default function ApproveArticlesPage() {
-  console.log("ApproveArticlesComponent");
   const {docsFromHook} = useDataFromFirestore('articles');
   const {appLanguage} = useLanguageContext();
   const [readMore, setReadMore] = useState(false);
@@ -19,19 +18,17 @@ export default function ApproveArticlesPage() {
   }
 
   const approveCloudFunctTrigger = (id) => {
-    console.log("approveCloudFunctTrigger()");
     const addData = functions.httpsCallable('approveArticle');
     addData({
       articleId: id
-    }).then(() => window.alert("Article approved")).catch(err => console.log("Improvement process went wrong " + err));
+    }).then(() => window.alert("Article approved")).catch(err => console.log("Aprovement process went wrong " + err));
   }
 
   const deleteCloudFunctTrigger = (id) => {
-    console.log("deleteCloudFunctTrigger()");
     const addData = functions.httpsCallable('deleteArticle');
     addData({
       articleId: id
-    }).then(() => window.alert("Article deleted")).catch(err => console.log("Improvement process went wrong " + err));
+    }).then(() => window.alert("Article deleted")).catch(err => window.alert("Aprovement process went wrong " + err));
   }
 
   const linkName = readMore ? 'Read Less << ' : 'Read More >> ';

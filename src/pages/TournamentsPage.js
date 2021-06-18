@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {useDataFromFirestore, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import logoSection from '../assets/images/dest/logo-section.png';
-//import vsIcon from '../assets/images/dest/icons/vsIcon.png';
+import vsIcon from '../assets/images/dest/icons/vsIcon.png';
 import {useLanguageContext} from "../context/LanguageContext";
 import {useTranslation} from "react-i18next";
 
@@ -191,7 +191,7 @@ function TournamentsPage() {
         <li className="tab__item-icon">
             <img
                 className="tab__img-icon"
-                //src={vsIcon}
+                src={vsIcon}
                 alt=""/>
         </li>
         <li className="tab__item-icon">
