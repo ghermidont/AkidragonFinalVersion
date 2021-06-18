@@ -45,23 +45,12 @@ export default function NavBar() {
                     {t('NavBar.Menu.OurUniverse.Tournaments')}
                   </Link>
                 </li>
-                {/*//test to be deleted in release*/}
+                {/*TODO For UI test. to be deleted in release*/}
                 <li>
                   <Link className='btn-more' to="/Step2CompleteProfilePage">
                     <button className="news__btn btn">Complete account</button>
                   </Link>
                 </li>
-                {/*Phase 2*/}
-                {/*<li className="sub-menu__item">*/}
-                {/*    <Link to="/ContactUsPage">*/}
-                {/*        <a className="sub-menu__link">Team e giochi</a>*/}
-                {/*    </Link>*/}
-                {/*</li>*/}
-                {/*<li className="sub-menu__item">*/}
-                {/*    <Link to="/ContactUsPage">*/}
-                {/*        <a className="sub-menu__link">Sale Gaming</a>*/}
-                {/*    </Link>*/}
-                {/*</li>*/}
               </ul>
             </li>
 

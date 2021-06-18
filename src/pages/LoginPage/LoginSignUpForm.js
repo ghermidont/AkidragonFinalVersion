@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useAuthContext} from '../../context/AuthContext';
 import classes from './LoginSignUpForm.module.scss';
+import firebase from 'firebase';
 
 //Implement the Enter key stroke login and signup
 const LoginSignUpForm = () => {
@@ -9,8 +10,17 @@ const LoginSignUpForm = () => {
   const [error, setError] = useState(null);
   const [fileUploaded, setFileUploaded] = useState(false);
 
+    const passwordReset = () => {
+        firebase.auth().sendPasswordResetEmail(email)
+            .then(() => {
+                window.alert("A password reset email has been sent to you email address");
+            })
+            .catch((error) => {
+                window.alert(`The password could not be reset due to ${error.message}. Error code: ${error.code}`);
+            });
+    }
+
   const {
-    clearInput,
     email,
     setEmail,
     password,
@@ -27,12 +37,9 @@ const LoginSignUpForm = () => {
  const fileUploadEventListener = (e) => {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-      //localStorage.setItem("userPicture", uploadedFile);
       setSignUpFormUserUploadedFile(uploadedFile);
       setFileUploaded(true);
     } else {
-      //localStorage.removeItem("userPicture");
-      //setUploadedPicFile('');
       setError('Please select an image file (png or jpg)');
     }
   };
@@ -77,12 +84,13 @@ const LoginSignUpForm = () => {
                   <button className="form-article__btn" style={{marginLeft: '20px'}} type="button"
                           onClick={handleLogin}>Sign in
                   </button>
+                    <div>
+                        <button onClick={()=>email!==""?passwordReset(email):<div style={{color: "red"}}>Please provide an email address</div>}>Reset password</button>
+                    </div>
                   <p>
                     Don't have an account?
                     <span onClick={() => setHasAccount(!hasAccount)}>Sign up</span>
                   </p>
-
-
                 </>
               ) : (
                 <>
@@ -110,10 +118,12 @@ const LoginSignUpForm = () => {
                       </p>
                       <span className={classes.linkIn} onClick={() => setHasAccount(!hasAccount)}>Sign in</span>
                     </div>
+
                   </div>
 
                 </>
               )}
+
             </div>
           </form>
         </div>

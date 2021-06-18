@@ -9,18 +9,18 @@ export function useAuthContext(){
 
 /*########################## Authentication Context Provider ##########################*/
 export function AuthContextProvider({ children }) {
-    const [signUpFormUserUploadedFile, setSignUpFormUserUploadedFile] = useState('');
-    const [userUploadedPictureUrl, setUserUploadedPictureUrl] = useState('');
+    const [signUpFormUserUploadedFile, setSignUpFormUserUploadedFile] = useState("");
+    const [userUploadedPictureUrl, setUserUploadedPictureUrl] = useState("");
     const [currentUser, setCurrentUser] = useState();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [emailError, setEmailError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
     const [hasAccount, setHasAccount] = useState(false);
     const [userPoints, setUserPoints] = useState(0);
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [userSurveyPassedStatus, setUserSurveyPassedStatus] = useState('');
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [userSurveyPassedStatus, setUserSurveyPassedStatus] = useState("");
     const [currentUserModerator, setCurrentUserModerator] = useState();
     const [userInfoCompleted, setUserInfoCompleted] = useState();
     //const [loading, setLoading] = useState(true);
