@@ -129,6 +129,7 @@
 
   &__item {
     background-color: var(--blueDark);
+
     &:first-child {
       padding-top: 1.2rem;
     }
@@ -209,6 +210,15 @@
           }
         }
       }
+
+      &.hover-off {
+        &:not(:last-child) {
+          &:hover,
+          &:focus {
+            padding-bottom: 0rem;
+          }
+        }
+      }
     }
 
     &__link {
@@ -240,6 +250,7 @@
 
     &__item {
       background-color: transparent;
+
       &:first-child {
         padding-top: 0;
       }

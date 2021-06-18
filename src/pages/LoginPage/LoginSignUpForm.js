@@ -10,15 +10,15 @@ const LoginSignUpForm = () => {
   const [error, setError] = useState(null);
   const [fileUploaded, setFileUploaded] = useState(false);
 
-    const passwordReset = () => {
-        firebase.auth().sendPasswordResetEmail(email)
-            .then(() => {
-                window.alert("A password reset email has been sent to you email address");
-            })
-            .catch((error) => {
-                window.alert(`The password could not be reset due to ${error.message}. Error code: ${error.code}`);
-            });
-    }
+  const passwordReset = () => {
+    firebase.auth().sendPasswordResetEmail(email)
+      .then(() => {
+        window.alert("A password reset email has been sent to you email address");
+      })
+      .catch((error) => {
+        window.alert(`The password could not be reset due to ${error.message}. Error code: ${error.code}`);
+      });
+  }
 
   const {
     email,
@@ -34,7 +34,7 @@ const LoginSignUpForm = () => {
     setSignUpFormUserUploadedFile
   } = useAuthContext();
 
- const fileUploadEventListener = (e) => {
+  const fileUploadEventListener = (e) => {
     let uploadedFile = e.target.files[0];
     if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
       setSignUpFormUserUploadedFile(uploadedFile);
@@ -76,19 +76,24 @@ const LoginSignUpForm = () => {
             />
             <p className="passwordError">{passwordError}</p>
 
-            <div className='form-article__box-btn'>
+            <div className={classes.inner}>
               {hasAccount ? (
                 <>
-                  <button className="form-article__btn" style={{marginLeft: '20px'}} type="button"
-                          onClick={handleLogin}>Sign in
-                  </button>
-                    <div>
-                        <button onClick={()=>email!==""?passwordReset(email):<div style={{color: "red"}}>Please provide an email address</div>}>Reset password</button>
-                    </div>
-                  <p>
-                    Don't have an account?
-                    <span onClick={() => setHasAccount(!hasAccount)}>Sign up</span>
-                  </p>
+                  <div className={classes.inner}>
+                    <button className={classes.btnIn} type="button"
+                            onClick={handleLogin}>Sign In
+                    </button>
+                    <p>
+                      Don't have an account?
+                      <span className={classes.linkUp} onClick={() => setHasAccount(!hasAccount)}>Sign Up</span>
+                    </p>
+                  </div>
+
+                  <div>
+                    <button className={classes.btnReset} onClick={() => email !== "" ? passwordReset(email) :
+                      <div style={{color: "red"}}>Please provide an email address</div>}>Reset password
+                    </button>
+                  </div>
                 </>
               ) : (
                 <>
@@ -100,7 +105,7 @@ const LoginSignUpForm = () => {
                           <input className='visually-hidden' type="file" onChange={fileUploadEventListener}/>
                         </label>
                         <div className="output">
-                          {fileUploaded===true&& <div className="error">File uploaded.</div>}
+                          {fileUploaded === true && <div className="error">File uploaded.</div>}
                           {error && <div className="error">{error}</div>}
                         </div>
                       </form>
@@ -116,12 +121,9 @@ const LoginSignUpForm = () => {
                       </p>
                       <span className={classes.linkIn} onClick={() => setHasAccount(!hasAccount)}>Sign in</span>
                     </div>
-
                   </div>
-
                 </>
               )}
-
             </div>
           </form>
         </div>

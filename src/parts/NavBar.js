@@ -88,13 +88,13 @@ export default function NavBar() {
               </ul>
             </li>
 
-            <li className="menu__item">
+            <li className="menu__item hover-off">
               <Link className="menu__link menu__link--contact" to="/ContactUsPage" onClick={() => setToggleMenu('')}>
                 {t('NavBar.Menu.Contacts')}
               </Link>
             </li>
 
-            <li className="menu__item">
+            <li className="menu__item hover-off">
               <ul className="lang header__lang">
                 <li className="lang__item">
                   <button className="lang__link" onClick={() => {
@@ -117,7 +117,7 @@ export default function NavBar() {
               </ul>
             </li>
             {/*<div>Current language is "{appLanguage}"</div>*/}
-            <li className="menu__item">
+            <li className="menu__item hover-off">
               <ul className="box-user__list">
                 <li className="box-user__item">
                   {!currentUser &&
@@ -150,7 +150,7 @@ export default function NavBar() {
                 </li>
               </ul>
             </li>
-            <li className="menu__item">
+            <li className="menu__item hover-off">
               <div className="search header__search" onClick={() => setToggleMenu('')}>
                 <SearchBar/>
               </div>

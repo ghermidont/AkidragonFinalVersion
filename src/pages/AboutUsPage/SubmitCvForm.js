@@ -3,7 +3,7 @@ import emailjs from 'emailjs-com';
 import {init} from 'emailjs-com';
 import {useHistory} from 'react-router-dom';
 import {useTranslation} from "react-i18next";
-import {Form} from 'react-bootstrap';
+import classes from "./SubmitCvForm.module.scss";
 
 init("user_ryi2yglqohFlHpuZyAqiJ");
 
@@ -71,22 +71,20 @@ export default function SubmitCvForm() {
             aria-describedby="emailHelp"
             name="email"
           />
-          {/*<label className="form-article__label-check form-cv ml-4">*/}
-          {/*  <input*/}
-          {/*    className="form-check-input "*/}
-          {/*    type="checkbox"*/}
-          {/*    value={!checkBoxState ? "I consent to the processing of my personal data." : ''}*/}
-          {/*    name="checkbox"*/}
-          {/*    onChange={() => {*/}
-          {/*      !checkBoxState ? setCheckBoxState(true) : setCheckBoxState(false);*/}
-          {/*      console.log(checkBoxState)*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*  {t('SubmitCVForm.Consent')}*/}
-          {/*</label>*/}
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out"/>
-          </Form.Group>
+          <label className={classes.label}>
+            <input
+              className={classes.check}
+              type="checkbox"
+              value={!checkBoxState ? "I consent to the processing of my personal data." : ''}
+              name="checkbox"
+              onChange={() => {
+                !checkBoxState ? setCheckBoxState(true) : setCheckBoxState(false);
+                console.log(checkBoxState)
+              }}
+            />
+            {t('SubmitCVForm.Consent')}
+          </label>
+
 
           <div className="form-article__box-btn">
             {/*<label className='form-article__label btn-upload'>*/}
@@ -102,7 +100,7 @@ export default function SubmitCvForm() {
               style={{display: "block"}}
             > {t("SubmitCVForm.AttachFile")}:
 
-              <p className="">{t("SubmitCVForm.MaxFileSize")}</p>
+
               <input
                 className='form__name visually-hidden'
                 type="file"
@@ -113,12 +111,14 @@ export default function SubmitCvForm() {
               />
               {fileSize !== 0 && <div style={{marginTop: "1em"}}>{t("SubmitCVForm.FileUploaded")}</div>}
             </label>
+
             <input
               className='btn-upload'
               type="submit"
               value={t("SubmitCVForm.SubmitButton")}
             />
           </div>
+          <p>{t("SubmitCVForm.MaxFileSize")}</p>
         </form>
       </div>
     </>

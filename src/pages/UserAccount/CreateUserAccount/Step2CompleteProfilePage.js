@@ -66,7 +66,7 @@ export default function Step2CompleteProfilePage() {
     return(
         <>
             <div className='form-article__body form-login__body'>
-                <h1 className="title form-title">{t('Step2CompleteProfilePage.CompleteProfile')}</h1>
+                <h1 className="title form-title" style={{marginBottom:'6rem'}}>{t('Step2CompleteProfilePage.CompleteProfile')}</h1>
                 <form className="form-article">
                     <label className='form-article__label'>
                         {t('Step2CompleteProfilePage.FirstName')}

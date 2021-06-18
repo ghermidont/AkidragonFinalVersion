@@ -3,6 +3,8 @@ import {useDataFromFirestore} from "../customHooks/useFirestore";
 import {Link} from "react-router-dom";
 import {useLanguageContext} from "../context/LanguageContext";
 import { ShareLink } from 'social-media-sharing'
+import logoSection from '../assets/images/dest/logo-section.png';
+
 const queryString = require('query-string');
 
 export default function Article() {
@@ -41,6 +43,13 @@ export default function Article() {
                 {selectedArticle && selectedArticle.map(
                     doc =>(
                         <>
+                          <div className="new-article__title-box">
+                            <img src={logoSection} alt="" className="new-article__logo"/>
+                            <h1 className="new-article__title title">
+                            Title: {doc.content[appLanguage].title}
+                          </h1>
+                          </div>
+
                         <div className="new-article__inner">
                             <div className="new-article__btn-bg">
                                 <Link to="/BlogPage">
@@ -49,25 +58,20 @@ export default function Article() {
                             </div>
                         </div>
                         <div className="new-article__image">
-                            <img style={{
-                                maxWidth: '25%',
-                                height: 'auto'
-                            }}
+                            <img
                                  src={doc.content[appLanguage].image?doc.content[appLanguage].image:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
                                  className="articles-page__img"
                                  alt=""
                             />
                         </div>
-                            <h1 className="new-article__title title">
-                                Title: {doc.content[appLanguage].title}
-                            </h1>
+
                         <p className="new-article__text">
                             Content: {doc.content[appLanguage].text}
                         </p>
                         <div className="new-article__info">
                         </div>
-                            <div className="social__item">
-                                <span className="icon-facebook2" onClick={()=>shareFacebook()}> Share to Facebook >>> </span>
+                            <div className="btn-upload">
+                                <span className="icon-facebook2" onClick={()=>shareFacebook()}> >>></span>
                             </div>
                         <div>
                             <br/>

@@ -9,7 +9,7 @@ function ManageTournamentsPage() {
   const history = useHistory();
   const {docsFromHook} = useDataFromFirestore('tournaments');
   const {setChosenTournamentNumber} = useTournamentsContext();
-    console.log(docsFromHook);
+  console.log(docsFromHook);
   const passedEvents = docsFromHook.filter(function (doc) {
     return doc.eventStatus === "passed";
   });
@@ -26,17 +26,12 @@ function ManageTournamentsPage() {
     return (
       <li className="tab__item" key={doc.id}>
 
-          <div className="tab__image"
-               style={{
-                   position: "center",
-                   backgroundSize: "cover",
-                   backgroundRepeat: "no-repeat"
-               }}>
-              <img
-                  className="tab__img"
-                  src={doc.eventBanner}
-                  alt="some text"/>
-          </div>
+        <div className="tab__image">
+          <img
+            className="tab__img"
+            src={doc.eventBanner}
+            alt="some text"/>
+        </div>
         <div className="tab__content">
           <a className="tab__title">Category: {doc.eventCategory}</a>
           <div className="tab__name">Title: {doc.eventTitle}</div>
@@ -67,11 +62,19 @@ function ManageTournamentsPage() {
             <button className="tab__link-info">
               <a className="" href={doc.eventInfoPage}>Info</a>
             </button>
-          </div>
-          <div className="btn__inner">
+
+            <Link
+              className="tab__link-info"
+              onClick={() => {
+                setChosenTournamentNumber(doc.id);
+                history.push(`/edit-tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
+              }}
+            >
+              Update
+            </Link>
             <Button
-              className='btn-settings btn-minus'
-              variant="danger"
+              className="tab__link-info del"
+              ariant="danger"
               onClick={() => {
                 projectFirestore.collection("tournaments").doc(doc.id).delete().then(() => {
                   window.alert("Document successfully deleted!");
@@ -80,16 +83,8 @@ function ManageTournamentsPage() {
                 });
               }}
             >
+              Delete
             </Button>
-            <Link
-              className='btn-settings btn-update'
-              onClick={() => {
-                setChosenTournamentNumber(doc.id);
-                history.push(`/edit-tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
-              }}
-            >
-              <span className='icon-cog'></span>
-            </Link>
           </div>
         </div>
       </li>
@@ -102,19 +97,14 @@ function ManageTournamentsPage() {
     let parsedDate = date.toString();
 
     return (
-        <li className="tab__item" key={doc.id}>
+      <li className="tab__item" key={doc.id}>
 
-            <div className="tab__image"
-                 style={{
-                     position: "center",
-                     backgroundSize: "cover",
-                     backgroundRepeat: "no-repeat"
-                 }}>
-                <img
-                    className="tab__img"
-                    src={doc.eventBanner}
-                    alt="some text"/>
-            </div>
+        <div className="tab__image">
+          <img
+            className="tab__img"
+            src={doc.eventBanner}
+            alt="some text"/>
+        </div>
         <div className="tab__content">
           <a className="tab__title">Category: {doc.eventCategory}</a>
           <div className="tab__name">Title: {doc.eventTitle}</div>
@@ -139,12 +129,19 @@ function ManageTournamentsPage() {
             <button className="tab__link-info">
               <a className="" href={doc.eventInfoPage}>Info</a>
             </button>
-          </div>
-          <div className="btn__inner">
 
+            <Link
+              className="tab__link-info"
+              onClick={() => {
+                setChosenTournamentNumber(doc.id);
+                history.push(`/edit-tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
+              }}
+            >
+              Update
+            </Link>
             <Button
-              className='btn-settings btn-minus'
-              variant="danger"
+              className="tab__link-info del"
+              ariant="danger"
               onClick={() => {
                 projectFirestore.collection("tournaments").doc(doc.id).delete().then(() => {
                   window.alert("Document successfully deleted!");
@@ -152,16 +149,9 @@ function ManageTournamentsPage() {
                   console.error("Error removing document: ", error);
                 });
               }}
-            >DELETE</Button>
-            <Link
-              className='btn-settings btn-update'
-              onClick={() => {
-                setChosenTournamentNumber(doc.id);
-                history.push(`/edit-tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
-              }}
             >
-              <span className='icon-cog'></span>
-            </Link>
+              Delete
+            </Button>
           </div>
         </div>
       </li>
@@ -173,19 +163,14 @@ function ManageTournamentsPage() {
     let parsedDate = date.toString();
 
     return (
-        <li className="tab__item" key={doc.id}>
+      <li className="tab__item" key={doc.id}>
 
-            <div className="tab__image"
-                 style={{
-                     position: "center",
-                     backgroundSize: "cover",
-                     backgroundRepeat: "no-repeat"
-                 }}>
-                <img
-                    className="tab__img"
-                    src={doc.eventBanner}
-                    alt="some text"/>
-            </div>
+        <div className="tab__image">
+          <img
+            className="tab__img"
+            src={doc.eventBanner}
+            alt="some text"/>
+        </div>
         <div className="tab__content">
           <a className="tab__title">Category: {doc.eventCategory}</a>
           <div className="tab__name">Title: {doc.eventTitle}</div>
@@ -228,18 +213,18 @@ function ManageTournamentsPage() {
               Update
             </Link>
             <Button
-            className="tab__link-info del"
-            variant="danger"
-            onClick={() => {
-              projectFirestore.collection("TEMP-tournaments").doc(doc.id).delete().then(() => {
-                window.alert("Document successfully deleted!");
-              }).catch((error) => {
-                console.error("Error removing document: ", error);
-              });
-            }}
-          >
-            Delete
-          </Button>
+              className="tab__link-info del"
+              variant="danger"
+              onClick={() => {
+                projectFirestore.collection("TEMP-tournaments").doc(doc.id).delete().then(() => {
+                  window.alert("Document successfully deleted!");
+                }).catch((error) => {
+                  console.error("Error removing document: ", error);
+                });
+              }}
+            >
+              Delete
+            </Button>
           </div>
         </div>
       </li>
@@ -251,19 +236,14 @@ function ManageTournamentsPage() {
     let parsedDate = date.toString();
 
     return (
-        <li className="tab__item" key={doc.id}>
+      <li className="tab__item" key={doc.id}>
 
-            <div className="tab__image"
-                 style={{
-                     position: "center",
-                     backgroundSize: "cover",
-                     backgroundRepeat: "no-repeat"
-                 }}>
-                <img
-                    className="tab__img"
-                    src={doc.eventBanner}
-                    alt="some text"/>
-            </div>
+        <div className="tab__image">
+          <img
+            className="tab__img"
+            src={doc.eventBanner}
+            alt="some text"/>
+        </div>
         <div className="tab__content">
           <a className="tab__title">Category: {doc.eventCategory}</a>
           <div className="tab__name">Title: {doc.eventTitle}</div>
@@ -349,7 +329,7 @@ function ManageTournamentsPage() {
               <div className="tab__body">
                 <ul className="tab__list active" id="tab_1">
                   {passedEvents && passedEvents.map(doc =>
-                      doc.eventCategory === "match" ? PassedMatchTemp(doc) : PassedTournTemp(doc)
+                    doc.eventCategory === "match" ? PassedMatchTemp(doc) : PassedTournTemp(doc)
                   )}
                   {futureEvents && futureEvents.map(doc =>
                     doc.eventCategory === "match" ? FutureMatchTemp(doc) : FutureTournTemp(doc)

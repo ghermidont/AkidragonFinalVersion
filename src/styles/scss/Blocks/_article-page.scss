@@ -40,16 +40,20 @@
       transform: rotate(90deg);
     }
   }
-  &__title {
-    margin-right: auto;
-    transform: translateX(-40%);
+  &__title-box{
+    text-align: center;
+    margin-bottom: 6rem;
   }
+  &__logo{
+    max-width: 30rem;
+    margin-bottom: 2rem;
+  }
+
   &__image {
-    max-width: 100%;
+    max-width: 50rem;
     height: auto;
     min-height: 36rem;
-    background-color: var(--blue);
-    margin-bottom: 3rem;
+    margin: 0 auto 6rem;
   }
   &__text {
     color: var(--white);
@@ -59,6 +63,12 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 5rem;
+
+    .social__item{
+      span{
+        cursor: pointer;
+      }
+    }
   }
 }
 
@@ -89,6 +99,9 @@
       margin-right: 0;
       transform: translateX(0);
     }
+    &__text{
+      margin-bottom: 2rem;
+    }
   }
 }
 @media screen and (max-width: 380px) {
@@ -98,6 +111,9 @@
       span {
         display: none;
       }
+    }
+    &__image{
+      margin-bottom: 1rem;
     }
   }
 }

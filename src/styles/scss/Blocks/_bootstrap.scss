@@ -115,16 +115,31 @@
   color: var(--blueDark);
   font-style: normal;
 }
-@media screen and (max-width: 460px){
-  .tab-content.addArticle{
-    padding: 0;
-  }
+.react-player__preview{
+  height: 30rem!important;
 }
+
+
 @media screen and (max-width: 580px){
   .tab{
     &__btn{
       width: 100%;
       display: block;
     }
+  }
+}
+@media screen and (max-width: 520px){
+  .react-player__preview{
+    height: 25rem!important;
+  }
+}
+@media screen and (max-width: 460px){
+  .tab-content.addArticle{
+    padding: 0;
+  }
+}
+@media screen and (max-width: 380px){
+  .react-player__preview{
+    height: 20rem!important;
   }
 }

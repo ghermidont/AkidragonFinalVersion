@@ -1,3 +1,5 @@
+@import "./src/styles/scss/mixin";
+
 .form {
   max-width: 60rem;
   width: 100%;
@@ -12,24 +14,37 @@
     font-style: normal;
   }
 }
-
+.btnIn{
+  @include btn;
+  display: inline-block;
+  width: 15rem;
+}
 .btnInner {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.linkIn {
+.linkIn, .linkUp {
   color: var(--blue);
   font-weight: 700;
+  cursor: pointer;
 }
 .inner{
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   width: 100%;
+  margin-top: 4rem;
 }
 .formText{
   margin-left: 2rem;
+}
+.btnReset{
+  @include btn;
+  margin-top: 2rem;
+  margin-left: -2.4rem;
+  transform: scale(.7);
 }
 
 @media screen and (max-width: 580px) {
@@ -38,6 +53,9 @@
   }
   .inner{
     flex-direction: column;
+  }
+  .btnIn{
+    margin-bottom: 2rem;
   }
 
 }

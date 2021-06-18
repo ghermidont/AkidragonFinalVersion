@@ -25,7 +25,7 @@ export default function MatchesTournamentsSwiper (){
 
     return (
         <div style={{textAlign: "center"}}>
-          <div style={{maxWidth:"640px", height:"auto", margin:"0 auto"}}>
+          <div style={{maxWidth:"640px", height:"100%", margin:"0 auto"}}>
             <ReactPlayer
               url = {mainMatchVid}
               controls = {true}
@@ -33,6 +33,7 @@ export default function MatchesTournamentsSwiper (){
               playing = {false}
               //onStart = {()=>console.log("hello")}
               width={'100%'}
+              height={'100%'}
               style={{margin:"auto"}}
             />
           </div>
