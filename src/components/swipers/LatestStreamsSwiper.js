@@ -28,18 +28,19 @@ export default function LatestStreamsSwiper() {
           {
             "rotate": 50,
             "stretch": 0,
-            "depth": 300,
+            "depth": 100,
             "modifier": 1,
             "slideShadows": true
           }
         }
+
         grabCursor={false}
         centeredSlides={true}
-        navigation={false}
-        initialSlide={2}
+        navigation = {false}
+        initialSlide = {2}
         pagination={true}
-        spaceBetween={50}
-        slidesPerView={3}
+        spaceBetween={20}
+        slidesPerView={'auto'}
         className="mySwiper"
         onSlideChange={()=>{if(playState===true)setPlayState(false);}}
       >

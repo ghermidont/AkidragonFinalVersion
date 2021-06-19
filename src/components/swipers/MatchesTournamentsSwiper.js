@@ -8,6 +8,7 @@ import "swiper/components/effect-coverflow/effect-coverflow.min.css";
 import "swiper/components/pagination/pagination.min.css";
 
 import "./swiperStyles.css";
+import classes from './ReactPlayer.module.scss';
 
 import SwiperCore, {
   EffectCoverflow, Pagination
@@ -26,12 +27,12 @@ export default function MatchesTournamentsSwiper() {
 
   return (
     <div style={{textAlign: "center"}}>
-      <div style={{maxWidth: "640px", height: "auto", margin: "0 auto"}}>
+      <div className={classes.playerWrapper}>
         <ReactPlayer
           url={mainMatchVid}
           controls={true}
           width="100%"
-          height="100%"
+          height="300px"
           light={true}
           playing={false}
           onStart={() => console.log("hello")}
@@ -49,13 +50,14 @@ export default function MatchesTournamentsSwiper() {
             "slideShadows": true
           }
         }
+
         grabCursor={false}
         centeredSlides={true}
-        navigation={false}
-        initialSlide={2}
+        navigation = {false}
+        initialSlide = {2}
         pagination={true}
         spaceBetween={20}
-        slidesPerView={3}
+        slidesPerView={'auto'}
         className="mySwiper"
       >
         {filterResult && filterResult.slice(0, 6).map(doc =>

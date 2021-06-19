@@ -5,6 +5,7 @@ import {useDataFromFirestore} from "../../customHooks/useFirestore";
 import "swiper/swiper.min.css";
 import "swiper/components/effect-coverflow/effect-coverflow.min.css";
 import "swiper/components/pagination/pagination.min.css";
+import classes from './ReactPlayer.module.scss';
 
 import "./swiperStyles.css";
 
@@ -25,7 +26,7 @@ export default function MatchesTournamentsSwiper (){
 
     return (
         <div style={{textAlign: "center"}}>
-          <div style={{maxWidth:"640px", height:"100%", margin:"0 auto"}}>
+          <div className={classes.playerWrapper} >
             <ReactPlayer
               url = {mainMatchVid}
               controls = {true}
@@ -56,7 +57,7 @@ export default function MatchesTournamentsSwiper (){
                 initialSlide = {2}
                 pagination={true}
                 spaceBetween={20}
-                slidesPerView={3}
+                slidesPerView={'auto'}
                 className="mySwiper"
             >
                 {filterResult && filterResult.slice(0, 6).map(doc=>

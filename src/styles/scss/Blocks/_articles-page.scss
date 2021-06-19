@@ -56,14 +56,18 @@
       display: block;
     }
   }
+  &__tab-item{
+    max-width: 100%;
+    margin-bottom: 6rem;
+  }
 
   &__post {
     display: flex;
   }
 
   &__image {
-    width: 30rem;
-    height: 12rem;
+    width: 30%;
+    height: 15rem;
     object-fit: cover;
     background-color: var(--blue);
   }
@@ -74,6 +78,7 @@
   }
 
   &__content {
+    width: 70%;
     margin-left: 3rem;
     padding-left: 1rem;
     border-left: 2px solid var(--blue);
