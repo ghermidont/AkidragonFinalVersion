@@ -1,24 +1,23 @@
 import React, {useState, useContext} from "react";
-
 const languageContext = React.createContext();
 
 export function useLanguageContext(){
-    return useContext(languageContext);
+	return useContext(languageContext);
 }
 
 /*########################## Articles Context Provider ##########################*/
+// eslint-disable-next-line react/prop-types
 export function LanguageContextProvider({ children }) {
-    console.log("LanguageContextProvider() worked!");
-    const [appLanguage, setAppLanguage] = useState('en');
+	const [appLanguage, setAppLanguage] = useState("en");
 
-    const value = {
-        appLanguage,
-        setAppLanguage
-    }
+	const value = {
+		appLanguage,
+		setAppLanguage
+	};
 
-    return (
-        <languageContext.Provider value={value}>
-            {children}
-        </languageContext.Provider>
-    );
+	return (
+		<languageContext.Provider value={value}>
+			{children}
+		</languageContext.Provider>
+	);
 }

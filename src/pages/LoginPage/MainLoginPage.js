@@ -1,22 +1,21 @@
-import React from 'react';
-import LoginSignUpForm from './LoginSignUpForm';
-import {useAuthContext} from '../../context/AuthContext';
+import React from "react";
+import LoginSignUpForm from "./LoginSignUpForm";
+import {useAuthContext} from "../../context/AuthContext";
 import PreUserProfilePageCheck from "../pre-UserProfilePageCheck";
 
 export default function MainLoginPage() {
-    console.log("MainLoginPage worked.");
-    const {currentUser} = useAuthContext();
-    const CurrentUserFromLS = JSON.parse(localStorage.getItem('LSCurrentUser'));
+	const {currentUser} = useAuthContext();
+	const CurrentUserFromLS = JSON.parse(localStorage.getItem("LSCurrentUser"));
 
-   return(
-        <div>
-            {currentUser||CurrentUserFromLS ?
-                (
-                    <PreUserProfilePageCheck />
-                ) : (
-                    <LoginSignUpForm />
-                )
-            }
-        </div>
-    );
+	return(
+		<div>
+			{currentUser||CurrentUserFromLS ?
+				(
+					<PreUserProfilePageCheck />
+				) : (
+					<LoginSignUpForm />
+				)
+			}
+		</div>
+	);
 }

@@ -1,25 +1,23 @@
 import React, {useState, useContext} from "react";
-
 const tournamentsContext = React.createContext();
 
 export function useTournamentsContext(){
-    return useContext(tournamentsContext);
+	return useContext(tournamentsContext);
 }
 
 /*########################## Articles Context Provider ##########################*/
+// eslint-disable-next-line react/prop-types
 export function TournamentsContextProvider({ children }) {
-    console.log("TournamentsContextProvider() worked!");
+	const [chosenTournamentNumber, setChosenTournamentNumber] = useState("");
 
-    const [chosenTournamentNumber, setChosenTournamentNumber] = useState('');
+	const value = {
+		chosenTournamentNumber,
+		setChosenTournamentNumber
+	};
 
-    const value = {
-        chosenTournamentNumber,
-        setChosenTournamentNumber
-    }
-
-    return (
-        <tournamentsContext.Provider value={value}>
-            {children}
-        </tournamentsContext.Provider>
-    );
+	return (
+		<tournamentsContext.Provider value={value}>
+			{children}
+		</tournamentsContext.Provider>
+	);
 }

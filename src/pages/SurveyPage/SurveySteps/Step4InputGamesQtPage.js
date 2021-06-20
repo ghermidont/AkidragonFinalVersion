@@ -1,19 +1,15 @@
-import React from 'react';
-import {Link} from "react-router-dom";
+import React from "react";
 
+// eslint-disable-next-line no-unused-vars,react/prop-types
 export default function Step4InputGamesQtPage({surveyResultObject}) {
-    return(
-        <div>
-            <label>Some question about games:</label>
-            <input
-                type="text"
-                autoFocus
-                required
-                onChange={
-                    (e)=>console.log(e.target.value)}
-            />
-
-
-        </div>
-    );
+	return(
+		<div>
+			<label>Some question about games:</label>
+			<input
+				type="text"
+				autoFocus
+				required
+			/>
+		</div>
+	);
 }
