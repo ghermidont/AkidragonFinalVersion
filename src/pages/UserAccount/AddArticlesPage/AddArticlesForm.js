@@ -86,7 +86,6 @@ export default function AddArticlesForm() {
 					setITFileUploadError("Impossibile caricare il file");
 				}
 			}
-
 			putFile(uploadedFile).then();
 		} else {
 			setITFileTypeError("Seleziona un file immagine (png o jpg)");

@@ -68,8 +68,10 @@ export default function UpdateUserProfilePage() {
 		}
 	}, [docsFromHookUserInfo]);
 
+	let uploadedFile;
+
 	const fileUploadEventListener = (e) => {
-		let uploadedFile = e.target.files[0];
+		uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
 			// eslint-disable-next-line no-inner-declarations
 			async function putFile(uploadedFile){
@@ -109,8 +111,10 @@ export default function UpdateUserProfilePage() {
 			.then( () => {
 				return window.alert("User info updated successfully");
 			})
-			.catch((error) => {
-				return window.alert("Error: " + error.code + " " + error.message + "" + error.details);
+			.catch(() => {
+				window.alert("Connection error. Please try uploading the image again.");
+				uploadedFile=[];
+				setUrl("");
 			});
 	};
 
