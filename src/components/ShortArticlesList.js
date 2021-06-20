@@ -30,7 +30,7 @@ export default function ShortArticlesList() {
 					}}>
 						<img
 							src={doc.content[appLanguage].image ? doc.content[appLanguage].image : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
-							alt="" className="articles-page__img article__image"/>
+							alt="" className="article__image"/>
 						<div className="article__content">
 							<img className="article__logo" src={logo} alt="logo"/>
 							<div className="article__box-text">

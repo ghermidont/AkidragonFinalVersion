@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from "react";
-//import {useAuthContext} from "../../context/AuthContext";
 import {useDataFromFirestoreUserInfo} from "../../customHooks/useFirestore";
 import {functions, projectStorage} from "../../fireBase";
 import {Button} from "react-bootstrap";
@@ -267,7 +266,6 @@ export default function UpdateUserProfilePage() {
 						<strong> {t("UpdateUserProfilePage.Biography")}</strong>
 						<textarea
 							className='form-update__input'
-							type="text"
 							value={bio}
 							onChange={
 								(e) => setBio(e.target.value)
