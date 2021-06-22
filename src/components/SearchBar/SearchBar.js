@@ -55,7 +55,7 @@ function SearchBar(props) {
     return (
         <>
             <span className="icon-search" onClick={handleShow}></span>
-            <Modal show={show} onHide={handleClose}>
+            <Modal className='modal-body' show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
                         <input placeholder="Search input here...." type="text" onInput={(e) => handleInput(e)}/>
