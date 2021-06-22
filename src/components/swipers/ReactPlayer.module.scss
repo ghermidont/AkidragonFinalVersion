@@ -1,0 +1,15 @@
+.playerWrapper{
+  max-width: 64rem;
+  height: 30rem;
+  margin: 0 auto;
+}
+@media screen and(max-height: 500px){
+  .playerWrapper{
+    height: 25rem;
+  }
+}
+@media screen and(max-height: 400px){
+  .playerWrapper{
+    height: 20rem;
+  }
+}

@@ -73,6 +73,8 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^7.29.0",
+    "eslint-plugin-react": "^7.24.0",
     "prop-types": "^15.7.2"
   }
 }

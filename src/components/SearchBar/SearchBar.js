@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from "react";
 import {Modal} from "react-bootstrap";
 import SearchItem from "./SearchItem";
 //import {useArticlesContext} from "../../context/ArticlesContext";
@@ -55,7 +55,7 @@ function SearchBar(props) {
     return (
         <>
             <span className="icon-search" onClick={handleShow}></span>
-            <Modal className='modal-body' show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
                         <input placeholder="Search input here...." type="text" onInput={(e) => handleInput(e)}/>
