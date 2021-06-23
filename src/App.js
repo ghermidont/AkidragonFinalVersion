@@ -43,6 +43,8 @@ import EditArticleForm from "./pages/UserAccount/AddArticlesPage/EditArticleForm
 import SponsorshipPage from "./pages/SponsorshipPage/SponsoshipPage";
 import CMSMenu from "./pages/CMSMenu/CMSMenu";
 import MainSurveyPage from "./pages/SurveyPage/SurveySteps/MainSurveyPage";
+import BannersMenu from "./pages/ModeratorPanel/BannersMenu";
+
 function App() {
 	//const [loginPassed, setLoginPassed] = useState(false);
 
@@ -74,6 +76,7 @@ function App() {
 											<PrivateRoute path="/DeleteProfilePage" component={DeleteProfilePage} />
 											<PrivateRoute path="/CMSMenu" component={CMSMenu} />
 											<PrivateRoute path="/MainSurveyPage" component={MainSurveyPage} />
+											<PrivateRoute path="/BannersMenu" component={BannersMenu} />
 
 											<Route path="/" exact component={HomePage} />
 											<Route path="/article/:slug" component={ArticlePage} />

@@ -16,6 +16,7 @@
     "date-and-time": "^1.0.1",
     "dotenv": "^8.6.0",
     "emailjs-com": "^2.6.4",
+    "expo": "^41.0.1",
     "express": "^4.17.1",
     "firebase": "^8.6.3",
     "i18next": "^19.9.2",

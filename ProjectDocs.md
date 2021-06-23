@@ -93,3 +93,6 @@ https://www.npmjs.com/package/react-whatsapp
 #Local storage:
 https://www.youtube.com/watch?v=fTP2gi7e3k8
 https://joaoforja.com/blog/how-to-persist-state-after-a-page-refresh-in-react-using-local-storage/
+
+#Authentication with Facebook:
+https://menubar.io/firebase-facebook-login-react

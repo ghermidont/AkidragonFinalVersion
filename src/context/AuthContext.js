@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import React, {useState, useContext, useEffect} from "react";
 //auth is the auth function we created in the firebase.js file. All functions called after auth. are firebase functions.
 import {auth, projectFirestore} from "../fireBase";
@@ -26,7 +27,7 @@ export function AuthContextProvider({ children }) {
 	const [userInfoCompleted, setUserInfoCompleted] = useState();
 	const[moderator, setModerator] = useState(false);
 
-	const clearErrors = () => {
+   	const clearErrors = () => {
 		setEmailError("");
 		setPasswordError("");
 	};
@@ -69,8 +70,7 @@ export function AuthContextProvider({ children }) {
 			);
 	};
 
-	const handleLogout = () => {
-		//clearInput();
+   	const handleLogout = () => {		
 		auth.signOut().then(()=>{
 			localStorage.clear();
 		});
@@ -94,10 +94,13 @@ export function AuthContextProvider({ children }) {
 		setPassword("");
 	};
 
+	//User sate change listener
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(user => {
+			//Write user object to the LocalStorage to preserve it during pages refresh
 			localStorage.setItem("LSCurrentUser", JSON.stringify(user));
 			setCurrentUser(user);
+			//Clears the login form fields
 			clearInput();
 		});
 		return unsubscribe;

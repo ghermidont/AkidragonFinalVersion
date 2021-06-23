@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import React, {useEffect, useState} from "react";
 import ShortArticlesList from "../../components/ShortArticlesList";
 import {Link} from "react-router-dom";
@@ -124,6 +125,9 @@ export default function UserProfilePage() {
             			</li>
             			<li className="profile__settings-item">
             				<Link className='profile__settings-link' to='/CMSMenu'>{t("UserProfilePage.EditStaticContent")}</Link>
+            			</li>
+            			<li className="profile__settings-item">
+            				<Link className='profile__settings-link' to='/BannersMenu'>Banner menu</Link>
             			</li>
             		</ul>
             	</li>
