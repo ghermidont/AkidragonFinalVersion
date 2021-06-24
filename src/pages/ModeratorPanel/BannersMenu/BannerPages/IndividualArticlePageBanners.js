@@ -3,27 +3,20 @@ import React, {useEffect, useRef, useState} from "react";
 import {projectFirestore} from "../../../../fireBase";
 import {useDataFromFirestoreCMS} from "../../../../customHooks/useFirestore";
 
-/* Desktop:
-* Vertical 160X600
-* Square 250X250
-* Square 320X100
-* Square 320X50
-*  */
-
 function IndividualArticlePageBanners() {
 	let publishBtnRef = useRef();
 	const [ITMainText, setITMainText] = useState("");
 	const [ENMainText, setENMainText] = useState("");
 	const [ENFooterText, setENFooterText] = useState("");
 	const [ITFooterText, setITFooterText] = useState("");
-	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
+	const {docsFromHookCMS} = useDataFromFirestoreCMS("banners");
 
 	let selectedDoc = "";
 
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
-				return doc.id === "blogPage";
+				return doc.id === "individualArticlePage";
 			});
 		}
 	});
@@ -40,16 +33,16 @@ function IndividualArticlePageBanners() {
 	}, [docsFromHookCMS]);
 
 	const writeToFBCallback = () => {
-		const collectionRef = projectFirestore.collection("web-app-cms").doc("blogPage");
+		const collectionRef = projectFirestore.collection("banners").doc("individualArticlePage");
 		collectionRef.set(
 			{
-				"footerText": {
-					"en": ENFooterText,
-					"it": ITFooterText
+				"desktop": {
+					"vertical": vertical
 				},
-				"mainText": {
-					"en": ENMainText,
-					"it": ITMainText
+				"mobile": {
+					"top": Top,
+					"middle": middle,
+					"bottom": bottom
 				}
 			})
 			.then(() => {
@@ -63,7 +56,7 @@ function IndividualArticlePageBanners() {
 	return (
 		<>
 			<div style={{paddingTop: "5em important"}}>
-				<center><h1>Edit <strong>Blog</strong> Page banners:</h1></center>
+				<center><h1>Edit <strong>Individual Article</strong> Page banners:</h1></center>
 				<section>
 					<ul className="nav nav-tabs" id="myTab" role="tablist">
 						<li className="nav-item">
@@ -98,28 +91,27 @@ function IndividualArticlePageBanners() {
 							aria-labelledby="home-tab">
 							<div className='form-article__body'>
 								<form className="form-article">
-
 									<label className='form-article__label'>
-										Banner text:
+										Vertical 160x600 (left and right of the body):
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ITMainText}
+											name="script"
+											value={vertical160x600}
 											onChange={
-												(e)=>setITMainText(e.target.value)
+												(e)=>setVertical160x600(e.target.value)
 											}
 										></textarea>
 									</label>
 									<label className='form-article__label'>
-										Footer text:
+										250x250, 320x100, 320x50:
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ITFooterText}
+											name="script"
+											value={_250x250320x100320x50}
 											onChange={
-												(e)=>setITFooterText(e.target.value)
+												(e)=>set_250x250320x100320x50(e.target.value)
 											}
 										></textarea>
 									</label>
@@ -137,28 +129,28 @@ function IndividualArticlePageBanners() {
 						>
 							<div className='form-article__body'>
 								<form className="form-article">
-
+									<div>320x50, 234x60:</div>
 									<label className='form-article__label'>
-										Banner text:
+										Top:
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ENMainText}
+											name="script"
+											value={top}
 											onChange={
-												(e)=>setENMainText(e.target.value)
+												(e)=>setTop(e.target.value)
 											}
 										></textarea>
 									</label>
 									<label className='form-article__label'>
-										Footer text:
+										Bottom:
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ENFooterText}
+											name="script"
+											value={bottom}
 											onChange={
-												(e)=>setENFooterText(e.target.value)
+												(e)=>setBottom(e.target.value)
 											}
 										></textarea>
 									</label>

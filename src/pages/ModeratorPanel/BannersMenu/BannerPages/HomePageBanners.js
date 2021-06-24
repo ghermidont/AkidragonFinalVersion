@@ -3,24 +3,22 @@ import React, {useEffect, useRef, useState} from "react";
 import {projectFirestore} from "../../../../fireBase";
 import {useDataFromFirestoreCMS} from "../../../../customHooks/useFirestore";
 
-/* Desktop:
-* Vertical 160X600
-* */
-
 function HomePageBanners() {
 	let publishBtnRef = useRef();
-	const [ITMainText, setITMainText] = useState("");
-	const [ENMainText, setENMainText] = useState("");
-	const [ENFooterText, setENFooterText] = useState("");
-	const [ITFooterText, setITFooterText] = useState("");
-	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
+	//states
+	const [vertical, setVertical] = useState("");
+	const [Top, setTop] = useState("");
+	const [middle, setMiddle] = useState("");
+	const [bottom, setBottom] = useState("");
+
+	const {docsFromHookCMS} = useDataFromFirestoreCMS("banners");
 
 	let selectedDoc = "";
 
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
-				return doc.id === "blogPage";
+				return doc.id === "homePage";
 			});
 		}
 	});
@@ -28,25 +26,25 @@ function HomePageBanners() {
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
-				setITMainText(doc.mainText.it);
-				setENMainText(doc.mainText.en);
-				setENFooterText(doc.footerText.en);
-				setITFooterText(doc.footerText.it);
+				setVertical(doc.desktop.vertical);
+				setTop(doc.mobile.top);
+				setMiddle(doc.mobile.middle);
+				setBottom(doc.mobile.bottom);
 			});
 		}
 	}, [docsFromHookCMS]);
 
 	const writeToFBCallback = () => {
-		const collectionRef = projectFirestore.collection("web-app-cms").doc("blogPage");
+		const collectionRef = projectFirestore.collection("banners").doc("homePage");
 		collectionRef.set(
 			{
-				"footerText": {
-					"en": ENFooterText,
-					"it": ITFooterText
+				"desktop": {
+					"vertical": vertical
 				},
-				"mainText": {
-					"en": ENMainText,
-					"it": ITMainText
+				"mobile": {
+					"top": Top,
+					"middle": middle,
+					"bottom": bottom
 				}
 			})
 			.then(() => {
@@ -60,7 +58,7 @@ function HomePageBanners() {
 	return (
 		<>
 			<div style={{paddingTop: "5em important"}}>
-				<center><h1>Edit <strong>Blog</strong> Page banners:</h1></center>
+				<center><h1>Edit <strong>Home</strong> Page banners:</h1></center>
 				<section>
 					<ul className="nav nav-tabs" id="myTab" role="tablist">
 						<li className="nav-item">
@@ -95,28 +93,15 @@ function HomePageBanners() {
 							aria-labelledby="home-tab">
 							<div className='form-article__body'>
 								<form className="form-article">
-
 									<label className='form-article__label'>
-										Banner text:
+										Vertical 160x600 (left and right of the body):
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ITMainText}
+											name="script"
+											value={vertical}
 											onChange={
-												(e)=>setITMainText(e.target.value)
-											}
-										></textarea>
-									</label>
-									<label className='form-article__label'>
-										Footer text:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ITFooterText}
-											onChange={
-												(e)=>setITFooterText(e.target.value)
+												(e)=>setVertical(e.target.value)
 											}
 										></textarea>
 									</label>
@@ -134,28 +119,40 @@ function HomePageBanners() {
 						>
 							<div className='form-article__body'>
 								<form className="form-article">
-
+									<div>320x50, 234x60:</div>
 									<label className='form-article__label'>
-										Banner text:
+										Home top:
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ENMainText}
+											name="script"
+											value={Top}
 											onChange={
-												(e)=>setENMainText(e.target.value)
+												(e)=>setTop(e.target.value)
 											}
 										></textarea>
 									</label>
 									<label className='form-article__label'>
-										Footer text:
+										Home middle:
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ENFooterText}
+											name="script"
+											value={middle}
 											onChange={
-												(e)=>setENFooterText(e.target.value)
+												(e)=>setMiddle(e.target.value)
+											}
+										></textarea>
+									</label>
+									<label className='form-article__label'>
+										Home bottom:
+										<textarea
+											className='form-article__input'
+											rows='2'
+											name="script"
+											value={bottom}
+											onChange={
+												(e)=>setBottom(e.target.value)
 											}
 										></textarea>
 									</label>

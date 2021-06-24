@@ -43,7 +43,7 @@ import EditArticleForm from "./pages/UserAccount/AddArticlesPage/EditArticleForm
 import SponsorshipPage from "./pages/SponsorshipPage/SponsoshipPage";
 import CMSMenu from "./pages/CMSMenu/CMSMenu";
 import MainSurveyPage from "./pages/SurveyPage/SurveySteps/MainSurveyPage";
-import BannersMenu from "./pages/ModeratorPanel/BannersMenu";
+import BannersMenu from "./pages/ModeratorPanel/BannersMenu/BannersMainMenu";
 
 function App() {
 	//const [loginPassed, setLoginPassed] = useState(false);

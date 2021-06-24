@@ -1,15 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, {useEffect, useRef, useState} from "react";
-//import {useHistory} from "react-router-dom";
 import {projectFirestore} from "../../../../fireBase";
 import {useDataFromFirestoreCMS} from "../../../../customHooks/useFirestore";
-
-/* Desktop:
-* Vertical 160X600
-* Square 250X250
-* Square 320X100
-* Square 320X50
-* */
 
 function TournamentsPageBanners() {
 	let publishBtnRef = useRef();
@@ -24,7 +16,7 @@ function TournamentsPageBanners() {
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
-				return doc.id === "blogPage";
+				return doc.id === "tournamentsPage";
 			});
 		}
 	});
@@ -32,25 +24,24 @@ function TournamentsPageBanners() {
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
-				setITMainText(doc.mainText.it);
-				setENMainText(doc.mainText.en);
-				setENFooterText(doc.footerText.en);
-				setITFooterText(doc.footerText.it);
+				setVertical(doc.desktop.vertical);
+				set_250x250320x100320x50(doc.desktop._250x250320x100320x50);
+				setMiddle(doc.mobile.middle);
 			});
 		}
 	}, [docsFromHookCMS]);
 
 	const writeToFBCallback = () => {
-		const collectionRef = projectFirestore.collection("web-app-cms").doc("blogPage");
+		const collectionRef = projectFirestore.collection("banners").doc("tournamentsPage");
 		collectionRef.set(
 			{
-				"footerText": {
-					"en": ENFooterText,
-					"it": ITFooterText
+				"desktop": {
+					"vertical": vertical
 				},
-				"mainText": {
-					"en": ENMainText,
-					"it": ITMainText
+				"mobile": {
+					"top": Top,
+					"middle": middle,
+					"bottom": bottom
 				}
 			})
 			.then(() => {
@@ -64,7 +55,7 @@ function TournamentsPageBanners() {
 	return (
 		<>
 			<div style={{paddingTop: "5em important"}}>
-				<center><h1>Edit <strong>Blog</strong> Page banners:</h1></center>
+				<center><h1>Edit <strong>Tournaments</strong> Page banners:</h1></center>
 				<section>
 					<ul className="nav nav-tabs" id="myTab" role="tablist">
 						<li className="nav-item">
@@ -76,7 +67,7 @@ function TournamentsPageBanners() {
 								role="tab"
 								aria-controls="home"
 								aria-selected="true"
-							>Italian</a>
+							>Desktop</a>
 						</li>
 						<li className="nav-item">
 							<a className="nav-link"
@@ -86,7 +77,7 @@ function TournamentsPageBanners() {
 							   role="tab"
 							   aria-controls="profile"
 							   aria-selected="false"
-							>English</a>
+							>Mobile</a>
 						</li>
 					</ul>
 					<div className="tab-content" id="myTabContent">
@@ -99,28 +90,27 @@ function TournamentsPageBanners() {
 							aria-labelledby="home-tab">
 							<div className='form-article__body'>
 								<form className="form-article">
-
 									<label className='form-article__label'>
-										Banner text:
+										Vertical 160x600 (left and right of the body):
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ITMainText}
+											name="script"
+											value={vertical}
 											onChange={
-												(e)=>setITMainText(e.target.value)
+												(e)=>setVertical(e.target.value)
 											}
 										></textarea>
 									</label>
 									<label className='form-article__label'>
-										Footer text:
+										250x250, 320x100, 320x50:
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ITFooterText}
+											name="script"
+											value={_250x250320x100320x50}
 											onChange={
-												(e)=>setITFooterText(e.target.value)
+												(e)=>set_250x250320x100320x50(e.target.value)
 											}
 										></textarea>
 									</label>
@@ -138,28 +128,16 @@ function TournamentsPageBanners() {
 						>
 							<div className='form-article__body'>
 								<form className="form-article">
-
+									<div>320x50, 234x60:</div>
 									<label className='form-article__label'>
-										Banner text:
+										Top middle:
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ENMainText}
+											name="script"
+											value={middle}
 											onChange={
-												(e)=>setENMainText(e.target.value)
-											}
-										></textarea>
-									</label>
-									<label className='form-article__label'>
-										Footer text:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ENFooterText}
-											onChange={
-												(e)=>setENFooterText(e.target.value)
+												(e)=>setMiddle(e.target.value)
 											}
 										></textarea>
 									</label>
@@ -168,7 +146,6 @@ function TournamentsPageBanners() {
 						</div>
 
 						<div className="form-article__box-btn">
-
 							<button
 								ref={publishBtnRef}
 								className="form-article__btn"

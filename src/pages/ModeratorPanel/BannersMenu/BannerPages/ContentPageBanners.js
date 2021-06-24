@@ -23,7 +23,7 @@ function ContentPageBanners() {
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
-				return doc.id === "blogPage";
+				return doc.id === "contentPage";
 			});
 		}
 	});
@@ -40,16 +40,16 @@ function ContentPageBanners() {
 	}, [docsFromHookCMS]);
 
 	const writeToFBCallback = () => {
-		const collectionRef = projectFirestore.collection("web-app-cms").doc("blogPage");
+		const collectionRef = projectFirestore.collection("banners").doc("contentPage");
 		collectionRef.set(
 			{
-				"footerText": {
-					"en": ENFooterText,
-					"it": ITFooterText
+				"desktop": {
+					"vertical": vertical
 				},
-				"mainText": {
-					"en": ENMainText,
-					"it": ITMainText
+				"mobile": {
+					"top": Top,
+					"middle": middle,
+					"bottom": bottom
 				}
 			})
 			.then(() => {
@@ -63,7 +63,7 @@ function ContentPageBanners() {
 	return (
 		<>
 			<div style={{paddingTop: "5em important"}}>
-				<center><h1>Edit <strong>Blog</strong> Page banners:</h1></center>
+				<center><h1>Edit <strong>Content</strong> Page banners:</h1></center>
 				<section>
 					<ul className="nav nav-tabs" id="myTab" role="tablist">
 						<li className="nav-item">
@@ -98,28 +98,27 @@ function ContentPageBanners() {
 							aria-labelledby="home-tab">
 							<div className='form-article__body'>
 								<form className="form-article">
-
 									<label className='form-article__label'>
-										Banner text:
+										Vertical 160x600 (left and right of the body):
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ITMainText}
+											name="script"
+											value={vertical160x600}
 											onChange={
-												(e)=>setITMainText(e.target.value)
+												(e)=>setVertical160x600(e.target.value)
 											}
 										></textarea>
 									</label>
 									<label className='form-article__label'>
-										Footer text:
+										250x250, 320x100, 320x50:
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ITFooterText}
+											name="script"
+											value={_250x250320x100320x50}
 											onChange={
-												(e)=>setITFooterText(e.target.value)
+												(e)=>set_250x250320x100320x50(e.target.value)
 											}
 										></textarea>
 									</label>
@@ -137,37 +136,12 @@ function ContentPageBanners() {
 						>
 							<div className='form-article__body'>
 								<form className="form-article">
-
-									<label className='form-article__label'>
-										Banner text:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ENMainText}
-											onChange={
-												(e)=>setENMainText(e.target.value)
-											}
-										></textarea>
-									</label>
-									<label className='form-article__label'>
-										Footer text:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ENFooterText}
-											onChange={
-												(e)=>setENFooterText(e.target.value)
-											}
-										></textarea>
-									</label>
+									<h1>No banners</h1>
 								</form>
 							</div>
 						</div>
 
 						<div className="form-article__box-btn">
-
 							<button
 								ref={publishBtnRef}
 								className="form-article__btn"

@@ -39,16 +39,16 @@ function BlogPageBanners() {
 	}, [docsFromHookCMS]);
 
 	const writeToFBCallback = () => {
-		const collectionRef = projectFirestore.collection("web-app-cms").doc("blogPage");
+		const collectionRef = projectFirestore.collection("banners").doc("blogPage");
 		collectionRef.set(
 			{
-				"footerText": {
-					"en": ENFooterText,
-					"it": ITFooterText
+				"desktop": {
+					"vertical": vertical
 				},
-				"mainText": {
-					"en": ENMainText,
-					"it": ITMainText
+				"mobile": {
+					"top": Top,
+					"middle": middle,
+					"bottom": bottom
 				}
 			})
 			.then(() => {
@@ -97,28 +97,15 @@ function BlogPageBanners() {
 							aria-labelledby="home-tab">
 							<div className='form-article__body'>
 								<form className="form-article">
-
 									<label className='form-article__label'>
-                                        Banner text:
+										250x250, 320x100, 320x50:
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ITMainText}
+											name="script"
+											value={_250x250320x100320x50}
 											onChange={
-												(e)=>setITMainText(e.target.value)
-											}
-										></textarea>
-									</label>
-									<label className='form-article__label'>
-                                        Footer text:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ITFooterText}
-											onChange={
-												(e)=>setITFooterText(e.target.value)
+												(e)=>set_250x250320x100320x50(e.target.value)
 											}
 										></textarea>
 									</label>
@@ -136,28 +123,28 @@ function BlogPageBanners() {
 						>
 							<div className='form-article__body'>
 								<form className="form-article">
-
+									<div>320x50, 234x60:</div>
 									<label className='form-article__label'>
-                                        Banner text:
+										Blog top:
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ENMainText}
+											name="script"
+											value={top}
 											onChange={
-												(e)=>setENMainText(e.target.value)
+												(e)=>setTop(e.target.value)
 											}
 										></textarea>
 									</label>
 									<label className='form-article__label'>
-                                        Footer text:
+										Blog bottom:
 										<textarea
 											className='form-article__input'
 											rows='2'
-											name="countent"
-											value={ENFooterText}
+											name="script"
+											value={bottom}
 											onChange={
-												(e)=>setENFooterText(e.target.value)
+												(e)=>setBottom(e.target.value)
 											}
 										></textarea>
 									</label>
