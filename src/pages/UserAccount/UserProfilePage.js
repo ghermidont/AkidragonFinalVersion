@@ -127,7 +127,7 @@ export default function UserProfilePage() {
             				<Link className='profile__settings-link' to='/CMSMenu'>{t("UserProfilePage.EditStaticContent")}</Link>
             			</li>
             			<li className="profile__settings-item">
-            				<Link className='profile__settings-link' to='/ComplexLogicBannersMenu'>Banner menu</Link>
+            				<Link className='profile__settings-link' to='/BannersMenu'>Banner menu</Link>
             			</li>
             		</ul>
             	</li>

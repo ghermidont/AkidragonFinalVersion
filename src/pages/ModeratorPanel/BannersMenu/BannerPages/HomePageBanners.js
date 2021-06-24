@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, {useEffect, useRef, useState} from "react";
 import {projectFirestore} from "../../../../fireBase";
-import {useDataFromFirestoreCMS} from "../../../../customHooks/useFirestore";
+import {useDataFromFirestoreBanners} from "../../../../customHooks/useFirestore";
 
 function HomePageBanners() {
 	let publishBtnRef = useRef();
@@ -11,13 +11,13 @@ function HomePageBanners() {
 	const [middle, setMiddle] = useState("");
 	const [bottom, setBottom] = useState("");
 
-	const {docsFromHookCMS} = useDataFromFirestoreCMS("banners");
+	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
 	let selectedDoc = "";
 
 	useEffect(() => {
-		if (docsFromHookCMS) {
-			selectedDoc = docsFromHookCMS.filter(function (doc) {
+		if (docsFromHookBanners) {
+			selectedDoc = docsFromHookBanners.filter(function (doc) {
 				return doc.id === "homePage";
 			});
 		}
@@ -32,7 +32,7 @@ function HomePageBanners() {
 				setBottom(doc.mobile.bottom);
 			});
 		}
-	}, [docsFromHookCMS]);
+	}, [docsFromHookBanners]);
 
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("banners").doc("homePage");
@@ -119,9 +119,9 @@ function HomePageBanners() {
 						>
 							<div className='form-article__body'>
 								<form className="form-article">
-									<div>320x50, 234x60:</div>
+
 									<label className='form-article__label'>
-										Home top:
+										Top (320x50, 234x60):
 										<textarea
 											className='form-article__input'
 											rows='2'
@@ -133,7 +133,7 @@ function HomePageBanners() {
 										></textarea>
 									</label>
 									<label className='form-article__label'>
-										Home middle:
+										Middle (320x50, 234x60):
 										<textarea
 											className='form-article__input'
 											rows='2'
@@ -145,7 +145,7 @@ function HomePageBanners() {
 										></textarea>
 									</label>
 									<label className='form-article__label'>
-										Home bottom:
+										Bottom (320x50, 234x60):
 										<textarea
 											className='form-article__input'
 											rows='2'

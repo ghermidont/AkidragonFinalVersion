@@ -1,28 +1,21 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, {useEffect, useRef, useState} from "react";
 import {projectFirestore} from "../../../../fireBase";
-import {useDataFromFirestoreCMS} from "../../../../customHooks/useFirestore";
-
-/* Desktop:
-* Vertical 160X600
-* Square 250X250
-* Square 320X100
-* Square 320X50
-* */
+import {useDataFromFirestoreBanners} from "../../../../customHooks/useFirestore";
 
 function ContentPageBanners() {
 	let publishBtnRef = useRef();
-	const [ITMainText, setITMainText] = useState("");
-	const [ENMainText, setENMainText] = useState("");
-	const [ENFooterText, setENFooterText] = useState("");
-	const [ITFooterText, setITFooterText] = useState("");
-	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
+
+	const [vertical, setVertical] = useState("");
+	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
+
+	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
 	let selectedDoc = "";
 
 	useEffect(() => {
-		if (docsFromHookCMS) {
-			selectedDoc = docsFromHookCMS.filter(function (doc) {
+		if (docsFromHookBanners) {
+			selectedDoc = docsFromHookBanners.filter(function (doc) {
 				return doc.id === "contentPage";
 			});
 		}
@@ -31,25 +24,19 @@ function ContentPageBanners() {
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
-				setITMainText(doc.mainText.it);
-				setENMainText(doc.mainText.en);
-				setENFooterText(doc.footerText.en);
-				setITFooterText(doc.footerText.it);
+				setVertical(doc.desktop.vertical);
+				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
 			});
 		}
-	}, [docsFromHookCMS]);
+	}, [docsFromHookBanners]);
 
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("banners").doc("contentPage");
 		collectionRef.set(
 			{
 				"desktop": {
-					"vertical": vertical
-				},
-				"mobile": {
-					"top": Top,
-					"middle": middle,
-					"bottom": bottom
+					"vertical": vertical,
+					"_250x250320x100320x50": _250x250320x100320x50
 				}
 			})
 			.then(() => {
@@ -104,21 +91,21 @@ function ContentPageBanners() {
 											className='form-article__input'
 											rows='2'
 											name="script"
-											value={vertical160x600}
+											value={vertical}
 											onChange={
-												(e)=>setVertical160x600(e.target.value)
+												(e)=>setVertical(e.target.value)
 											}
 										></textarea>
 									</label>
 									<label className='form-article__label'>
-										250x250, 320x100, 320x50:
+										Middle center (250x250, 320x100, 320x50):
 										<textarea
 											className='form-article__input'
 											rows='2'
 											name="script"
 											value={_250x250320x100320x50}
 											onChange={
-												(e)=>set_250x250320x100320x50(e.target.value)
+												(e)=>set250x250320x100320x50(e.target.value)
 											}
 										></textarea>
 									</label>

@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import {useLanguageContext} from "../../context/LanguageContext";
 import logoSection from "../../assets/images/dest/logo-section.png";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
+import {useDataFromFirestoreBanners, useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 import {useTranslation} from "react-i18next";
 
 export default function HomePage() {
@@ -28,6 +28,21 @@ export default function HomePage() {
 	const [ITTournamentsBannerUrl, setITTournamentsBannerUrl] = useState("");
 	const [ENBannerText, setENBannerText] = useState("");
 	const [ITBannerText, setITBannerText] = useState("");
+	const [vertical, setVertical] = useState();
+	const [Top, setTop] = useState("");
+	const [middle, setMiddle] = useState("");
+	const [bottom, setBottom] = useState("");
+	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
+
+	let selectedBanners = "";
+
+	useEffect(() => {
+		if (docsFromHookBanners) {
+			selectedBanners = docsFromHookBanners.filter(function (doc) {
+				return doc.id === "homePage";
+			});
+		}
+	});
 
 	let selectedDoc = "";
 
@@ -40,6 +55,16 @@ export default function HomePage() {
 	});
 
 	useEffect(() => {
+		if (selectedBanners !== ""){
+			selectedBanners.map(doc => {
+				setVertical(doc.desktop.vertical);
+				console.log(vertical);
+				setTop(doc.mobile.top);
+				setMiddle(doc.mobile.middle);
+				setBottom(doc.mobile.bottom);
+			});
+		}
+
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
 				setENBannerUrl(doc.banner.en);
@@ -58,7 +83,7 @@ export default function HomePage() {
 				setITBannerText(doc.bannerText.it);
 			});
 		}
-	}, [docsFromHookCMS]);
+	}, [docsFromHookCMS, docsFromHookBanners]);
 
 	return (
 		<>
@@ -136,6 +161,18 @@ export default function HomePage() {
 					</div>
 				</section>
 
+				<section className="news">
+					<div className="container">
+						BANNERS:
+						<ul>
+							<li>{vertical}</li>
+							<li>{Top}</li>
+							<li>{middle}</li>
+							<li>{bottom}</li>
+						</ul>
+					</div>
+					{/*.replace(/^"(.*)"$/, "$1")*/}
+				</section>
 				<section className="slider">
 					<div className="container">
 						<h2 className="slider__title title">

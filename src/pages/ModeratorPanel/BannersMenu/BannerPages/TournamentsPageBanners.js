@@ -1,21 +1,22 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, {useEffect, useRef, useState} from "react";
 import {projectFirestore} from "../../../../fireBase";
-import {useDataFromFirestoreCMS} from "../../../../customHooks/useFirestore";
+import {useDataFromFirestoreBanners} from "../../../../customHooks/useFirestore";
 
 function TournamentsPageBanners() {
 	let publishBtnRef = useRef();
-	const [ITMainText, setITMainText] = useState("");
-	const [ENMainText, setENMainText] = useState("");
-	const [ENFooterText, setENFooterText] = useState("");
-	const [ITFooterText, setITFooterText] = useState("");
-	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
+
+	const [vertical, setVertical] = useState("");
+	const [_250x250320x100320x50, set250x250320x100320x50] = useState("");
+	const [middle, setMiddle] = useState("");
+
+	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
 	let selectedDoc = "";
 
 	useEffect(() => {
-		if (docsFromHookCMS) {
-			selectedDoc = docsFromHookCMS.filter(function (doc) {
+		if (docsFromHookBanners) {
+			selectedDoc = docsFromHookBanners.filter(function (doc) {
 				return doc.id === "tournamentsPage";
 			});
 		}
@@ -25,23 +26,22 @@ function TournamentsPageBanners() {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
 				setVertical(doc.desktop.vertical);
-				set_250x250320x100320x50(doc.desktop._250x250320x100320x50);
+				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
 				setMiddle(doc.mobile.middle);
 			});
 		}
-	}, [docsFromHookCMS]);
+	}, [docsFromHookBanners]);
 
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("banners").doc("tournamentsPage");
 		collectionRef.set(
 			{
 				"desktop": {
-					"vertical": vertical
+					"vertical": vertical,
+					"_250x250320x100320x50": _250x250320x100320x50
 				},
 				"mobile": {
-					"top": Top,
-					"middle": middle,
-					"bottom": bottom
+					"middle": middle
 				}
 			})
 			.then(() => {
@@ -103,14 +103,14 @@ function TournamentsPageBanners() {
 										></textarea>
 									</label>
 									<label className='form-article__label'>
-										250x250, 320x100, 320x50:
+										Middle center (250x250, 320x100, 320x50):
 										<textarea
 											className='form-article__input'
 											rows='2'
 											name="script"
 											value={_250x250320x100320x50}
 											onChange={
-												(e)=>set_250x250320x100320x50(e.target.value)
+												(e)=>set250x250320x100320x50(e.target.value)
 											}
 										></textarea>
 									</label>
@@ -128,9 +128,8 @@ function TournamentsPageBanners() {
 						>
 							<div className='form-article__body'>
 								<form className="form-article">
-									<div>320x50, 234x60:</div>
 									<label className='form-article__label'>
-										Top middle:
+										Top middle (320x50, 234x60):
 										<textarea
 											className='form-article__input'
 											rows='2'

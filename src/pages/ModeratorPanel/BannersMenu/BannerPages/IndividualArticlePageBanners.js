@@ -1,21 +1,23 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, {useEffect, useRef, useState} from "react";
 import {projectFirestore} from "../../../../fireBase";
-import {useDataFromFirestoreCMS} from "../../../../customHooks/useFirestore";
+import {useDataFromFirestoreBanners} from "../../../../customHooks/useFirestore";
 
 function IndividualArticlePageBanners() {
 	let publishBtnRef = useRef();
-	const [ITMainText, setITMainText] = useState("");
-	const [ENMainText, setENMainText] = useState("");
-	const [ENFooterText, setENFooterText] = useState("");
-	const [ITFooterText, setITFooterText] = useState("");
-	const {docsFromHookCMS} = useDataFromFirestoreCMS("banners");
+
+	const [vertical, setVertical] = useState("");
+	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
+	const [Top, setTop] = useState("");
+	const [bottom, setBottom] = useState("");
+
+	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
 	let selectedDoc = "";
 
 	useEffect(() => {
-		if (docsFromHookCMS) {
-			selectedDoc = docsFromHookCMS.filter(function (doc) {
+		if (docsFromHookBanners) {
+			selectedDoc = docsFromHookBanners.filter(function (doc) {
 				return doc.id === "individualArticlePage";
 			});
 		}
@@ -24,24 +26,24 @@ function IndividualArticlePageBanners() {
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
-				setITMainText(doc.mainText.it);
-				setENMainText(doc.mainText.en);
-				setENFooterText(doc.footerText.en);
-				setITFooterText(doc.footerText.it);
+				 setVertical(doc.desktop.vertical);
+				 set250x250320x100320x50(doc.desktop._250x250320x100320x50);
+				 setTop(doc.mobile.top);
+				 setBottom(doc.mobile.bottom);
 			});
 		}
-	}, [docsFromHookCMS]);
+	}, [docsFromHookBanners]);
 
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("banners").doc("individualArticlePage");
 		collectionRef.set(
 			{
 				"desktop": {
-					"vertical": vertical
+					"vertical": vertical,
+					"_250x250320x100320x50": _250x250320x100320x50
 				},
 				"mobile": {
 					"top": Top,
-					"middle": middle,
 					"bottom": bottom
 				}
 			})
@@ -97,9 +99,9 @@ function IndividualArticlePageBanners() {
 											className='form-article__input'
 											rows='2'
 											name="script"
-											value={vertical160x600}
+											value={vertical}
 											onChange={
-												(e)=>setVertical160x600(e.target.value)
+												(e)=>setVertical(e.target.value)
 											}
 										></textarea>
 									</label>
@@ -111,7 +113,7 @@ function IndividualArticlePageBanners() {
 											name="script"
 											value={_250x250320x100320x50}
 											onChange={
-												(e)=>set_250x250320x100320x50(e.target.value)
+												(e)=>set250x250320x100320x50(e.target.value)
 											}
 										></textarea>
 									</label>
@@ -129,21 +131,21 @@ function IndividualArticlePageBanners() {
 						>
 							<div className='form-article__body'>
 								<form className="form-article">
-									<div>320x50, 234x60:</div>
+
 									<label className='form-article__label'>
-										Top:
+										Top (320x50, 234x60)::
 										<textarea
 											className='form-article__input'
 											rows='2'
 											name="script"
-											value={top}
+											value={Top}
 											onChange={
 												(e)=>setTop(e.target.value)
 											}
 										></textarea>
 									</label>
 									<label className='form-article__label'>
-										Bottom:
+										Bottom (320x50, 234x60)::
 										<textarea
 											className='form-article__input'
 											rows='2'
