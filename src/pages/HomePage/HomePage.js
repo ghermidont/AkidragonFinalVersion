@@ -34,11 +34,6 @@ export default function HomePage() {
 	const [middle, setMiddle] = useState("");
 	const [bottom, setBottom] = useState("");
 
-	// let  htmlInput = "<div><h1>Title</h1><p>A paragraph</p></div>";
-	// let  htmlToReactParser = new HtmlToReact.Parser(React);
-	// let  reactComponent = htmlToReactParser.parse(htmlInput);
-	//let  reactHtml = React.renderToStaticMarkup(reactComponent);
-
 	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
 	let selectedBanners = "";
@@ -105,7 +100,6 @@ export default function HomePage() {
 	return (
 		<>
 			<main className="page">
-
 				<section className="banner">
 					<div className="container">
 						<div className="banner__image">
@@ -122,39 +116,33 @@ export default function HomePage() {
 						</h2>
 						<ul className="info__list">
 							<li className="info__item">
-								<Link to="/TournamentsPage">
-									<a className="info__link">
-										<div className="info__image">
-											<img className="info__img"
-												src={appLanguage === "it" ? ITTournamentsBannerUrl : ENTournamentsBannerUrl}
-												alt=""/>
-										</div>
-										<h3 className="info__item-title">{t("HomePage.Card1")}</h3>
-									</a>
+								<Link to="/TournamentsPage" className="info__link">
+									<div className="info__image">
+										<img className="info__img"
+											src={appLanguage === "it" ? ITTournamentsBannerUrl : ENTournamentsBannerUrl}
+											alt=""/>
+									</div>
+									<h3 className="info__item-title">{t("HomePage.Card1")}</h3>
 								</Link>
 							</li>
 							<li className="info__item">
-								<Link to="/AboutUsPage">
-									<a className="info__link">
-										<div className="info__image">
-											<img className="info__img"
-												src={appLanguage === "it" ? ITGameTeamsBannerUrl : ENGameTeamsBannerUrl}
-												alt=""/>
-										</div>
-										<h3 className="info__item-title">{t("HomePage.Card2")}</h3>
-									</a>
+								<Link to="/AboutUsPage" className="info__link">
+									<div className="info__image">
+										<img className="info__img"
+											src={appLanguage === "it" ? ITGameTeamsBannerUrl : ENGameTeamsBannerUrl}
+											alt=""/>
+									</div>
+									<h3 className="info__item-title">{t("HomePage.Card2")}</h3>
 								</Link>
 							</li>
 							<li className="info__item">
-								<Link to="/">
-									<a className="info__link">
-										<div className="info__image">
-											<img className="info__img"
-												src={appLanguage === "it" ? ITSalesBannerUrl : ENSalesBannerUrl}//"https://en.parisinfo.com/var/otcp/sites/images/node_43/node_51/joueurs-d'esport-%7C-630x405-%7C-%C2%A9-dr/19307954-1-fre-FR/Joueurs-d'Esport-%7C-630x405-%7C-%C2%A9-DR.jpg"
-												alt=""/>
-										</div>
-										<h3 className="info__item-title">{t("HomePage.Card3")}</h3>
-									</a>
+								<Link to="/" className="info__link">
+									<div className="info__image">
+										<img className="info__img"
+											src={appLanguage === "it" ? ITSalesBannerUrl : ENSalesBannerUrl}//"https://en.parisinfo.com/var/otcp/sites/images/node_43/node_51/joueurs-d'esport-%7C-630x405-%7C-%C2%A9-dr/19307954-1-fre-FR/Joueurs-d'Esport-%7C-630x405-%7C-%C2%A9-DR.jpg"
+											alt=""/>
+									</div>
+									<h3 className="info__item-title">{t("HomePage.Card3")}</h3>
 								</Link>
 							</li>
 						</ul>
@@ -213,8 +201,8 @@ export default function HomePage() {
 									<img src={appLanguage === "it" ? ITSponsorshipBannerUrl : ENSponsorshipBannerUrl} alt=""
 										className="feed__img"/>
 								</div>
-								<Link className="feed__link" to="SponsorshipPage">
-									<a className="feed__link">{t("HomePage.SponsorshipBanner")}</a>
+								<Link className="feed__link" to="/SponsorshipPage">
+									{t("HomePage.SponsorshipBanner")}
 								</Link>
 							</div>
 							<div className="feed__item">
@@ -222,8 +210,8 @@ export default function HomePage() {
 									<img src={appLanguage === "it" ? ITContactsBannerUrl : ENContactsBannerUrl} alt=""
 										className="feed__img"/>
 								</div>
-								<Link className="feed__link" to="ContactUsPage">
-									<a className="feed__link">{t("HomePage.ContactsBanner")}</a>
+								<Link className="feed__link" to="/ContactUsPage">
+									{t("HomePage.ContactsBanner")}
 								</Link>
 							</div>
 						</div>
