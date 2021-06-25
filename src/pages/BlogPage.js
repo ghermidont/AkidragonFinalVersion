@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {useDataFromFirestore, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
+import {useDataFromFirestore, useDataFromFirestoreBanners, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import logoSection from "../assets/images/dest/logo-section.png";
 import {useLanguageContext} from "../context/LanguageContext";
 import {useTranslation} from "react-i18next";
@@ -18,6 +18,22 @@ export default function BlogPage() {
 	const [ITMainText, setITMainText] = useState("");
 	const [ENFooterText, setENFooterText] = useState("");
 	const [ITFooterText, setITFooterText] = useState("");
+
+	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
+	const [Top, setTop] = useState("");
+	const [bottom, setBottom] = useState("");
+
+	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
+
+	let selectedBanners = "";
+
+	useEffect(() => {
+		if (docsFromHookBanners) {
+			selectedBanners = docsFromHookBanners.filter(function (doc) {
+				return doc.id === "blogPage";
+			});
+		}
+	});
 
 	//Filter approved articles
 	let articlesArr;
@@ -60,7 +76,16 @@ export default function BlogPage() {
 				setITFooterText(doc.footerText.it);
 			});
 		}
-	}, [docsFromHookCMS]);
+
+		if (selectedBanners !== ""){
+			selectedBanners.map(doc => {
+				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
+				setTop(doc.mobile.top);
+				setBottom(doc.mobile.bottom);
+			});
+		}
+	}, [docsFromHookCMS, docsFromHookBanners]);
+
 	return (
 		<>
 			<section className="news-banner">
@@ -70,6 +95,18 @@ export default function BlogPage() {
 					</div>
 					<h1 className="news-banner__title title"><span>{t("BlogPage.NewsTitle")}</span></h1>
 					<p className="news-banner__subtitle">{appLanguage === "it" ? ITMainText : ENMainText}</p>
+
+					<section className="news">
+						<div className="container">
+							BANNERS:
+							<ul>
+								<li>{_250x250320x100320x50}</li>
+								<li>{Top}</li>
+								<li>{bottom}</li>
+							</ul>
+						</div>
+						{/*.replace(/^"(.*)"$/, "$1")*/}
+					</section>
 
 					<div className="tab__body">
 						<ul className="nav nav-tabs tab__btn-list tab__news" id="myTab" role="tablist">

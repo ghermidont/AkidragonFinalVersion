@@ -1,5 +1,5 @@
-import React from "react";
-import {useDataFromFirestore} from "../customHooks/useFirestore";
+import React, {useEffect, useState} from "react";
+import {useDataFromFirestore, useDataFromFirestoreBanners} from "../customHooks/useFirestore";
 import {Link} from "react-router-dom";
 import {useLanguageContext} from "../context/LanguageContext";
 import { ShareLink } from "social-media-sharing";
@@ -13,6 +13,34 @@ export default function Article() {
 	const {appLanguage} = useLanguageContext();
 	let parsedWindowLocation = queryString.parse(window.location.hash);
 	const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(13);
+
+	const [vertical, setVertical] = useState("");
+	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
+	const [Top, setTop] = useState("");
+	const [bottom, setBottom] = useState("");
+
+	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
+
+	let selectedBanners = "";
+
+	useEffect(() => {
+		if (docsFromHookBanners) {
+			selectedBanners = docsFromHookBanners.filter(function (doc) {
+				return doc.id === "individualArticlePage";
+			});
+		}
+	});
+
+	useEffect(() => {
+		if (selectedBanners !== ""){
+			selectedBanners.map(doc => {
+				setVertical(doc.desktop.vertical);
+				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
+				setTop(doc.mobile.top);
+				setBottom(doc.mobile.bottom);
+			});
+		}
+	}, [docsFromHookBanners]);
 
 	const shareFacebook = () => {
 		let socialMediaLinks = new ShareLink("facebook");
@@ -32,6 +60,20 @@ export default function Article() {
 	return(
 		<section className="new-article">
 			<div className="container">
+
+				<section className="news">
+					<div className="container">
+						BANNERS:
+						<ul>
+							<li>{vertical}</li>
+							<li>{Top}</li>
+							<li>{_250x250320x100320x50}</li>
+							<li>{bottom}</li>
+						</ul>
+					</div>
+					{/*.replace(/^"(.*)"$/, "$1")*/}
+				</section>
+
 				{selectedArticle && selectedArticle.map(
 					doc =>(
 						<>

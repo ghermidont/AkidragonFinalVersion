@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {useDataFromFirestore, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
+import {useDataFromFirestore, useDataFromFirestoreBanners, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import logoSection from "../assets/images/dest/logo-section.png";
 import vsIcon from "../assets/images/dest/icons/vsIcon.png";
 import {useLanguageContext} from "../context/LanguageContext";
@@ -20,8 +20,23 @@ function TournamentsPage() {
 	const [ITFooterMessage, setITFooterMessage] = useState("");
 	const {appLanguage} = useLanguageContext();
 
-	useEffect(()=>{
+	const [vertical, setVertical] = useState("");
+	const [_250x250320x100320x50, set250x250320x100320x50] = useState("");
+	const [middle, setMiddle] = useState("");
 
+	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
+
+	let selectedBanners = "";
+
+	useEffect(() => {
+		if (docsFromHookBanners) {
+			selectedBanners = docsFromHookBanners.filter(function (doc) {
+				return doc.id === "tournamentsPage";
+			});
+		}
+	});
+
+	useEffect(()=>{
 		const passedEvents = docsFromHook.filter(function (doc) {
 			return doc.eventStatus === "passed";
 		});
@@ -57,7 +72,15 @@ function TournamentsPage() {
 				setITFooterMessage(doc.footerMessage.it);
 			});
 		}
-	}, [docsFromHookCMS]);
+
+		if (selectedBanners !== ""){
+			selectedBanners.map(doc => {
+				setVertical(doc.desktop.vertical);
+				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
+				setMiddle(doc.mobile.middle);
+			});
+		}
+	}, [docsFromHookCMS, docsFromHookBanners]);
 
 	//Templates
 	const PassedMatchTemp = (doc) => {
@@ -301,6 +324,18 @@ function TournamentsPage() {
 						<p className="tournament__text">
 							{appLanguage==="it"?ITBannerText:ENBannerText}
 						</p>
+
+						<section className="news">
+							<div className="container">
+								BANNERS:
+								<ul>
+									<li>{vertical}</li>
+									<li>{_250x250320x100320x50}</li>
+									<li>{middle}</li>
+								</ul>
+							</div>
+							{/*.replace(/^"(.*)"$/, "$1")*/}
+						</section>
 
 						<div className="tab__body">
 

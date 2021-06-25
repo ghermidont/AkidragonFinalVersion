@@ -32,6 +32,7 @@ export default function HomePage() {
 	const [Top, setTop] = useState("");
 	const [middle, setMiddle] = useState("");
 	const [bottom, setBottom] = useState("");
+
 	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
 	let selectedBanners = "";
@@ -58,7 +59,6 @@ export default function HomePage() {
 		if (selectedBanners !== ""){
 			selectedBanners.map(doc => {
 				setVertical(doc.desktop.vertical);
-				console.log(vertical);
 				setTop(doc.mobile.top);
 				setMiddle(doc.mobile.middle);
 				setBottom(doc.mobile.bottom);
@@ -173,6 +173,7 @@ export default function HomePage() {
 					</div>
 					{/*.replace(/^"(.*)"$/, "$1")*/}
 				</section>
+
 				<section className="slider">
 					<div className="container">
 						<h2 className="slider__title title">

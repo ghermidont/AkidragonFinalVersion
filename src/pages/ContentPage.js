@@ -3,7 +3,7 @@ import EntertainmentSwiper from "../components/swipers/EntertainmentSwiper";
 import MatchesTournamentsSwiper from "../components/swipers/MatchesTournamentsSwiper";
 import {Link} from "react-router-dom";
 import logoSection from "../assets/images/dest/logo-section.png";
-import {useDataFromFirestoreCMS} from "../customHooks/useFirestore";
+import {useDataFromFirestoreBanners, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import {useLanguageContext} from "../context/LanguageContext";
 import {useTranslation} from "react-i18next";
 
@@ -19,6 +19,10 @@ export default function Contents() {
 	const [ENBannerText, setENBannerText] = useState("");
 	const [ENSwiper1Title, setENSwiper1Title] = useState("");
 	const [ENSwiper2Title, setENSwiper2Title] = useState("");
+
+	const [vertical, setVertical] = useState();
+	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
+
 	const {appLanguage} = useLanguageContext();
 
 	let selectedDoc = "";
@@ -26,6 +30,18 @@ export default function Contents() {
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
+				return doc.id === "contentPage";
+			});
+		}
+	});
+
+	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
+
+	let selectedBanners = "";
+
+	useEffect(() => {
+		if (docsFromHookBanners) {
+			selectedBanners = docsFromHookBanners.filter(function (doc) {
 				return doc.id === "contentPage";
 			});
 		}
@@ -45,7 +61,14 @@ export default function Contents() {
 				setENSwiper2Title(doc.swiper2.en);
 			});
 		}
-	}, [docsFromHookCMS]);
+
+		if (selectedBanners !== ""){
+			selectedBanners.map(doc => {
+				setVertical(doc.desktop.vertical);
+				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
+			});
+		}
+	}, [docsFromHookCMS, docsFromHookBanners]);
 
 	return (
 		<main className="page">
@@ -60,6 +83,17 @@ export default function Contents() {
 						{appLanguage === "it" ? ITBannerText : ENBannerText}
 					</p>
 				</div>
+			</section>
+
+			<section className="news">
+				<div className="container">
+					BANNERS:
+					<ul>
+						<li>{vertical}</li>
+						<li>{_250x250320x100320x50}</li>
+					</ul>
+				</div>
+				{/*.replace(/^"(.*)"$/, "$1")*/}
 			</section>
 
 			<section className="video">
