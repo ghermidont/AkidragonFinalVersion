@@ -388,8 +388,8 @@ function TournamentsPage() {
 					<div className="container">
 						<h2 className="contact__title">{appLanguage==="it"?ITFooterMessage:ENFooterMessage}</h2>
 						<div className="contact__btn">
-							<Link to="/ContactUsPage">
-								<a className="contact__btn-link">{t("TournamentsPage.ContactsButton")}</a>
+							<Link to="/ContactUsPage" className="contact__btn-link">
+								{t("TournamentsPage.ContactsButton")}
 							</Link>
 						</div>
 					</div>

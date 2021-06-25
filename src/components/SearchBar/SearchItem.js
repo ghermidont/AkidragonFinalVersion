@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import {Col, Container, Row} from "react-bootstrap";
-//import {useLanguageContext} from "../../context/LanguageContext";
 
 const Item = (props) => {
 	const [readMore, setReadMore] = useState(false);

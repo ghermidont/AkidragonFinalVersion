@@ -1,23 +1,22 @@
 import React, {useEffect, useState} from "react";
 import {Modal} from "react-bootstrap";
 import SearchItem from "./SearchItem";
-//import {useArticlesContext} from "../../context/ArticlesContext";
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
 
 function SearchBar() {
-	console.log("SearchBarDiv worked.");
-	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	const {appLanguage} = useLanguageContext();
+
+	const [show, setShow] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [search, setSearch] = useState("");
 	const [serverDataSearchResultArr, setServerDataSearchResultArr] = useState([]);
+
 	const {docsFromHook} = useDataFromFirestore("articles");
 
 	useEffect(() => {
-		//setDataFromServer(articleContent);
 		if(docsFromHook)setIsLoading(false);
 	}, []);
 

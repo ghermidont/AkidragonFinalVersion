@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
 import {useAuthContext} from "../../context/AuthContext";
 import {useArticlesContext} from "../../context/ArticlesContext";
@@ -11,7 +11,6 @@ const UserProfileArticlesPage = () => {
 	const {docsFromHook} = useDataFromFirestore("articles");
 	const {currentUser} = useAuthContext();
 	const {appLanguage} = useLanguageContext();
-	const history = useHistory();
 	const {setChosenArticleNumber} = useArticlesContext();
 	const CurrentUserFromLS = JSON.parse(localStorage.getItem("LSCurrentUser"));
 	const {setChosenModifyArticleNumber} = useArticlesContext();
@@ -20,7 +19,6 @@ const UserProfileArticlesPage = () => {
 	let userPersonalArticlesArr = [];
 
 	if(docsFromHook&&(currentUser||CurrentUserFromLS)) {
-
 		userPersonalArticlesArr = docsFromHook.filter(function (article) {
 			return article.authorId === (currentUser.uid||CurrentUserFromLS.uid);
 		});
@@ -68,7 +66,7 @@ const UserProfileArticlesPage = () => {
 
 							<ul className="articles-page__tab-list active" id="tab_1">
 								{generalLatestArticlesArr && generalLatestArticlesArr.slice(0, 8).map(doc => (
-									<>
+									<div key={doc.id}>
 										<br/>
 										<li className="articles-page__tab-item" key={doc.id}>
 											<article className='articles-page__post'>
@@ -77,10 +75,8 @@ const UserProfileArticlesPage = () => {
 												</div>
 												<div className="articles-page__content">
 													<Link
-														onClick={()=>{
-															setChosenArticleNumber(doc.id);
-															history.push(`/article/${doc.id}`, { from: "/UserProfileArticlesPage" });
-														}}
+														to={`/article/${doc.id}`}
+														onClick={()=>setChosenArticleNumber(doc.id)}
 													>
 														<h3 className="articles-page__content-title">{doc.content[appLanguage].title}</h3>
 													</Link>
@@ -92,7 +88,7 @@ const UserProfileArticlesPage = () => {
 												</div>
 											</article>
 										</li>
-									</>
+									</div>
 								))}
 							</ul>
 
@@ -116,9 +112,8 @@ const UserProfileArticlesPage = () => {
 											</div>
 											{doc.approved===false&&<div>Not approve yet</div>}
 										</article>
-										<Link onClick={()=> {
+										<Link  to={`/edit-article/${doc.id}`} onClick={()=> {
 											setChosenModifyArticleNumber(doc.id);
-											history.push(`/edit-article/${doc.id}`, {from: "/ManageArticlesPage"});
 										}}>
 											<Button className='btn-article btn-upload'>
                       UPDATE
