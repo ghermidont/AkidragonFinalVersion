@@ -5,6 +5,7 @@ import logoSection from "../assets/images/dest/logo-section.png";
 import vsIcon from "../assets/images/dest/icons/vsIcon.png";
 import {useLanguageContext} from "../context/LanguageContext";
 import {useTranslation} from "react-i18next";
+import HtmlToReact from "html-to-react";
 
 function TournamentsPage() {
 	const {t} = useTranslation();
@@ -305,6 +306,17 @@ function TournamentsPage() {
 			</li>);
 	};
 
+	// DB string tags parser
+	const stringTagsParser = (tag) => {
+		if(tag) {
+			let  htmlInput = tag;
+			let  htmlToReactParser = new HtmlToReact.Parser(React);
+			let  reactComponent = htmlToReactParser.parse(htmlInput);
+			return reactComponent;
+		}
+		return;
+	};
+
 	return (
 		<>
 			<main className="page">
@@ -329,9 +341,9 @@ function TournamentsPage() {
 							<div className="container">
 								BANNERS:
 								<ul>
-									<li>{vertical}</li>
-									<li>{_250x250320x100320x50}</li>
-									<li>{middle}</li>
+									<li>{stringTagsParser(vertical)}</li>
+									<li>{stringTagsParser(_250x250320x100320x50)}</li>
+									<li>{stringTagsParser(middle)}</li>
 								</ul>
 							</div>
 							{/*.replace(/^"(.*)"$/, "$1")*/}

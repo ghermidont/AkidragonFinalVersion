@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import HtmlToReact from "html-to-react";
 import ShortArticlesList from "../../components/ShortArticlesList";
 import LatestStreamsSwiper from "../../components/swipers/LatestStreamsSwiper";
 import {Link} from "react-router-dom";
@@ -32,6 +33,11 @@ export default function HomePage() {
 	const [Top, setTop] = useState("");
 	const [middle, setMiddle] = useState("");
 	const [bottom, setBottom] = useState("");
+
+	// let  htmlInput = "<div><h1>Title</h1><p>A paragraph</p></div>";
+	// let  htmlToReactParser = new HtmlToReact.Parser(React);
+	// let  reactComponent = htmlToReactParser.parse(htmlInput);
+	//let  reactHtml = React.renderToStaticMarkup(reactComponent);
 
 	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
@@ -84,6 +90,17 @@ export default function HomePage() {
 			});
 		}
 	}, [docsFromHookCMS, docsFromHookBanners]);
+
+	// DB string tags parser
+	const stringTagsParser = (tag) => {
+		if(tag) {
+			let  htmlInput = tag;
+			let  htmlToReactParser = new HtmlToReact.Parser(React);
+			let  reactComponent = htmlToReactParser.parse(htmlInput);
+			return reactComponent;
+		}
+		return;
+	};
 
 	return (
 		<>
@@ -165,10 +182,10 @@ export default function HomePage() {
 					<div className="container">
 						BANNERS:
 						<ul>
-							<li>{vertical}</li>
-							<li>{Top}</li>
-							<li>{middle}</li>
-							<li>{bottom}</li>
+							<li>{stringTagsParser(vertical)}</li>
+							<li>{stringTagsParser(Top)}</li>
+							<li>{stringTagsParser(middle)}</li>
+							<li>{stringTagsParser(bottom)}</li>
 						</ul>
 					</div>
 					{/*.replace(/^"(.*)"$/, "$1")*/}

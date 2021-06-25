@@ -6,6 +6,7 @@ import logoSection from "../assets/images/dest/logo-section.png";
 import {useDataFromFirestoreBanners, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import {useLanguageContext} from "../context/LanguageContext";
 import {useTranslation} from "react-i18next";
+import HtmlToReact from "html-to-react";
 
 export default function Contents() {
 	const {t} = useTranslation();
@@ -70,6 +71,17 @@ export default function Contents() {
 		}
 	}, [docsFromHookCMS, docsFromHookBanners]);
 
+	// DB string tags parser
+	const stringTagsParser = (tag) => {
+		if(tag) {
+			let  htmlInput = tag;
+			let  htmlToReactParser = new HtmlToReact.Parser(React);
+			let  reactComponent = htmlToReactParser.parse(htmlInput);
+			return reactComponent;
+		}
+		return;
+	};
+
 	return (
 		<main className="page">
 			<section className="video-page">
@@ -89,8 +101,8 @@ export default function Contents() {
 				<div className="container">
 					BANNERS:
 					<ul>
-						<li>{vertical}</li>
-						<li>{_250x250320x100320x50}</li>
+						<li>{stringTagsParser(vertical)}</li>
+						<li>{stringTagsParser(_250x250320x100320x50)}</li>
 					</ul>
 				</div>
 				{/*.replace(/^"(.*)"$/, "$1")*/}

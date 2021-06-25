@@ -1,6 +1,9 @@
 #React snippets:
 https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets
 
+#String tags parser:
+https://github.com/mikenikles/html-to-react
+
 #Redux course:
 https://www.youtube.com/watch?v=poQXNp9ItL4
 

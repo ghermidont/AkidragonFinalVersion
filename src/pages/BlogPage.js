@@ -6,6 +6,7 @@ import {useLanguageContext} from "../context/LanguageContext";
 import {useTranslation} from "react-i18next";
 import {useArticlesContext} from "../context/ArticlesContext";
 import {useHistory} from "react-router-dom";
+import HtmlToReact from "html-to-react";
 
 export default function BlogPage() {
 	const {setChosenArticleNumber} = useArticlesContext();
@@ -86,6 +87,17 @@ export default function BlogPage() {
 		}
 	}, [docsFromHookCMS, docsFromHookBanners]);
 
+	// DB string tags parser
+	const stringTagsParser = (tag) => {
+		if(tag) {
+			let  htmlInput = tag;
+			let  htmlToReactParser = new HtmlToReact.Parser(React);
+			let  reactComponent = htmlToReactParser.parse(htmlInput);
+			return reactComponent;
+		}
+		return;
+	};
+
 	return (
 		<>
 			<section className="news-banner">
@@ -100,9 +112,9 @@ export default function BlogPage() {
 						<div className="container">
 							BANNERS:
 							<ul>
-								<li>{_250x250320x100320x50}</li>
-								<li>{Top}</li>
-								<li>{bottom}</li>
+								<li>{stringTagsParser(_250x250320x100320x50)}</li>
+								<li>{stringTagsParser(Top)}</li>
+								<li>{stringTagsParser(bottom)}</li>
 							</ul>
 						</div>
 						{/*.replace(/^"(.*)"$/, "$1")*/}
