@@ -56,6 +56,9 @@ export default function Contents() {
 					</div>
 					<h1 className="video-page__title title"><span>{appLanguage === "it" ? ITBannerTitle : ENBannerTitle}</span>
 					</h1>
+					<div className="banner content__banner">
+
+					</div>
 					<p className="video-page__subtitle">
 						{appLanguage === "it" ? ITBannerText : ENBannerText}
 					</p>

@@ -71,6 +71,10 @@ export default function BlogPage() {
 					<h1 className="news-banner__title title"><span>{t("BlogPage.NewsTitle")}</span></h1>
 					<p className="news-banner__subtitle">{appLanguage === "it" ? ITMainText : ENMainText}</p>
 
+					<div className="banner blog__banner">
+
+					</div>
+
 					<div className="tab__body">
 						<ul className="nav nav-tabs tab__btn-list tab__news" id="myTab" role="tablist">
 							<li className="nav-item tab__btn-item">

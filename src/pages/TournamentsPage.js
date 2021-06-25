@@ -12,7 +12,7 @@ function TournamentsPage() {
 	const [futureEvents, setFutureEvents] = useState();
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 	const {docsFromHook} = useDataFromFirestore("tournaments");
-	const [ENBannerUrl,setENBannerUrl] = useState("");
+	const [ENBannerUrl, setENBannerUrl] = useState("");
 	const [ITBannerUrl, setITBannerUrl] = useState("");
 	const [ENBannerText, setENBannerText] = useState("");
 	const [ITBannerText, setITBannerText] = useState("");
@@ -20,7 +20,7 @@ function TournamentsPage() {
 	const [ITFooterMessage, setITFooterMessage] = useState("");
 	const {appLanguage} = useLanguageContext();
 
-	useEffect(()=>{
+	useEffect(() => {
 
 		const passedEvents = docsFromHook.filter(function (doc) {
 			return doc.eventStatus === "passed";
@@ -87,12 +87,16 @@ function TournamentsPage() {
 				<ul className="tab__icon">
 					<li className="tab__item-icon">
 						<a className="tab__link-icon">
-							<img className="tab__img" src={doc.eventWinner1?doc.eventWinner1:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt=""/>
+							<img className="tab__img"
+								src={doc.eventWinner1 ? doc.eventWinner1 : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
+								alt=""/>
 						</a>
 					</li>
 					<li className="tab__item-icon">
 						<a className="tab__link-icon">
-							<img className="tab__img" src={doc.eventWinner2?doc.eventWinner2:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt=""/>
+							<img className="tab__img"
+								src={doc.eventWinner2 ? doc.eventWinner2 : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
+								alt=""/>
 						</a>
 					</li>
 				</ul>
@@ -137,7 +141,7 @@ function TournamentsPage() {
 						<a className="tab__link-icon">
 							<img
 								className="tab__img"
-								src={doc.eventWinner1?doc.eventWinner1:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
+								src={doc.eventWinner1 ? doc.eventWinner1 : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
 								alt=""/>
 						</a>
 					</li>
@@ -182,7 +186,7 @@ function TournamentsPage() {
 						<a href="#" className="tab__link-icon">
 							<img
 								className="tab__img"
-								src={doc.pictureURL1?doc.pictureURL1:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
+								src={doc.pictureURL1 ? doc.pictureURL1 : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
 								alt=""/>
 						</a>
 					</li>
@@ -196,7 +200,7 @@ function TournamentsPage() {
 						<a className="tab__link-icon">
 							<img
 								className="tab__img"
-								src={doc.pictureURL2?doc.pictureURL2:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
+								src={doc.pictureURL2 ? doc.pictureURL2 : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
 								alt=""/>
 						</a>
 					</li>
@@ -241,14 +245,7 @@ function TournamentsPage() {
 						<a href="#" className="tab__link-icon">
 							<img
 								className="tab__img"
-								src={doc.pictureURL1?doc.pictureURL1:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"} alt=""/>
-						</a>
-					</li>
-					<li className="tab__item-icon">
-						<a href="#" className="tab__link-icon">
-							<img
-								className="tab__img"
-								src={doc.pictureURL2?doc.pictureURL2:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
+								src={doc.pictureURL1 ? doc.pictureURL1 : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
 								alt=""/>
 						</a>
 					</li>
@@ -256,7 +253,15 @@ function TournamentsPage() {
 						<a href="#" className="tab__link-icon">
 							<img
 								className="tab__img"
-								src={doc.pictureURL3?doc.pictureURL3:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
+								src={doc.pictureURL2 ? doc.pictureURL2 : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
+								alt=""/>
+						</a>
+					</li>
+					<li className="tab__item-icon">
+						<a href="#" className="tab__link-icon">
+							<img
+								className="tab__img"
+								src={doc.pictureURL3 ? doc.pictureURL3 : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
 								alt=""/>
 						</a>
 					</li>
@@ -264,7 +269,7 @@ function TournamentsPage() {
 						<a className="tab__link-icon">
 							<img
 								className="tab__img"
-								src={doc.pictureURL4?doc.pictureURL4:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
+								src={doc.pictureURL4 ? doc.pictureURL4 : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
 								alt=""/>
 						</a>
 					</li>
@@ -295,18 +300,20 @@ function TournamentsPage() {
 							{t("TournamentsPage.AkidragonTournaments")}
 						</h1>
 						<div className="tournament__image">
-							<img className="tournament__img" src={appLanguage==="it"?ITBannerUrl:ENBannerUrl} alt=""/>
+							<img className="tournament__img" src={appLanguage === "it" ? ITBannerUrl : ENBannerUrl} alt=""/>
 						</div>
 
 						<p className="tournament__text">
-							{appLanguage==="it"?ITBannerText:ENBannerText}
+							{appLanguage === "it" ? ITBannerText : ENBannerText}
 						</p>
+
+						<div className="banner tournaments__banner"></div>
 
 						<div className="tab__body">
 
 							<ul className="nav nav-tabs tab__btn-list" id="myTab" role="tablist">
 
-								<li className="nav-item tab__btn-item" >
+								<li className="nav-item tab__btn-item">
 									<a className="tab__btn active" id="passed-tab" data-toggle="tab" href="#passed" role="tab"
 										aria-controls="passed" aria-selected="true">{t("TournamentsPage.PassedEvents")}</a>
 								</li>
@@ -339,7 +346,7 @@ function TournamentsPage() {
 
 				<section className="contact">
 					<div className="container">
-						<h2 className="contact__title">{appLanguage==="it"?ITFooterMessage:ENFooterMessage}</h2>
+						<h2 className="contact__title">{appLanguage === "it" ? ITFooterMessage : ENFooterMessage}</h2>
 						<div className="contact__btn">
 							<Link to="/ContactUsPage">
 								<a className="contact__btn-link">{t("TournamentsPage.ContactsButton")}</a>

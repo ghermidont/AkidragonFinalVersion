@@ -1,0 +1,14 @@
+.banner{
+  &__container{
+    position: relative;
+  }
+  &__home{
+    width: 16rem;
+    height: 60rem;
+    background-color: var(--blue);
+    margin-left: auto;
+    position: fixed;
+    right: 4rem;
+    top: 20rem;
+  }
+}

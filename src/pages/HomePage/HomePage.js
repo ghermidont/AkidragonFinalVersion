@@ -73,6 +73,12 @@ export default function HomePage() {
 					</div>
 				</section>
 
+				<div className="container banner__container">
+					<div className="banner banner__home">
+
+					</div>
+				</div>
+
 				<section className="info">
 					<div className="container">
 						<h2 className="title info__title">
