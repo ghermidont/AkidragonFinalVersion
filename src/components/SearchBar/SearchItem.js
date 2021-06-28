@@ -40,7 +40,7 @@ const Item = (props) => {
 										<br/>
 									</Row>
 									<Row style={{display: "flex"}}>
-										<Link onClick={()=>{setReadMore(!readMore);}}>
+										<Link to={""} onClick={()=>{setReadMore(!readMore);}}>
 											{linkName}
 										</Link >
 										<br/>

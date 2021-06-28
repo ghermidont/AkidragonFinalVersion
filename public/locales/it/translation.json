@@ -95,6 +95,8 @@
   },
 
   "ContactUsForm": {
+    "MessageSent": "Messaggio inviato",
+    "ConnectionError": "Il tuo messaggio non è stato inviato a causa di un errore di connessione",
     "NamePlaceHolder": "Nome",
     "EmailPlaceHolder": "Email",
     "SubjectPlaceHolder": "Soggetto",
@@ -111,6 +113,9 @@
   },
 
   "SubmitCVForm": {
+    "MessageSent": "Messaggio inviato",
+    "ConnectionError": "Il tuo messaggio non è stato inviato a causa di un errore di connessione",
+    "SubmitCVForm": "Invia modulo CV",
     "NamePlaceHolder": "Nome",
     "Consent": "Acconsento al trattamento dei miei dati personali",
     "SubmitButton": "Invia",
@@ -129,6 +134,12 @@
     "MessageSentAlert": "Il tuo messaggio è stato inviato. Ti contatteremo a breve."
   },
 
+  "SponsorshipForm": {
+    "CooperationOffers": "Offerte di cooperazione",
+    "ProcessData": "Dati di processo",
+    "Submit": "Invia"
+  },
+
   "ContentPage": {
     "OtherStreams": "Guarda altri",
     "ContactUs": "Contattaci"
@@ -140,6 +151,14 @@
     "MusicCategory": "Musica",
     "MoviesCategory": "Film",
     "PublishButton": "Pubblicare"
+  },
+
+  "EditArticleForm": {
+    "ArticleCategory": "Categoria articolo",
+    "VideoGames": "Video games",
+    "Music": "Musica",
+    "Movies": "Film",
+    "SaveChanges": "Salvare le modifiche"
   },
 
   "UpdateUserProfilePage": {

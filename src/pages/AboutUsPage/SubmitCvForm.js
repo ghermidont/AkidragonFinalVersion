@@ -29,10 +29,10 @@ export default function SubmitCvForm() {
 		if (sizeExceededError === false) {
 			emailjs.sendForm("service_neq4dxf", "template_cmcxzgs", "#resume-form", "user_ryi2yglqohFlHpuZyAqiJ")
 				.then(() => {
-					window.alert("Message sent");
+					window.alert(t("SubmitCVForm.MessageSent"));
 					history.push("/", {from: "/SubmitCVForm"});
 				}, () => {
-					window.alert("Your message was not sent due to a connection error");
+					window.alert(t("SubmitCVForm.ConnectionError"));
 				});
 			e.target.reset();
 		}
@@ -42,8 +42,7 @@ export default function SubmitCvForm() {
 		<>
 			<div className='form-update__body'>
 				<h1 className="title form__title">
-					{/*TODO translate*/}
-          Submit CV Form
+					{t("SubmitCVForm.SubmitCVForm")}Submit CV Form
 				</h1>
 
 				<form

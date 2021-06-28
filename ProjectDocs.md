@@ -99,3 +99,5 @@ https://joaoforja.com/blog/how-to-persist-state-after-a-page-refresh-in-react-us
 
 #Authentication with Facebook:
 https://menubar.io/firebase-facebook-login-react
+
+e.target.reset()

@@ -2,11 +2,11 @@ import React from "react";
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
 import {Button} from "react-bootstrap";
 import {projectFirestore} from "../../fireBase";
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useTournamentsContext} from "../../context/TournamentsContext";
+import { v4 as uuidv4 } from "uuid";
 
 function ManageTournamentsPage() {
-	const history = useHistory();
 	const {docsFromHook} = useDataFromFirestore("tournaments");
 	const {setChosenTournamentNumber} = useTournamentsContext();
 	const passedEvents = docsFromHook.filter(function (doc) {
@@ -23,8 +23,7 @@ function ManageTournamentsPage() {
 		let parsedDate = date.toString();
 
 		return (
-			<li className="tab__item" key={doc.id}>
-
+			<li className="tab__item" key={uuidv4()}>
 				<div className="tab__image">
 					<img
 						className="tab__img"
@@ -64,10 +63,8 @@ function ManageTournamentsPage() {
 
 						<Link
 							className="tab__link-info"
-							onClick={() => {
-								setChosenTournamentNumber(doc.id);
-								history.push(`/edit-tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
-							}}
+							to={`/edit-tournament/${doc.id}`}
+							onClick={()=>setChosenTournamentNumber(doc.id)}
 						>
               Update
 						</Link>
@@ -95,7 +92,7 @@ function ManageTournamentsPage() {
 		let parsedDate = date.toString();
 
 		return (
-			<li className="tab__item" key={doc.id}>
+			<li className="tab__item" key={uuidv4()}>
 				<div className="tab__image">
 					<img
 						className="tab__img"
@@ -129,10 +126,8 @@ function ManageTournamentsPage() {
 
 						<Link
 							className="tab__link-info"
-							onClick={() => {
-								setChosenTournamentNumber(doc.id);
-								history.push(`/edit-tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
-							}}
+							to={`/edit-tournament/${doc.id}`}
+							onClick={()=>setChosenTournamentNumber(doc.id)}
 						>
               Update
 						</Link>
@@ -160,7 +155,7 @@ function ManageTournamentsPage() {
 		let parsedDate = date.toString();
 
 		return (
-			<li className="tab__item" key={doc.id}>
+			<li className="tab__item" key={uuidv4()}>
 				<div className="tab__image">
 					<img
 						className="tab__img"
@@ -201,10 +196,8 @@ function ManageTournamentsPage() {
 						</button>
 						<Link
 							className="tab__link-info"
-							onClick={() => {
-								setChosenTournamentNumber(doc.id);
-								history.push(`/edit-tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
-							}}
+							to={`/edit-tournament/${doc.id}`}
+							onClick={()=>setChosenTournamentNumber(doc.id)}
 						>
               Update
 						</Link>
@@ -232,7 +225,7 @@ function ManageTournamentsPage() {
 		let parsedDate = date.toString();
 
 		return (
-			<li className="tab__item" key={doc.id}>
+			<li className="tab__item" key={uuidv4()}>
 
 				<div className="tab__image">
 					<img
@@ -290,10 +283,8 @@ function ManageTournamentsPage() {
 						</button>
 						<Link
 							className="tab__link-info"
-							onClick={() => {
-								setChosenTournamentNumber(doc.id);
-								history.push(`/edit-tournament/${doc.id}`, {from: "/ManageTournamentsPage"});
-							}}
+							to={`/edit-tournament/${doc.id}`}
+							onClick={()=>setChosenTournamentNumber(doc.id)}
 						>
               Update
 						</Link>
