@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {useDataFromFirestore, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
+import {useDataFromFirestore, useDataFromFirestoreBanners, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import logoSection from "../assets/images/dest/logo-section.png";
 import vsIcon from "../assets/images/dest/icons/vsIcon.png";
 import {useLanguageContext} from "../context/LanguageContext";
 import {useTranslation} from "react-i18next";
+import HtmlToReact from "html-to-react";
 
 function TournamentsPage() {
 	const {t} = useTranslation();
@@ -22,6 +23,23 @@ function TournamentsPage() {
 
 	useEffect(() => {
 
+	const [vertical, setVertical] = useState("");
+	const [_250x250320x100320x50, set250x250320x100320x50] = useState("");
+	const [middle, setMiddle] = useState("");
+
+	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
+
+	let selectedBanners = "";
+
+	useEffect(() => {
+		if (docsFromHookBanners) {
+			selectedBanners = docsFromHookBanners.filter(function (doc) {
+				return doc.id === "tournamentsPage";
+			});
+		}
+	});
+
+	useEffect(()=>{
 		const passedEvents = docsFromHook.filter(function (doc) {
 			return doc.eventStatus === "passed";
 		});
@@ -57,7 +75,15 @@ function TournamentsPage() {
 				setITFooterMessage(doc.footerMessage.it);
 			});
 		}
-	}, [docsFromHookCMS]);
+
+		if (selectedBanners !== ""){
+			selectedBanners.map(doc => {
+				setVertical(doc.desktop.vertical);
+				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
+				setMiddle(doc.mobile.middle);
+			});
+		}
+	}, [docsFromHookCMS, docsFromHookBanners]);
 
 	//Templates
 	const PassedMatchTemp = (doc) => {
@@ -186,7 +212,7 @@ function TournamentsPage() {
 						<a href="#" className="tab__link-icon">
 							<img
 								className="tab__img"
-								src={doc.pictureURL1 ? doc.pictureURL1 : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
+								src={doc.pictureURL1?doc.pictureURL1:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
 								alt=""/>
 						</a>
 					</li>
@@ -200,7 +226,7 @@ function TournamentsPage() {
 						<a className="tab__link-icon">
 							<img
 								className="tab__img"
-								src={doc.pictureURL2 ? doc.pictureURL2 : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
+								src={doc.pictureURL2?doc.pictureURL2:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
 								alt=""/>
 						</a>
 					</li>
@@ -287,6 +313,17 @@ function TournamentsPage() {
 			</li>);
 	};
 
+	// DB string tags parser
+	const stringTagsParser = (tag) => {
+		if(tag) {
+			let  htmlInput = tag;
+			let  htmlToReactParser = new HtmlToReact.Parser(React);
+			let  reactComponent = htmlToReactParser.parse(htmlInput);
+			return reactComponent;
+		}
+		return;
+	};
+
 	return (
 		<>
 			<main className="page">
@@ -306,8 +343,20 @@ function TournamentsPage() {
 						</div>
 
 						<p className="tournament__text">
-							{appLanguage === "it" ? ITBannerText : ENBannerText}
+							{appLanguage==="it"?ITBannerText:ENBannerText}
 						</p>
+
+						<section className="news">
+							<div className="container">
+								BANNERS:
+								<ul>
+									<li>{stringTagsParser(vertical)}</li>
+									<li>{stringTagsParser(_250x250320x100320x50)}</li>
+									<li>{stringTagsParser(middle)}</li>
+								</ul>
+							</div>
+							{/*.replace(/^"(.*)"$/, "$1")*/}
+						</section>
 
 						<div className="banner banner__square"></div>
 
@@ -315,7 +364,7 @@ function TournamentsPage() {
 
 							<ul className="nav nav-tabs tab__btn-list" id="myTab" role="tablist">
 
-								<li className="nav-item tab__btn-item">
+								<li className="nav-item tab__btn-item" >
 									<a className="tab__btn active" id="passed-tab" data-toggle="tab" href="#passed" role="tab"
 										aria-controls="passed" aria-selected="true">{t("TournamentsPage.PassedEvents")}</a>
 								</li>
@@ -350,8 +399,8 @@ function TournamentsPage() {
 					<div className="container">
 						<h2 className="contact__title">{appLanguage === "it" ? ITFooterMessage : ENFooterMessage}</h2>
 						<div className="contact__btn">
-							<Link to="/ContactUsPage">
-								<a className="contact__btn-link">{t("TournamentsPage.ContactsButton")}</a>
+							<Link to="/ContactUsPage" className="contact__btn-link">
+								{t("TournamentsPage.ContactsButton")}
 							</Link>
 						</div>
 					</div>

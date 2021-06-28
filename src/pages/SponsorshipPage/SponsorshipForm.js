@@ -1,6 +1,4 @@
-//https://www.youtube.com/watch?v=NgWGllOjkbs
-//https://www.geeksforgeeks.org/how-to-send-attachments-and-email-using-nodemailer-in-node-js/
-import React from "react";
+import React, {useRef} from "react";
 import emailjs from "emailjs-com";
 import {init} from "emailjs-com";
 import {useHistory} from "react-router-dom";
@@ -9,11 +7,13 @@ import {useTranslation} from "react-i18next";
 init("user_ryi2yglqohFlHpuZyAqiJ");
 
 export default function SponsorshipForm() {
+	let publishBtnRef = useRef();
 	const history = useHistory();
 	const {t} = useTranslation();
 
 	function sendSponsorshipEmail(e) {
 		e.preventDefault();
+		publishBtnRef.current&&publishBtnRef.current.setAttribute("disabled", "disabled");
 
 		emailjs.sendForm(
 			"service_neq4dxf",
@@ -23,9 +23,11 @@ export default function SponsorshipForm() {
 		)
 			.then((result) => {
 				window.alert(t("SponsorshipPage.MessageSentAlert"));
+				publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
 				result.text && history.push("/", {from: "/SponsorshipPage"});
 			}, (error) => {
 				window.aler("Error: " + error.text);
+				publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
 			});
 		e.target.reset();
 	}
@@ -75,6 +77,7 @@ export default function SponsorshipForm() {
 									</div>
 									<button
 										type="submit"
+										ref={publishBtnRef}
 										className="primary-btn submit btn-upload"
 									>
 										{t("SponsorshipPage.SubmitButton")}

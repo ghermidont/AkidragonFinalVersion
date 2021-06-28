@@ -5,7 +5,6 @@ import {useDataFromFirestore} from "../../customHooks/useFirestore";
 import "swiper/swiper.min.css";
 import "swiper/components/effect-coverflow/effect-coverflow.min.css";
 import "swiper/components/pagination/pagination.min.css";
-
 import "./swiperStyles.css";
 
 import SwiperCore, {
@@ -44,21 +43,20 @@ export default function LatestStreamsSwiper() {
 				onSlideChange={()=>{if(playState===true)setPlayState(false);}}
 			>
 				{docsFromHook && docsFromHook.slice(0, 6).map(doc => (
-					<>
-						<SwiperSlide key={doc.id}>
-							<div style={{maxWidth: "640px", height: "100%", margin: "0 auto"}}>
-								<ReactPlayer
-									ref={player}
-									url={doc.videoURL}
-									controls={true}
-									width={"100%"}
-									height={"100%"}
-									light={true}
-									playing={playState}
-								/>
-							</div>
-						</SwiperSlide>
-					</>
+					<SwiperSlide key={doc.id}>
+						<div style={{maxWidth: "640px", height: "100%", margin: "0 auto"}}>
+							<ReactPlayer
+								ref={player}
+								url={doc.videoURL}
+								controls={true}
+								width={"100%"}
+								height={"100%"}
+								light={true}
+								playing={playState}
+							/>
+						</div>
+					</SwiperSlide>
+				
 				))}
 			</Swiper>
 

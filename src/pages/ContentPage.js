@@ -3,9 +3,10 @@ import EntertainmentSwiper from "../components/swipers/EntertainmentSwiper";
 import MatchesTournamentsSwiper from "../components/swipers/MatchesTournamentsSwiper";
 import {Link} from "react-router-dom";
 import logoSection from "../assets/images/dest/logo-section.png";
-import {useDataFromFirestoreCMS} from "../customHooks/useFirestore";
+import {useDataFromFirestoreBanners, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import {useLanguageContext} from "../context/LanguageContext";
 import {useTranslation} from "react-i18next";
+import HtmlToReact from "html-to-react";
 
 export default function Contents() {
 	const {t} = useTranslation();
@@ -19,6 +20,10 @@ export default function Contents() {
 	const [ENBannerText, setENBannerText] = useState("");
 	const [ENSwiper1Title, setENSwiper1Title] = useState("");
 	const [ENSwiper2Title, setENSwiper2Title] = useState("");
+
+	const [vertical, setVertical] = useState();
+	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
+
 	const {appLanguage} = useLanguageContext();
 
 	let selectedDoc = "";
@@ -26,6 +31,18 @@ export default function Contents() {
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
+				return doc.id === "contentPage";
+			});
+		}
+	});
+
+	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
+
+	let selectedBanners = "";
+
+	useEffect(() => {
+		if (docsFromHookBanners) {
+			selectedBanners = docsFromHookBanners.filter(function (doc) {
 				return doc.id === "contentPage";
 			});
 		}
@@ -45,7 +62,25 @@ export default function Contents() {
 				setENSwiper2Title(doc.swiper2.en);
 			});
 		}
-	}, [docsFromHookCMS]);
+
+		if (selectedBanners !== ""){
+			selectedBanners.map(doc => {
+				setVertical(doc.desktop.vertical);
+				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
+			});
+		}
+	}, [docsFromHookCMS, docsFromHookBanners]);
+
+	// DB string tags parser
+	const stringTagsParser = (tag) => {
+		if(tag) {
+			let  htmlInput = tag;
+			let  htmlToReactParser = new HtmlToReact.Parser(React);
+			let  reactComponent = htmlToReactParser.parse(htmlInput);
+			return reactComponent;
+		}
+		return;
+	};
 
 	return (
 		<main className="page">
@@ -67,10 +102,20 @@ export default function Contents() {
 				</div>
 			</section>
 
+			<section className="news">
+				<div className="container">
+					BANNERS:
+					<ul>
+						<li>{stringTagsParser(vertical)}</li>
+						<li>{stringTagsParser(_250x250320x100320x50)}</li>
+					</ul>
+				</div>
+				{/*.replace(/^"(.*)"$/, "$1")*/}
+			</section>
+
 			<section className="video">
 				<div className="container">
 					<h2 className="video__title">{appLanguage === "it" ? ITSwiper1Title : ENSwiper1Title}</h2>
-
 					<EntertainmentSwiper/>
 					<button className="video__btn btn">{t("ContentPage.OtherStreams")}</button>
 				</div>
@@ -85,8 +130,8 @@ export default function Contents() {
 			</section>
 
 			<div className="contact__btn">
-				<Link to="/ContactUsPage">
-					<a className="contact__btn-link">{t("ContentPage.ContactUs")}</a>
+				<Link className="contact__btn-link" to="/ContactUsPage">
+					{t("ContentPage.ContactUs")}
 				</Link>
 			</div>
 		</main>

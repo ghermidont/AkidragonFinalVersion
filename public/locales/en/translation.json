@@ -96,6 +96,8 @@
   },
 
   "ContactUsForm": {
+    "MessageSent": "Message sent",
+    "ConnectionError": "Your message was not sent due to a connection error",
     "NamePlaceHolder": "Name",
     "EmailPlaceHolder": "Email",
     "SubjectPlaceHolder": "Subject",
@@ -112,6 +114,9 @@
   },
 
   "SubmitCVForm": {
+    "MessageSent": "Message sent",
+    "ConnectionError": "Your message was not sent due to a connection error",
+    "SubmitCVForm": "Submit CV Form",
     "NamePlaceHolder": "Name",
     "Consent": "I consent to the processing of my personal data",
     "SubmitButton": "Submit",
@@ -130,6 +135,12 @@
     "MessageSentAlert": "You message has been sent. We will contact you shortly."
   },
 
+  "SponsorshipForm": {
+    "CooperationOffers": "Cooperation offers",
+    "ProcessData": "Process data",
+    "Submit": "Submit"
+  },
+
   "ContentPage": {
     "OtherStreams": "Other streams",
     "ContactUs": "Contact Us"
@@ -141,6 +152,14 @@
     "MusicCategory": "Music",
     "MoviesCategory": "Movies",
     "PublishButton": "Publish"
+  },
+
+  "EditArticleForm": {
+    "ArticleCategory": "Article Category",
+    "VideoGames": "Video games",
+    "Music": "Music",
+    "Movies": "Movies",
+    "SaveChanges": "Save changes"
   },
 
   "UpdateUserProfilePage": {

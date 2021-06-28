@@ -117,12 +117,11 @@ export default function AddArticlesForm() {
 		})
 			.then(() => {
 				publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
-				// cancelBtnRef.current.removeAttribute("disabled");
 				window.alert("Article added successfully!");
 				history.push("/UserProfilePage", {from: "/AddArticlesForm"});
 			})
 			.catch((error) => {
-				window.alert(error.code + " " + error.message + "" + error.details);
+				window.alert("Error :" + error.code + " " + error.message + "" + error.details);
 			});
 	};
 

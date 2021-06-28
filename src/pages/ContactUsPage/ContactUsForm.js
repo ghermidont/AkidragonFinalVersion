@@ -6,8 +6,6 @@ import {useTranslation} from "react-i18next";
 
 init("user_ryi2yglqohFlHpuZyAqiJ");
 
-//TODO include e.target.reset() in all file inputs.
-
 export default function ContactUsForm() {
 	const {t} = useTranslation();
 	const [checkBoxState, setCheckBoxState] = useState(true);
@@ -31,10 +29,10 @@ export default function ContactUsForm() {
 			if (sizeExceededError === false) {
 				emailjs.sendForm("service_neq4dxf", "template_sij1vgl", "#contactus-form", "user_ryi2yglqohFlHpuZyAqiJ")
 					.then((result) => {
-						window.alert("Message sent: " + result.text);
+						window.alert(t("ContactUsForm.MessageSent"));
 						return result.text && history.push("/MessageSentPage", {from: "/ContactUsForm"});
 					}, () => {
-						window.alert("Your message was not sent due to a connection error");
+						window.alert(t("ContactUsForm.ConnectionError"));
 					});
 				e.target.reset();
 			}
@@ -42,10 +40,10 @@ export default function ContactUsForm() {
 		if(fileSize===0) {
 			emailjs.sendForm("service_neq4dxf", "template_sij1vgl", "#contactus-form", "user_ryi2yglqohFlHpuZyAqiJ")
 				.then((result) => {
-					window.alert("Message sent: " + result.text);
+					window.alert(t("ContactUsForm.MessageSent"));
 					result.text && history.push("/MessageSentPage", {from: "/ContactUsForm"});
-				}, (error) => {
-					window.alert("Error sendding the message: " + error.text);
+				}, () => {
+					window.alert(t("ContactUsForm.ConnectionError"));
 				});
 			e.target.reset();
 		}

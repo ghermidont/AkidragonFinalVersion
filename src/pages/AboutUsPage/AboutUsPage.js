@@ -4,6 +4,7 @@ import logoBig from "../../assets/images/dest/logo-big.png";
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
 import {useTranslation} from "react-i18next";
+import { v4 as uuidv4 } from "uuid";
 
 function AboutUsPage() {
 	const {t} = useTranslation();
@@ -130,13 +131,12 @@ function AboutUsPage() {
 						<h2 className="team__title title">{appLanguage==="it"?ITCrewTitle:ENCrewTitle}</h2>
 						<ul className="team__list">
 							{ generalTeamMembersArr.map(doc =>
-								<li className="team__item" key={doc.id}>
+								<li className="team__item"  key={uuidv4().toString()}>
 									<img src={doc.avatar} alt="" className="team__image"/>
 									<div className="team__name">{doc.name}</div>
 									<div className="team__position">{appLanguage==="it"?doc.title.it:doc.title.en}</div>
 								</li>
-							)
-							}
+							)}
 						</ul>
 					</div>
 				</div>
@@ -147,7 +147,9 @@ function AboutUsPage() {
 					<h2 className="partner__title title">{appLanguage==="it"?ITPartnersTitle:ENPartnersTitle}</h2>
 					<ul className="partner__list">
 						{ generalPartnersLogoArr.map(doc =>
-							<li className="partner__item" key={doc.id}><img src={doc.logo} alt="" className="partner__image"/></li>
+							<li className="partner__item" key={uuidv4().toString()}>
+								<img src={doc.logo} key={doc.id} alt="" className="partner__image"/>
+							</li>
 						)}
 					</ul>
 				</div>

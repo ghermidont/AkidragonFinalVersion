@@ -2,10 +2,12 @@ import React, {useEffect, useRef, useState} from "react";
 import {projectStorage, functions} from "../../../fireBase";
 import {useHistory} from "react-router-dom";
 import {useDataFromFirestore} from "../../../customHooks/useFirestore";
+import {useTranslation} from "react-i18next";
 // eslint-disable-next-line no-undef
 const queryString = require("query-string");
 
 export default function EditArticleForm() {
+	const {t} = useTranslation();
 	let publishBtnRef = useRef();
 	const {docsFromHook} = useDataFromFirestore("articles");
 	const fileTypesArray = ["image/png", "image/jpeg"];
@@ -199,8 +201,7 @@ export default function EditArticleForm() {
 						<div className='form-article__body'>
 							<form className="form-article">
 								<label className='form-article__label'>
-									{/*TODO translate*/}
-                                    Title
+									Titolo
 									<input
 										className='form-article__input'
 										type="text"
@@ -212,7 +213,7 @@ export default function EditArticleForm() {
 									/>
 								</label>
 								<label className='form-article__label'>
-                                    Description
+									Description
 									<textarea
 										className='form-article__input'
 										rows='1'
@@ -237,7 +238,7 @@ export default function EditArticleForm() {
 									></textarea>
 								</label>
 								<div>
-                                    Current thumbnail:
+									Miniatura attuale:
 									<img style={{width: "25%", height: "auto"}} src={OldITUrl} alt=""/>
 								</div>
 								<div className="form-article__box-btn">
@@ -253,7 +254,7 @@ export default function EditArticleForm() {
 									<div className="output">
 										{ ITFileUploadError!=="" && <div className="error">{ ITFileUploadError }</div>}
 										{ ITFileTypeError!=="" && <div className="error">{ ITFileTypeError }</div> }
-										{ ITFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITUrl} alt=""/></div> }
+										{ ITFileSuccess&&<div>Immagine caricata con successo: <img style={{width: "25%", height: "auto"}} src={ITUrl} alt=""/></div> }
 									</div>
 								</div>
 							</form>
@@ -271,7 +272,7 @@ export default function EditArticleForm() {
 						<div className='form-article__body'>
 							<form className="form-article">
 								<label className='form-article__label'>
-                                    Title
+									Title
 									<input
 										className='form-article__input'
 										type="text"
@@ -282,7 +283,6 @@ export default function EditArticleForm() {
 										}/>
 								</label>
 								<label className='form-article__label'>
-                                    Description
 									<textarea
 										className='form-article__input'
 										rows='1'
@@ -314,7 +314,9 @@ export default function EditArticleForm() {
 								</div>
 								<div className="form-article__box-btn">
 
-									<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload
+									<label className='form-article__label btn-upload'>
+										<span className='icon-upload2'></span>
+										Upload
 										<input
 											className='form-article__btn visually-hidden'
 											type="file"
@@ -326,7 +328,6 @@ export default function EditArticleForm() {
 										{ ENFileUploadError!=="" && <div className="error">{ ENFileUploadError }</div>}
 										{ ENFileTypeError!=="" && <div className="error">{ ENFileTypeError }</div> }
 										{ ENFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENUrl} alt=""/></div> }
-
 									</div>
 								</div>
 							</form>
@@ -334,28 +335,28 @@ export default function EditArticleForm() {
 					</div>
 
 					<div className="form-article__checkbox-title form-article__label">
-                        Article category: {currentCategories?currentCategories:""}
+						{t("EditArticleForm.ArticleCategory")}: {currentCategories?currentCategories:""}
 					</div>
 
 					<label className="form-article__label-check">
 						<input
 							type="checkbox"
 							onChange={()=>videoGamesSwitch===0?setVideoGamesSwitch(1):setVideoGamesSwitch(0)}
-						/> Video game
+						/> {t("EditArticleForm.VideoGames")}
 					</label>
 
 					<label className="form-article__label-check">
 						<input
 							type="checkbox"
 							onChange={()=>musicSwitch===0?setMusicSwitch(1):setMusicSwitch(0)}
-						/> Music
+						/> {t("EditArticleForm.Music")}
 					</label>
 
 					<label className="form-article__label-check">
 						<input
 							type="checkbox"
 							onChange={()=>moviesSwitch===0?setMoviesSwitch(1):setMoviesSwitch(0)}
-						/> Movie
+						/> {t("EditArticleForm.Movies")}
 					</label>
 
 					<button
@@ -363,7 +364,7 @@ export default function EditArticleForm() {
 						className="form-article__btn"
 						onClick={()=>publishArticleCFTrigger()}
 					>
-                            Save changes
+						{t("EditArticleForm.SaveChanges")}
 					</button>
 
 				</div>

@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useDataFromFirestore} from "../../../customHooks/useFirestore";
 import {useLanguageContext} from "../../../context/LanguageContext";
 import {Button} from "react-bootstrap";
@@ -8,7 +8,6 @@ import classes from "./styles/ManageArticlesPage.module.scss";
 
 const ManageArticlesPage = () => {
 	const {appLanguage} = useLanguageContext();
-	const history = useHistory();
 
 	const {docsFromHook} = useDataFromFirestore("articles");
 
@@ -23,8 +22,8 @@ const ManageArticlesPage = () => {
 						<div className="articles-page__tab-body">
 							<ul className="articles-page__tab-list active">
 								{docsFromHook && docsFromHook.map(doc => (
-									<>
-										<li className={classes.item} key={doc.id}>
+									<div key={doc.id}>
+										<li className={classes.item}>
 											<article className={classes.article}>
 												<div className="articles-page__image" style={{minWidth: "20rem", height: "100%"}}>
 													<img
@@ -41,9 +40,8 @@ const ManageArticlesPage = () => {
 											</article>
 											<div className={classes.btnInner}>
 												{/*TODO translate*/}
-												<Link className={classes.btn} onClick={() => {
-													history.push(`/edit-article/${doc.id}`, {from: "/ManageArticlesPage"});
-												}}> Edit article
+												<Link to={`/edit-article/${doc.id}`} className={classes.btn}>
+													Edit article
 												</Link>
 												<Button
 													className={classes.btnDel}
@@ -57,7 +55,7 @@ const ManageArticlesPage = () => {
 														});
 													}}
 												>
-                          Delete Article
+                          							Delete Article
 												</Button>
 											</div>
 										</li>
@@ -65,7 +63,7 @@ const ManageArticlesPage = () => {
 										<br/>
 										<br/>
 										<br/>
-									</>
+									</div>
 								))}
 							</ul>
 						</div>

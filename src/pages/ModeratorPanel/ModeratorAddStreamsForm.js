@@ -23,22 +23,27 @@ export default function ModeratorAddStreamsForm() {
 	},[videoURL]);
 
 	const addStreamsWithFBCallback = () => {
-		const collectionRef = projectFirestore.collection("streams").doc();
-		collectionRef.set(
-			{
-				"authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
-				"category": streamCategory,
-				"videoURL": videoURL,
-				"imageURL": thumbnail.medium.url,
-				"createdAt": Date.now()
-			})
-			.then(() => {
-				window.alert("Stream added successfully!");
-				history.push("/UserProfilePage", {from: "/ModeratorAddStreamsForm"});
-			})
-			.catch((error) => {
-				window.alert("Could not add stream due to:" + error.code + " " + error.message + "" + error.details);
-			});
+		if(streamCategory!=="") {
+			const collectionRef = projectFirestore.collection("streams").doc();
+			collectionRef.set(
+				{
+					"authorID": currentUser ? currentUser.uid : CurrentUserFromLS.uid,
+					"category": streamCategory,
+					"videoURL": videoURL,
+					"imageURL": thumbnail.medium.url,
+					"createdAt": Date.now()
+				})
+				.then(() => {
+					window.alert("Stream added successfully!");
+					history.push("/UserProfilePage", {from: "/ModeratorAddStreamsForm"});
+				})
+				.catch((error) => {
+					window.alert("Could not add stream due to:" + error.code + " " + error.message + "" + error.details);
+				});
+		}else{
+			return window.alert("Please provide a stream category");
+		}
+
 	};
 
 	return (

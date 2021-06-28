@@ -1,6 +1,9 @@
 #React snippets:
 https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets
 
+#String tags parser:
+https://github.com/mikenikles/html-to-react
+
 #Redux course:
 https://www.youtube.com/watch?v=poQXNp9ItL4
 
@@ -96,3 +99,5 @@ https://joaoforja.com/blog/how-to-persist-state-after-a-page-refresh-in-react-us
 
 #Authentication with Facebook:
 https://menubar.io/firebase-facebook-login-react
+
+e.target.reset()

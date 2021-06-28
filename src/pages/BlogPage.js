@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {useDataFromFirestore, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
+import {useDataFromFirestore, useDataFromFirestoreBanners, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import logoSection from "../assets/images/dest/logo-section.png";
 import {useLanguageContext} from "../context/LanguageContext";
 import {useTranslation} from "react-i18next";
 import {useArticlesContext} from "../context/ArticlesContext";
-import {useHistory} from "react-router-dom";
+import HtmlToReact from "html-to-react";
 
 export default function BlogPage() {
 	const {setChosenArticleNumber} = useArticlesContext();
-	const history = useHistory();
 	const {t} = useTranslation();
 	const {appLanguage} = useLanguageContext();
 	const {docsFromHook} = useDataFromFirestore("articles");
@@ -18,6 +17,22 @@ export default function BlogPage() {
 	const [ITMainText, setITMainText] = useState("");
 	const [ENFooterText, setENFooterText] = useState("");
 	const [ITFooterText, setITFooterText] = useState("");
+
+	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
+	const [Top, setTop] = useState("");
+	const [bottom, setBottom] = useState("");
+
+	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
+
+	let selectedBanners = "";
+
+	useEffect(() => {
+		if (docsFromHookBanners) {
+			selectedBanners = docsFromHookBanners.filter(function (doc) {
+				return doc.id === "blogPage";
+			});
+		}
+	});
 
 	//Filter approved articles
 	let articlesArr;
@@ -60,7 +75,27 @@ export default function BlogPage() {
 				setITFooterText(doc.footerText.it);
 			});
 		}
-	}, [docsFromHookCMS]);
+
+		if (selectedBanners !== ""){
+			selectedBanners.map(doc => {
+				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
+				setTop(doc.mobile.top);
+				setBottom(doc.mobile.bottom);
+			});
+		}
+	}, [docsFromHookCMS, docsFromHookBanners]);
+
+	// DB string tags parser
+	const stringTagsParser = (tag) => {
+		if(tag) {
+			let  htmlInput = tag;
+			let  htmlToReactParser = new HtmlToReact.Parser(React);
+			let  reactComponent = htmlToReactParser.parse(htmlInput);
+			return reactComponent;
+		}
+		return;
+	};
+
 	return (
 		<>
 			<section className="news-banner">
@@ -70,6 +105,18 @@ export default function BlogPage() {
 					</div>
 					<h1 className="news-banner__title title"><span>{t("BlogPage.NewsTitle")}</span></h1>
 					<p className="news-banner__subtitle">{appLanguage === "it" ? ITMainText : ENMainText}</p>
+
+					<section className="news">
+						<div className="container">
+							BANNERS:
+							<ul>
+								<li>{stringTagsParser(_250x250320x100320x50)}</li>
+								<li>{stringTagsParser(Top)}</li>
+								<li>{stringTagsParser(bottom)}</li>
+							</ul>
+						</div>
+						{/*.replace(/^"(.*)"$/, "$1")*/}
+					</section>
 
 					<div className="banner banner__square">
 
@@ -104,10 +151,7 @@ export default function BlogPage() {
 							<div className="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
 								{articlesArr && articlesArr.slice(0, 8).map(doc =>
 									<article className="article" key={doc.id}>
-										<Link className="article__link" onClick={() => {
-											setChosenArticleNumber(doc.id);
-											history.push(`/article/${doc.id}`, {from: "/BlogPage"});
-										}}>
+										<Link className="article__link" to={`/article/${doc.id}`} onClick={() => setChosenArticleNumber(doc.id)}>
 											<img
 												src={doc.content[appLanguage].image ? doc.content[appLanguage].image : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
 												alt="" className="article__image"/>
@@ -132,10 +176,7 @@ export default function BlogPage() {
 							>
 								{videoGamesNews && videoGamesNews.slice(0, 8).map(doc =>
 									<article className="article" key={doc.id}>
-										<Link className="article__link" onClick={() => {
-											setChosenArticleNumber(doc.id);
-											history.push(`/article/${doc.id}`, {from: "/BlogPage"});
-										}}>
+										<Link className="article__link" to={`/article/${doc.id}`} onClick={() => setChosenArticleNumber(doc.id)}>
 											<img
 												src={doc.content[appLanguage].image ? doc.content[appLanguage].image : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
 												alt="" className="article__image"/>
@@ -161,10 +202,7 @@ export default function BlogPage() {
 							>
 								{moviesNews && moviesNews.slice(0, 8).map(doc =>
 									<article className="article" key={doc.id}>
-										<Link className="article__link" onClick={() => {
-											setChosenArticleNumber(doc.id);
-											history.push(`/article/${doc.id}`, {from: "/BlogPage"});
-										}}>
+										<Link className="article__link" to={`/article/${doc.id}`} onClick={() => setChosenArticleNumber(doc.id)}>
 											<img
 												src={doc.content[appLanguage].image ? doc.content[appLanguage].image : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
 												alt="" className="article__image"/>
@@ -190,10 +228,7 @@ export default function BlogPage() {
 							>
 								{musicNews && musicNews.slice(0, 8).map(doc =>
 									<article className="article" key={doc.id}>
-										<Link className="article__link" onClick={() => {
-											setChosenArticleNumber(doc.id);
-											history.push(`/article/${doc.id}`, {from: "/BlogPage"});
-										}}>
+										<Link className="article__link" to={`/article/${doc.id}`} onClick={() => setChosenArticleNumber(doc.id)}>
 											<img
 												src={doc.content[appLanguage].image ? doc.content[appLanguage].image : "https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/articles_pictures%2Fdefault-placeholder-image.png?alt=media&token=1ead64c5-c3cc-4213-ac97-a391f8c15bf2"}
 												alt="" className="article__image"/>

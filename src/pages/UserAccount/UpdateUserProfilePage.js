@@ -144,7 +144,6 @@ export default function UpdateUserProfilePage() {
 			<div className='form-update__body'>
 				<form className="form-update">
 					<div className="form-update__avatar-image">
-
 						<img
 							className="form-update__avatar-img"
 							src={oldUrl!==""?oldUrl:"https://firebasestorage.googleapis.com/v0/b/aki-dragon.appspot.com/o/profile_pictures%2Fdepositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg?alt=media&token=5f904560-36a3-4425-9386-960fa63a92e6"}
@@ -291,6 +290,7 @@ export default function UpdateUserProfilePage() {
 							className='form-update__input'
 							ref={passwordRef}
 							type="password"
+							onChange={()=>console.log("")}
 						/>
 					</label>
 					<label className='form-update__label'>
@@ -309,6 +309,7 @@ export default function UpdateUserProfilePage() {
 							value={email}
 							ref={emailRef}
 							type="email"
+							onChange={()=>console.log("")}
 						/>
 					</label>
 					<button 
