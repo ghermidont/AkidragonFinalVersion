@@ -31,6 +31,8 @@ export default function Article() {
 
 	return(
 		<section className="new-article">
+			<div className="banner__commercial banner__commercial--left"></div>
+			<div className="banner__commercial banner__commercial--right"></div>
 			<div className="container">
 				{selectedArticle && selectedArticle.map(
 					doc =>(
@@ -57,6 +59,8 @@ export default function Article() {
 								/>
 							</div>
 
+							<div className="banner banner__square banner__square--article"></div>
+
 							<p className="new-article__text">
                             Content: {doc.content[appLanguage].text}
 							</p>
@@ -71,6 +75,8 @@ export default function Article() {
 									<button className="new--article__btn btn"><span>Other</span>news</button>
 								</Link>
 							</div>
+
+							<div className="banner banner__square banner__square--article"></div>
 						</>
 					)
 				)}

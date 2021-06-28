@@ -71,7 +71,7 @@ export default function BlogPage() {
 					<h1 className="news-banner__title title"><span>{t("BlogPage.NewsTitle")}</span></h1>
 					<p className="news-banner__subtitle">{appLanguage === "it" ? ITMainText : ENMainText}</p>
 
-					<div className="banner blog__banner">
+					<div className="banner banner__square">
 
 					</div>
 
@@ -213,6 +213,8 @@ export default function BlogPage() {
 					</div>
 				</div>
 			</section>
+
+			<div className="banner banner__square"></div>
 
 			<section className="contact">
 				<div className="container">

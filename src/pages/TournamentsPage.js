@@ -290,6 +290,8 @@ function TournamentsPage() {
 	return (
 		<>
 			<main className="page">
+				<div className="banner__commercial banner__commercial--left"></div>
+				<div className="banner__commercial banner__commercial--right"></div>
 				<section className="tournament">
 					<div className="container">
 
@@ -307,7 +309,7 @@ function TournamentsPage() {
 							{appLanguage === "it" ? ITBannerText : ENBannerText}
 						</p>
 
-						<div className="banner tournaments__banner"></div>
+						<div className="banner banner__square"></div>
 
 						<div className="tab__body">
 

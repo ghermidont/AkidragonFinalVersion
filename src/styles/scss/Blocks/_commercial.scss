@@ -1,14 +1,28 @@
 .banner{
-  &__container{
-    position: relative;
+  &__square{
+    max-width: 32rem;
+    width: 100%;
+    height: 100%;
+    margin: 4rem auto 6rem;
+    &--article{
+      margin: 6rem auto;
+    }
   }
-  &__home{
+  &__commercial{
+    position: fixed;
+    transform: translateY(40%);
     width: 16rem;
     height: 60rem;
-    background-color: var(--blue);
-    margin-left: auto;
-    position: fixed;
-    right: 4rem;
-    top: 20rem;
+    &--left{
+      left: 3rem;
+    }
+    &--right{
+      right: 3rem;
+    }
+  }
+}
+@media screen and(max-width: 1520px){
+  .banner__commercial{
+    display: none;
   }
 }

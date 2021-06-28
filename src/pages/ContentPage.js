@@ -49,6 +49,8 @@ export default function Contents() {
 
 	return (
 		<main className="page">
+			<div className="banner__commercial banner__commercial--left"></div>
+			<div className="banner__commercial banner__commercial--right"></div>
 			<section className="video-page">
 				<div className="container">
 					<div className="info__logo logo-section">
@@ -56,7 +58,7 @@ export default function Contents() {
 					</div>
 					<h1 className="video-page__title title"><span>{appLanguage === "it" ? ITBannerTitle : ENBannerTitle}</span>
 					</h1>
-					<div className="banner content__banner">
+					<div className="banner banner__square">
 
 					</div>
 					<p className="video-page__subtitle">

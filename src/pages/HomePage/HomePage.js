@@ -63,6 +63,8 @@ export default function HomePage() {
 	return (
 		<>
 			<main className="page">
+				<div className="banner__commercial banner__commercial--left"></div>
+				<div className="banner__commercial banner__commercial--right"></div>
 
 				<section className="banner">
 					<div className="container">
@@ -74,9 +76,7 @@ export default function HomePage() {
 				</section>
 
 				<div className="container banner__container">
-					<div className="banner banner__home">
-
-					</div>
+					<div className="banner banner__square"></div>
 				</div>
 
 				<section className="info">
@@ -133,6 +133,10 @@ export default function HomePage() {
 						<h2 className="news__title title">
 							{t("HomePage.LatestArticlesTitle")}
 						</h2>
+
+						<div className="banner banner__square"></div>
+
+
 						<div className="news__inner">
 							<ShortArticlesList/>
 						</div>
@@ -180,6 +184,8 @@ export default function HomePage() {
 						</div>
 					</div>
 				</section>
+
+				<div className="banner banner__square"></div>
 
 				<div className="contact__btn">
 					<Link className="contact__btn-link" to="/ContactUsPage">
