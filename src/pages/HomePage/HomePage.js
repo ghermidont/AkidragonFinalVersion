@@ -100,8 +100,8 @@ export default function HomePage() {
 	return (
 		<>
 			<main className="page">
-				<div className="banner__commercial banner__commercial--left"></div>
-				<div className="banner__commercial banner__commercial--right"></div>
+				<div className="banner__commercial banner__commercial--left">{stringTagsParser(vertical)}</div>
+				<div className="banner__commercial banner__commercial--right">{stringTagsParser(vertical)}</div>
 
 				<section className="banner">
 					<div className="container">
@@ -113,7 +113,7 @@ export default function HomePage() {
 				</section>
 
 				<div className="container banner__container">
-					<div className="banner banner__square"></div>
+					<div className="banner banner__square">{stringTagsParser(Top)}</div>
 				</div>
 
 				<section className="info">
@@ -165,7 +165,7 @@ export default function HomePage() {
 							{t("HomePage.LatestArticlesTitle")}
 						</h2>
 
-						<div className="banner banner__square"></div>
+						<div className="banner banner__square">{stringTagsParser(middle)}</div>
 
 
 						<div className="news__inner">
@@ -175,19 +175,6 @@ export default function HomePage() {
 							<button className="news__btn btn">{t("HomePage.OtherArticlesButton")}</button>
 						</Link>
 					</div>
-				</section>
-
-				<section className="news">
-					<div className="container">
-						BANNERS:
-						<ul>
-							<li>{stringTagsParser(vertical)}</li>
-							<li>{stringTagsParser(Top)}</li>
-							<li>{stringTagsParser(middle)}</li>
-							<li>{stringTagsParser(bottom)}</li>
-						</ul>
-					</div>
-					{/*.replace(/^"(.*)"$/, "$1")*/}
 				</section>
 
 				<section className="slider">
@@ -229,7 +216,7 @@ export default function HomePage() {
 					</div>
 				</section>
 
-				<div className="banner banner__square"></div>
+				<div className="banner banner__square">{stringTagsParser(bottom)}</div>
 
 				<div className="contact__btn">
 					<Link className="contact__btn-link" to="/ContactUsPage">

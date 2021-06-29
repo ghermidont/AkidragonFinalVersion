@@ -19,7 +19,7 @@ export default function BlogPage() {
 	const [ITFooterText, setITFooterText] = useState("");
 
 	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
-	const [Top, setTop] = useState("");
+	//const [Top, setTop] = useState("");
 	const [bottom, setBottom] = useState("");
 
 	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
@@ -79,7 +79,7 @@ export default function BlogPage() {
 		if (selectedBanners !== ""){
 			selectedBanners.map(doc => {
 				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
-				setTop(doc.mobile.top);
+				//setTop(doc.mobile.top);
 				setBottom(doc.mobile.bottom);
 			});
 		}
@@ -105,21 +105,11 @@ export default function BlogPage() {
 					</div>
 					<h1 className="news-banner__title title"><span>{t("BlogPage.NewsTitle")}</span></h1>
 					<p className="news-banner__subtitle">{appLanguage === "it" ? ITMainText : ENMainText}</p>
-
-					<section className="news">
-						<div className="container">
-							BANNERS:
-							<ul>
-								<li>{stringTagsParser(_250x250320x100320x50)}</li>
-								<li>{stringTagsParser(Top)}</li>
-								<li>{stringTagsParser(bottom)}</li>
-							</ul>
-						</div>
-						{/*.replace(/^"(.*)"$/, "$1")*/}
-					</section>
+				
+					{/*<li>{stringTagsParser(Top)}</li>*/}
 
 					<div className="banner banner__square">
-
+						{stringTagsParser(_250x250320x100320x50)}
 					</div>
 
 					<div className="tab__body">
@@ -249,7 +239,7 @@ export default function BlogPage() {
 				</div>
 			</section>
 
-			<div className="banner banner__square"></div>
+			<div className="banner banner__square">{stringTagsParser(bottom)}</div>
 
 			<section className="contact">
 				<div className="container">

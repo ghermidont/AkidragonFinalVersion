@@ -84,8 +84,8 @@ export default function Contents() {
 
 	return (
 		<main className="page">
-			<div className="banner__commercial banner__commercial--left"></div>
-			<div className="banner__commercial banner__commercial--right"></div>
+			<div className="banner__commercial banner__commercial--left">{stringTagsParser(vertical)}</div>
+			<div className="banner__commercial banner__commercial--right">{stringTagsParser(vertical)}</div>
 			<section className="video-page">
 				<div className="container">
 					<div className="info__logo logo-section">
@@ -94,23 +94,12 @@ export default function Contents() {
 					<h1 className="video-page__title title"><span>{appLanguage === "it" ? ITBannerTitle : ENBannerTitle}</span>
 					</h1>
 					<div className="banner banner__square">
-
+						{stringTagsParser(_250x250320x100320x50)}
 					</div>
 					<p className="video-page__subtitle">
 						{appLanguage === "it" ? ITBannerText : ENBannerText}
 					</p>
 				</div>
-			</section>
-
-			<section className="news">
-				<div className="container">
-					BANNERS:
-					<ul>
-						<li>{stringTagsParser(vertical)}</li>
-						<li>{stringTagsParser(_250x250320x100320x50)}</li>
-					</ul>
-				</div>
-				{/*.replace(/^"(.*)"$/, "$1")*/}
 			</section>
 
 			<section className="video">

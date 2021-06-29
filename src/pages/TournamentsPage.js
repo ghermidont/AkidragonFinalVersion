@@ -9,6 +9,8 @@ import HtmlToReact from "html-to-react";
 
 function TournamentsPage() {
 	const {t} = useTranslation();
+	const {appLanguage} = useLanguageContext();
+	
 	const [passedEvents, setPassedEvents] = useState();
 	const [futureEvents, setFutureEvents] = useState();
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
@@ -18,14 +20,10 @@ function TournamentsPage() {
 	const [ENBannerText, setENBannerText] = useState("");
 	const [ITBannerText, setITBannerText] = useState("");
 	const [ENFooterMessage, setENFooterMessage] = useState("");
-	const [ITFooterMessage, setITFooterMessage] = useState("");
-	const {appLanguage} = useLanguageContext();
-
-	useEffect(() => {
-
+	const [ITFooterMessage, setITFooterMessage] = useState("");	
 	const [vertical, setVertical] = useState("");
 	const [_250x250320x100320x50, set250x250320x100320x50] = useState("");
-	const [middle, setMiddle] = useState("");
+	//const [middle, setMiddle] = useState("");
 
 	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
@@ -80,7 +78,7 @@ function TournamentsPage() {
 			selectedBanners.map(doc => {
 				setVertical(doc.desktop.vertical);
 				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
-				setMiddle(doc.mobile.middle);
+				//setMiddle(doc.mobile.middle);
 			});
 		}
 	}, [docsFromHookCMS, docsFromHookBanners]);
@@ -327,38 +325,30 @@ function TournamentsPage() {
 	return (
 		<>
 			<main className="page">
-				<div className="banner__commercial banner__commercial--left"></div>
-				<div className="banner__commercial banner__commercial--right"></div>
+				<div className="banner__commercial banner__commercial--left">{stringTagsParser(vertical)}</div>
+				<div className="banner__commercial banner__commercial--right">{stringTagsParser(vertical)}</div>
+				
 				<section className="tournament">
-					<div className="container">
-
+					
+					<div className="container">		
+						
 						<div className="info__logo logo-section">
 							<img src={logoSection} alt="" className="info__img"/>
 						</div>
+						
 						<h1 className="tournament__title title">
 							{t("TournamentsPage.AkidragonTournaments")}
 						</h1>
+						
 						<div className="tournament__image">
 							<img className="tournament__img" src={appLanguage === "it" ? ITBannerUrl : ENBannerUrl} alt=""/>
 						</div>
 
 						<p className="tournament__text">
 							{appLanguage==="it"?ITBannerText:ENBannerText}
-						</p>
-
-						<section className="news">
-							<div className="container">
-								BANNERS:
-								<ul>
-									<li>{stringTagsParser(vertical)}</li>
-									<li>{stringTagsParser(_250x250320x100320x50)}</li>
-									<li>{stringTagsParser(middle)}</li>
-								</ul>
-							</div>
-							{/*.replace(/^"(.*)"$/, "$1")*/}
-						</section>
-
-						<div className="banner banner__square"></div>
+						</p>					
+							
+						<div className="banner banner__square">{stringTagsParser(_250x250320x100320x50)}</div>
 
 						<div className="tab__body">
 
@@ -383,16 +373,19 @@ function TournamentsPage() {
 										doc.eventCategory === "match" ? PassedMatchTemp(doc) : PassedTournTemp(doc)
 									)}
 								</div>
-
+	
 								<div className="tab-pane fade" id="future" role="tabpanel" aria-labelledby="future-tab">
 									{futureEvents && futureEvents.slice(0, 4).map(doc =>
 										doc.eventCategory === "match" ? FutureMatchTemp(doc) : FutureTournTemp(doc)
 									)}
 								</div>
-
+								
 							</div>
+							
 						</div>
+						
 					</div>
+					
 				</section>
 
 				<section className="contact">
@@ -405,9 +398,13 @@ function TournamentsPage() {
 						</div>
 					</div>
 				</section>
+				
 			</main>
 		</>
 	);
+	
 }
 
 export default TournamentsPage;
+
+{/*<li>{stringTagsParser(middle)}</li>*/}
