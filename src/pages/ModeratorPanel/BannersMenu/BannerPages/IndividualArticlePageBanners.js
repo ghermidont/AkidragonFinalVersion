@@ -106,7 +106,7 @@ function IndividualArticlePageBanners() {
 										></textarea>
 									</label>
 									<label className='form-article__label'>
-										250x250, 320x100, 320x50:
+										Middle center (250x250, 320x100, 320x50):
 										<textarea
 											className='form-article__input'
 											rows='2'
@@ -146,7 +146,7 @@ function IndividualArticlePageBanners() {
 									</label>
 
 									<label className='form-article__label'>
-										Bottom (320x50, 234x60)::
+										Bottom (320x50, 234x60):
 										<textarea
 											className='form-article__input'
 											rows='2'
