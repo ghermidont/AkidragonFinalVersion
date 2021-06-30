@@ -23,7 +23,7 @@ function TournamentsPage() {
 	const [ITFooterMessage, setITFooterMessage] = useState("");	
 	const [vertical, setVertical] = useState("");
 	const [_250x250320x100320x50, set250x250320x100320x50] = useState("");
-	//const [middle, setMiddle] = useState("");
+	const [middle, setMiddle] = useState("");
 
 	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
@@ -78,7 +78,7 @@ function TournamentsPage() {
 			selectedBanners.map(doc => {
 				setVertical(doc.desktop.vertical);
 				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
-				//setMiddle(doc.mobile.middle);
+				setMiddle(doc.mobile.middle);
 			});
 		}
 	}, [docsFromHookCMS, docsFromHookBanners]);
@@ -349,6 +349,7 @@ function TournamentsPage() {
 						</p>					
 							
 						<div className="banner banner__square">{stringTagsParser(_250x250320x100320x50)}</div>
+						<div className="banner banner__square">{stringTagsParser(middle)}</div>
 
 						<div className="tab__body">
 
@@ -407,4 +408,3 @@ function TournamentsPage() {
 
 export default TournamentsPage;
 
-{/*<li>{stringTagsParser(middle)}</li>*/}

@@ -17,7 +17,7 @@ export default function Article() {
 
 	const [vertical, setVertical] = useState("");
 	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
-	//const [Top, setTop] = useState("");
+	const [Top, setTop] = useState("");
 	const [bottom, setBottom] = useState("");
 
 	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
@@ -37,7 +37,7 @@ export default function Article() {
 			selectedBanners.map(doc => {
 				setVertical(doc.desktop.vertical);
 				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
-				//setTop(doc.mobile.top);
+				setTop(doc.mobile.top);
 				setBottom(doc.mobile.bottom);
 			});
 		}
@@ -105,7 +105,7 @@ export default function Article() {
 							</p>
 						</p>
 						
-						{/*<div className="banner banner__square banner__square--article">{stringTagsParser(Top)}</div>*/}
+						<div className="banner banner__square banner__square--article">{stringTagsParser(Top)}</div>
 
 						<div className="btn-upload">
 							<span className="icon-facebook2" onClick={()=>shareFacebook()}> Share</span>

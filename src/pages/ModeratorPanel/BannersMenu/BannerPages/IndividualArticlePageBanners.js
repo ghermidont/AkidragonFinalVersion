@@ -28,7 +28,7 @@ function IndividualArticlePageBanners() {
 			selectedDoc.map(doc => {
 				 setVertical(doc.desktop.vertical);
 				 set250x250320x100320x50(doc.desktop._250x250320x100320x50);
-				 setTop(doc.mobile.top);
+				 // setTop(doc.mobile.top);
 				 setBottom(doc.mobile.bottom);
 			});
 		}
@@ -144,6 +144,7 @@ function IndividualArticlePageBanners() {
 											}
 										></textarea>
 									</label>
+
 									<label className='form-article__label'>
 										Bottom (320x50, 234x60)::
 										<textarea

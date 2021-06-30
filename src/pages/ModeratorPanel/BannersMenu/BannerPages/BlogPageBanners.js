@@ -25,7 +25,7 @@ function BlogPageBanners() {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
 				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
-				setTop(doc.mobile.top);
+				// setTop(doc.mobile.top);
 				setBottom(doc.mobile.bottom);
 			});
 		}
