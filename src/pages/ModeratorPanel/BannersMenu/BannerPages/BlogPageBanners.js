@@ -25,7 +25,7 @@ function BlogPageBanners() {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
 				set250x250320x100320x50(doc.desktop._250x250320x100320x50);
-				// setTop(doc.mobile.top);
+				setTop(doc.mobile.top);
 				setBottom(doc.mobile.bottom);
 			});
 		}
@@ -117,7 +117,7 @@ function BlogPageBanners() {
 								<form className="form-article">
 
 									<label className='form-article__label'>
-										Top (320x50, 234x60)::
+										Top (320x50, 234x60):
 										<textarea
 											className='form-article__input'
 											rows='2'
