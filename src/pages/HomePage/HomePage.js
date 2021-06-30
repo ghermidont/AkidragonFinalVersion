@@ -113,7 +113,7 @@ export default function HomePage() {
 				</section>
 
 				<div className="container banner__container">
-					<div className="banner banner__square">{stringTagsParser(Top)}</div>
+					<div className="banner banner__square">{stringTagsParser(Top)} </div>
 				</div>
 
 				<section className="info">
