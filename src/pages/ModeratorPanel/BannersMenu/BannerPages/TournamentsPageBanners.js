@@ -128,7 +128,6 @@ function TournamentsPageBanners() {
 						>
 							<div className='form-article__body'>
 								<form className="form-article">
-									<div><center>No banners</center></div>
 									<label className='form-article__label'>
 										Top middle (320x50, 234x60):
 										<textarea
