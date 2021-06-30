@@ -133,7 +133,7 @@ function IndividualArticlePageBanners() {
 								<form className="form-article">
 
 									<label className='form-article__label'>
-										Top (320x50, 234x60)::
+										Top (320x50, 234x60):
 										<textarea
 											className='form-article__input'
 											rows='2'
