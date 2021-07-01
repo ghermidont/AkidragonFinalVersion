@@ -15,6 +15,7 @@
     transform: translateY(25%);
     width: 16rem;
     height: 60rem;
+
     &--left{
       left: 3rem;
     }
@@ -23,7 +24,7 @@
     }
   }
 }
-@media screen and (max-width: 1520px){
+@media screen and (max-width: 1580px){
   .banner__commercial{
     display: none;
   }
