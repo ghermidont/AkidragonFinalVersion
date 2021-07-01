@@ -2,16 +2,27 @@ import React from "react";
 import {Link, useHistory} from "react-router-dom";
 import {useAuthContext} from "../../context/AuthContext";
 import {useTranslation} from "react-i18next";
+import {projectFirestore} from "../../fireBase";
 
 export default function DeleteProfilePage(){
 	const {handleLogout} = useAuthContext();
 	const {currentUser} = useAuthContext();
 	const history = useHistory();
 	const {t} = useTranslation();
+	const CurrentUserFromLS = JSON.parse(localStorage.getItem("LSCurrentUser"));
+
+	const deleteUserInfoFromDB = () => {
+		projectFirestore.collection("user-profiles").doc(CurrentUserFromLS.id).delete().then(() => {
+			console.log("User info deleted.");
+		}).catch(() => {
+			console.log("No such user information");
+		});
+	};
 
 	const deleteCurrentUser = async () => {
 		await currentUser.delete().then(function () {
 			window.alert("Profile deleted.");
+			deleteUserInfoFromDB();
 			handleLogout();
 			history.push("/");
 		}).catch(function (error) {
