@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Modal} from "react-bootstrap";
-import SearchItem from "./SearchItem";
-import {useDataFromFirestore} from "../../customHooks/useFirestore";
+import ArticleSearchItem from "./ArticleSearchItem";
+import TournamentSearchItem from "./TournamentSearchItem";
+
+import {useDataFromFirestore, useDataFromFirestoreTournaments} from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
 
 function SearchBar() {
@@ -14,10 +16,13 @@ function SearchBar() {
 	const [search, setSearch] = useState("");
 	const [serverDataSearchResultArr, setServerDataSearchResultArr] = useState([]);
 
+	//Getting data from DB
 	const {docsFromHook} = useDataFromFirestore("articles");
+	const {docsFromHookTournaments} = useDataFromFirestoreTournaments("tournaments");
+	console.log(docsFromHook);
 
 	useEffect(() => {
-		if(docsFromHook)setIsLoading(false);
+		if(docsFromHook||docsFromHookTournaments)setIsLoading(false);
 	}, []);
 
 	// Search And Highlight Function
@@ -25,10 +30,10 @@ function SearchBar() {
 		let searchBarInputText = event.target.value;
 		setSearch(searchBarInputText);
 
-		const searchResultArr = docsFromHook
+		const articlesSearchResultsArr = docsFromHook
 			.filter(item =>
 				item.content[appLanguage].title.toLowerCase().includes(searchBarInputText.toLowerCase()) ||
-                    item.content[appLanguage].text.toLowerCase().includes(searchBarInputText.toLowerCase())
+				item.content[appLanguage].text.toLowerCase().includes(searchBarInputText.toLowerCase())
 			)
 			.map(item => {
 				let newTitle = item.content[appLanguage].title.replace(
@@ -47,7 +52,27 @@ function SearchBar() {
 					body: newContent,
 				};
 			});
+
+		const tournamentsSearchResultsArr = docsFromHookTournaments
+			.filter(item =>
+				item.eventTitle!==undefined&&item.eventTitle.toLowerCase().includes(searchBarInputText.toLowerCase())
+			)
+			.map(item => {
+				let newTitle = item.eventTitle.replace(
+					new RegExp(searchBarInputText, "gi"),
+					match =>
+						`<mark style="background: #2769AA; color: blue;">${match}</mark>`
+				);
+				return {
+					...item,
+					title: newTitle,
+				};
+			});
+
+		const searchResultArr = articlesSearchResultsArr.concat(tournamentsSearchResultsArr);
+
 		setServerDataSearchResultArr(searchResultArr);
+		console.log(serverDataSearchResultArr);
 	};
 
 	return (
@@ -68,15 +93,22 @@ function SearchBar() {
 						):
 							search.length > 0 ? (
 								serverDataSearchResultArr.map(post => (
-									<SearchItem
-										key = {post.id}
-										slug = {post.slug}
-										title = {post.content[appLanguage].title}
-										text = {post.content[appLanguage].text}
-										description = {post.content[appLanguage].description}
-										image = {post.content[appLanguage].image}
-										handleClose = {handleClose}
-									/>
+									(post.approved!==undefined)?
+										<ArticleSearchItem
+											key = {post.id}
+											slug = {post.slug}
+											title = {post.content[appLanguage].title}
+											text = {post.content[appLanguage].text}
+											description = {post.content[appLanguage].description}
+											image = {post.content[appLanguage].image}
+											handleClose = {handleClose}
+										/>:
+										<TournamentSearchItem
+											tournamentKey = {post.id}
+											tournamentTitle = {post.eventTitle}
+											tournamentBanner = {post.eventBanner}
+											handleClose = {handleClose}
+										/>
 								))
 							) : ""}
 					</ul>

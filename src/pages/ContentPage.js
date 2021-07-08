@@ -106,7 +106,9 @@ export default function Contents() {
 				<div className="container">
 					<h2 className="video__title">{appLanguage === "it" ? ITSwiper1Title : ENSwiper1Title}</h2>
 					<EntertainmentSwiper/>
-					<button className="video__btn btn">{t("ContentPage.OtherStreams")}</button>
+					<Link className="video__btn" to={"/FullStreamsList"}>
+						<button className="video__btn btn">{t("ContentPage.OtherStreams")}</button>
+					</Link>
 				</div>
 			</section>
 
@@ -114,7 +116,9 @@ export default function Contents() {
 				<div className="container">
 					<h2 className="video__title">{appLanguage === "it" ? ITSwiper2Title : ENSwiper2Title}</h2>
 					<MatchesTournamentsSwiper/>
-					<button className="video__btn btn">{t("ContentPage.OtherStreams")}</button>
+					<Link className="video__btn" to={"/FullStreamsList"}>
+						<button className="video__btn btn">{t("ContentPage.OtherStreams")}</button>
+					</Link>
 				</div>
 			</section>
 

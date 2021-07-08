@@ -44,6 +44,7 @@ import SponsorshipPage from "./pages/SponsorshipPage/SponsoshipPage";
 import CMSMenu from "./pages/CMSMenu/CMSMenu";
 import MainSurveyPage from "./pages/SurveyPage/SurveySteps/MainSurveyPage";
 import BannersMenu from "./pages/ModeratorPanel/BannersMenu/BannersMainMenu";
+import FullStreamsList from "./pages/FullStreamsList";
 
 function App() {
 	//const [loginPassed, setLoginPassed] = useState(false);
@@ -83,6 +84,7 @@ function App() {
 											<Route path="/ContactUsPage" component={ContactUsPage} />
 											<Route path="/BlogPage" component={BlogPage} />
 											<Route path="/ContentPage" component={ContentPage} />
+											<Route path="/FullStreamsList" component={FullStreamsList} />
 											<Route path="/AboutUsPage" component={AboutUsPage} />
 											<Route path="/TournamentsPage" component={TournamentsPage} />
 											<Route path="/SubmitCvForm" component={SubmitCvForm} />

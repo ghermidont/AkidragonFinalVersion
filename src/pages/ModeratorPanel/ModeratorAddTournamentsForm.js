@@ -260,16 +260,16 @@ export default function ModeratorAddTournamentsForm() {
 	const addTournamentWithFBCallback = () => {
 		const collectionRef = projectFirestore.collection("tournaments").doc();
 		if ((loading1 === false &&
-      loading2 === false &&
-      loading3 === false &&
-      loading4 === false) ||
-      (loading1 === false &&
-        loading2 === false) ||
-      (loading3 === false &&
-        loading4 === false) ||
-      loadingWin1 === false ||
-      (loadingWin1 === false &&
-        loadingWin2 === false))
+			loading2 === false &&
+			loading3 === false &&
+			loading4 === false) ||
+			(loading1 === false &&
+				loading2 === false) ||
+			(loading3 === false &&
+				loading4 === false) ||
+			loadingWin1 === false ||
+			(loadingWin1 === false &&
+				loadingWin2 === false))
 		{
 			collectionRef.set(
 				{
@@ -347,7 +347,7 @@ export default function ModeratorAddTournamentsForm() {
 							className='icon-upload2'>
                &ensp;
 						</span>
-            Event banner
+						Event banner
 						<input
 							className='visually-hidden'
 							type="file"
@@ -362,83 +362,83 @@ export default function ModeratorAddTournamentsForm() {
 					</div>
 
 					{eventStatus === "future" &&
-          <>
-          	<label className='form-update__label btn-upload btn-upload--tournament'>
-          		<span className='icon-upload2'></span> Picture team 1
-          	<input
-          		className='form-update__btn visually-hidden'
-          		type="file"
-          		placeholder='file'
-          		onChange={file1UploadEventListener}
-          	/>
+					<>
+						<label className='form-update__label btn-upload btn-upload--tournament'>
+							<span className='icon-upload2'></span> Picture team 1
+							<input
+								className='form-update__btn visually-hidden'
+								type="file"
+								placeholder='file'
+								onChange={file1UploadEventListener}
+							/>
 
-          	</label>
-          	<div className="output">
-          		{error1 && <div className="error">{error1}</div>}
-          		{fileSuccess1 &&
-              <div>Image 1 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url1} alt=""/></div>}
-          	</div>
-          	<br/>
-          	<label className='form-update__label btn-upload btn-upload--tournament'>
-          		<span className='icon-upload2'></span> Picture team 2
-          		<input
-          			className='form-update__btn visually-hidden'
-          			type="file"
-          			placeholder='file'
-          			onChange={file2UploadEventListener}
-          		/>
+						</label>
+						<div className="output">
+							{error1 && <div className="error">{error1}</div>}
+							{fileSuccess1 &&
+							<div>Image 1 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url1} alt=""/></div>}
+						</div>
+						<br/>
+						<label className='form-update__label btn-upload btn-upload--tournament'>
+							<span className='icon-upload2'></span> Picture team 2
+							<input
+								className='form-update__btn visually-hidden'
+								type="file"
+								placeholder='file'
+								onChange={file2UploadEventListener}
+							/>
 
-          	</label>
-          	<div className="output">          	
-          		{error2 && <div className="error">{error2}</div>}
-          		{fileSuccess2 &&
-              <div>Image 2 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url2} alt=""/></div>}
-          	</div>
-          	<br/>
-          </>
+						</label>
+						<div className="output">
+							{error2 && <div className="error">{error2}</div>}
+							{fileSuccess2 &&
+							<div>Image 2 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url2} alt=""/></div>}
+						</div>
+						<br/>
+					</>
 					}
 					{(eventCategory === "tournament" && eventStatus === "future") &&
-          <>
-          	<label className='form-update__label btn-upload btn-upload--tournament'><span
-          		className='icon-upload2'></span> Picture team 3
-          	<input
-          		className='form-update__btn visually-hidden'
-          		type="file"
-          		placeholder='file'
-          		onChange={file3UploadEventListener}
-          	/>
-          	</label>
-          	<div className="output">
-          		{error3 && <div className="error">{error3}</div>}
-          		{fileSuccess3 &&
-              <div>Image 3 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url3} alt=""/></div>}
-          	</div>
-          	<br/>
-          	<label className='form-update__label btn-upload btn-upload--tournament'> <span
-          		className='icon-upload2'></span> Picture team 4
-          	<input
-          		className='form-update__btn visually-hidden'
-          		type="file"
-          		placeholder='file'
-          		onChange={file4UploadEventListener}
-          	/>
-          	</label>
-          	<div className="output">
-          		{error4 && <div className="error">{error4}</div>}
-          		{fileSuccess4 &&
-              <div>Image 4 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url4} alt=""/></div>}
-          	</div>
-          	<br/>
-          </>
+					<>
+						<label className='form-update__label btn-upload btn-upload--tournament'><span
+							className='icon-upload2'></span> Picture team 3
+						<input
+							className='form-update__btn visually-hidden'
+							type="file"
+							placeholder='file'
+							onChange={file3UploadEventListener}
+						/>
+						</label>
+						<div className="output">
+							{error3 && <div className="error">{error3}</div>}
+							{fileSuccess3 &&
+							<div>Image 3 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url3} alt=""/></div>}
+						</div>
+						<br/>
+						<label className='form-update__label btn-upload btn-upload--tournament'> <span
+							className='icon-upload2'></span> Picture team 4
+						<input
+							className='form-update__btn visually-hidden'
+							type="file"
+							placeholder='file'
+							onChange={file4UploadEventListener}
+						/>
+						</label>
+						<div className="output">
+							{error4 && <div className="error">{error4}</div>}
+							{fileSuccess4 &&
+							<div>Image 4 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={url4} alt=""/></div>}
+						</div>
+						<br/>
+					</>
 					}
 
 					{eventVideoLink &&
-          <ReactPlayer
-          	url={eventVideoLink ? eventVideoLink : ""}
-          	controls={true}
-          	light={true}
-          	playing={false}
-          />
+					<ReactPlayer
+						url={eventVideoLink ? eventVideoLink : ""}
+						controls={true}
+						light={true}
+						playing={false}
+					/>
 					}
 
 					<input
@@ -473,52 +473,52 @@ export default function ModeratorAddTournamentsForm() {
 					/>
 
 					{eventStatus === "passed" &&
-          <label
-          	className='form-update__label btn-upload btn-upload--tournament'>
+					<label
+						className='form-update__label btn-upload btn-upload--tournament'>
           	<span
-          		className='icon-upload2'>
+							className='icon-upload2'>
           	</span>
-            Event winner 1
-          	<input
-          		className='visually-hidden'
-          		type="file"
-          		onChange={fileWin1UploadEventListener}
-          	/>
-          	<div className="output">
-          		{errorWin1 && <div className="error">{errorWin1}</div>}
-          		{fileSuccessWin1 &&
-              <div>Image Win1 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={urlWin1} alt=""/>
-              </div>}
-          	</div>
-          </label>
+						Event winner 1
+						<input
+							className='visually-hidden'
+							type="file"
+							onChange={fileWin1UploadEventListener}
+						/>
+						<div className="output">
+							{errorWin1 && <div className="error">{errorWin1}</div>}
+							{fileSuccessWin1 &&
+							<div>Image Win1 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={urlWin1} alt=""/>
+							</div>}
+						</div>
+					</label>
 					}
 					{(eventStatus === "passed" && eventCategory === "match") &&
-          <label
-          	className='form-update__label btn-upload btn-upload--tournament'>
+					<label
+						className='form-update__label btn-upload btn-upload--tournament'>
           	<span
-          		className='icon-upload2'>
+							className='icon-upload2'>
           	</span>
-            Event winner 2
-          	<input
-          		className='form-update__btn visually-hidden'
-          		type="file"
-          		placeholder='file'
-          		onChange={fileWin2UploadEventListener}
-          	/>
-          	<div className="output">
-          		{errorWin2 && <div className="error">{errorWin2}</div>}
-          		{fileSuccessWin2 &&
-              <div>Image Win2 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={urlWin2} alt=""/>
-              </div>}
-          	</div>
-          </label>
+						Event winner 2
+						<input
+							className='form-update__btn visually-hidden'
+							type="file"
+							placeholder='file'
+							onChange={fileWin2UploadEventListener}
+						/>
+						<div className="output">
+							{errorWin2 && <div className="error">{errorWin2}</div>}
+							{fileSuccessWin2 &&
+							<div>Image Win2 Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={urlWin2} alt=""/>
+							</div>}
+						</div>
+					</label>
 					}
 
 					<button
 						className="btn-upload"
 						onClick={() => addTournamentWithFBCallback()}
 					>
-            Submit
+						Submit
 					</button>
 
 				</form>

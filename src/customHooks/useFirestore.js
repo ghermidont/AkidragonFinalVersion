@@ -24,8 +24,23 @@ const useDataFromFirestore = (collection) => {
 		// this is a cleanup function that react will run when
 		// a component using the hook unmounts
 	}, [collection]);
-
 	return { docsFromHook };
+};
+
+const useDataFromFirestoreTournaments = (collection) => {
+	const [docsFromHookTournaments, setDocsFromHookTournaments] = useState([]);
+	useEffect( () => {		
+		const unsubFromCollection = projectFirestore.collection(collection).orderBy("createdAt", "desc")			
+			.onSnapshot(snap => {				
+				let documents = [];				
+				snap.forEach(doc => {
+					documents.push({...doc.data(), id: doc.id,  slug: doc.id});
+				});
+				setDocsFromHookTournaments(documents);
+			});
+		return () => unsubFromCollection();			
+	}, [collection]);
+	return { docsFromHookTournaments };
 };
 
 const useDataFromFirestoreCMS = (collection) => {
@@ -77,4 +92,4 @@ const useDataFromFirestoreUserInfo = (collection) => {
 	return { docsFromHookUserInfo };
 };
 
-export {useDataFromFirestore, useDataFromFirestoreCMS, useDataFromFirestoreUserInfo, useDataFromFirestoreBanners};
+export {useDataFromFirestore, useDataFromFirestoreCMS, useDataFromFirestoreUserInfo, useDataFromFirestoreBanners, useDataFromFirestoreTournaments};
