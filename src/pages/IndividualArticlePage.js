@@ -5,6 +5,7 @@ import {useLanguageContext} from "../context/LanguageContext";
 import { ShareLink } from "social-media-sharing";
 import logoSection from "../assets/images/dest/logo-section.png";
 import HtmlToReact from "html-to-react";
+import ShortArticlesList from "../components/ShortArticlesList";
 
 // eslint-disable-next-line no-undef
 const queryString = require("query-string");
@@ -75,6 +76,7 @@ export default function Article() {
 			<div className="container">
 				{selectedArticle && selectedArticle.map(doc =>(
 					<div key={doc.id}>
+						<div>Category: <ul>{doc.categories.map(category=><li key={doc.id+Date.now}>{category}</li>)}</ul></div>
 						<div className="new-article__title-box">
 							<img src={logoSection} alt="" className="new-article__logo"/>
 							<h1 className="new-article__title title">
@@ -111,13 +113,18 @@ export default function Article() {
 							<span className="icon-facebook2" onClick={()=>shareFacebook()}> Share</span>
 						</div>
 
-						<div>
-							<br/>
-							<Link to = "/BlogPage">
-								<button className="new--article__btn btn"><span>Other</span>news</button>
-							</Link>
-						</div>				
-									
+						<div className="news__inner">
+							<ShortArticlesList/>
+						</div>
+
+						<center>
+							<div>
+								<br/>
+								<Link to = "/BlogPage">
+									<button className="new--article__btn btn"><span>Other</span>news</button>
+								</Link>
+							</div>
+						</center>
 						<div className="banner banner__square banner__square--article">{stringTagsParser(bottom)}</div>
 					</div>	
 				)

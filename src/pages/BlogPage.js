@@ -85,15 +85,12 @@ export default function BlogPage() {
 		}
 	}, [docsFromHookCMS, docsFromHookBanners]);
 
-	// DB string tags parser
+	// DB string tags parser. Is needed to render the banners stored in the database.
 	const stringTagsParser = (tag) => {
 		if(tag) {
-			let  htmlInput = tag;
 			let  htmlToReactParser = new HtmlToReact.Parser(React);
-			let  reactComponent = htmlToReactParser.parse(htmlInput);
-			return reactComponent;
+			return htmlToReactParser.parse(tag);
 		}
-		return;
 	};
 
 	return (
