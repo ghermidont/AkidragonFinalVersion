@@ -57,6 +57,7 @@ function ContactUsPage() {
 
 				<section className="map">
 					<div className="container">
+						<h1>{t("ContactUsForm.Headquarter")}</h1>
 						<ul className="map__list">
 							<li className="map__item map__address">
 								<span className="icon-location"> </span>

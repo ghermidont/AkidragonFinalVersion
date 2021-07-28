@@ -99,12 +99,14 @@
     "MessageSent": "Message sent",
     "ConnectionError": "Your message was not sent due to a connection error",
     "NamePlaceHolder": "Name",
+    "SurnamePlaceHolder": "Surname",
     "EmailPlaceHolder": "Email",
     "SubjectPlaceHolder": "Subject",
     "MessagePlaceHolder": "Message",
     "UploadButton": "Upload",
     "SubmitButton": "Submit",
     "Consent": "I consent to the processing of my personal data",
+    "Headquarter": "Headquarter",
     "WhatsAppMessage": "Write us on Whatsapp"
   },
 
@@ -130,6 +132,7 @@
     "PageTitle": "Sponsorship",
     "CooperationOffers": "Cooperation offers",
     "NamePlaceHolder": "Name",
+    "SurnamePlaceHolder": "Surname",
     "MessagePlaceHolder": "Message",
     "SubmitButton": "Submit",
     "MessageSentAlert": "You message has been sent. We will contact you shortly."

@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import React, {useRef} from "react";
 import emailjs from "emailjs-com";
 import {init} from "emailjs-com";
@@ -55,18 +56,26 @@ export default function SponsorshipForm() {
 											</div>
 
 											<div className="col-md-6">
-												<input placeholder="Email"
-													id="email"
-													type="email"
-													className="form-control form-update__input"
-													aria-describedby="emailHelp"
-													required
-													name="email"
+												<input placeholder={t("SponsorshipPage.SurnamePlaceHolder")}
+													   id="surname"
+													   type="text"
+													   className="form-control form-update__input"
+													   required
+													   name="surname"
 												/>
 											</div>
 										</div>
 									</div>
+
 									<div className="form-group">
+										<input placeholder="Email"
+											   id="email"
+											   type="email"
+											   className="form-control form-update__input"
+											   aria-describedby="emailHelp"
+											   required
+											   name="email"
+										/>
 										<textarea placeholder={t("SponsorshipPage.MessagePlaceHolder")}
 											id="message"
 											className="form-control form-update__input"

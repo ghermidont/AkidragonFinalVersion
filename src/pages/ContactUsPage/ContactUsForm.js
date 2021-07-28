@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import React, {useEffect, useState} from "react";
 import emailjs from "emailjs-com";
 import {init} from "emailjs-com";
@@ -30,7 +31,7 @@ export default function ContactUsForm() {
 				emailjs.sendForm("service_neq4dxf", "template_sij1vgl", "#contactus-form", "user_ryi2yglqohFlHpuZyAqiJ")
 					.then((result) => {
 						window.alert(t("ContactUsForm.MessageSent"));
-						return result.text && history.push("/MessageSentPage", {from: "/ContactUsForm"});
+						if(result.text)history.push("/MessageSentPage", {from: "/ContactUsForm"});
 					}, () => {
 						window.alert(t("ContactUsForm.ConnectionError"));
 					});
@@ -60,6 +61,13 @@ export default function ContactUsForm() {
 					required
 					name="name"
 				/>
+				<input className="input"
+					   placeholder={t("ContactUsForm.SurnamePlaceHolder")}
+					   id="surname"
+					   type="text"
+					   required
+					   name="surname"
+				/>
 			</div>
 			<input
 				className="input"
@@ -70,16 +78,6 @@ export default function ContactUsForm() {
 				placeholder={t("ContactUsForm.EmailPlaceHolder")}
 				id="email"
 			/>
-			<input
-				className="input"
-				aria-describedby="Subject"
-				placeholder={t("ContactUsForm.SubjectPlaceHolder")}
-				id="subject"
-				type="text"
-				required
-				name="subject"
-			/>
-
 			<textarea
 				className="input"
 				cols="30"

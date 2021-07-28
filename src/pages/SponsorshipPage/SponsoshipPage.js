@@ -5,8 +5,22 @@ import {useLanguageContext} from "../../context/LanguageContext";
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 
 function SponsorshipPage() {
-	const [ENBannerUrl, setENBannerUrl] = useState("");
-	const [ITBannerUrl, setITBannerUrl] = useState("");
+	const [pageCMSContent, setCMSPageContent] = useState({
+		ENBannerUrl: "",
+		ITBannerUrl: "",
+		ENHowItWorksTitle: "",
+		ITHowItWorksTitle: "",
+		ENHowItWorksText: "",
+		ITHowItWorksText: ""
+	});
+
+	const {ENBannerUrl, ITBannerUrl, ENHowItWorksTitle, ITHowItWorksTitle, ENHowItWorksText, ITHowItWorksText } = pageCMSContent;
+	// const [ENBannerUrl, setENBannerUrl] = useState("");
+	// const [ITBannerUrl, setITBannerUrl] = useState("");
+	// const [setENHowItWorksTitle] = useState("");
+	// const [setITHowItWorksTitle] = useState("");
+	// const [setENHowItWorksText] = useState("");
+	// const [setITHowItWorksText] = useState("");
 
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 
@@ -19,12 +33,24 @@ function SponsorshipPage() {
 	});
 
 	let selectedDoc = "";
-
+	//!Add new fields to FireBase.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
-				setENBannerUrl(doc.banner.en);
-				setITBannerUrl(doc.banner.it);
+				setCMSPageContent({
+					ENBannerUrl:doc.banner.en,
+					ITBannerUrl:doc.banner.it,
+					ENHowItWorksTitle:doc.howItWorksTitle.en,
+					ITHowItWorksTitle:doc.howItWorksTitle.it,
+					ENHowItWorksText:doc.howItWorksText.en,
+					ITHowItWorksText:doc.howItWorksText.it
+				});
+				// setENBannerUrl(doc.banner.en);
+				// setITBannerUrl(doc.banner.it);
+				// setENHowItWorksTitle(doc.howItWorksTitle.en);
+				// setITHowItWorksTitle(doc.howItWorksTitle.it);
+				// setENHowItWorksText(doc.howItWorksText.en);
+				// setITHowItWorksText(doc.howItWorksText.it);
 			});
 		}
 	}, [docsFromHookCMS]);
@@ -43,7 +69,12 @@ function SponsorshipPage() {
 					</div>
 				</div>
 			</section>
+			{/*How does it work text here.*/}
+			<div>
+				{appLanguage === "it" ? ITHowItWorksTitle : ENHowItWorksTitle}
+				{appLanguage === "it" ? ITHowItWorksText : ENHowItWorksText}
 
+			</div>
 			<SponsorshipForm />
 		</>
 	);

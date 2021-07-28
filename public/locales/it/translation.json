@@ -98,12 +98,14 @@
     "MessageSent": "Messaggio inviato",
     "ConnectionError": "Il tuo messaggio non è stato inviato a causa di un errore di connessione",
     "NamePlaceHolder": "Nome",
+    "SurnamePlaceHolder": "Cognome",
     "EmailPlaceHolder": "Email",
     "SubjectPlaceHolder": "Soggetto",
     "MessagePlaceHolder": "Messaggio",
     "UploadButton": "Caricare",
     "SubmitButton": "Invia",
     "Consent": "Acconsento al trattamento dei miei dati personali",
+    "Headquarter": "Sede centrale",
     "WhatsAppMessage": "Scrivici su Whatsapp"
   },
 
@@ -129,6 +131,7 @@
     "PageTitle": "Sponsorizzazione",
     "CooperationOffers": "Offerte di cooperazione",
     "NamePlaceHolder": "Nome",
+    "SurnamePlaceHolder": "Cognome",
     "MessagePlaceHolder": "Messaggio",
     "SubmitButton": "Invia",
     "MessageSentAlert": "Il tuo messaggio è stato inviato. Ti contatteremo a breve."
