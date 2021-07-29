@@ -11,6 +11,7 @@ import CMSBlogPageEdit from "./PagesEditComponents/CMSBlogPageEdit";
 import CMSAboutUsPageEdit from "./PagesEditComponents/CMSAboutUsPageEdit";
 import CMSContentPageEdit from "./PagesEditComponents/CMSContentPageEdit";
 import CMSContactUpPageEdit from "./PagesEditComponents/CMSContactUsPageEdit";
+import CMSSponsorshipPageEdit from "./PagesEditComponents/CMSSponsorshipPageEdit";
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -38,6 +39,7 @@ export default function LabTabs() {
 						<Tab label="Content Page" value="4" />
 						<Tab label="AboutUs Page" value="5" />
 						<Tab label="ContactUs Page" value="6" />
+						<Tab label="Sponsorship Page" value="7" />
 					</TabList>
 				</AppBar>
 				<TabPanel value="1"><CMSHomePageEdit /></TabPanel>
@@ -46,6 +48,7 @@ export default function LabTabs() {
 				<TabPanel value="4"><CMSContentPageEdit /></TabPanel>
 				<TabPanel value="5"><CMSAboutUsPageEdit /></TabPanel>
 				<TabPanel value="6"><CMSContactUpPageEdit /></TabPanel>
+				<TabPanel value="7"><CMSSponsorshipPageEdit /></TabPanel>
 			</TabContext>
 		</div>
 	);

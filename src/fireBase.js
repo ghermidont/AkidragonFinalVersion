@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 //In order to communicate with the Firebase we need to use the FireBase SDK.
-
 //In order to keep the FireBase logic separate form the components we create a separate folder (customHooks) that contains the logic for interaction with the database.
 
 import firebase from "firebase";

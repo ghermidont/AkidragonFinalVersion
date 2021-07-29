@@ -1,11 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {useDataFromFirestore, useDataFromFirestoreBanners} from "../customHooks/useFirestore";
+import {
+	useDataFromFirestore,
+	useDataFromFirestoreBanners
+} from "../customHooks/useFirestore";
 import {Link} from "react-router-dom";
 import {useLanguageContext} from "../context/LanguageContext";
 import { ShareLink } from "social-media-sharing";
 import logoSection from "../assets/images/dest/logo-section.png";
 import HtmlToReact from "html-to-react";
 import ShortArticlesList from "../components/ShortArticlesList";
+import date from "date-and-time";
 
 // eslint-disable-next-line no-undef
 const queryString = require("query-string");
@@ -51,12 +55,14 @@ export default function Article() {
 	};
 
 	let selectedArticle = "";
+	let authorID = "";
 
 	if(docsFromHook) {
 		//Filter the articles object and select the article who's slug corresponds to the current window slug
 		selectedArticle = docsFromHook.filter(function (article) {
 			return article.id === stringifiedSlug;
 		});
+		if(selectedArticle){selectedArticle.map(doc =>authorID=doc.authorId);}
 	}
 
 	// DB string tags parser
@@ -68,6 +74,18 @@ export default function Article() {
 		}
 	};
 
+	const dateConverter = (DATE, format) => {
+		if(format==="extended") {
+			let date = new Date(DATE);
+			return date.toString();
+		} else {
+			let now = new Date(DATE);
+			return date.format(now, "ddd, MMM DD YYYY");
+		}
+	};
+
+
+
 	return(
 		<section className="new-article">
 			<div className="banner__commercial banner__commercial--left">{stringTagsParser(vertical)}</div>
@@ -76,7 +94,11 @@ export default function Article() {
 			<div className="container">
 				{selectedArticle && selectedArticle.map(doc =>(
 					<div key={doc.id}>
-						<div>Category: <ul>{doc.categories.map(category=><li key={doc.id+Date.now}>{category}</li>)}</ul></div>
+						<div>
+							<div>Category: <ul>{doc.categories.map(category=><li key={doc.id+Date.now}>{category}</li>)}</ul></div>
+							<div>Author: {authorID}</div>
+							<div>Date: {dateConverter(doc.createdAt)}</div>
+						</div>
 						<div className="new-article__title-box">
 							<img src={logoSection} alt="" className="new-article__logo"/>
 							<h1 className="new-article__title title">

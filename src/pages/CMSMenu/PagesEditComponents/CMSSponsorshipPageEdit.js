@@ -1,23 +1,23 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import React, {useEffect, useRef, useState} from "react";
-import {useHistory} from "react-router-dom";
 import {projectFirestore, projectStorage} from "../../../fireBase";
 import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
 
-function CMSTournamentsPageEdit() {
+function CMSSponsorshipPageEdit() {
 	const publishBtnRef = useRef();
 
 	const fileTypesArray = ["image/png", "image/jpeg"];
-	const history = useHistory();
 
 	const [ENBannerUrl, setENBannerUrl] = useState("");
 	const [ITBannerUrl, setITBannerUrl] = useState("");
-	const [OldENBannerUrl, setOldENBannerUrl] = useState("");
-	const [OldITBannerUrl, setITOldBannerUrl] = useState("");
 
-	const [ENBannerText, setENBannerText] = useState("");
-	const [ITBannerText, setITBannerText] = useState("");
-	const [ENFooterMessage, setENFooterMessage] = useState("");
-	const [ITFooterMessage, setITFooterMessage] = useState("");
+	const [oldENBannerUrl, setOldENBannerUrl] = useState("");
+	const [oldITBannerUrl, setOldITBannerUrl] = useState("");
+    
+	const [ENHowItWorksTitle, setENHowItWorksTitle] = useState("");
+	const [ITHowItWorksTitle, setITHowItWorksTitle] = useState("");
+	const [ENHowItWorksText, setENHowItWorksText] = useState("");
+	const [ITHowItWorksText, setITHowItWorksText] = useState("");
 
 	const [ITFileTypeError ,setITFileTypeError] = useState("");
 	const [ENFileTypeError ,setENFileTypeError] = useState("");
@@ -35,7 +35,7 @@ function CMSTournamentsPageEdit() {
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
-				return doc.id === "tournamentsPage";
+				return doc.id === "sponsorshipPage";
 			});
 		}
 	});
@@ -43,19 +43,42 @@ function CMSTournamentsPageEdit() {
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
-				setENBannerUrl(doc.mainBanner.en);
-				setOldENBannerUrl(doc.mainBanner.en);
-
-				setITBannerUrl(doc.mainBanner.it);
-				setITOldBannerUrl(doc.mainBanner.it);
-
-				setENBannerText(doc.bannerText.en);
-				setITBannerText(doc.bannerText.it);
-				setENFooterMessage(doc.footerMessage.en);
-				setITFooterMessage(doc.footerMessage.it);
+				setENBannerUrl(doc.bannerUrl.en);
+				setITBannerUrl(doc.bannerUrl.it);
+				setOldENBannerUrl(doc.bannerUrl.en);
+				setOldITBannerUrl(doc.bannerUrl.it);
+				setENHowItWorksTitle(doc.howItWorksTitle.en);
+				setITHowItWorksTitle(doc.howItWorksTitle.it);
+				setENHowItWorksText(doc.howItWorksText.en);
+				setITHowItWorksText(doc.howItWorksText.it);
 			});
 		}
 	}, [docsFromHookCMS]);
+
+	const writeToFBCallback = () => {
+		const collectionRef = projectFirestore.collection("web-app-cms").doc("sponsorshipPage");
+		collectionRef.set(
+			{
+				"bannerUrl": {
+					"en": ENBannerUrl,
+					"it": ITBannerUrl
+				},
+				"howItWorksTitle": {
+					"en": ENHowItWorksTitle,
+					"it": ITHowItWorksTitle
+				},
+				"howItWorksText": {
+					"en": ENHowItWorksText,
+					"it": ITHowItWorksText
+				}
+			})
+			.then(() => {
+				window.alert("Content edited successfully!");
+			})
+			.catch((error) => {
+				window.alert("Error: " + error.code + " " + error.message + " " + error.details);
+			});
+	};
 
 	const ITFileUploadEventListener = (e) => {
 		let uploadedFile = e.target.files[0];
@@ -66,7 +89,7 @@ function CMSTournamentsPageEdit() {
 				try {
 					setITFileTypeError("");
 					setITUploadError("");
-					const storageRef = projectStorage.ref("CMS-pictures/tournamentsPage").child(uploadedFile.name);
+					const storageRef = projectStorage.ref("CMS-pictures/sponsorshipPage").child(uploadedFile.name);
 					storageRef.put(uploadedFile).on("state_changed", () => {
 					},  (err) => {
 						window.alert(err);
@@ -103,6 +126,7 @@ function CMSTournamentsPageEdit() {
 						const finalUrl = await storageRef.getDownloadURL();
 						finalUrl!==undefined?setENFileSuccess(true):setENFileSuccess(false);
 						setENBannerUrl(finalUrl);
+
 					});
 				} catch {
 					setENUploadError("Failed to upload file");
@@ -114,37 +138,10 @@ function CMSTournamentsPageEdit() {
 		}
 	};
 
-	const writeToFBCallback = () => {
-		const collectionRef = projectFirestore.collection("web-app-cms").doc("tournamentsPage");
-
-		collectionRef.set(
-			{
-				"mainBanner": {
-					"en": ENBannerUrl,
-					"it": ITBannerUrl
-				},
-				"bannerText": {
-					"en": ENBannerText,
-					"it": ITBannerText
-				},
-				"footerMessage": {
-					"en": ENFooterMessage,
-					"it": ITFooterMessage
-				}
-			})
-			.then(() => {
-				window.alert("Stream added successfully!");
-				history.push("/UserProfilePage", {from: "/CMSMenu"});
-			})
-			.catch((error) => {
-				window.alert(error.code + " " + error.message + "" + error.details);
-			});
-	};
-
 	return (
 		<>
 			<div style={{paddingTop: "5em important"}}>
-				<center><h1>Edit <strong>Tournaments</strong> Page static content:</h1></center>
+				<center><h1>Edit <strong>Sponsorship</strong> Page static content:</h1></center>
 				<section>
 					<ul className="nav nav-tabs" id="myTab" role="tablist">
 						<li className="nav-item">
@@ -170,6 +167,7 @@ function CMSTournamentsPageEdit() {
 						</li>
 					</ul>
 					<div className="tab-content" id="myTabContent">
+
 						{/*Tab1*/}
 						<div
 							className="tab-pane fade show active"
@@ -178,41 +176,14 @@ function CMSTournamentsPageEdit() {
 							aria-labelledby="home-tab">
 							<div className='form-article__body'>
 								<form className="form-article">
-
-									<label className='form-article__label'>
-                                        Banner text:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ITBannerText}
-											required
-											onChange={
-												(e)=>setITBannerText(e.target.value)
-											}
-										></textarea>
-									</label>
-
-									<label className='form-article__label'>
-                                        Footer message:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ITFooterMessage}
-											required
-											onChange={
-												(e)=>setITFooterMessage(e.target.value)
-											}
-										></textarea>
-									</label>
 									<div>
-                                        Current banner:
-										<img style={{width: "25%", height: "auto"}} src={OldITBannerUrl} alt=""/>
+                                            Current banner:
+										<img style={{width: "25%", height: "auto"}} src={oldITBannerUrl} alt=""/>
 									</div>
 									{/*file input*/}
-									<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
-										<input
+									<label className='form-article__label btn-upload'>
+										<span className='icon-upload2'> </span> Main banner
+									 <input
 											className='form-article__btn visually-hidden'
 											type="file"
 											placeholder='file'
@@ -220,10 +191,37 @@ function CMSTournamentsPageEdit() {
 										/>
 									</label>
 									<div className="output">
-										{ ITUploadError!=="" && <div className="error">{ ITUploadError }</div>}
-										{ ITFileTypeError!=="" && <div className="error">{ ITFileTypeError }</div>}
-										{ ITFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITBannerUrl} alt=""/></div> }
+										{ITUploadError !== "" && <div className="error">{ITUploadError}</div>}
+										{ITFileTypeError !== "" && <div className="error">{ITFileTypeError}</div>}
+										{ITFileSuccess &&
+                                        <div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}}
+                                        	src={ITBannerUrl} alt=""/></div>}
 									</div>
+									<label className='form-article__label'>
+                                        Banner title:
+										<textarea
+											className='form-article__input'
+											rows='2'
+											name="countent"
+											value={ITHowItWorksTitle}
+											onChange={
+												(e) => setITHowItWorksTitle(e.target.value)
+											}
+										> </textarea>
+									</label>
+
+									<label className='form-article__label'>
+                                        Banner text:
+										<textarea
+											className='form-article__input'
+											rows='2'
+											name="countent"
+											value={ITHowItWorksText}
+											onChange={
+												(e) => setITHowItWorksText(e.target.value)
+											}
+										> </textarea>
+									</label>
 								</form>
 							</div>
 						</div>
@@ -238,40 +236,13 @@ function CMSTournamentsPageEdit() {
 						>
 							<div className='form-article__body'>
 								<form className="form-article">
-
-									<label className='form-article__label'>
-                                        Content
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ENBannerText}
-											required
-											onChange={
-												(e)=>setENBannerText(e.target.value)
-											}
-										></textarea>
-									</label>
-
-									<label className='form-article__label'>
-                                        Content
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ENFooterMessage}
-											required
-											onChange={
-												(e)=>setENFooterMessage(e.target.value)
-											}
-										></textarea>
-									</label>
 									<div>
                                         Current banner:
-										<img style={{width: "25%", height: "auto"}} src={OldENBannerUrl} alt=""/>
+										<img style={{width: "25%", height: "auto"}} src={oldENBannerUrl} alt=""/>
 									</div>
 									{/*file input*/}
-									<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
+									<label className='form-article__label btn-upload'>
+										<span className='icon-upload2'> </span> Main banner
 										<input
 											className='form-article__btn visually-hidden'
 											type="file"
@@ -280,10 +251,38 @@ function CMSTournamentsPageEdit() {
 										/>
 									</label>
 									<div className="output">
-										{ ENUploadError!=="" && <div className="error">{ ENUploadError }</div>}
-										{ ENFileTypeError!=="" && <div className="error">{ ENFileTypeError }</div>}
-										{ ENFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENBannerUrl} alt=""/></div> }
+										{ENUploadError !== "" && <div className="error">{ENUploadError}</div>}
+										{ENFileTypeError !== "" && <div className="error">{ENFileTypeError}</div>}
+										{ENFileSuccess &&
+                                        <div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}}
+                                        	src={ENBannerUrl} alt=""/></div>}
 									</div>
+
+									<label className='form-article__label'>
+                                        Banner text:
+										<textarea
+											className='form-article__input'
+											rows='2'
+											name="content"
+											value={ENHowItWorksTitle}
+											onChange={
+												(e) => setENHowItWorksTitle(e.target.value)
+											}
+										> </textarea>
+									</label>
+
+									<label className='form-article__label'>
+                                        Footer text:
+										<textarea
+											className='form-article__input'
+											rows='2'
+											name="content"
+											value={ENHowItWorksText}
+											onChange={
+												(e) => setENHowItWorksText(e.target.value)
+											}
+										> </textarea>
+									</label>
 								</form>
 							</div>
 						</div>
@@ -293,18 +292,10 @@ function CMSTournamentsPageEdit() {
 							<button
 								ref={publishBtnRef}
 								className="form-article__btn"
-								onClick={()=>writeToFBCallback()}
+								onClick={() => writeToFBCallback()}
 							>
                                 Publish
 							</button>
-
-							{/*<button*/}
-							{/*    ref={cancelBtnRef}*/}
-							{/*    className="form-article__btn"*/}
-							{/*    onClick={()=>clearInput()}*/}
-							{/*>*/}
-							{/*    Cancel*/}
-							{/*</button>*/}
 						</div>
 					</div>
 				</section>
@@ -313,4 +304,4 @@ function CMSTournamentsPageEdit() {
 	);
 }
 
-export default CMSTournamentsPageEdit;
+export default CMSSponsorshipPageEdit;
