@@ -42,6 +42,16 @@ export default function NavBar() {
 										{t("NavBar.Menu.OurUniverse.Tournaments")}
 									</Link>
 								</li>
+								<li className="sub-menu__item">
+									<Link className="sub-menu__link" onClick={() => setToggleMenu("")} to="GameTeamsPage">
+										{t("NavBar.Menu.OurUniverse.GameTeams")}
+									</Link>
+								</li>
+								<li className="sub-menu__item">
+									<Link className="sub-menu__link" onClick={() => setToggleMenu("")} to="GameSalesPage">
+										{t("NavBar.Menu.OurUniverse.SaleGames")}
+									</Link>
+								</li>
 							</ul>
 						</li>
 

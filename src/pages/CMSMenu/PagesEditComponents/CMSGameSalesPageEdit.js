@@ -7,7 +7,7 @@ import { BsDashCircleFill,  BsPlusCircleFill} from "react-icons/bs";
 import { v4 as uuidv4 } from "uuid";
 import {FaLinkedinIn} from "react-icons/fa";
 
-function CMSAboutUsPageEdit() {
+function CMSGamesSalesPageEdit() {
 	// eslint-disable-next-line react/prop-types
 	const ColoredLine = ({ color }) => (
 		<hr
@@ -132,7 +132,7 @@ function CMSAboutUsPageEdit() {
 								window.alert(err);
 							}, async()=>{
 								const finalUrl = await storageRef.getDownloadURL();
-								if(finalUrl!==undefined)doc[e.target.name]=finalUrl;                                
+								if(finalUrl!==undefined)doc[e.target.name]=finalUrl;
 							});
 						} catch {
 							return window.alert("Failed to upload file");
@@ -163,7 +163,7 @@ function CMSAboutUsPageEdit() {
 								window.alert(err);
 							}, async()=>{
 								const finalUrl = await storageRef.getDownloadURL();
-								if(finalUrl!==undefined)doc[e.target.name]=finalUrl;                                
+								if(finalUrl!==undefined)doc[e.target.name]=finalUrl;
 							});
 						} catch {
 							return window.alert("Failed to upload file");
@@ -452,7 +452,7 @@ function CMSAboutUsPageEdit() {
 								<form className="form-article">
 
 									<div>
-										Current top banner IT:
+                                        Current top banner IT:
 										<img style={{width: "25%", height: "auto"}} src={oldITTopBannerUrl} alt=""/>
 									</div>
 									<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
@@ -495,7 +495,7 @@ function CMSAboutUsPageEdit() {
 
 									{/*banner*/}
 									<div>
-										Current mission banner IT:
+                                        Current mission banner IT:
 										<img style={{width: "25%", height: "auto"}} src={oldITBannerUrl} alt=""/>
 									</div>
 									<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
@@ -667,7 +667,7 @@ function CMSAboutUsPageEdit() {
 							<div className='form-article__body'>
 								<form className="form-article">
 									<div>
-										Current top banner EN:
+                                        Current top banner EN:
 										<img style={{width: "25%", height: "auto"}} src={oldENTopBannerUrl} alt=""/>
 									</div>
 									<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
@@ -769,7 +769,7 @@ function CMSAboutUsPageEdit() {
 											<>
 												<div key={member.id}>
 													<label className='form-article__label'>
-                                                    Name:
+                                                        Name:
 														<input
 															name="name"
 															className='form-article__input'
@@ -779,7 +779,7 @@ function CMSAboutUsPageEdit() {
 														/>
 													</label>
 													<div>
-                                                    Current avatar:
+                                                        Current avatar:
 														<img style={{width: "25%", height: "auto"}} src={member.avatar} alt=""/>
 													</div>
 
@@ -797,7 +797,7 @@ function CMSAboutUsPageEdit() {
 													</div>
 
 													<label className='form-article__label'>
-                                                    Title:
+                                                        Title:
 														<input
 															name="title"
 															className='form-article__input'
@@ -920,4 +920,4 @@ function CMSAboutUsPageEdit() {
 	);
 }
 
-export default CMSAboutUsPageEdit;
+export default CMSGamesSalesPageEdit;

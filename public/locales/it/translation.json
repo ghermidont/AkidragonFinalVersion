@@ -4,7 +4,9 @@
     "Menu": {
       "OurUniverse": {
         "OurUniverse": "Il nostro universo",
-        "Tournaments": "Tornei"
+        "Tournaments": "Tornei",
+        "GameTeams": "Team e giochi",
+        "SaleGames": "Sale gaming"
       },
       "Community": {
         "Community": "Comunità",
@@ -192,6 +194,14 @@
     "ConfirmProfileDeletion": "Conferma la cancellazione del profilo",
     "CancelButton": "Annulla",
     "DeleteProfileButton": "Elimina profilo"
+  },
+
+  "GameSalesPage":{
+    "SaleGaming": "Sale gaming",
+    "RoomsOffer": "Cosa offrono le nostre sale",
+    "ComeVisit": "Vieni a trovarci",
+    "JoinUs": "Vuoi entrare a far parte del nostro franchise?",
+    "ContactsButton": "Contattaci"
   }
 
 }

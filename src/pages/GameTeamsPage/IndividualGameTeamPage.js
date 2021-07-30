@@ -90,7 +90,7 @@ export default function Article() {
 		<section className="new-article">
 			<div className="banner__commercial banner__commercial--left">{stringTagsParser(vertical)}</div>
 			<div className="banner__commercial banner__commercial--right">{stringTagsParser(vertical)}</div>
-			
+
 			<div className="container">
 				{selectedArticle && selectedArticle.map(doc =>(
 					<div key={doc.id}>
@@ -102,7 +102,7 @@ export default function Article() {
 						<div className="new-article__title-box">
 							<img src={logoSection} alt="" className="new-article__logo"/>
 							<h1 className="new-article__title title">
-                            Title: {doc.content[appLanguage].title}
+                                    Title: {doc.content[appLanguage].title}
 							</h1>
 						</div>
 
@@ -125,10 +125,10 @@ export default function Article() {
 						<p className="new-article__text">
 							<div className="banner banner__square banner__square--article">{stringTagsParser(_250x250320x100320x50)}</div>
 							<p className="new-article__text">
-                            Content: {doc.content[appLanguage].text}
+                                    Content: {doc.content[appLanguage].text}
 							</p>
 						</p>
-						
+
 						<div className="banner banner__square banner__square--article">{stringTagsParser(Top)}</div>
 
 						<div className="btn-upload">
@@ -148,7 +148,7 @@ export default function Article() {
 							</div>
 						</center>
 						<div className="banner banner__square banner__square--article">{stringTagsParser(bottom)}</div>
-					</div>	
+					</div>
 				)
 				)}
 			</div>

@@ -4,7 +4,9 @@
     "Menu": {
       "OurUniverse": {
         "OurUniverse": "Our universe",
-        "Tournaments": "Tournaments"
+        "Tournaments": "Tournaments",
+        "GameTeams": "Game teams",
+        "SaleGames": "Sale gaming"
       },
       "Community": {
         "Community": "Community",
@@ -193,5 +195,13 @@
     "ConfirmProfileDeletion": "Confirm profile deletion",
     "CancelButton": "Cancel",
     "DeleteProfileButton": "Delete profile"
+  },
+
+  "GameSalesPage":{
+    "SaleGaming": "Sale gaming",
+    "RoomsOffer": "What our rooms offer",
+    "ComeVisit": "Come visit",
+    "JoinUs": "Do you want to join our franchise?",
+    "ContactsButton": "Contact Us"
   }
 }

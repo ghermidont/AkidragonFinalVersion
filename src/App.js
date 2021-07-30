@@ -45,6 +45,8 @@ import CMSMenu from "./pages/CMSMenu/CMSMenu";
 import MainSurveyPage from "./pages/SurveyPage/SurveySteps/MainSurveyPage";
 import BannersMenu from "./pages/ModeratorPanel/BannersMenu/BannersMainMenu";
 import FullStreamsList from "./pages/FullStreamsList";
+import GameSalesPage from "./pages/GameSalesPage";
+import GameTeamsPage from "./pages/GameTeamsPage/GameTeamsPage";
 
 function App() {
 	//const [loginPassed, setLoginPassed] = useState(false);
@@ -91,6 +93,8 @@ function App() {
 											<Route path="/MainLoginPage" component={MainLoginPage} />
 											<Route path="/SponsorshipPage" component={SponsorshipPage} />
 											<Route path="/Step2CompleteProfilePage" component={Step2CompleteProfilePage} />
+											<Route path="/GameSalesPage" component={GameSalesPage} />
+											<Route path="/GameTeamsPage" component={GameTeamsPage} />
 										</Switch>
 									</TournamentsContextProvider>
 								</ArticlesContextProvider>

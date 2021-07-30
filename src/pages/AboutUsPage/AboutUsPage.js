@@ -5,6 +5,7 @@ import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
 import {useTranslation} from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
+import { FaLinkedinIn } from "react-icons/fa";
 
 function AboutUsPage() {
 	const {t} = useTranslation();
@@ -13,6 +14,10 @@ function AboutUsPage() {
 
 	const [ENBannerUrl, setENBannerUrl] = useState("");
 	const [ITBannerUrl, setITBannerUrl] = useState("");
+
+	const [ENTopBanner, setENTopBanner] = useState("");
+	const [ITTopBanner, setITTopBanner] = useState("");
+
 	// Text
 	const [ENCareerTitle, setENCareerTitle] = useState("");
 	const [ITCareerTitle, setITCareerTitle] = useState("");
@@ -67,6 +72,9 @@ function AboutUsPage() {
 				setENTitleText(doc.titleText.en);
 				setITTitleText(doc.titleText.it);
 
+				setENTopBanner(doc.topBanner.en);
+				setITTopBanner(doc.topBanner.it);
+
 				setENBannerUrl(doc.banner.en);
 				setITBannerUrl(doc.banner.it);
 
@@ -95,12 +103,11 @@ function AboutUsPage() {
 				<div className="container">
 					<div className="banner__image">
 						{/*TODO Add change banner option to the CMS*/}
-						<img className="banner__img" src={appLanguage === "it" ? ITBannerUrl : ENBannerUrl} alt="Akidragon banner"/>
+						<img className="banner__img" src={appLanguage === "it" ? ITTopBanner : ENTopBanner} alt="Akidragon top banner"/>
 					</div>
 				</div>
 			</section>
 
-			<section className="intro"></section>
 			<section className="about">
 				<div className="container">
 					<div className="about__inner">
@@ -144,6 +151,9 @@ function AboutUsPage() {
 									<img src={doc.avatar} alt="" className="team__image"/>
 									<div className="team__name">{doc.name}</div>
 									<div className="team__position">{appLanguage==="it"?doc.title.it:doc.title.en}</div>
+									<a href={doc.linkedin} className="social__link">
+										<FaLinkedinIn />
+									</a>
 								</li>
 							)}
 						</ul>
