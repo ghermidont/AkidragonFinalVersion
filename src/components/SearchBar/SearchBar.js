@@ -19,7 +19,6 @@ function SearchBar() {
 	//Getting data from DB
 	const {docsFromHook} = useDataFromFirestore("articles");
 	const {docsFromHookTournaments} = useDataFromFirestoreTournaments("tournaments");
-	console.log(docsFromHook);
 
 	useEffect(() => {
 		if(docsFromHook||docsFromHookTournaments)setIsLoading(false);
@@ -72,7 +71,6 @@ function SearchBar() {
 		const searchResultArr = articlesSearchResultsArr.concat(tournamentsSearchResultsArr);
 
 		setServerDataSearchResultArr(searchResultArr);
-		console.log(serverDataSearchResultArr);
 	};
 
 	return (

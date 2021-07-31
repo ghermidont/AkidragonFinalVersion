@@ -1,4 +1,3 @@
-//TODO make this page
 import React, {useEffect, useState} from "react";
 import {useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import {useLanguageContext} from "../context/LanguageContext";

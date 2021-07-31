@@ -47,6 +47,8 @@ import BannersMenu from "./pages/ModeratorPanel/BannersMenu/BannersMainMenu";
 import FullStreamsList from "./pages/FullStreamsList";
 import GameSalesPage from "./pages/GameSalesPage";
 import GameTeamsPage from "./pages/GameTeamsPage/GameTeamsPage";
+import IndividualGameTeamPage from "./pages/GameTeamsPage/IndividualGameTeamPage";
+import {TeamsContextProvider} from "./context/TeamsContext";
 
 function App() {
 	//const [loginPassed, setLoginPassed] = useState(false);
@@ -60,44 +62,47 @@ function App() {
 						<LanguageContextProvider>
 							<NavBar />
 							<StreamsContextProvider>
-								<ArticlesContextProvider>
-									<TournamentsContextProvider>
-										<Switch>
-											<PrivateRoute path="/UserProfilePage" component={UserProfilePage} />
-											<PrivateRoute path="/AddArticlesForm" component={AddArticlesForm} />
-											<PrivateRoute path="/ModeratorAddStreamsForm" component={ModeratorAddStreamsForm} />
-											<PrivateRoute path="/ModeratorAddTournamentsForm" component={ModeratorAddTournamentsForm} />
-											<PrivateRoute path="/UserProfileArticlesPage" component={UserProfileArticlesPage} />
-											<PrivateRoute path="/UpdateUserProfilePage" component={UpdateUserProfilePage} />
-											<PrivateRoute path="/ApproveArticlesPage" component={ApproveArticlesPage} />
-											<PrivateRoute path="/ManageArticlesPage" component={ManageArticlesPage} />
-											<PrivateRoute path="/ManageStreamsPage" component={ManageStreamsPage} />
-											<PrivateRoute path="/ManageTournamentsPage" component={ManageTournamentsPage} />
-											<PrivateRoute path="/edit-tournament/:slug" component={EditTournamentForm} />
-											<PrivateRoute path="/edit-stream/:slug" component={EditStreamForm} />
-											<PrivateRoute path="/edit-article/:slug" component={EditArticleForm} />
-											<PrivateRoute path="/DeleteProfilePage" component={DeleteProfilePage} />
-											<PrivateRoute path="/CMSMenu" component={CMSMenu} />
-											<PrivateRoute path="/MainSurveyPage" component={MainSurveyPage} />
-											<PrivateRoute path="/BannersMenu" component={BannersMenu} />
+								<TeamsContextProvider>
+									<ArticlesContextProvider>
+										<TournamentsContextProvider>
+											<Switch>
+												<PrivateRoute path="/UserProfilePage" component={UserProfilePage} />
+												<PrivateRoute path="/AddArticlesForm" component={AddArticlesForm} />
+												<PrivateRoute path="/ModeratorAddStreamsForm" component={ModeratorAddStreamsForm} />
+												<PrivateRoute path="/ModeratorAddTournamentsForm" component={ModeratorAddTournamentsForm} />
+												<PrivateRoute path="/UserProfileArticlesPage" component={UserProfileArticlesPage} />
+												<PrivateRoute path="/UpdateUserProfilePage" component={UpdateUserProfilePage} />
+												<PrivateRoute path="/ApproveArticlesPage" component={ApproveArticlesPage} />
+												<PrivateRoute path="/ManageArticlesPage" component={ManageArticlesPage} />
+												<PrivateRoute path="/ManageStreamsPage" component={ManageStreamsPage} />
+												<PrivateRoute path="/ManageTournamentsPage" component={ManageTournamentsPage} />
+												<PrivateRoute path="/edit-tournament/:slug" component={EditTournamentForm} />
+												<PrivateRoute path="/edit-stream/:slug" component={EditStreamForm} />
+												<PrivateRoute path="/edit-article/:slug" component={EditArticleForm} />
+												<PrivateRoute path="/DeleteProfilePage" component={DeleteProfilePage} />
+												<PrivateRoute path="/CMSMenu" component={CMSMenu} />
+												<PrivateRoute path="/MainSurveyPage" component={MainSurveyPage} />
+												<PrivateRoute path="/BannersMenu" component={BannersMenu} />
 
-											<Route path="/" exact component={HomePage} />
-											<Route path="/article/:slug" component={ArticlePage} />
-											<Route path="/ContactUsPage" component={ContactUsPage} />
-											<Route path="/BlogPage" component={BlogPage} />
-											<Route path="/ContentPage" component={ContentPage} />
-											<Route path="/FullStreamsList" component={FullStreamsList} />
-											<Route path="/AboutUsPage" component={AboutUsPage} />
-											<Route path="/TournamentsPage" component={TournamentsPage} />
-											<Route path="/SubmitCvForm" component={SubmitCvForm} />
-											<Route path="/MainLoginPage" component={MainLoginPage} />
-											<Route path="/SponsorshipPage" component={SponsorshipPage} />
-											<Route path="/Step2CompleteProfilePage" component={Step2CompleteProfilePage} />
-											<Route path="/GameSalesPage" component={GameSalesPage} />
-											<Route path="/GameTeamsPage" component={GameTeamsPage} />
-										</Switch>
-									</TournamentsContextProvider>
-								</ArticlesContextProvider>
+												<Route path="/" exact component={HomePage} />
+												<Route path="/article/:slug" component={ArticlePage} />
+												<Route path="/team/:slug" component={IndividualGameTeamPage} />
+												<Route path="/ContactUsPage" component={ContactUsPage} />
+												<Route path="/BlogPage" component={BlogPage} />
+												<Route path="/ContentPage" component={ContentPage} />
+												<Route path="/FullStreamsList" component={FullStreamsList} />
+												<Route path="/AboutUsPage" component={AboutUsPage} />
+												<Route path="/TournamentsPage" component={TournamentsPage} />
+												<Route path="/SubmitCvForm" component={SubmitCvForm} />
+												<Route path="/MainLoginPage" component={MainLoginPage} />
+												<Route path="/SponsorshipPage" component={SponsorshipPage} />
+												<Route path="/Step2CompleteProfilePage" component={Step2CompleteProfilePage} />
+												<Route path="/GameSalesPage" component={GameSalesPage} />
+												<Route path="/GameTeamsPage" component={GameTeamsPage} />
+											</Switch>
+										</TournamentsContextProvider>
+									</ArticlesContextProvider>
+								</TeamsContextProvider>
 							</StreamsContextProvider>
 						</LanguageContextProvider>
 						<Footer/>

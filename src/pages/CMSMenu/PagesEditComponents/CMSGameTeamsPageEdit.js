@@ -867,7 +867,7 @@ function CMSGameTeamsPageEdit() {
 											onChange={
 												(e)=>setENCareerText(e.target.value)
 											}
-										></textarea>
+										> </textarea>
 									</label>
 								</form>
 							</div>

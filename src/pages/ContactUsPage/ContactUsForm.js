@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import emailjs from "emailjs-com";
 import {init} from "emailjs-com";
 import {useHistory} from "react-router-dom";
@@ -13,6 +13,7 @@ export default function ContactUsForm() {
 	const [sizeExceededError, setSizeExceededError] = useState();
 	const [fileSize, setFileSize] = useState(0);
 	const history = useHistory();
+	let publishBtnRef = useRef();
 
 	useEffect(() => {
 		if (fileSize > 512000) {
@@ -28,12 +29,20 @@ export default function ContactUsForm() {
 		e.preventDefault();
 		if(fileSize>0) {
 			if (sizeExceededError === false) {
-				emailjs.sendForm("service_neq4dxf", "template_sij1vgl", "#contactus-form", "user_ryi2yglqohFlHpuZyAqiJ")
+
+				emailjs.sendForm(
+					"service_neq4dxf",
+					"template_sij1vgl",
+					"#contactus-form",
+					"user_ryi2yglqohFlHpuZyAqiJ"
+				)
 					.then((result) => {
 						window.alert(t("ContactUsForm.MessageSent"));
+						publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
 						if(result.text)history.push("/MessageSentPage", {from: "/ContactUsForm"});
-					}, () => {
-						window.alert(t("ContactUsForm.ConnectionError"));
+					}, (error) =>{
+						window.aler("Error: " + error.text);
+						publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
 					});
 				e.target.reset();
 			}
@@ -42,9 +51,11 @@ export default function ContactUsForm() {
 			emailjs.sendForm("service_neq4dxf", "template_sij1vgl", "#contactus-form", "user_ryi2yglqohFlHpuZyAqiJ")
 				.then((result) => {
 					window.alert(t("ContactUsForm.MessageSent"));
-					result.text && history.push("/MessageSentPage", {from: "/ContactUsForm"});
+					publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
+					if(result.text)history.push("/MessageSentPage", {from: "/ContactUsForm"});
 				}, () => {
 					window.alert(t("ContactUsForm.ConnectionError"));
+					publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
 				});
 			e.target.reset();
 		}
@@ -55,11 +66,11 @@ export default function ContactUsForm() {
 		<form className="form contact-intro__form" id="contact-form" onSubmit={sendEmail} method="POST">
 			<div className="form__box">
 				<input className="input"
-					placeholder={t("ContactUsForm.NamePlaceHolder")}
-					id="name"
-					type="text"
-					required
-					name="name"
+					   placeholder={t("ContactUsForm.NamePlaceHolder")}
+					   id="name"
+					   type="text"
+					   required
+					   name="name"
 				/>
 				<input className="input"
 					   placeholder={t("ContactUsForm.SurnamePlaceHolder")}
@@ -128,10 +139,6 @@ export default function ContactUsForm() {
 				/>
 				{t("ContactUsForm.Consent")}
 			</label>
-
 		</form>
-
-
 	);
-
 }
