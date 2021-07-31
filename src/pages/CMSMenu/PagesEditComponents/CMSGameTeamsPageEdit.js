@@ -1,12 +1,9 @@
-//TODO make this page
-import React, {useEffect, useRef, useState} from "react";
-import {useHistory} from "react-router-dom";
+import React, {useEffect, useState} from "react";
 import {projectFirestore, projectStorage} from "../../../fireBase";
 import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
 //The red line between team members
 import { BsDashCircleFill,  BsPlusCircleFill} from "react-icons/bs";
 import { v4 as uuidv4 } from "uuid";
-import {FaLinkedinIn} from "react-icons/fa";
 
 function CMSGameTeamsPageEdit() {
 	// eslint-disable-next-line react/prop-types
@@ -20,120 +17,91 @@ function CMSGameTeamsPageEdit() {
 		/>
 	);
 
-	let publishBtnRef = useRef();
 	const fileTypesArray = ["image/png", "image/jpeg"];
-	const history = useHistory();
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 
-	// Urls
-	const [ENBannerUrl, setENBannerUrl] = useState("");
-	const [ITBannerUrl, setITBannerUrl] = useState("");
+	const [ITGamingTeamBannerUrl, setITGamingTeamBannerUrl] = useState("");
+	const [ENGamingTeamBannerUrl, setENGamingTeamBannerUrl] = useState("");
 
-	const [ENTopBannerUrl, setENTopBannerUrl] = useState("");
-	const [ITTopBannerUrl, setITTopBannerUrl] = useState("");
+	const [oldITGamingTeamBannerUrl, setOldITGamingTeamBannerUrl] = useState("");
+	const [oldENGamingTeamBannerUrl, setOldENGamingTeamBannerUrl] = useState("");
 
-	const [partnerLogo1Url, setPartnerLogo1Url] = useState("");
-	const [partnerLogo2Url, setPartnerLogo2Url] = useState("");
-	const [partnerLogo3Url, setPartnerLogo3Url] = useState("");
-	const [partnerLogo4Url, setPartnerLogo4Url] = useState("");
-	const [partnerLogo5Url, setPartnerLogo5Url] = useState("");
+	const [ITGamingTeamText, setITGamingTeamText] = useState("");
+	const [ENGamingTeamText, setENGamingTeamText] = useState("");
 
-	const [oldENBannerUrl, setOldENBannerUrl] = useState("");
-	const [oldITBannerUrl, setOldITBannerUrl] = useState("");
+	const [ITGamingTeamTitle, setITGamingTeamTitle] = useState("");
+	const [ENGamingTeamTitle, setENGamingTeamTitle] = useState("");
 
-	const [oldENTopBannerUrl, setOldENTopBannerUrl] = useState("");
-	const [oldITTopBannerUrl, setOldITTopBannerUrl] = useState("");
-
-	// Success
-	const [ENBannerFileSuccess, setENBannerFileSuccess] = useState(false);
-	const [ITBannerFileSuccess, setITBannerFileSuccess] = useState(false);
-
-	const [ENTopBannerFileSuccess, setENTopBannerFileSuccess] = useState(false);
-	const [ITTopBannerFileSuccess, setITTopBannerFileSuccess] = useState(false);
-
-	// Text
-	const [ENCareerTitle, setENCareerTitle] = useState("");
-	const [ITCareerTitle, setITCareerTitle] = useState("");
-
-	const [ENCareerText, setENCareerText] = useState("");
-	const [ITCareerText, setITCareerText] = useState("");
-
-	const [ENCrewTitle, setENCrewTitle] = useState("");
-	const [ITCrewTitle, setITCrewTitle] = useState("");
-
-	const [ITMissionTitle, setITMissionTitle] = useState("");
-	const [ENMissionTitle, setENMissionTitle] = useState("");
-
-	const [ITMissionText, setITMissionText] = useState("");
-	const [ENMissionText, setENMissionText] = useState("");
-
-	const [ENPartnersTitle, setENPartnersTitle] = useState("");
-	const [ITPartnersTitle, setITPartnersTitle] = useState("");
-
-	const [ENTitle, setENTitle] = useState("");
-	const [ITTitle, setITTitle] = useState("");
-
-	const [ENTitleText, setENTitleText] = useState("");
-	const [ITTitleText, setITTitleText] = useState("");
-
-	// Test START
-	const [generalTeamMembersArr, setGeneralTeamMembersArr] = useState([]);
-	const [generalPartnersLogoArr, setGeneralPartnersLogoArr] = useState([]);
+	const [ITGamingTeamBannerUrlFileSuccess ,setITGamingTeamBannerUrlFileSuccess] = useState(false);
+	const [ENGamingTeamBannerUrlFileSuccess ,setENGamingTeamBannerUrlFileSuccess] = useState(false);
+	
+	const [gameTeamMembersArr, setGameTeamMembersArr] = useState([]);
 
 	const handleAddFields = () => {
-		setGeneralTeamMembersArr([...generalTeamMembersArr, { logo: "",  avatar: "", title: {en: "", it: "" }, linkedin: ""}]);
-	};
-	const handleAddFieldsPartners = () => {
-		setGeneralPartnersLogoArr([...generalPartnersLogoArr, { logo: ""}]);
+		setGameTeamMembersArr([...gameTeamMembersArr,
+			{
+				slug: uuidv4(),
+				avatar: {
+					en: "",
+					it: ""
+				},
+				teamTopTitle: {
+					en: "",
+					it: ""
+				},
+				teamTopText: {
+					en: "",
+					it: ""
+				},
+				lowTitle: {
+					en: "",
+					it: ""
+				},
+				lowText: {
+					en: "",
+					it: ""
+				},
+				social: {
+					facebook: "",
+					instagram: "",
+					youtube: "",
+					twitch: ""
+				}
+			}]);
 	};
 
-	const handleRemoveFields = id => {
-		const values  = [...generalTeamMembersArr];
-		values.splice(values.findIndex(value => value.id === id), 1);
-		setGeneralTeamMembersArr(values);
-	};
-	const handleRemoveFieldsPartners = id => {
-		const values  = [...generalPartnersLogoArr];
-		values.splice(values.findIndex(value => value.id === id), 1);
-		setGeneralPartnersLogoArr(values);
+	const handleRemoveFields = slug => {
+		const teams  = [...gameTeamMembersArr];
+		teams.splice(teams.findIndex(team => team.slug === slug), 1);
+		setGameTeamMembersArr(teams);
 	};
 
-	const handleChangeInput = (id, event) => {
-		const newInputFields = generalTeamMembersArr.map(doc => {
-			if(id === doc.id) {
-				doc[event.target.name] = event.target.value;
-			}
-			return doc;
-		});
-		setGeneralTeamMembersArr(newInputFields);
-	};
-
-	const handleChangeInputTitle = (id, event, lng) => {
-		const newInputField = generalTeamMembersArr.map(doc => {
-			if(id === doc.id) {
+	const handleChangeInputLng = (slug, event, lng) => {
+		const newInputField = gameTeamMembersArr.map(doc => {
+			if(slug === doc.slug) {
 				doc[event.target.name][lng] = event.target.value;
 			}
 			return doc;
 		});
-		setGeneralTeamMembersArr(newInputField);
+		setGameTeamMembersArr(newInputField);
 	};
 
-	const fileChangeInput = (id, e) =>{
+	const fileChangeInput = (slug, e, lng) =>{
 		let uploadedFile = e.target.files[0];
-		const newInputFields = generalTeamMembersArr.map(doc => {
-			if(id === doc.id) {
+		const newInputFields = gameTeamMembersArr.map(doc => {
+			if(slug === doc.slug) {
 				if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
 					// eslint-disable-next-line no-inner-declarations
 					async function putFile(uploadedFile){
 						e.preventDefault();
 						try {
-							const storageRef = projectStorage.ref("CMS-pictures/aboutUsPage/members").child(uploadedFile.name);
+							const storageRef = projectStorage.ref("CMS-pictures/gameTeams").child(uploadedFile.name);
 							storageRef.put(uploadedFile).on("state_changed", () => {
 							},  (err) => {
 								window.alert(err);
 							}, async()=>{
 								const finalUrl = await storageRef.getDownloadURL();
-								if(finalUrl!==undefined)doc[e.target.name]=finalUrl;
+								if(finalUrl!==undefined)doc[e.target.name][lng]=finalUrl;
 							});
 						} catch {
 							return window.alert("Failed to upload file");
@@ -146,119 +114,57 @@ function CMSGameTeamsPageEdit() {
 			}
 			return doc;
 		});
-		setGeneralTeamMembersArr(newInputFields);
+		setGameTeamMembersArr(newInputFields);
 	};
 
-	const fileChangeInputPartners = (id, e) =>{
-		let uploadedFile = e.target.files[0];
-		const newInputFields = generalTeamMembersArr.map(doc => {
-			if(id === doc.id) {
-				if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-					// eslint-disable-next-line no-inner-declarations
-					async function putFile(uploadedFile){
-						e.preventDefault();
-						try {
-							const storageRef = projectStorage.ref("CMS-pictures/aboutUsPage/partners").child(uploadedFile.name);
-							storageRef.put(uploadedFile).on("state_changed", () => {
-							},  (err) => {
-								window.alert(err);
-							}, async()=>{
-								const finalUrl = await storageRef.getDownloadURL();
-								if(finalUrl!==undefined)doc[e.target.name]=finalUrl;
-							});
-						} catch {
-							return window.alert("Failed to upload file");
-						}
-					}
-					putFile(uploadedFile).then(()=>window.alert("File uploaded successfully."));
-				} else {
-					return window.alert("Please select an image file (png or jpg)");
-				}
-			}
-			return doc;
-		});
-		setGeneralPartnersLogoArr(newInputFields);
-	};
-
+	let teamsArr = [];
 	let selectedDoc = "";
 
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
-				return doc.id === "aboutUsPage";
+				return doc.id === "game-teams";
 			});
 		}
+		console.log(selectedDoc);
 	});
-
-	let membersArr = [];
-	let partnersArr = [];
 
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
-				doc.members.map(member => membersArr.push({...member, id: uuidv4()}));
-				setGeneralTeamMembersArr(membersArr);
+				doc.gameTeams.map(member => teamsArr.push({...member}));
+				setGameTeamMembersArr(teamsArr);
 
-				doc.partners.map(partner => partnersArr.push({...partner, id: uuidv4()}));
-				setGeneralPartnersLogoArr(partnersArr);
+				setITGamingTeamBannerUrl(doc.topBanner.it);
+				setENGamingTeamBannerUrl(doc.topBanner.en);
 
-				setENTitle(doc.title.en);
-				setITTitle(doc.title.it);
-				setENTitleText(doc.titleText.en);
-				setITTitleText(doc.titleText.it);
+				setOldITGamingTeamBannerUrl(doc.topBanner.it);
+				setOldENGamingTeamBannerUrl(doc.topBanner.en);
 
-				setENBannerUrl(doc.banner.en);
-				setITBannerUrl(doc.banner.it);
+				setITGamingTeamText(doc.text.it);
+				setENGamingTeamText(doc.text.en);
 
-				setENTopBannerUrl(doc.topBanner.en);
-				setITTopBannerUrl(doc.topBanner.it);
-
-				setPartnerLogo1Url(doc.partnersLogos.partner1);
-				setPartnerLogo2Url(doc.partnersLogos.partner2);
-				setPartnerLogo3Url(doc.partnersLogos.partner3);
-				setPartnerLogo4Url(doc.partnersLogos.partner4);
-				setPartnerLogo5Url(doc.partnersLogos.partner5);
-
-				setOldENBannerUrl(doc.banner.en);
-				setOldITBannerUrl(doc.banner.it);
-
-				setOldENTopBannerUrl(doc.topBanner.en);
-				setOldITTopBannerUrl(doc.topBanner.it);
-
-				setITMissionTitle(doc.missionTitle.it);
-				setENMissionTitle(doc.missionTitle.en);
-				setITMissionText(doc.missionText.it);
-				setENMissionText(doc.missionText.en);
-
-				setENCareerTitle(doc.careerTitle.en);
-				setITCareerTitle(doc.careerTitle.it);
-				setENCareerText(doc.careerText.en);
-				setITCareerText(doc.careerText.it);
-
-				setENCrewTitle(doc.crewTitle.en);
-				setITCrewTitle(doc.crewTitle.it);
-
-				setENPartnersTitle(doc.partnersTitle.en);
-				setITPartnersTitle(doc.partnersTitle.it);
+				setITGamingTeamTitle(doc.title.it);
+				setENGamingTeamTitle(doc.title.en);
 			});
 		}
 	}, [docsFromHookCMS]);
 
-	const ENBannerFileUploadEventListener = (e) => {
+	const ENGamingTeamTopBannerFileUploadEventListener = (e) => {
 		let uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
 			// eslint-disable-next-line no-inner-declarations
 			async function putFile(uploadedFile){
 				e.preventDefault();
 				try {
-					const storageRef = projectStorage.ref("CMS-pictures/aboutUsPage").child(uploadedFile.name);
+					const storageRef = projectStorage.ref("CMS-pictures/gameTeams").child(uploadedFile.name);
 					storageRef.put(uploadedFile).on("state_changed", () => {
 					},  (err) => {
 						window.alert(err);
 					}, async()=>{
 						const finalUrl = await storageRef.getDownloadURL();
-						finalUrl!==undefined?setENBannerFileSuccess(true):setENBannerFileSuccess(false);
-						setENBannerUrl(finalUrl);
+						finalUrl!==undefined?setENGamingTeamBannerUrlFileSuccess(true):setENGamingTeamBannerUrlFileSuccess(false);
+						setENGamingTeamBannerUrl(finalUrl);
 					});
 				} catch {
 					window.alert("Failed to upload file. Try uploading again.");
@@ -270,76 +176,24 @@ function CMSGameTeamsPageEdit() {
 		}
 	};
 
-	const ITBannerFileUploadEventListener = (e) => {
+	const ITGamingTeamTopBannerFileUploadEventListener = (e) => {
 		let uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
 			// eslint-disable-next-line no-inner-declarations
 			async function putFile(uploadedFile){
 				e.preventDefault();
 				try {
-					const storageRef = projectStorage.ref("CMS-pictures/aboutUsPage").child(uploadedFile.name);
+					const storageRef = projectStorage.ref("CMS-pictures/gameTeams").child(uploadedFile.name);
 					storageRef.put(uploadedFile).on("state_changed", () => {
 					},  (err) => {
 						window.alert(err);
 					}, async()=>{
 						const finalUrl = await storageRef.getDownloadURL();
-						finalUrl!==undefined?setITBannerFileSuccess(true):setITBannerFileSuccess(false);
-						setITBannerUrl(finalUrl);
+						finalUrl!==undefined?setITGamingTeamBannerUrlFileSuccess(true):setITGamingTeamBannerUrlFileSuccess(false);
+						setITGamingTeamBannerUrl(finalUrl);
 					});
 				} catch {
 					window.alert("Failed to upload file. Try uploading again.");
-				}
-			}
-			putFile(uploadedFile).then();
-		} else {
-			window.alert("Please select an image file (png or jpg)");
-		}
-	};
-
-	const ENTopBannerFileUploadEventListener = (e) => {
-		let uploadedFile = e.target.files[0];
-		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-			// eslint-disable-next-line no-inner-declarations
-			async function putFile(uploadedFile){
-				e.preventDefault();
-				try {
-					const storageRef = projectStorage.ref("CMS-pictures/aboutUsPage").child(uploadedFile.name);
-					storageRef.put(uploadedFile).on("state_changed", () => {
-					},  (err) => {
-						window.alert(err);
-					}, async()=>{
-						const finalUrl = await storageRef.getDownloadURL();
-						finalUrl!==undefined?setENTopBannerFileSuccess(true):setENTopBannerFileSuccess(false);
-						setENTopBannerUrl(finalUrl);
-					});
-				} catch {
-					return window.alert("Failed to upload file. Try loading again.");
-				}
-			}
-			putFile(uploadedFile).then();
-		} else {
-			return window.alert("Please select an image file (png or jpg)");
-		}
-	};
-
-	const ITTopBannerFileUploadEventListener = (e) => {
-		let uploadedFile = e.target.files[0];
-		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
-			// eslint-disable-next-line no-inner-declarations
-			async function putFile(uploadedFile){
-				e.preventDefault();
-				try {
-					const storageRef = projectStorage.ref("CMS-pictures/aboutUsPage").child(uploadedFile.name);
-					storageRef.put(uploadedFile).on("state_changed", () => {
-					},  (err) => {
-						window.alert(err);
-					}, async()=>{
-						const finalUrl = await storageRef.getDownloadURL();
-						finalUrl!==undefined?setITTopBannerFileSuccess(true):setITTopBannerFileSuccess(false);
-						setITTopBannerUrl(finalUrl);
-					});
-				} catch {
-					window.alert("Failed to upload file. Try uploading again");
 				}
 			}
 			putFile(uploadedFile).then();
@@ -349,73 +203,36 @@ function CMSGameTeamsPageEdit() {
 	};
 
 	const writeToFBCallback = () => {
-		const collectionRef = projectFirestore.collection("web-app-cms").doc("aboutUsPage");
+		const collectionRef = projectFirestore.collection("web-app-cms").doc("game-teams");
 
 		collectionRef.set(
 			{
-				"members": generalTeamMembersArr,
-				"topBanner": {
-					"en": ENTopBannerUrl,
-					"it": ITTopBannerUrl
-				},
-				"banner": {
-					"en": ENBannerUrl,
-					"it": ITBannerUrl
-				},
-				"careerText": {
-					"en": ENCareerText,
-					"it": ITCareerText
-				},
-				"careerTitle": {
-					"en": ENCareerTitle,
-					"it": ITCareerTitle
-				},
-				"crewTitle": {
-					"en": ENCrewTitle,
-					"it": ITCrewTitle
-				},
-				"missionText": {
-					"en": ENMissionText,
-					"it": ITMissionText
-				},
-				"missionTitle": {
-					"en": ENMissionTitle,
-					"it": ITMissionTitle
-				},
-				"partners": generalPartnersLogoArr,
-				"partnersLogos": {
-					"partner1": partnerLogo1Url,
-					"partner2": partnerLogo2Url,
-					"partner3": partnerLogo3Url,
-					"partner4": partnerLogo4Url,
-					"partner5": partnerLogo5Url,
-				},
-				"partnersTitle": {
-					"en": ENPartnersTitle,
-					"it": ITPartnersTitle
+				"gameTeams": gameTeamMembersArr,
+				"text": {
+					"en": ENGamingTeamText,
+					"it": ITGamingTeamText
 				},
 				"title": {
-					"en": ENTitle,
-					"it": ITTitle
+					"en": ENGamingTeamTitle,
+					"it": ITGamingTeamTitle
 				},
-				"titleText": {
-					"en": ENTitleText,
-					"it": ITTitleText
+				"topBanner": {
+					"en": ENGamingTeamBannerUrl,
+					"it": ITGamingTeamBannerUrl
 				}
 			})
 			.then(() => {
 				window.alert("Content edited successfully!");
-				history.push("/UserProfilePage", {from: "/CMSMenu"});
 			})
 			.catch((error) => {
-				window.alert("Error: " + error.code + " " + error.message + " " + error.details);
+				window.alert(`Error: ${error.message}`);
 			});
 	};
 
 	return (
 		<>
 			<div style={{paddingTop: "5em important"}}>
-				<center><h1>Edit <strong>AboutUs</strong> Page static content:</h1></center>
+				<center><h1>Edit <strong>Game Teams</strong> Page static content:</h1></center>
 				<section>
 					<ul className="nav nav-tabs" id="myTab" role="tablist">
 						<li className="nav-item">
@@ -451,208 +268,164 @@ function CMSGameTeamsPageEdit() {
 							aria-labelledby="home-tab">
 							<div className='form-article__body'>
 								<form className="form-article">
+									<label className='form-article__label'>
+										Title:
+										<textarea
+											className='form-article__input'
+											rows='2'
+											name="mainTitle"
+											value={ITGamingTeamTitle}
+											onChange={
+												(e)=>setITGamingTeamTitle(e.target.value)
+											}
+										> </textarea>
+									</label>
+
+									<label className='form-article__label'>
+										Text:
+										<textarea
+											className='form-article__input'
+											rows='2'
+											name="mainText"
+											value={ITGamingTeamText}
+											onChange={
+												(e)=>setITGamingTeamText(e.target.value)
+											}
+										> </textarea>
+									</label>
 
 									<div>
-                                        Current top banner IT:
-										<img style={{width: "25%", height: "auto"}} src={oldITTopBannerUrl} alt=""/>
+                                        Current top banner:
+										<img style={{width: "25%", height: "auto"}} src={oldITGamingTeamBannerUrl} alt=""/>
 									</div>
-									<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
+									<label className='form-article__label btn-upload'> <span className='icon-upload2'> </span> Main banner
 										<input
 											className='form-article__btn visually-hidden'
 											type="file"
 											placeholder='file'
-											onChange={ITTopBannerFileUploadEventListener}
+											onChange={ITGamingTeamTopBannerFileUploadEventListener}
 										/>
 									</label>
 									<div className="output">
-										{ITTopBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITTopBannerUrl} alt=""/></div> }
+										{ITGamingTeamBannerUrlFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITGamingTeamBannerUrl} alt=""/></div> }
 									</div>
 
-									<label className='form-article__label'>
-                                        Title:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ITTitle}
-											onChange={
-												(e)=>setITTitle(e.target.value)
-											}
-										></textarea>
-									</label>
+									{/*Game teams: START*/}
+									<br/>
+									<div><h1>Teams list:</h1>
 
-									<label className='form-article__label'>
-                                        Title text:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ITTitleText}
-											onChange={
-												(e)=>setITTitleText(e.target.value)
-											}
-										></textarea>
-									</label>
-
-									{/*banner*/}
-									<div>
-                                        Current mission banner IT:
-										<img style={{width: "25%", height: "auto"}} src={oldITBannerUrl} alt=""/>
-									</div>
-									<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
-										<input
-											className='form-article__btn visually-hidden'
-											type="file"
-											placeholder='file'
-											onChange={ITBannerFileUploadEventListener}
-										/>
-									</label>
-									<div className="output">
-										{ ITBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ITBannerUrl} alt=""/></div> }
-									</div>
-
-									<label className='form-article__label'>
-                                        Mission title:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ITMissionTitle}
-											onChange={
-												(e)=>setITMissionTitle(e.target.value)
-											}
-										></textarea>
-									</label>
-									<label className='form-article__label'>
-                                        Mission text:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ITMissionText}
-											onChange={
-												(e)=>setITMissionText(e.target.value)
-											}
-										></textarea>
-									</label>
-
-									<label className='form-article__label'>
-                                        Crew title:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ITCrewTitle}
-											onChange={
-												(e)=>setITCrewTitle(e.target.value)
-											}
-										></textarea>
-									</label>
-									{/*Team members: START*/}
-
-									<div>Team members list:
-
-										{ generalTeamMembersArr.map(member => (
+										{ gameTeamMembersArr.map(team => (
 											<>
-												<div key={member.id}>
-													<label className='form-article__label'>
-                                                        Name:
-														<input
-															name="name"
-															className='form-article__input'
-															type="text"
-															placeholder={member.name}
-															onChange={event => handleChangeInput(member.id, event)}
-														/>
-													</label>
+												<div key={team.slug}>
 													<div>
-                                                        Current avatar:
-														<img style={{width: "25%", height: "auto"}} src={member.avatar} alt=""/>
+														Gaming team avatar:
+														<img style={{width: "25%", height: "auto"}} src={team.avatar.it} alt=""/>
 													</div>
 
-													<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+													<label className='form-article__label btn-upload'> <span className='icon-upload2'> </span> Avatar
 														<input
 															name="avatar"
 															className='form-article__btn visually-hidden'
 															type="file"
 															placeholder='file'
-															onChange={event => fileChangeInput(member.id, event)}
-														/>
-													</label>
-													<div className="output">
-														{/*{ avatar3FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/></div> }*/}
-													</div>
-
-													<label className='form-article__label'>
-                                                        Title:
-														<input
-															name="title"
-															className='form-article__input'
-															type="text"
-															placeholder={member.title.it}
-															onChange={event => handleChangeInputTitle(member.id, event, "it")}
+															onChange={event => fileChangeInput(team.slug, event, "it")}
 														/>
 													</label>
 
 													<label className='form-article__label'>
-														<FaLinkedinIn /> LinkedIn:
+                                                        Top title:
 														<input
-															name="linkedin"
-															className='form-article__input'
+															name="teamTopTitle"
+															className="form-article__input"
 															type="text"
-															placeholder={member.linkedin}
-															onChange={event => handleChangeInput(member.id, event)}
+															placeholder={team.teamTopTitle.it}
+															onChange={event => handleChangeInputLng(team.slug, event, "it")}
+														/>
+													</label>
+
+													<label className='form-article__label'>
+														Top text:
+														<input
+															name="teamTopText"
+															className="form-article__input"
+															type="text"
+															placeholder={team.teamTopText.it}
+															onChange={event => handleChangeInputLng(team.slug, event, "it")}
+														/>
+													</label>
+
+													<label className='form-article__label'>
+														Low title:
+														<input
+															name="lowTitle"
+															className="form-article__input"
+															type="text"
+															placeholder={team.lowTitle.it}
+															onChange={event => handleChangeInputLng(team.slug, event, "it")}
+														/>
+													</label>
+
+													<label className='form-article__label'>
+														Low text:
+														<input
+															name="lowText"
+															className="form-article__input"
+															type="text"
+															placeholder={team.lowText.it}
+															onChange={event => handleChangeInputLng(team.slug, event, "it")}
+														/>
+													</label>
+													{/* social*/}
+													<label className='form-article__label'>
+														Facebook link:
+														<input
+															name="social"
+															className="form-article__input"
+															type="text"
+															placeholder={team.social.facebook}
+															onChange={event => handleChangeInputLng(team.slug, event, "facebook")}
+														/>
+													</label>
+													<label className='form-article__label'>
+														Instagram link:
+														<input
+															name="social"
+															className="form-article__input"
+															type="text"
+															placeholder={team.social.instagram}
+															onChange={event => handleChangeInputLng(team.slug, event, "instagram")}
+														/>
+													</label>
+													<label className='form-article__label'>
+														Twitch link:
+														<input
+															name="social"
+															className="form-article__input"
+															type="text"
+															placeholder={team.social.twitch}
+															onChange={event => handleChangeInputLng(team.slug, event, "twitch")}
+														/>
+													</label>
+													<label className='form-article__label'>
+														Youtube link:
+														<input
+															name="social"
+															className="form-article__input"
+															type="text"
+															placeholder={team.social.youtube}
+															onChange={event => handleChangeInputLng(team.slug, event, "youtube")}
 														/>
 													</label>
 
 													<BsPlusCircleFill style={{marginRight: "2em"}} onClick={()=>handleAddFields()}/>
-													<BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(member.id)}/>
+													<BsDashCircleFill disabled={gameTeamMembersArr.length === 1} onClick={() => handleRemoveFields(team.slug)}/>
 													<ColoredLine color="red" />
 												</div>
 												<br />
 											</>
-
 										)) }
-
 										{/*Team members: END*/}
 									</div>
-
-									<label className='form-article__label'>
-                                        Partners title:
-										<input
-											className='form-article__input'
-											type="text"
-											value={ITPartnersTitle}
-											onChange={
-												(e)=>setITPartnersTitle(e.target.value)
-											}
-										/>
-									</label>
-
-									<label className='form-article__label'>
-                                        Career title:
-										<input
-											className='form-article__input'
-											type="text"
-											value={ITCareerTitle}
-											onChange={
-												(e)=>setITCareerTitle(e.target.value)
-											}
-										/>
-									</label>
-
-									<label className='form-article__label'>
-                                        Career text:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ITCareerText}
-											onChange={
-												(e)=>setITCareerText(e.target.value)
-											}
-										></textarea>
-									</label>
 								</form>
 							</div>
 						</div>
@@ -667,256 +440,183 @@ function CMSGameTeamsPageEdit() {
 						>
 							<div className='form-article__body'>
 								<form className="form-article">
+									<label className='form-article__label'>
+										Title:
+										<textarea
+											className='form-article__input'
+											rows='2'
+											name="title"
+											value={ENGamingTeamTitle}
+											onChange={
+												(e)=>setENGamingTeamTitle(e.target.value)
+											}
+										> </textarea>
+									</label>
+
+									<label className='form-article__label'>
+										Text:
+										<textarea
+											className='form-article__input'
+											rows='2'
+											name="text"
+											value={ENGamingTeamText}
+											onChange={
+												(e)=>setENGamingTeamText(e.target.value)
+											}
+										> </textarea>
+									</label>
+
 									<div>
-                                        Current top banner EN:
-										<img style={{width: "25%", height: "auto"}} src={oldENTopBannerUrl} alt=""/>
+										Current top banner:
+										<img style={{width: "25%", height: "auto"}} src={oldENGamingTeamBannerUrl} alt=""/>
 									</div>
-									<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
+									<label className='form-article__label btn-upload'> <span className='icon-upload2'> </span> Main banner
 										<input
 											className='form-article__btn visually-hidden'
 											type="file"
 											placeholder='file'
-											onChange={ENTopBannerFileUploadEventListener}
+											onChange={ENGamingTeamTopBannerFileUploadEventListener}
 										/>
 									</label>
 									<div className="output">
-										{ENTopBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENTopBannerUrl} alt=""/></div> }
+										{ENGamingTeamBannerUrlFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENGamingTeamBannerUrl} alt=""/></div> }
 									</div>
 
-									<label className='form-article__label'>
-                                        Title:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ENTitle}
-											onChange={
-												(e)=>setENTitle(e.target.value)
-											}
-										></textarea>
-									</label>
+									{/*Game teams: START*/}
 
-									<label className='form-article__label'>
-                                        Title text:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ENTitleText}
-											onChange={
-												(e)=>setENTitleText(e.target.value)
-											}
-										></textarea>
-									</label>
+									<br/>
+									<div><h1>Teams list:</h1>
 
-									{/*banner*/}
-									<div>
-                                        Current mission banner EN:
-										<img style={{width: "25%", height: "auto"}} src={oldENBannerUrl} alt=""/>
-									</div>
-									<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Main banner
-										<input
-											className='form-article__btn visually-hidden'
-											type="file"
-											placeholder='file'
-											onChange={ENBannerFileUploadEventListener}
-										/>
-									</label>
-									<div className="output">
-										{ENBannerFileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={ENBannerUrl} alt=""/></div> }
-									</div>
-									<label className='form-article__label'>
-                                        Mission title:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ENMissionTitle}
-											onChange={
-												(e)=>setENMissionTitle(e.target.value)
-											}
-										></textarea>
-									</label>
-									<label className='form-article__label'>
-                                        Mission text:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ENMissionText}
-											onChange={
-												(e)=>setENMissionText(e.target.value)
-											}
-										></textarea>
-									</label>
-
-									<label className='form-article__label'>
-                                        Crew title:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ENCrewTitle}
-											onChange={
-												(e)=>setENCrewTitle(e.target.value)
-											}
-										></textarea>
-									</label>
-
-									{/*Team members: START*/}
-
-									<div>Team members list:
-										{ generalTeamMembersArr.map(member => (
+										{ gameTeamMembersArr.map(team => (
 											<>
-												<div key={member.id}>
-													<label className='form-article__label'>
-                                                        Name:
-														<input
-															name="name"
-															className='form-article__input'
-															type="text"
-															placeholder={member.name}
-															onChange={event => handleChangeInput(member.id, event)}
-														/>
-													</label>
+												<div key={team.slug}>
 													<div>
-                                                        Current avatar:
-														<img style={{width: "25%", height: "auto"}} src={member.avatar} alt=""/>
+														Gaming team avatar:
+														<img style={{width: "25%", height: "auto"}} src={team.avatar.en} alt=""/>
 													</div>
 
-													<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Avatar
+													<label className='form-article__label btn-upload'> <span className='icon-upload2'> </span> Avatar
 														<input
 															name="avatar"
 															className='form-article__btn visually-hidden'
 															type="file"
 															placeholder='file'
-															onChange={event => fileChangeInput(member.id, event)}
+															onChange={event => fileChangeInput(team.slug, event, "en")}
 														/>
 													</label>
-													<div className="output">
-														{/*{ avatar3FileSuccess&&<div>Image Uploaded successfully: <img style={{width: "25%", height: "auto"}} src={avatar3Url} alt=""/></div> }*/}
-													</div>
 
 													<label className='form-article__label'>
-                                                        Title:
+														Top title:
 														<input
 															name="title"
-															className='form-article__input'
+															className="form-article__input"
 															type="text"
-															placeholder={member.title.en}
-															onChange={event => handleChangeInputTitle(member.id, event, "en")}
+															placeholder={team.teamTopTitle.en}
+															onChange={event => handleChangeInputLng(team.slug, event, "en")}
+														/>
+													</label>
+
+													<label className='form-article__label'>
+														Top text:
+														<input
+															name="text"
+															className="form-article__input"
+															type="text"
+															placeholder={team.teamTopText.en}
+															onChange={event => handleChangeInputLng(team.slug, event, "en")}
+														/>
+													</label>
+
+													<label className='form-article__label'>
+														Low title:
+														<input
+															name="lowTitle"
+															className="form-article__input"
+															type="text"
+															placeholder={team.lowTitle.en}
+															onChange={event => handleChangeInputLng(team.slug, event, "en")}
+														/>
+													</label>
+
+													<label className='form-article__label'>
+														Low text:
+														<input
+															name="lowText"
+															className="form-article__input"
+															type="text"
+															placeholder={team.lowText.en}
+															onChange={event => handleChangeInputLng(team.slug, event, "en")}
+														/>
+													</label>
+
+													{/* Social Links*/}
+													<label className='form-article__label'>
+														Facebook link:
+														<input
+															name="social"
+															className="form-article__input"
+															type="text"
+															placeholder={team.social.facebook}
+															onChange={event => handleChangeInputLng(team.slug, event, "facebook")}
 														/>
 													</label>
 													<label className='form-article__label'>
-														<FaLinkedinIn /> LinkedIn:
+														Instagram link:
 														<input
-															name="linkedin"
-															className='form-article__input'
+															name="social"
+															className="form-article__input"
 															type="text"
-															placeholder={member.linkedin}
-															onChange={event => handleChangeInput(member.id, event)}
+															placeholder={team.social.instagram}
+															onChange={event => handleChangeInputLng(team.slug, event, "instagram")}
+														/>
+													</label>
+													<label className='form-article__label'>
+														Twitch link:
+														<input
+															name="social"
+															className="form-article__input"
+															type="text"
+															placeholder={team.social.twitch}
+															onChange={event => handleChangeInputLng(team.slug, event, "twitch")}
+														/>
+													</label>
+													<label className='form-article__label'>
+														Youtube link:
+														<input
+															name="social"
+															className="form-article__input"
+															type="text"
+															placeholder={team.social.youtube}
+															onChange={event => handleChangeInputLng(team.slug, event, "youtube")}
 														/>
 													</label>
 
 													<BsPlusCircleFill style={{marginRight: "2em"}} onClick={()=>handleAddFields()}/>
-													<BsDashCircleFill disabled={generalTeamMembersArr.length === 1} onClick={() => handleRemoveFields(member.id)}/>
+													<BsDashCircleFill disabled={gameTeamMembersArr.length === 1} onClick={() => handleRemoveFields(team.slug)}/>
 													<ColoredLine color="red" />
 												</div>
 												<br />
 											</>
-
 										)) }
-
 										{/*Team members: END*/}
-
 									</div>
-
-									<label className='form-article__label'>
-                                        Partners title:
-										<input
-											className='form-article__input'
-											type="text"
-
-											value={ENPartnersTitle}
-											onChange={
-												(e)=>setENPartnersTitle(e.target.value)
-											}
-										/>
-									</label>
-
-									<label className='form-article__label'>
-                                        Career title:
-										<input
-											className='form-article__input'
-											type="text"
-
-											value={ENCareerTitle}
-											onChange={
-												(e)=>setENCareerTitle(e.target.value)
-											}
-										/>
-									</label>
-
-									<label className='form-article__label'>
-                                        Career text:
-										<textarea
-											className='form-article__input'
-											rows='2'
-											name="countent"
-											value={ENCareerText}
-											onChange={
-												(e)=>setENCareerText(e.target.value)
-											}
-										> </textarea>
-									</label>
 								</form>
 							</div>
 						</div>
 
-						{/*partners logos*/}
-						<div>
-							{/*TPartners logos: START*/}
-							{ generalPartnersLogoArr.map(partner => (
-								<>
-									<div key={partner.id}>
-										<div>
-                                            Logo:
-											<img style={{width: "25%", height: "auto"}} src={partner.logo} alt=""/>
-										</div>
-
-										<label className='form-article__label btn-upload'> <span className='icon-upload2'></span> Upload
-											<input
-												name="logo"
-												className='form-article__btn visually-hidden'
-												type="file"
-												placeholder='file'
-												onChange={event => fileChangeInputPartners(partner.id, event)}
-											/>
-										</label>
-
-										<BsPlusCircleFill style={{marginRight: "2em"}} onClick={()=>handleAddFieldsPartners()}/>
-										<BsDashCircleFill disabled={generalPartnersLogoArr.length === 1} onClick={() => handleRemoveFieldsPartners(partner.id)}/>
-										<ColoredLine color="red" />
-									</div>
-									<br />
-								</>
-							)) }
-							{/*Partners logos: END*/}
-
-							<div className="form-article__box-btn">
-								<button
-									ref={publishBtnRef}
-									className="form-article__btn"
-									onClick={()=>writeToFBCallback()}
-								>
-                                    Publish
-								</button>
-
-							</div>
-						</div>
 					</div>
 				</section>
+				<div className="form-article__box-btn">
+					<button
+						className="form-article__btn"
+						onClick={()=>writeToFBCallback()}
+					>
+						Publish
+					</button>
+
+				</div>
 			</div>
+
 		</>
 	);
 }

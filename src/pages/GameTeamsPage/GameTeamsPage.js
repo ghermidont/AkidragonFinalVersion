@@ -1,5 +1,5 @@
-//TODO Make this page + translation.
-// TODO Start from defining the states and assigning a slug on creating teams
+//TODO translation.
+// TODO Do the individual game team page.
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, {useEffect, useState} from "react";
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
@@ -31,11 +31,7 @@ export default function GameTeamsPage() {
 				return doc.id === "game-teams";
 			});
 		}
-		console.log(selectedDoc);
 	});
-
-	console.log(docsFromHookCMS);
-
 
 	useEffect(() => {
 		if (selectedDoc !== "") {
@@ -93,7 +89,7 @@ export default function GameTeamsPage() {
 								</li>
 							</ul>
 						
-							<Link to={`/team/${team.slug}`} className="article__link" onClick={() => setChosenTeamNumber(team.slug)}>{team.title[appLanguage]}</Link>
+							<Link to={`/team/${team.slug}`} className="article__link" onClick={() => setChosenTeamNumber(team.slug)}>{team.teamTopTitle[appLanguage]}</Link>
 						</article>
 					))}
 				</div>

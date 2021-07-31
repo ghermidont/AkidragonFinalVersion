@@ -43,8 +43,8 @@ export default function LabTabs() {
 						<Tab label="AboutUs Page" value="5" />
 						<Tab label="ContactUs Page" value="6" />
 						<Tab label="Sponsorship Page" value="7" />
-						<Tab label="CMSGameTeamsPageEdit" value="8" />
-						<Tab label="CMSGameSalesPageEdit" value="9" />
+						<Tab label="Game Teams Page" value="8" />
+						<Tab label="Game Sales Page" value="9" />
 					</TabList>
 				</AppBar>
 				<TabPanel value="1"><CMSHomePageEdit /></TabPanel>
