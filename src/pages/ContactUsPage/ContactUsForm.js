@@ -38,7 +38,7 @@ export default function ContactUsForm() {
 					.then((result) => {
 						window.alert(t("ContactUsForm.MessageSent"));
 						publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
-						if(result.text)history.push("/MessageSentPage", {from: "/ContactUsForm"});
+						if(result.text)history.push("/", {from: "/ContactUsForm"});
 					}, (error) =>{
 						window.aler("Error: " + error.text);
 						publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
@@ -51,7 +51,7 @@ export default function ContactUsForm() {
 				.then((result) => {
 					window.alert(t("ContactUsForm.MessageSent"));
 					publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
-					if(result.text)history.push("/MessageSentPage", {from: "/ContactUsForm"});
+					if(result.text)history.push("/", {from: "/ContactUsForm"});
 				}, () => {
 					window.alert(t("ContactUsForm.ConnectionError"));
 					publishBtnRef.current&&publishBtnRef.current.removeAttribute("disabled");
