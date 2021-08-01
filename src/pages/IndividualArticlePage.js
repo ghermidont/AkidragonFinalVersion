@@ -1,8 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {
-	useDataFromFirestore,
-	useDataFromFirestoreBanners
-} from "../customHooks/useFirestore";
+import { useDataFromFirestore, useDataFromFirestoreBanners, useDataFromFirestoreUserInfo } from "../customHooks/useFirestore";
 import {Link} from "react-router-dom";
 import {useLanguageContext} from "../context/LanguageContext";
 import { ShareLink } from "social-media-sharing";
@@ -19,12 +16,20 @@ export default function Article() {
 	const {appLanguage} = useLanguageContext();
 	const parsedWindowLocation = queryString.parse(window.location.hash);
 	const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(13);
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+
+	const {docsFromHookUserInfo} = useDataFromFirestoreUserInfo("user-profiles");
 
 	const [vertical, setVertical] = useState("");
 	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
 	const [Top, setTop] = useState("");
 	const [bottom, setBottom] = useState("");
 
+	let authorID = "";
+	let selectedUser = [];
+
+	//Extracting banners START
 	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
 	let selectedBanners = "";
@@ -48,6 +53,7 @@ export default function Article() {
 		}
 	}, [docsFromHookBanners]);
 
+	//extracting banners END
 	const shareFacebook = () => {
 		let socialMediaLinks = new ShareLink("facebook");
 		socialMediaLinks.get({u: `http://mydomainfortesting.ml/#/article/${stringifiedSlug}`});
@@ -55,17 +61,31 @@ export default function Article() {
 	};
 
 	let selectedArticle = "";
-	let authorID = "";
 
 	if(docsFromHook) {
 		//Filter the articles object and select the article who's slug corresponds to the current window slug
 		selectedArticle = docsFromHook.filter(function (article) {
 			return article.id === stringifiedSlug;
 		});
-		console.log(selectedArticle);
 
-		if(selectedArticle){selectedArticle.map(doc =>authorID=doc.authorId);}
+		if(selectedArticle){
+			selectedArticle.map( doc => authorID = doc.authorId );
+		}
 	}
+
+	useEffect(() => {
+		selectedUser = docsFromHookUserInfo.filter(function (user) {
+			return user.id === authorID;
+		});
+
+		selectedUser.map(doc => {
+			setFirstName(doc.firstName);
+			setLastName(doc.lastName);
+		});
+	}, [selectedUser]);
+
+
+
 
 	// DB string tags parser
 	const stringTagsParser = (tag) => {
@@ -86,8 +106,6 @@ export default function Article() {
 		}
 	};
 
-	//TODO Get and display the name of the author.
-
 	return(
 		<section className="new-article">
 			<div className="banner__commercial banner__commercial--left">{stringTagsParser(vertical)}</div>
@@ -98,7 +116,7 @@ export default function Article() {
 					<div key={doc.id}>
 						<div>
 							<div>Category: <ul>{doc.categories.map(category=><li key={doc.id+Date.now}>{category}</li>)}</ul></div>
-							<div>Author: {authorID}</div>
+							<div>Author: {firstName} {lastName}</div>
 							<div>Date: {dateConverter(doc.createdAt)}</div>
 						</div>
 						<div className="new-article__title-box">
