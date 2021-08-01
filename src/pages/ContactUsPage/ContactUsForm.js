@@ -29,7 +29,6 @@ export default function ContactUsForm() {
 		e.preventDefault();
 		if(fileSize>0) {
 			if (sizeExceededError === false) {
-
 				emailjs.sendForm(
 					"service_neq4dxf",
 					"template_sij1vgl",
@@ -62,8 +61,7 @@ export default function ContactUsForm() {
 	}
 
 	return (
-
-		<form className="form contact-intro__form" id="contact-form" onSubmit={sendEmail} method="POST">
+		<form className="form contact-intro__form" id="contactus-form" onSubmit={sendEmail} method="POST">
 			<div className="form__box">
 				<input className="input"
 					   placeholder={t("ContactUsForm.NamePlaceHolder")}
