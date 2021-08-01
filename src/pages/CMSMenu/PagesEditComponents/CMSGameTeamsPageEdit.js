@@ -6,6 +6,7 @@ import { BsDashCircleFill,  BsPlusCircleFill} from "react-icons/bs";
 import { v4 as uuidv4 } from "uuid";
 
 function CMSGameTeamsPageEdit() {
+
 	// eslint-disable-next-line react/prop-types
 	const ColoredLine = ({ color }) => (
 		<hr
@@ -508,7 +509,7 @@ function CMSGameTeamsPageEdit() {
 													<label className='form-article__label'>
 														Top title:
 														<input
-															name="title"
+															name="teamTopTitle"
 															className="form-article__input"
 															type="text"
 															placeholder={team.teamTopTitle.en}
@@ -519,7 +520,7 @@ function CMSGameTeamsPageEdit() {
 													<label className='form-article__label'>
 														Top text:
 														<input
-															name="text"
+															name="teamTopText"
 															className="form-article__input"
 															type="text"
 															placeholder={team.teamTopText.en}

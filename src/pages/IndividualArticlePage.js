@@ -62,6 +62,8 @@ export default function Article() {
 		selectedArticle = docsFromHook.filter(function (article) {
 			return article.id === stringifiedSlug;
 		});
+		console.log(selectedArticle);
+
 		if(selectedArticle){selectedArticle.map(doc =>authorID=doc.authorId);}
 	}
 

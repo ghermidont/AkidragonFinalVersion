@@ -43,12 +43,12 @@ export default function NavBar() {
 									</Link>
 								</li>
 								<li className="sub-menu__item">
-									<Link className="sub-menu__link" onClick={() => setToggleMenu("")} to="GameTeamsPage">
+									<Link className="sub-menu__link" onClick={() => setToggleMenu("")} to="/GameTeamsPage">
 										{t("NavBar.Menu.OurUniverse.GameTeams")}
 									</Link>
 								</li>
 								<li className="sub-menu__item">
-									<Link className="sub-menu__link" onClick={() => setToggleMenu("")} to="GameSalesPage">
+									<Link className="sub-menu__link" onClick={() => setToggleMenu("")} to="/GameSalesPage">
 										{t("NavBar.Menu.OurUniverse.SaleGames")}
 									</Link>
 								</li>
@@ -74,7 +74,7 @@ export default function NavBar() {
 
 						<li className="menu__item">
 							<a className="menu__link">{t("NavBar.Menu.TheBrand.TheBrand")}</a>
-							<span className="icon-angle-down arrow"></span>
+							<span className="icon-angle-down arrow"> </span>
 							<ul className="sub-menu__list">
 								<li className="sub-menu__item">
 									<Link className="sub-menu__link" onClick={() => setToggleMenu("")} to="/AboutUsPage">
