@@ -198,12 +198,13 @@ function CMSContactUpPageEdit() {
 										></textarea>
 									</label>
 
+
 								</form>
 							</div>
 						</div>
 
-						<label className='form-article__label'>
-                            Phone number:
+						<label className='form-article__label cms'>
+							Phone number:
 							<textarea
 								className='form-article__input'
 								rows='2'

@@ -233,9 +233,9 @@ function CMSGameTeamsPageEdit() {
 	return (
 		<>
 			<div style={{paddingTop: "5em important"}}>
-				<center><h1>Edit <strong>Game Teams</strong> Page static content:</h1></center>
+				<center className='mt-5'><h1>Edit <strong>Game Teams</strong> Page static content:</h1></center>
 				<section>
-					<ul className="nav nav-tabs" id="myTab" role="tablist">
+					<ul className="nav nav-tabs mt-5" id="myTab" role="tablist">
 						<li className="nav-item">
 							<a
 								className="nav-link active"
@@ -601,21 +601,20 @@ function CMSGameTeamsPageEdit() {
 										)) }
 										{/*Team members: END*/}
 									</div>
+
 								</form>
 							</div>
 						</div>
-
+						<div className="form-article__box-btn">
+							<button
+								className="form-article__btn"
+								onClick={()=>writeToFBCallback()}
+							>
+								Publish
+							</button>
+						</div>
 					</div>
 				</section>
-				<div className="form-article__box-btn">
-					<button
-						className="form-article__btn"
-						onClick={()=>writeToFBCallback()}
-					>
-						Publish
-					</button>
-
-				</div>
 			</div>
 
 		</>

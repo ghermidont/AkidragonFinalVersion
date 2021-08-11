@@ -211,11 +211,20 @@
         }
       }
 
+      &:first-child {
+        &:hover,
+        &:focus {
+          &.menu__item {
+            padding-bottom: 10rem;
+          }
+        }
+      }
+
       &.hover-off {
         &:not(:last-child) {
           &:hover,
           &:focus {
-            padding-bottom: 0rem;
+            padding-bottom: 0;
           }
         }
       }
