@@ -3,6 +3,7 @@ import {useDataFromFirestoreCMS} from "../customHooks/useFirestore";
 import {useLanguageContext} from "../context/LanguageContext";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
+import classes from "./styles/GameSalesPage.module.scss";
 
 function GameSalesPage() {
 	const {t} = useTranslation();
@@ -42,28 +43,32 @@ function GameSalesPage() {
 	}, [docsFromHookCMS]);
 
 	return (
-		<div>
-			<div>
-				<div>{t("GameSalesPage.SaleGaming")}</div>
-				<div>
+		<div className='container'>
+			<div className={classes.title}>{t("GameSalesPage.SaleGaming")}</div>
+			<section className={classes.banner}>
+				<div className={classes.banner__image}>
 					<img src={appLanguage === "it" ? ITSaleGamingBannerUrl : ENSaleGamingBannerUrl} alt="" className="feed__img"/>
+				</div>
+				<div className={classes.banner__text}>
 					{appLanguage === "it" ? ITSaleGamingText : ENSaleGamingText}
 				</div>
-			</div>
+			</section>
 
-			<div>
-				<div>{t("GameSalesPage.RoomsOffer")}</div>
-				<div>
+			<section className={classes.offer}>
+				<div className={classes.offer__title}>{t("GameSalesPage.RoomsOffer")}</div>
+				<div className={classes.offer__image}>
 					<img src={appLanguage === "it" ? ITOurRoomsBannerUrl : ENOurRoomsBannerUrl} alt="" className="feed__img"/>
 				</div>
-			</div>
+			</section>
 
-			<div>
-				<div>{t("GameSalesPage.ComeVisit")}</div>
-				<div>MAP</div>
-			</div>
+			<section className={classes.map}>
+				<div className={classes.map__title}>{t("GameSalesPage.ComeVisit")}</div>
+				<div className={classes.map__google}>
 
-			<div>{t("GameSalesPage.JoinUs")}</div>
+				</div>
+			</section>
+
+			<div className={classes.offer__title}>{t("GameSalesPage.JoinUs")}</div>
 			<div className="contact__btn">
 				<Link className="contact__btn-link" to="/ContactUsPage">
 					{t("GameSalesPage.ContactsButton")}
