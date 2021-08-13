@@ -51,11 +51,12 @@ export default function GameTeamsPage() {
 	return (
 		<>
 			<div className='container'>
-
+				<div className={classes.title}>{t("GameSalesPage.SaleGaming")}</div>
 				<div className={classes.banner}>
-					<div>{t("GameSalesPage.GamingTeam")}</div>
-					<div className={classes.bannerinner}>
+					<div className={classes.banner__image}>
 						<img src={appLanguage === "it" ? ITGamingTeamBannerUrl : ENGamingTeamBannerUrl} alt="" className="feed__img"/>
+					</div>
+					<div className={classes.banner__text}>
 						{appLanguage === "it" ? ITGamingTeamText : ENGamingTeamText}
 					</div>
 				</div>
