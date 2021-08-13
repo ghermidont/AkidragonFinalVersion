@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { useDataFromFirestoreCMS } from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
+import classes from "./IndividualGameTeamPage.module.scss";
 // eslint-disable-next-line no-undef
 const queryString = require("query-string");
 

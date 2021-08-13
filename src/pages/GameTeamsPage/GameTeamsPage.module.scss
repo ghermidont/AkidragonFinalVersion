@@ -1,0 +1,41 @@
+.banner img {
+  max-width: 70rem;
+  width: 100%;
+  padding: 14rem 0 10rem;
+  margin-right: 5rem;
+  margin-bottom: 10rem;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2rem;
+  justify-items: center;
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+}
+
+.article__title {
+  display: block;
+  text-align: center;
+  font-style: normal;
+  font-size: 1.8rem;
+}
+
+.offerText {
+  text-align: center;
+  font-size: 30px;
+  font-style: normal;
+  color: var(--blue);
+  margin: 4rem 0;
+}
+
+@media screen and(max-width: 786px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+}
