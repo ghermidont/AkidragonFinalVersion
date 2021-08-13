@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { useDataFromFirestoreCMS } from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
-//import classes from "./IndividualGameTeamPage.module.scss";
+import classes from "./IndividualGameTeamPage.module.scss";
 // eslint-disable-next-line no-undef
 const queryString = require("query-string");
 
@@ -112,56 +112,60 @@ export default function IndividualGameTeamPage() {
 
 	return(
 		<section className="new-article">
-			<div className="container">				
-				<div>{appLanguage === "it" ? ITPageTitle : ENPageTitle}</div>
-				<div>{appLanguage === "it" ? ITPageText : ENPageText}</div>
-				<div>
-					<img
-						src={appLanguage === "it" ? ITTopBanner : ENTopBanner}
-						alt="avatar"
-						className="articles-page__img"
-					/>
+			<div className="container">
+				<div className={classes.title}>{appLanguage === "it" ? ITPageTitle : ENPageTitle}</div>
+				<div className={classes.banner}>
+					<div className={classes.banner__image}>
+						<img
+							src={appLanguage === "it" ? ITTopBanner : ENTopBanner}
+							alt="avatar"
+							className="articles-page__img"
+						/>
+					</div>
+					<div className={classes.banner__text}>{appLanguage === "it" ? ITPageText : ENPageText}</div>
 				</div>
 
-				<div>Team info section</div>
+				<div className={classes.inner}>
+					<div className={classes.content__image}>
+						<img
+							src={appLanguage === "it" ? info.avatar.it : info.avatar.en}
+							alt="avatar"
+							className="articles-page__img"
+						/>
+					</div>
+					<div className={classes.content}>
+						<div className={classes.content__title}>{appLanguage === "it" ? info.teamTopTitle.it : info.teamTopTitle.en}</div>
+						<div className={classes.content__text}>{appLanguage === "it" ? info.teamTopText.it : info.teamTopText.en}</div>
+						<div className={classes.content__lowTitle}>{appLanguage === "it" ? info.lowTitle.it : info.lowTitle.en}</div>
+						<div className={classes.content__text}>{appLanguage === "it" ? info.lowText.it : info.lowText.en}</div>
 
-				<div>
-					<img
-						src={appLanguage === "it" ? info.avatar.it : info.avatar.en}
-						alt="avatar"
-						className="articles-page__img"
-					/>
+						<div className={classes.social__title}>Channels:</div>
+
+						<ul className={classes.social__list}>
+							<li className="social__item">
+								<a href={info.social.facebook} className="social__link">
+									<span className="icon-facebook2"> </span>
+								</a>
+							</li>
+							<li className="social__item">
+								<a href={info.social.instagram} className="social__link">
+									<span className="icon-instagram"> </span>
+								</a>
+							</li>
+							<li className="social__item">
+								<a href={info.social.youtube} className="social__link">
+									<span className="icon-youtube"> </span>
+								</a>
+							</li>
+							<li className="social__item">
+								<a href={info.social.twitch} className="social__link">
+									<span className="icon-twitch"> </span>
+								</a>
+							</li>
+						</ul>
+					</div>
 				</div>
-				<div>{appLanguage === "it" ? info.teamTopTitle.it : info.teamTopTitle.en}</div>
-				<div>{appLanguage === "it" ? info.teamTopText.it : info.teamTopText.en}</div>
-				<div>{appLanguage === "it" ? info.lowTitle.it : info.lowTitle.en}</div>
-				<div>{appLanguage === "it" ? info.lowText.it : info.lowText.en}</div>
-
-				<div>Channels:</div>
-
-				<ul>
-					<li className="social__item">
-						<a href={info.social.facebook} className="social__link">
-							<span className="icon-facebook2"> </span>
-						</a>
-					</li>
-					<li className="social__item">
-						<a href={info.social.instagram} className="social__link">
-							<span className="icon-instagram"> </span>
-						</a>
-					</li>
-					<li className="social__item">
-						<a href={info.social.youtube} className="social__link">
-							<span className="icon-youtube"> </span>
-						</a>
-					</li>
-					<li className="social__item">
-						<a href={info.social.twitch} className="social__link">
-							<span className="icon-twitch"> </span>
-						</a>
-					</li>
-				</ul>
-			</div>					
+			</div>
 		</section>
 	);
 }
