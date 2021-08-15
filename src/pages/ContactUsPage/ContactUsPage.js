@@ -57,21 +57,24 @@ function ContactUsPage() {
 
 				<section className="map">
 					<div className="container">
-						<h1>{t("ContactUsForm.Headquarter")}</h1>
-						<ul className="map__list">
-							<li className="map__item map__address">
-								<span className="icon-location"> </span>
-								{appLanguage==="it"?ITAddress:ENAddress}
-							</li>
-							<li className="map__item map__phone">
-								<span className="icon-phone"> </span>
-								<a href="tel:+390636712213">{phone}</a>
-							</li>
-							<li className="map__item map__chat">
-								<ReactWhatsapp className="icon-whatsapp" number="+390636712213" message="Chat to AkiDragon's representative." />
-								{t("ContactUsForm.WhatsAppMessage")}
-							</li>
-						</ul>
+						<h1 className="title map__title">{t("ContactUsForm.Headquarter")}</h1>
+						<div className="map__inner">
+							<div className="map__google"></div>
+							<ul className="map__list">
+								<li className="map__item map__address">
+									<span className="icon-location"> </span>
+									{appLanguage==="it"?ITAddress:ENAddress}
+								</li>
+								<li className="map__item map__phone">
+									<span className="icon-phone"> </span>
+									<a href="tel:+390636712213">{phone}</a>
+								</li>
+								<li className="map__item map__chat">
+									<ReactWhatsapp className="icon-whatsapp" number="+390636712213" message="Chat to AkiDragon's representative." />
+									{t("ContactUsForm.WhatsAppMessage")}
+								</li>
+							</ul>
+						</div>
 					</div>
 				</section>
 			</main>

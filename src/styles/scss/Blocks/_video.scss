@@ -28,8 +28,13 @@
     object-fit: cover;
   }
   &__btn {
-    margin: 6rem auto;
+    margin: 0 auto;
     display: block;
+    position: absolute;
+    top: 22rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
   }
 
   &__slider {
