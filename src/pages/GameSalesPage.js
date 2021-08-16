@@ -64,7 +64,9 @@ function GameSalesPage() {
 			<section className={classes.map}>
 				<div className={classes.map__title}>{t("GameSalesPage.ComeVisit")}</div>
 				<div className={classes.map__google}>
-
+					<iframe
+						src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3030496.5865739477!2d10.122954446274512!3d42.11883499956605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2s!4v1629119430728!5m2!1sru!2s"
+						style={{width:"100%", height:"100%", border:false}} allowFullScreen="" loading="lazy"> </iframe>
 				</div>
 			</section>
 

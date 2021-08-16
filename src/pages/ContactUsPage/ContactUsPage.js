@@ -47,9 +47,9 @@ function ContactUsPage() {
 			<main className="page">
 				<section className="contact-intro">
 					<div className="container">
-						<h1 className="contact-intro__title title"><span>{appLanguage==="it"?ITTitle:ENTitle}</span></h1>
+						<h1 className="contact-intro__title title"><span>{appLanguage === "it" ? ITTitle : ENTitle}</span></h1>
 						<p className="contact-intro__text">
-							{appLanguage==="it"?ITText:ENText}
+							{appLanguage === "it" ? ITText : ENText}
 						</p>
 						<ContactUsForm/>
 					</div>
@@ -59,18 +59,23 @@ function ContactUsPage() {
 					<div className="container">
 						<h1 className="title map__title">{t("ContactUsForm.Headquarter")}</h1>
 						<div className="map__inner">
-							<div className="map__google"></div>
+							<div className="map__google">
+								<iframe
+									src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3030496.5865739477!2d10.122954446274512!3d42.11883499956605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2s!4v1629119430728!5m2!1sru!2s"
+									style={{width:"100%", height:"100%", border:false}} allowFullScreen="" loading="lazy"> </iframe>
+							</div>
 							<ul className="map__list">
 								<li className="map__item map__address">
 									<span className="icon-location"> </span>
-									{appLanguage==="it"?ITAddress:ENAddress}
+									{appLanguage === "it" ? ITAddress : ENAddress}
 								</li>
 								<li className="map__item map__phone">
 									<span className="icon-phone"> </span>
 									<a href="tel:+390636712213">{phone}</a>
 								</li>
 								<li className="map__item map__chat">
-									<ReactWhatsapp className="icon-whatsapp" number="+390636712213" message="Chat to AkiDragon's representative." />
+									<ReactWhatsapp className="icon-whatsapp" number="+390636712213"
+										message="Chat to AkiDragon's representative."/>
 									{t("ContactUsForm.WhatsAppMessage")}
 								</li>
 							</ul>
