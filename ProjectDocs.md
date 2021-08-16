@@ -108,4 +108,7 @@ e.target.reset()
 <https://docs.google.com/spreadsheets/d/18JM7GTFBLi_lW5X5Xr8tgChmqVM4l7przcUc_bUmTRQ/edit#gid=0>
 
 16.08 2021 iframe map google:
-<https://www.google.com/maps/@42.118835,10.1229544,7z?hl=ru>
+<https://www.google.com/maps/@42.118835,10.1229544,7z?hl=en>
+
+Js documentation API:
+<https://jsdoc.app/about-getting-started.html>

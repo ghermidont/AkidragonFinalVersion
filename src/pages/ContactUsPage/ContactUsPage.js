@@ -42,6 +42,15 @@ function ContactUsPage() {
 		}
 	}, [docsFromHookCMS]);
 
+	/** This is the link to the maps API where custom coordinates can be set and a new URL will be generated.
+	 * The new URL shall be placed inside the src={""} parameter of the iframe:
+	 * https://www.google.com/maps/@42.118835,10.1229544,7z?hl=en
+	 * Steps: 1. input the searched address;
+	 * Steps: 2. Click the burger menu in the left corner. Select the "Share or embed map";
+	 * Steps: 3. Select the "Embed a map" tab;
+	 * Steps: 4. Copy the new generated srs URL and paste it inside the existing iframe in the project. src={"put here"};
+	 */
+
 	return (
 		<>
 			<main className="page">
@@ -61,7 +70,7 @@ function ContactUsPage() {
 						<div className="map__inner">
 							<div className="map__google">
 								<iframe
-									src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3030496.5865739477!2d10.122954446274512!3d42.11883499956605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2s!4v1629119430728!5m2!1sru!2s"
+									src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.1927690863176!2d12.475259515682398!3d41.91021457138236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f60f8c50ce9b7%3A0xd4e1f876de4002c2!2sPiazza%20del%20Popolo%2C%2018%2C%2000187%20Roma%20RM%2C%20Italy!5e0!3m2!1sen!2s!4v1629121312957!5m2!1sen!2s"
 									style={{width:"100%", height:"100%", border:false}} allowFullScreen="" loading="lazy"> </iframe>
 							</div>
 							<ul className="map__list">

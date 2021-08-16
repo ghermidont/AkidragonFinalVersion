@@ -7,7 +7,7 @@ import {StreamsContextProvider} from "./context/StreamsContext";
 import {LanguageContextProvider} from "./context/LanguageContext";
 import {TournamentsContextProvider} from "./context/TournamentsContext";
 import UserProfilePage from "./pages/UserAccount/UserProfilePage";
-import BlogPage from "./pages/BlogPage";
+import BlogPage from "./pages/BlogPage/BlogPage";
 import AddArticlesForm from "./pages/UserAccount/AddArticlesPage/AddArticlesForm";
 import UpdateUserProfilePage from "./pages/UserAccount/UpdateUserProfilePage";
 import SubmitCvForm from "./pages/AboutUsPage/SubmitCvForm";

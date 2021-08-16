@@ -127,7 +127,7 @@ export default function Article() {
 								<div className='info-article__author'>Author: {firstName} {lastName}</div>
 								<div className='info-article__date'>Date: {dateConverter(doc.createdAt)}</div>
 							</div>
-							<div className='info-article__category'>Category: <ul>{doc.categories.map(category=><li key={doc.id+Date.now}>{category}</li>)}</ul></div>
+							<div className='info-article__category'>Category: <ul>{doc.categories.map((category, i)=><li key={doc.id+i}>{category}</li>)}</ul></div>
 						</div>
 
 						<div className="new-article__inner">

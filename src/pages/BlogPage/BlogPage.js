@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {useDataFromFirestore, useDataFromFirestoreBanners, useDataFromFirestoreCMS} from "../customHooks/useFirestore";
-import logoSection from "../assets/images/dest/logo-section.png";
-import {useLanguageContext} from "../context/LanguageContext";
+import {useDataFromFirestore, useDataFromFirestoreBanners, useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
+import logoSection from "../../assets/images/dest/logo-section.png";
+import {useLanguageContext} from "../../context/LanguageContext";
 import {useTranslation} from "react-i18next";
-import {useArticlesContext} from "../context/ArticlesContext";
+import {useArticlesContext} from "../../context/ArticlesContext";
 import HtmlToReact from "html-to-react";
-import SearchBar from "../components/SearchBar/SearchBar";
+import BlogSearchBar from "./ArticlesSearchBar/BlogSearchBar";
 
 export default function BlogPage() {
 	const {setChosenArticleNumber} = useArticlesContext();
@@ -104,8 +104,9 @@ export default function BlogPage() {
 					<h1 className="news-banner__title title"><span>{t("BlogPage.NewsTitle")}</span></h1>
 					<p className="news-banner__subtitle">{appLanguage === "it" ? ITMainText : ENMainText}</p>
 					<div className='news-banner__search'>
-						<SearchBar />
+						<BlogSearchBar />
 					</div>
+
 				
 					<div className="banner banner__square">
 						{stringTagsParser(Top)}
