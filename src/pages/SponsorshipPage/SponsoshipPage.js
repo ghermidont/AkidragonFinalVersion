@@ -14,7 +14,14 @@ function SponsorshipPage() {
 		ITHowItWorksText: ""
 	});
 
-	const {ENBannerUrl, ITBannerUrl, ENHowItWorksTitle, ITHowItWorksTitle, ENHowItWorksText, ITHowItWorksText } = pageCMSContent;
+	const {
+		ENBannerUrl,
+		ITBannerUrl,
+		ENHowItWorksTitle,
+		ITHowItWorksTitle,
+		ENHowItWorksText,
+		ITHowItWorksText
+	} = pageCMSContent;
 
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 
@@ -55,17 +62,24 @@ function SponsorshipPage() {
 						{/*TODO Add change banner option to the CMS*/}
 						<img className="banner__img" src={appLanguage === "it" ? ITBannerUrl : ENBannerUrl} alt="Akidragon banner"/>
 					</div>
+
+					{/*How does it work text here.*/}
+					<div className='banner__inner'>
+						<div className='banner__text'>
+							<div className='banner__text-title'>
+								{appLanguage === "it" ? ITHowItWorksTitle : ENHowItWorksTitle}
+							</div>
+							<div>
+								{appLanguage === "it" ? ITHowItWorksText : ENHowItWorksText}
+							</div>
+						</div>
+						<SponsorshipForm/>
+					</div>
 				</div>
 			</section>
-			{/*How does it work text here.*/}
-			<div>
-				{appLanguage === "it" ? ITHowItWorksTitle : ENHowItWorksTitle}
-				{appLanguage === "it" ? ITHowItWorksText : ENHowItWorksText}
-
-			</div>
-			<SponsorshipForm />
 		</>
-	);
+	)
+	;
 }
 
 export default SponsorshipPage;

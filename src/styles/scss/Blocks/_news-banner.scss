@@ -1,6 +1,7 @@
 /*====News-Banner====*/
 .news-banner {
   padding: 14rem 0 5rem;
+  overflow: hidden;
 
   &__title {
     margin-bottom: 1rem;
@@ -13,6 +14,22 @@
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 7rem;
+  }
+
+  &__search {
+    margin: 4rem 0 4rem auto;
+    width: 6rem;
+    padding: .6rem 2rem;
+    border: .2rem solid var(--blue);
+    border-radius: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: opacity .3s;
+
+    &:focus,
+    &:hover {
+      opacity: .7;
+    }
   }
 
   .tab__btn {
@@ -45,7 +62,7 @@
       padding-bottom: 3rem;
       position: relative;
 
-      &::before{
+      &::before {
         content: '';
         position: absolute;
         width: 100vw;
@@ -78,7 +95,7 @@
       margin-bottom: 2rem;
     }
   }
-  .nav.nav-tabs.tab__btn-list.tab__news{
+  .nav.nav-tabs.tab__btn-list.tab__news {
     flex-direction: column !important;
     text-align: center;
   }

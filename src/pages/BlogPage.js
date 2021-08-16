@@ -6,6 +6,7 @@ import {useLanguageContext} from "../context/LanguageContext";
 import {useTranslation} from "react-i18next";
 import {useArticlesContext} from "../context/ArticlesContext";
 import HtmlToReact from "html-to-react";
+import SearchBar from "../components/SearchBar/SearchBar";
 
 export default function BlogPage() {
 	const {setChosenArticleNumber} = useArticlesContext();
@@ -102,6 +103,9 @@ export default function BlogPage() {
 					</div>
 					<h1 className="news-banner__title title"><span>{t("BlogPage.NewsTitle")}</span></h1>
 					<p className="news-banner__subtitle">{appLanguage === "it" ? ITMainText : ENMainText}</p>
+					<div className='news-banner__search'>
+						<SearchBar />
+					</div>
 				
 					<div className="banner banner__square">
 						{stringTagsParser(Top)}
@@ -135,7 +139,7 @@ export default function BlogPage() {
 						</ul>
 
 
-						<div className="tab-content" id="myTabContent">
+						<div className="tab-content tab-content--blog" id="myTabContent">
 
 							<div className="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
 								{articlesArr && articlesArr.slice(0, 8).map(doc =>

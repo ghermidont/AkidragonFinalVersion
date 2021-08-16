@@ -39,9 +39,8 @@ export default function SponsorshipForm() {
 				<div className="row">
 					<div className="col-md-12">
 						<div className="section-title">
-							<h2 className="title">{t("SponsorshipPage.CooperationOffers")}</h2>
-							<hr/>
-							<div className='form-update__body'>
+							<div className='form-update__body banner__form'>
+								<h2 className="title title--form">{t("SponsorshipPage.CooperationOffers")}</h2>
 								<form className='form-update' id="sponsorship-form" onSubmit={sendSponsorshipEmail} method="POST">
 									<div className="form-group">
 										<div className="row">

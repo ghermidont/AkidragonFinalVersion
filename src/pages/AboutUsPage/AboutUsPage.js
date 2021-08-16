@@ -4,8 +4,8 @@ import logoBig from "../../assets/images/dest/logo-big.png";
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
 import {useTranslation} from "react-i18next";
-import { v4 as uuidv4 } from "uuid";
-import { FaLinkedinIn } from "react-icons/fa";
+import {v4 as uuidv4} from "uuid";
+import {FaLinkedinIn} from "react-icons/fa";
 
 function AboutUsPage() {
 	const {t} = useTranslation();
@@ -103,7 +103,8 @@ function AboutUsPage() {
 				<div className="container">
 					<div className="banner__image">
 						{/*TODO Add change banner option to the CMS*/}
-						<img className="banner__img" src={appLanguage === "it" ? ITTopBanner : ENTopBanner} alt="Akidragon top banner"/>
+						<img className="banner__img" src={appLanguage === "it" ? ITTopBanner : ENTopBanner}
+							alt="Akidragon top banner"/>
 					</div>
 				</div>
 			</section>
@@ -115,9 +116,9 @@ function AboutUsPage() {
 							<img src={logoBig} alt="" className="about__img"/>
 						</div>
 						<div className="about__content">
-							<h2 className="about__title title">{appLanguage==="it"?ITTitle:ENTitle}</h2>
+							<h2 className="about__title title">{appLanguage === "it" ? ITTitle : ENTitle}</h2>
 							<p className="about__text">
-								{appLanguage==="it"?ITTitleText:ENTitleText}
+								{appLanguage === "it" ? ITTitleText : ENTitleText}
 							</p>
 							<button className="about__btn">
 								<a className="" href="https://www.goldfoxgaming.it/">{t("AboutUsPage.FindOutMoreButton")}</a>
@@ -130,13 +131,13 @@ function AboutUsPage() {
 			<section className="mission">
 				<div className="container">
 					<div className="mission__wrapper">
-						<div className="mission__image">
-							<img src={appLanguage==="it"?ITBannerUrl:ENBannerUrl} alt="" className="mission__img"/>
-						</div>
-						<h2 className="mission__title title">{appLanguage==="it"?ITMissionTitle:ENMissionTitle}</h2>
+						<h2 className="mission__title title">{appLanguage === "it" ? ITMissionTitle : ENMissionTitle}</h2>
 						<p className="mission__text">
-							{appLanguage==="it"?ITMissionText:ENMissionText}
+							{appLanguage === "it" ? ITMissionText : ENMissionText}
 						</p>
+						<div className="mission__image">
+							<img src={appLanguage === "it" ? ITBannerUrl : ENBannerUrl} alt="" className="mission__img"/>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -144,15 +145,15 @@ function AboutUsPage() {
 			<section className="team">
 				<div className="container">
 					<div className="team__wrapper">
-						<h2 className="team__title title">{appLanguage==="it"?ITCrewTitle:ENCrewTitle}</h2>
+						<h2 className="team__title title">{appLanguage === "it" ? ITCrewTitle : ENCrewTitle}</h2>
 						<ul className="team__list">
-							{ generalTeamMembersArr.map(doc =>
-								<li className="team__item"  key={uuidv4().toString()}>
+							{generalTeamMembersArr.map(doc =>
+								<li className="team__item" key={uuidv4().toString()}>
 									<img src={doc.avatar} alt="" className="team__image"/>
 									<div className="team__name">{doc.name}</div>
-									<div className="team__position">{appLanguage==="it"?doc.title.it:doc.title.en}</div>
+									<div className="team__position">{appLanguage === "it" ? doc.title.it : doc.title.en}</div>
 									<a href={doc.linkedin} className="social__link">
-										<FaLinkedinIn />
+										<FaLinkedinIn/>
 									</a>
 								</li>
 							)}
@@ -163,9 +164,9 @@ function AboutUsPage() {
 
 			<section className="partner">
 				<div className="container">
-					<h2 className="partner__title title">{appLanguage==="it"?ITPartnersTitle:ENPartnersTitle}</h2>
+					<h2 className="partner__title title">{appLanguage === "it" ? ITPartnersTitle : ENPartnersTitle}</h2>
 					<ul className="partner__list">
-						{ generalPartnersLogoArr.map(doc =>
+						{generalPartnersLogoArr.map(doc =>
 							<li className="partner__item" key={uuidv4().toString()}>
 								<img src={doc.logo} key={doc.id} alt="" className="partner__image"/>
 							</li>
@@ -178,12 +179,14 @@ function AboutUsPage() {
 				<div className="container">
 					<div className="career__inner">
 						<div className="career__image">
-							<img src="https://corporate.exxonmobil.com/-/media/Global/Images/New-purchases/business-meeting-breakout-discussions_supporting.jpg" alt="" className="career__img"/>
+							<img
+								src="https://corporate.exxonmobil.com/-/media/Global/Images/New-purchases/business-meeting-breakout-discussions_supporting.jpg"
+								alt="" className="career__img"/>
 						</div>
 						<div className="career__content">
-							<h2 className="career__title title">{appLanguage==="it"?ITCareerTitle:ENCareerTitle}</h2>
+							<h2 className="career__title title">{appLanguage === "it" ? ITCareerTitle : ENCareerTitle}</h2>
 							<p className="career__text">
-								{appLanguage==="it"?ITCareerText:ENCareerText}
+								{appLanguage === "it" ? ITCareerText : ENCareerText}
 							</p>
 							<Link className="career__btn" to='/SubmitCvForm'>{t("AboutUsPage.SubmitCVButton")}</Link>
 						</div>

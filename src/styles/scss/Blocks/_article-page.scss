@@ -8,10 +8,12 @@
     align-items: center;
     margin-bottom: 3rem;
   }
+
   &__btn-bg {
     margin-right: auto;
     display: inline-block;
   }
+
   &__btn-back {
     font-size: 2rem;
     padding: 0.4rem 1.5rem;
@@ -40,11 +42,13 @@
       transform: rotate(90deg);
     }
   }
-  &__title-box{
+
+  &__title-box {
     text-align: center;
     margin-bottom: 6rem;
   }
-  &__logo{
+
+  &__logo {
     max-width: 30rem;
     margin-bottom: 2rem;
   }
@@ -55,19 +59,49 @@
     min-height: 36rem;
     margin: 0 auto 6rem;
   }
+
   &__text {
     color: var(--white);
     margin-bottom: 8rem;
   }
+
   &__info {
     display: flex;
     justify-content: space-between;
     margin-bottom: 5rem;
 
-    .social__item{
-      span{
+    .social__item {
+      span {
         cursor: pointer;
       }
+    }
+  }
+}
+
+.info-article {
+  padding: 5rem 0;
+
+  &__inner {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  &__author {
+    padding-right: 2rem;
+    border-right: .1rem solid var(--blue);
+  }
+
+  &__date {
+    padding-left: 2rem;
+    border-left: .1rem solid var(--blue);
+  }
+
+  &__category {
+    text-align: center;
+
+    li {
+      display: inline-block;
     }
   }
 }
@@ -79,6 +113,7 @@
     }
   }
 }
+
 @media screen and (max-width: 540px) {
   .new-article {
     &__btn-back {
@@ -95,24 +130,49 @@
         border-left: 2rem solid transparent;
       }
     }
+
     &__title {
       margin-right: 0;
       transform: translateX(0);
     }
-    &__text{
+
+    &__text {
       margin-bottom: 2rem;
     }
   }
 }
+
+@media screen and (max-width: 460px) {
+  .info-article {
+    &__inner {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__author {
+      padding-right: 0;
+      border: none;
+      margin-bottom: 1.5rem;
+    }
+
+    &__date {
+      padding-left: 0;
+      border: none;
+    }
+  }
+}
+
 @media screen and (max-width: 380px) {
   .new-article {
     &__btn-back {
       width: 8rem;
+
       span {
         display: none;
       }
     }
-    &__image{
+
+    &__image {
       margin-bottom: 1rem;
     }
   }

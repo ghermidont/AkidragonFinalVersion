@@ -78,7 +78,12 @@
 }
 
 .tab-content {
+  border: .4rem solid var(--blue);
+  border-radius: 0 1rem 1rem 1rem;
   padding: 1rem;
+  &--blog{
+    border: none;
+  }
 }
 
 .nav-tabs {
@@ -116,7 +121,6 @@
 .react-player__preview{
   height: 30rem!important;
 }
-
 
 @media screen and (max-width: 580px){
   .tab{

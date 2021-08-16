@@ -110,20 +110,24 @@ export default function Article() {
 		<section className="new-article">
 			<div className="banner__commercial banner__commercial--left">{stringTagsParser(vertical)}</div>
 			<div className="banner__commercial banner__commercial--right">{stringTagsParser(vertical)}</div>
-			
+
 			<div className="container">
 				{selectedArticle && selectedArticle.map(doc =>(
 					<div key={doc.id}>
-						<div>
-							<div>Category: <ul>{doc.categories.map(category=><li key={doc.id+Date.now}>{category}</li>)}</ul></div>
-							<div>Author: {firstName} {lastName}</div>
-							<div>Date: {dateConverter(doc.createdAt)}</div>
-						</div>
+
 						<div className="new-article__title-box">
 							<img src={logoSection} alt="" className="new-article__logo"/>
 							<h1 className="new-article__title title">
                             Title: {doc.content[appLanguage].title}
 							</h1>
+						</div>
+
+						<div className='info-article'>
+							<div className='info-article__inner'>
+								<div className='info-article__author'>Author: {firstName} {lastName}</div>
+								<div className='info-article__date'>Date: {dateConverter(doc.createdAt)}</div>
+							</div>
+							<div className='info-article__category'>Category: <ul>{doc.categories.map(category=><li key={doc.id+Date.now}>{category}</li>)}</ul></div>
 						</div>
 
 						<div className="new-article__inner">
@@ -143,12 +147,10 @@ export default function Article() {
 						</div>
 
 						<p className="new-article__text">
-							<div className="banner banner__square banner__square--article">{stringTagsParser(_250x250320x100320x50)}</div>
-							<p className="new-article__text">
-                            Content: {doc.content[appLanguage].text}
-							</p>
+                Content: {doc.content[appLanguage].text}
 						</p>
-						
+
+						<div className="banner banner__square banner__square--article">{stringTagsParser(_250x250320x100320x50)}</div>
 						<div className="banner banner__square banner__square--article">{stringTagsParser(Top)}</div>
 
 						<div className="btn-upload">
@@ -168,7 +170,7 @@ export default function Article() {
 							</div>
 						</center>
 						<div className="banner banner__square banner__square--article">{stringTagsParser(bottom)}</div>
-					</div>	
+					</div>
 				)
 				)}
 			</div>
