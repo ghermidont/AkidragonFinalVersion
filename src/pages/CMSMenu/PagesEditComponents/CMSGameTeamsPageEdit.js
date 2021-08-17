@@ -127,7 +127,7 @@ function CMSGameTeamsPageEdit() {
 				return doc.id === "game-teams";
 			});
 		}
-		console.log(selectedDoc);
+
 	});
 
 	useEffect(() => {

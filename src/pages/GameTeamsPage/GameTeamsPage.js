@@ -1,5 +1,3 @@
-//TODO translation.
-// TODO Do the individual game team page.
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, {useEffect, useState} from "react";
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
@@ -11,10 +9,15 @@ import classes from "./GameTeamsPage.module.scss";
 
 export default function GameTeamsPage() {
 	const {t} = useTranslation();
+
 	const {appLanguage} = useLanguageContext();
 
 	const [ITGamingTeamBannerUrl, setITGamingTeamBannerUrl] = useState("");
 	const [ENGamingTeamBannerUrl, setENGamingTeamBannerUrl] = useState("");
+
+	const [ITGamingTeamTitle, setITGamingTeamTitle] = useState("");
+	const [ENGamingTeamTitle, setENGamingTeamTitle] = useState("");
+
 	const [ITGamingTeamText, setITGamingTeamText] = useState("");
 	const [ENGamingTeamText, setENGamingTeamText] = useState("");
 
@@ -39,9 +42,13 @@ export default function GameTeamsPage() {
 			selectedDoc.map(doc => {
 				doc.gameTeams.map(member => teamsArr.push({...member}));
 				setGameTeamMembersArr(teamsArr);
-
+				//Top Banner
 				setITGamingTeamBannerUrl(doc.topBanner.it);
 				setENGamingTeamBannerUrl(doc.topBanner.en);
+				//Top Title
+				setITGamingTeamTitle(doc.title.it);
+				setENGamingTeamTitle(doc.title.en);
+				//Top Text
 				setITGamingTeamText(doc.text.it);
 				setENGamingTeamText(doc.text.en);
 			});
@@ -51,7 +58,9 @@ export default function GameTeamsPage() {
 	return (
 		<>
 			<div className='container'>
-				<div className={classes.title}>{t("GameSalesPage.SaleGaming")}</div>
+				<div className={classes.title}>
+					{appLanguage === "it" ? ITGamingTeamTitle : ENGamingTeamTitle}
+				</div>
 				<div className={classes.banner}>
 					<div className={classes.banner__image}>
 						<img src={appLanguage === "it" ? ITGamingTeamBannerUrl : ENGamingTeamBannerUrl} alt="" className="feed__img"/>
@@ -98,15 +107,15 @@ export default function GameTeamsPage() {
 						))}
 					</div>
 
-					<div className={classes.offerText}>{t("GameSalesPage.JoinUs")}</div>
+					<div className={classes.offerText}>{t("GameTeamsPage.JoinUs")}</div>
 					<div className="contact__btn">
 						<Link className="contact__btn-link" to="/ContactUsPage">
-							{t("GameSalesPage.ContactsButton")}
+							{t("GameTeamsPage.ContactsButton")}
 						</Link>
 					</div>
 				</div>
-			</div>
 
+			</div>
 		</>
 	);
 }

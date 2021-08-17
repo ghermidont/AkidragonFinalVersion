@@ -203,5 +203,14 @@
     "ComeVisit": "Come visit",
     "JoinUs": "Do you want to join our franchise?",
     "ContactsButton": "Contact Us"
+  },
+
+  "GameTeamsPage": {
+    "ContactsButton": "Contact Us",
+    "JoinUs": "Do you want to join our franchise?"
+  },
+
+  "IndividualGameTeamPage": {
+    "Social": "Social"
   }
 }

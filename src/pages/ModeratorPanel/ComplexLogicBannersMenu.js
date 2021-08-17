@@ -49,13 +49,8 @@ function ComplexLogicBannersMenu() {
 		setGeneralBannersArray(newInputFields);
 	};
 
-	const handleInputChangePageArr = (id, event, location) => {
+	const handleInputChangePageArr = () => {
 		const newInputFields = generalBannersArray.map(doc => {
-			if(id === doc.id) {
-				console.log(event.target.value);
-				console.log(location);
-				//doc.pages = pagesArray;
-			}
 			return doc;
 		});
 		setGeneralBannersArray(newInputFields);

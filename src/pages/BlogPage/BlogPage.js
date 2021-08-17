@@ -106,7 +106,6 @@ export default function BlogPage() {
 					<div className='news-banner__search'>
 						<BlogSearchBar />
 					</div>
-
 				
 					<div className="banner banner__square">
 						{stringTagsParser(Top)}

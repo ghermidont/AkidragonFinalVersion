@@ -4,8 +4,10 @@ import {useLanguageContext} from "../../context/LanguageContext";
 import classes from "./IndividualGameTeamPage.module.scss";
 // eslint-disable-next-line no-undef
 const queryString = require("query-string");
+import {useTranslation} from "react-i18next";
 
 export default function IndividualGameTeamPage() {
+	const {t} = useTranslation();
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 	const {appLanguage} = useLanguageContext();
 	const parsedWindowLocation = queryString.parse(window.location.hash);
@@ -54,7 +56,7 @@ export default function IndividualGameTeamPage() {
 
 	useEffect(() => {
 		if (docsFromHookCMS !== []) {
-			console.log("docsFromHookCMS", docsFromHookCMS);
+		
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
 				return doc.id === "game-teams";
 			});
@@ -139,7 +141,7 @@ export default function IndividualGameTeamPage() {
 						<div className={classes.content__lowTitle}>{appLanguage === "it" ? info.lowTitle.it : info.lowTitle.en}</div>
 						<div className={classes.content__text}>{appLanguage === "it" ? info.lowText.it : info.lowText.en}</div>
 
-						<div className={classes.social__title}>Channels:</div>
+						<div className={classes.social__title}>{t("IndividualGameTeamPage.Social")}:</div>
 
 						<ul className={classes.social__list}>
 							<li className="social__item">
