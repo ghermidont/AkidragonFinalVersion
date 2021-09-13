@@ -1,3 +1,4 @@
+/** This represents a search result article item in the search bar window.*/
 /* eslint-disable react/prop-types */
 import React, {useState} from "react";
 import {Link} from "react-router-dom";

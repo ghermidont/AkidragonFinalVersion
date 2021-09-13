@@ -9,7 +9,6 @@ export function useTeamsContext(){
 	return useContext(teamsContext);
 }
 
-/*########################## Teams Context Provider ##########################*/
 // eslint-disable-next-line react/prop-types
 export function TeamsContextProvider({ children }) {
 	const [chosenTeamNumber, setChosenTeamNumber] = useState();

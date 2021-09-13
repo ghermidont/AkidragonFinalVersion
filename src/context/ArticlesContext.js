@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react";
-import {projectFirestore} from "../fireBase";
-import {useAuthContext} from "./AuthContext";
+// import {projectFirestore} from "../fireBase";
+// import {useAuthContext} from "./AuthContext";
 
 const articlesContext = React.createContext({
 	articleContent: [],
@@ -11,10 +11,9 @@ export function useArticlesContext(){
 	return useContext(articlesContext);
 }
 
-/*########################## Articles Context Provider ##########################*/
 // eslint-disable-next-line react/prop-types
 export function ArticlesContextProvider({ children }) {
-	const {currentUser, setUserSurveyPassedStatus, createSurveyCheckInUserDoc} = useAuthContext();
+	//const {currentUser, setUserSurveyPassedStatus, createSurveyCheckInUserDoc} = useAuthContext();
 	const [generalArticlesExtractArr, setGeneralArticlesExtractArr] = useState(null);
 	const [addArticlesFormUserUploadedFile, setAddArticlesFormUserUploadedFile] = useState();
 	const [addArticlesFormUserUploadedFileUrl, setAddArticlesFormUserUploadedFileUrl] = useState();
@@ -22,21 +21,21 @@ export function ArticlesContextProvider({ children }) {
 	const [articleContent, setArticleContent] = useState();
 	const [chosenModifyArticleNumber, setChosenModifyArticleNumber] = useState("");
 
-	const writeSurveyToFirestoreUF = (surveyAnswersObject) =>{
-
-		projectFirestore.collection("filled-surveys").doc(currentUser.uid).set(surveyAnswersObject)
-			.then(() => {
-				window.alert("Survey results successfully written!");
-				createSurveyCheckInUserDoc();
-				setUserSurveyPassedStatus(true);
-			})
-			.catch((error) => {
-				window.alert("Error writing survey results: " + error);
-			});
-	};
+	// const writeSurveyToFirestoreUF = (surveyAnswersObject) =>{
+	//
+	// 	projectFirestore.collection("filled-surveys").doc(currentUser.uid).set(surveyAnswersObject)
+	// 		.then(() => {
+	// 			window.alert("Survey results successfully written!");
+	// 			createSurveyCheckInUserDoc();
+	// 			setUserSurveyPassedStatus(true);
+	// 		})
+	// 		.catch((error) => {
+	// 			window.alert("Error writing survey results: " + error);
+	// 		});
+	// };
 
 	const value = {
-		writeSurveyToFirestoreUF,
+		// writeSurveyToFirestoreUF,
 		articleContent,
 		setArticleContent,
 		generalArticlesExtractArr,

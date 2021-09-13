@@ -1,3 +1,4 @@
+/** Hooks to write files to Firestore. */
 import { useState, useEffect } from "react";
 import {projectStorage} from "../fireBase";
 

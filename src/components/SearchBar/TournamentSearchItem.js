@@ -1,3 +1,4 @@
+/** This represents a search result tournament item in the search bar window.*/
 /* eslint-disable react/prop-types */
 import React from "react";
 import {Link} from "react-router-dom";
@@ -21,6 +22,7 @@ const TournamentSearchItem = (props) => {
 									<br/>
 								</Row>
 								<Row>
+									{/*&gt; stands for '>' in Unicode*/}
 									{/* eslint-disable-next-line react/prop-types */}
 									<Link onClick={props.handleClose} to={"/TournamentsPage"}>
                                         &gt;&gt;&gt;Tournament page

@@ -1,20 +1,23 @@
+/**  This component is used in the homepage, user profile page and individual article page. */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React from "react";
 import {useDataFromFirestore} from "../customHooks/useFirestore";
 import {Link} from "react-router-dom";
+//Contexts import.
 import {useArticlesContext} from "../context/ArticlesContext";
-import logo from "../assets/images/src/DragonLogo.png";
-//import {useHistory} from "react-router-dom";
 import {useLanguageContext} from "../context/LanguageContext";
-
-//history.push(`/article/${doc.id}`, {from: "/ShortArticlesList"});
+//Logo
+import logo from "../assets/images/src/DragonLogo.png";
 
 export default function ShortArticlesList() {
+	//App language variable.
 	const {appLanguage} = useLanguageContext();
-	//const history = useHistory();
+	//Context.
 	const {setChosenArticleNumber} = useArticlesContext();
+	// Get articles from the database.
 	const {docsFromHook} = useDataFromFirestore("articles");
 
+	//The array contain the filtered articles.
 	let articlesArr;
 
 	if (docsFromHook) {
@@ -23,6 +26,7 @@ export default function ShortArticlesList() {
 		});
 	}
 
+	//'slice' is used to get only the 4 latest articles.
 	return (
 		<>
 			{articlesArr && articlesArr.slice(0, 4).map(doc => (

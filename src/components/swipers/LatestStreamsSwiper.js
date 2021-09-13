@@ -1,7 +1,9 @@
+/** The latest streams swiper from the homepage bottom section. */
 import React, {useRef, useState} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 import ReactPlayer from "react-player/youtube";
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
+//Styles.
 import "swiper/swiper.min.css";
 import "swiper/components/effect-coverflow/effect-coverflow.min.css";
 import "swiper/components/pagination/pagination.min.css";
@@ -56,12 +58,9 @@ export default function LatestStreamsSwiper() {
 							/>
 						</div>
 					</SwiperSlide>
-				
 				))}
 			</Swiper>
-
 		</div>
-
 	);
 
 }

@@ -1,3 +1,4 @@
+/** Hook to get streams from Firestore. Note: This code can be integrated in the useFirestore.js*/
 import { useState, useEffect } from "react";
 import { projectFirestore } from "../fireBase";
 

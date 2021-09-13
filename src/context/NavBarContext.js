@@ -6,6 +6,7 @@ export function useNavBarContext(){
 }
 
 /*########################## NavBar Context Provider ##########################*/
+// eslint-disable-next-line react/prop-types
 export function NavBarContextProvider({ children }) {
 	const [showSearch, setShowSearch] = useState(false);
 

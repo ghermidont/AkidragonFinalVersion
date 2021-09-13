@@ -1,12 +1,13 @@
+/** The entertainment swiper from the content page.*/
 import React, {useState} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 import ReactPlayer from "react-player/youtube";
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
+//Custom styles
 import "swiper/swiper.min.css";
 import "swiper/components/effect-coverflow/effect-coverflow.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import classes from "./ReactPlayer.module.scss";
-
 import "./swiperStyles.css";
 
 import SwiperCore, {
@@ -16,9 +17,11 @@ import SwiperCore, {
 SwiperCore.use([EffectCoverflow,Pagination]);
 
 export default function MatchesTournamentsSwiper (){
+	//Getting data from the database.
 	const {docsFromHook} = useDataFromFirestore("streams");
+	//States
 	const [mainMatchVid, setMainMatchVid] = useState("");
-
+	//Filtering streams.
 	const filterResult =  docsFromHook.filter(function(doc) {
 		return doc.category === "entertainment";
 	});

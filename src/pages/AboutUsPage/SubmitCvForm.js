@@ -3,6 +3,7 @@ import emailjs from "emailjs-com";
 import {init} from "emailjs-com";
 import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+//Styles import.
 import classes from "./SubmitCvForm.module.scss";
 
 init("user_ryi2yglqohFlHpuZyAqiJ");

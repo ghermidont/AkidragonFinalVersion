@@ -4,21 +4,24 @@ import logoBig from "../../assets/images/dest/logo-big.png";
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
 import {useTranslation} from "react-i18next";
+//Unique ID generator.
 import {v4 as uuidv4} from "uuid";
 import {FaLinkedinIn} from "react-icons/fa";
 
 function AboutUsPage() {
+	//Translation.
 	const {t} = useTranslation();
 	const {appLanguage} = useLanguageContext();
+	//Get CMS data from database.
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
-
+	//States.
 	const [ENBannerUrl, setENBannerUrl] = useState("");
 	const [ITBannerUrl, setITBannerUrl] = useState("");
 
 	const [ENTopBanner, setENTopBanner] = useState("");
 	const [ITTopBanner, setITTopBanner] = useState("");
 
-	// Text
+	// Text states.
 	const [ENCareerTitle, setENCareerTitle] = useState("");
 	const [ITCareerTitle, setITCareerTitle] = useState("");
 
@@ -46,8 +49,11 @@ function AboutUsPage() {
 	const [ENTitleText, setENTitleText] = useState("");
 	const [ITTitleText, setITTitleText] = useState("");
 
+	//Stores the data related to the team members.
 	let membersArr = [];
+	//Stores the data related to the partners.
 	let partnersArr = [];
+	//Stores the page filtered general data.
 	let selectedDoc = "";
 
 	useEffect(() => {
@@ -58,6 +64,7 @@ function AboutUsPage() {
 		}
 	});
 
+	//Updates the states on every change.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -102,9 +109,7 @@ function AboutUsPage() {
 			<section className="banner">
 				<div className="container">
 					<div className="banner__image">
-						{/*TODO Add change banner option to the CMS*/}
-						<img className="banner__img" src={appLanguage === "it" ? ITTopBanner : ENTopBanner}
-							alt="Akidragon top banner"/>
+						<img className="banner__img" src={appLanguage === "it" ? ITTopBanner : ENTopBanner}	alt="Akidragon top banner"/>
 					</div>
 				</div>
 			</section>

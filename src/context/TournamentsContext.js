@@ -5,7 +5,6 @@ export function useTournamentsContext(){
 	return useContext(tournamentsContext);
 }
 
-/*########################## Articles Context Provider ##########################*/
 // eslint-disable-next-line react/prop-types
 export function TournamentsContextProvider({ children }) {
 	const [chosenTournamentNumber, setChosenTournamentNumber] = useState("");

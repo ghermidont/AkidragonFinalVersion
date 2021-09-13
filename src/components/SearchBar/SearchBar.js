@@ -1,3 +1,4 @@
+/** Search bar component main logic.*/
 import React, {useEffect, useState} from "react";
 import {Modal} from "react-bootstrap";
 import ArticleSearchItem from "./ArticleSearchItem";

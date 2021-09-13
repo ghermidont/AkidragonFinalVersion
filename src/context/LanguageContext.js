@@ -5,7 +5,6 @@ export function useLanguageContext(){
 	return useContext(languageContext);
 }
 
-/*########################## Articles Context Provider ##########################*/
 // eslint-disable-next-line react/prop-types
 export function LanguageContextProvider({ children }) {
 	const [appLanguage, setAppLanguage] = useState("en");

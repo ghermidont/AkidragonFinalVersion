@@ -1,14 +1,13 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import React, {useState, useContext, useEffect} from "react";
 //auth is the auth function we created in the firebase.js file. All functions called after auth. are firebase functions.
-import {auth, projectFirestore} from "../fireBase";
+import {auth} from "../fireBase";
 const authContext = React.createContext();
 
 export function useAuthContext(){
 	return useContext(authContext);
 }
 
-/*########################## Authentication Context Provider ##########################*/
 // eslint-disable-next-line react/prop-types
 export function AuthContextProvider({ children }) {
 	const [signUpFormUserUploadedFile, setSignUpFormUserUploadedFile] = useState("");
@@ -22,7 +21,7 @@ export function AuthContextProvider({ children }) {
 	const [userPoints, setUserPoints] = useState(0);
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
-	const [userSurveyPassedStatus, setUserSurveyPassedStatus] = useState("");
+	//const [userSurveyPassedStatus, setUserSurveyPassedStatus] = useState("");
 	const [currentUserModerator, setCurrentUserModerator] = useState();
 	const [userInfoCompleted, setUserInfoCompleted] = useState();
 	const[moderator, setModerator] = useState(false);
@@ -76,18 +75,18 @@ export function AuthContextProvider({ children }) {
 		});
 	};
 
-	const createSurveyCheckInUserDoc = (User) => {
-		projectFirestore
-			.collection("user-profiles")
-			.doc(User.uid)
-			.update({surveyPassed: userSurveyPassedStatus})
-			.then(() => {
-				window.aler("Survey results successfully written!");
-			})
-			.catch((error) => {
-				window.aler("Error writing survey results: " + error);
-			});
-	};
+	// const createSurveyCheckInUserDoc = (User) => {
+	// 	projectFirestore
+	// 		.collection("user-profiles")
+	// 		.doc(User.uid)
+	// 		.update({surveyPassed: userSurveyPassedStatus})
+	// 		.then(() => {
+	// 			window.alert("Survey results successfully written!");
+	// 		})
+	// 		.catch((error) => {
+	// 			window.alert("Error writing survey results: " + error);
+	// 		});
+	// };
 
 	const clearInput = () => {
 		setEmail("");
@@ -109,9 +108,9 @@ export function AuthContextProvider({ children }) {
 	const value = {
 		clearInput,
 		currentUserModerator,
-		createSurveyCheckInUserDoc,
-		userSurveyPassedStatus,
-		setUserSurveyPassedStatus,
+		// createSurveyCheckInUserDoc,
+		// userSurveyPassedStatus,
+		// setUserSurveyPassedStatus,
 		userPoints,
 		setUserPoints,
 		auth,

@@ -1,6 +1,8 @@
+/** Hooks to extract data from Firestore. */
 import { useState, useEffect } from "react";
 import { projectFirestore } from "../fireBase";
 
+//Hook to extract articles.
 const useDataFromFirestore = (collection) => {
 	const [docsFromHook, setDocsFromHook] = useState([]);
 	//this useEffect interacts with the database every time the db changes (the collection).
@@ -27,6 +29,7 @@ const useDataFromFirestore = (collection) => {
 	return { docsFromHook };
 };
 
+//Hook to extract tournaments data.
 const useDataFromFirestoreTournaments = (collection) => {
 	const [docsFromHookTournaments, setDocsFromHookTournaments] = useState([]);
 	useEffect( () => {		
@@ -43,6 +46,7 @@ const useDataFromFirestoreTournaments = (collection) => {
 	return { docsFromHookTournaments };
 };
 
+//Hook to extract CMS data.
 const useDataFromFirestoreCMS = (collection) => {
 	const [docsFromHookCMS, setDocsFromHookCMS] = useState([]);
 	useEffect( () => {
@@ -59,6 +63,7 @@ const useDataFromFirestoreCMS = (collection) => {
 	return { docsFromHookCMS };
 };
 
+//Hook to extract banners.
 const useDataFromFirestoreBanners = (collection) => {
 	const [docsFromHookBanners, setDocsFromHookBanners] = useState([]);
 	useEffect( () => {
@@ -75,6 +80,7 @@ const useDataFromFirestoreBanners = (collection) => {
 	return {docsFromHookBanners};
 };
 
+//Hook to extract user info.
 const useDataFromFirestoreUserInfo = (collection) => {
 	const [docsFromHookUserInfo, setDocsFromHookUserInfo] = useState([]);
 	useEffect( () => {
