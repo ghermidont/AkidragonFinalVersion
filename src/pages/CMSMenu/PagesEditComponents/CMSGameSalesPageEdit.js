@@ -1,3 +1,4 @@
+/** Consider implementing the DRY principle. */
 import React, {useEffect, useRef, useState} from "react";
 import {projectFirestore, projectStorage} from "../../../fireBase";
 import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
@@ -16,11 +17,11 @@ function CMSGamesSalesPageEdit() {
 		}
 	});
 
-	//text
+	//text states
 	const [ITSaleGamingText ,setITSaleGamingText] = useState("");
 	const [ENSaleGamingText ,setENSaleGamingText] = useState("");
 
-	//url
+	//url states
 	const [ITSaleGamingBannerUrl ,setITSaleGamingBannerUrl] = useState("");
 	const [ENSaleGamingBannerUrl ,setENSaleGamingBannerUrl] = useState("");
 	const [ITOurRoomsBannerUrl ,setITOurRoomsBannerUrl] = useState("");
@@ -31,7 +32,7 @@ function CMSGamesSalesPageEdit() {
 	const [ITOurRoomsBannerFileSuccess ,setITOurRoomsBannerFileSuccess] = useState(false);
 	const [ENOurRoomsBannerFileSuccess ,setENOurRoomsBannerFileSuccess] = useState(false);
 
-	//old
+	//old states
 	const [oldITSaleGamingBannerUrl ,setOldITSaleGamingBannerUrl] = useState("");
 	const [oldENSaleGamingBannerUrl ,setOldENSaleGamingBannerUrl] = useState("");
 	const [oldITOurRoomsBannerUrl ,setOldITOurRoomsBannerUrl] = useState("");
@@ -41,6 +42,7 @@ function CMSGamesSalesPageEdit() {
 
 	const fileTypesArray = ["image/png", "image/jpeg"];
 
+	//Set the states on each database call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -60,6 +62,7 @@ function CMSGamesSalesPageEdit() {
 		}
 	}, [docsFromHookCMS]);
 
+	//File upload event listeners. START
 	const ITSaleGamingBannerFileUploadEventListener = (e) => {
 		let uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
@@ -163,7 +166,9 @@ function CMSGamesSalesPageEdit() {
 			window.alert("Please select an image file (png or jpg)");
 		}
 	};
+	//File upload event listeners. END
 
+	// Function to write data to the database.
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("web-app-cms").doc("gameSalesPage");
 		publishBtnRef.current&&publishBtnRef.current.setAttribute("disabled", "disabled");

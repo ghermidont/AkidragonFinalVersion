@@ -4,9 +4,10 @@ import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
 
 function CMSContactUpPageEdit() {
 	let publishBtnRef = useRef();
+	// Getting data from the database.
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 
-	//states
+	//States.
 	const [ENAddress, setENAddress] = useState("");
 	const [ITAddress, setITAddress] = useState("");
 	const [ENText, setENText] = useState("");
@@ -25,6 +26,7 @@ function CMSContactUpPageEdit() {
 		}
 	});
 
+	//Setting the states on each database call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -38,7 +40,7 @@ function CMSContactUpPageEdit() {
 			});
 		}
 	}, [docsFromHookCMS]);
-
+	// Function to write data to the database.
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("web-app-cms").doc("contactUsPage");
 		collectionRef.set(
@@ -143,7 +145,6 @@ function CMSContactUpPageEdit() {
 											}
 										></textarea>
 									</label>
-
 								</form>
 							</div>
 						</div>
@@ -197,7 +198,6 @@ function CMSContactUpPageEdit() {
 											}
 										></textarea>
 									</label>
-
 
 								</form>
 							</div>

@@ -9,11 +9,12 @@ init("user_ryi2yglqohFlHpuZyAqiJ");
 
 export default function ContactUsForm() {
 	const {t} = useTranslation();
+	const history = useHistory();
+	let publishBtnRef = useRef();
+	//States.
 	const [checkBoxState, setCheckBoxState] = useState(true);
 	const [sizeExceededError, setSizeExceededError] = useState();
 	const [fileSize, setFileSize] = useState(0);
-	const history = useHistory();
-	let publishBtnRef = useRef();
 
 	useEffect(() => {
 		if (fileSize > 512000) {
@@ -24,6 +25,7 @@ export default function ContactUsForm() {
 	}, [fileSize]
 	);
 
+	// Function for sending emails.
 	function sendEmail(e) {
 		//This default function prevents the page from refreshing when we click the submit button;
 		e.preventDefault();

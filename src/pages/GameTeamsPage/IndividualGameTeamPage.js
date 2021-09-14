@@ -1,3 +1,4 @@
+/** In case necessary, use this code architecture for the files proposed for the DRY principle implementation.*/
 import React, {useEffect, useState} from "react";
 import { useDataFromFirestoreCMS } from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
@@ -8,11 +9,16 @@ import {useTranslation} from "react-i18next";
 
 export default function IndividualGameTeamPage() {
 	const {t} = useTranslation();
-	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 	const {appLanguage} = useLanguageContext();
+
+	//Editing the slug
 	const parsedWindowLocation = queryString.parse(window.location.hash);
 	const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(10);
 
+	//Getting data from the database.
+	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
+
+	//States.
 	const[ENPageTitle, setENPageTitle] = useState("");
 	const[ITPageTitle, setITPageTitle] = useState("");
 
@@ -23,6 +29,7 @@ export default function IndividualGameTeamPage() {
 	const[ITTopBanner, setITTopBanner] = useState("");
 
 	const[teams, setTeams] = useState([]);
+
 	const[info, setInfo] = useState({
 		avatar: {
 			en: "",
@@ -54,14 +61,15 @@ export default function IndividualGameTeamPage() {
 
 	let selectedDoc = "";
 
+	//Filtering the database data.
 	useEffect(() => {
 		if (docsFromHookCMS !== []) {
-		
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
 				return doc.id === "game-teams";
 			});
 		}
 
+		//Setting the states on each database data call.
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
 				setENPageTitle(doc.title.en);
@@ -79,6 +87,7 @@ export default function IndividualGameTeamPage() {
 		}
 	}, [docsFromHookCMS]);
 
+	//Setting the info state on each teams states update.
 	useEffect(() => {
 		teams.map(t=>
 			setInfo({

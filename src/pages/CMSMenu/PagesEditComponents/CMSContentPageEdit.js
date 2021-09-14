@@ -4,7 +4,7 @@ import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
 
 function CMSContentPageEdit() {
 	let publishBtnRef = useRef();
-
+	//States.
 	const [ITBannerTitle, setITBannerTitle] = useState("");
 	const [ITBannerText, setITBannerText] = useState("");
 	const [ITSwiper1Title, setITSwiper1Title] = useState("");
@@ -14,7 +14,7 @@ function CMSContentPageEdit() {
 	const [ENBannerText, setENBannerText] = useState("");
 	const [ENSwiper1Title, setENSwiper1Title] = useState("");
 	const [ENSwiper2Title, setENSwiper2Title] = useState("");
-
+	//Getting data from the database.
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 
 	let selectedDoc = "";
@@ -26,7 +26,7 @@ function CMSContentPageEdit() {
 			});
 		}
 	});
-
+	//Setting the states on each database call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -44,6 +44,7 @@ function CMSContentPageEdit() {
 		}
 	}, [docsFromHookCMS]);
 
+	// Function to write data to the database.
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("web-app-cms").doc("contentPage");
 		collectionRef.set(
@@ -244,13 +245,6 @@ function CMSContentPageEdit() {
                                 Publish
 							</button>
 
-							{/*<button*/}
-							{/*    ref={cancelBtnRef}*/}
-							{/*    className="form-article__btn"*/}
-							{/*    onClick={() => history.push("/ContentPage")}*/}
-							{/*>*/}
-							{/*    Cancel*/}
-							{/*</button>*/}
 						</div>
 					</div>
 				</section>

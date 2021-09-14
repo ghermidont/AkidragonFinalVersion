@@ -1,9 +1,11 @@
+/** Search item component appearing in the blog search bar*/
 /* eslint-disable react/prop-types */
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import {Col, Container, Row} from "react-bootstrap";
 
 const BlogArticleSearchItem = (props) => {
+	//States
 	const [readMore, setReadMore] = useState(false);
 
 	const extraContent = (
@@ -35,7 +37,7 @@ const BlogArticleSearchItem = (props) => {
 								</Row>
 								<Row>
 									{/* eslint-disable-next-line react/prop-types */}
-												Description: {props.description || "Article description..."}
+									Description: {props.description || "Article description..."}
 									<br/>
 								</Row>
 								<Row style={{display: "flex"}}>

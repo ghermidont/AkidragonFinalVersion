@@ -3,28 +3,31 @@ import {Link} from "react-router-dom";
 import {useDataFromFirestore, useDataFromFirestoreBanners, useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 import logoSection from "../../assets/images/dest/logo-section.png";
 import {useLanguageContext} from "../../context/LanguageContext";
-import {useTranslation} from "react-i18next";
 import {useArticlesContext} from "../../context/ArticlesContext";
+import {useTranslation} from "react-i18next";
 import HtmlToReact from "html-to-react";
+//Components import.
 import BlogSearchBar from "./ArticlesSearchBar/BlogSearchBar";
 
 export default function BlogPage() {
-	const {setChosenArticleNumber} = useArticlesContext();
 	const {t} = useTranslation();
+	//Context variables.
+	const {setChosenArticleNumber} = useArticlesContext();
 	const {appLanguage} = useLanguageContext();
+	//Hooks
 	const {docsFromHook} = useDataFromFirestore("articles");
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
+	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
+	//States
 	const [ENMainText, setENMainText] = useState("");
 	const [ITMainText, setITMainText] = useState("");
 	const [ENFooterText, setENFooterText] = useState("");
 	const [ITFooterText, setITFooterText] = useState("");
-
 	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
 	const [Top, setTop] = useState("");
 	const [bottom, setBottom] = useState("");
 
-	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
-
+	//Stores the blog page banners from the database.
 	let selectedBanners = "";
 
 	useEffect(() => {
@@ -57,6 +60,7 @@ export default function BlogPage() {
 		return doc.categories.includes("videogames");
 	});
 
+	//Stores the CMS info for the page.
 	let selectedDoc = "";
 
 	useEffect(() => {
@@ -67,6 +71,7 @@ export default function BlogPage() {
 		}
 	});
 
+	//Setting the states.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -86,7 +91,7 @@ export default function BlogPage() {
 		}
 	}, [docsFromHookCMS, docsFromHookBanners]);
 
-	// DB string tags parser. Is needed to render the banners stored in the database.
+	// Database string tags parser. Is needed to render the banners stored in the database.
 	const stringTagsParser = (tag) => {
 		if(tag) {
 			let  htmlToReactParser = new HtmlToReact.Parser(React);
@@ -138,10 +143,9 @@ export default function BlogPage() {
 							</li>
 						</ul>
 
-
 						<div className="tab-content tab-content--blog" id="myTabContent">
-
 							<div className="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+								{/*Mapping the latest articles with no category filter.*/}
 								{articlesArr && articlesArr.slice(0, 8).map(doc =>
 									<article className="article" key={doc.id}>
 										<Link className="article__link" to={`/article/${doc.id}`} onClick={() => setChosenArticleNumber(doc.id)}>
@@ -159,6 +163,7 @@ export default function BlogPage() {
 										</Link>
 									</article>
 								)}
+
 							</div>
 
 							<div
@@ -167,6 +172,7 @@ export default function BlogPage() {
 								role="tabpanel"
 								aria-labelledby="videogames-tab"
 							>
+								{/*Mapping the articles filtered by "videogames" category.*/}
 								{videoGamesNews && videoGamesNews.slice(0, 8).map(doc =>
 									<article className="article" key={doc.id}>
 										<Link className="article__link" to={`/article/${doc.id}`} onClick={() => setChosenArticleNumber(doc.id)}>
@@ -193,6 +199,7 @@ export default function BlogPage() {
 								role="tabpanel"
 								aria-labelledby="movies-tab"
 							>
+								{/*Mapping the articles filtered by "movies" category.*/}
 								{moviesNews && moviesNews.slice(0, 8).map(doc =>
 									<article className="article" key={doc.id}>
 										<Link className="article__link" to={`/article/${doc.id}`} onClick={() => setChosenArticleNumber(doc.id)}>
@@ -208,7 +215,6 @@ export default function BlogPage() {
 												</div>
 											</div>
 										</Link>
-
 									</article>
 								)}
 							</div>
@@ -219,6 +225,7 @@ export default function BlogPage() {
 								role="tabpanel"
 								aria-labelledby="music-tab"
 							>
+								{/*Mapping the articles filtered by "music" category.*/}
 								{musicNews && musicNews.slice(0, 8).map(doc =>
 									<article className="article" key={doc.id}>
 										<Link className="article__link" to={`/article/${doc.id}`} onClick={() => setChosenArticleNumber(doc.id)}>

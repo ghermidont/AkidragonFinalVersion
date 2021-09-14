@@ -4,14 +4,16 @@ import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
 
 function CMSBlogPageEdit() {
 	let publishBtnRef = useRef();
+	//States.
 	const [ITMainText, setITMainText] = useState("");
 	const [ENMainText, setENMainText] = useState("");
 	const [ENFooterText, setENFooterText] = useState("");
 	const [ITFooterText, setITFooterText] = useState("");
+	//Extracting data from the database.
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 
 	let selectedDoc = "";
-
+	//Filtering data base data.
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
@@ -20,6 +22,7 @@ function CMSBlogPageEdit() {
 		}
 	});
 
+	// Updating states on each data base call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -30,7 +33,7 @@ function CMSBlogPageEdit() {
 			});
 		}
 	}, [docsFromHookCMS]);
-
+	//Function for writing data to the database.
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("web-app-cms").doc("blogPage");
 		collectionRef.set(
@@ -167,14 +170,6 @@ function CMSBlogPageEdit() {
 							>
                                 Publish
 							</button>
-
-							{/*<button*/}
-							{/*    ref={cancelBtnRef}*/}
-							{/*    className="form-article__btn"*/}
-							{/*    onClick={() => history.push("/UserProfilePage")}*/}
-							{/*>*/}
-							{/*    Cancel*/}
-							{/*</button>*/}
 						</div>
 					</div>
 				</section>

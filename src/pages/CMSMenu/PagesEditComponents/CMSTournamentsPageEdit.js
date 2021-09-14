@@ -8,7 +8,7 @@ function CMSTournamentsPageEdit() {
 
 	const fileTypesArray = ["image/png", "image/jpeg"];
 	const history = useHistory();
-
+	// States.
 	const [ENBannerUrl, setENBannerUrl] = useState("");
 	const [ITBannerUrl, setITBannerUrl] = useState("");
 	const [OldENBannerUrl, setOldENBannerUrl] = useState("");
@@ -32,6 +32,7 @@ function CMSTournamentsPageEdit() {
 
 	let selectedDoc = "";
 
+	//Filtering data from the database.
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
@@ -40,6 +41,7 @@ function CMSTournamentsPageEdit() {
 		}
 	});
 
+	//Updating the states on each database data call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -57,6 +59,7 @@ function CMSTournamentsPageEdit() {
 		}
 	}, [docsFromHookCMS]);
 
+	//File upload listeners. START
 	const ITFileUploadEventListener = (e) => {
 		let uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
@@ -113,7 +116,9 @@ function CMSTournamentsPageEdit() {
 			setENFileTypeError("Please select an image file (png or jpg)");
 		}
 	};
+	//File upload listeners. END
 
+	//Writing data to the database.
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("web-app-cms").doc("tournamentsPage");
 
@@ -298,13 +303,6 @@ function CMSTournamentsPageEdit() {
                                 Publish
 							</button>
 
-							{/*<button*/}
-							{/*    ref={cancelBtnRef}*/}
-							{/*    className="form-article__btn"*/}
-							{/*    onClick={()=>clearInput()}*/}
-							{/*>*/}
-							{/*    Cancel*/}
-							{/*</button>*/}
 						</div>
 					</div>
 				</section>

@@ -1,3 +1,4 @@
+/** Consider implementing the DRY principle. */
 import React, {useEffect, useRef, useState} from "react";
 import {projectFirestore, projectStorage} from "../../../fireBase";
 import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
@@ -6,7 +7,7 @@ function CMSHomePageEdit() {
 	let publishBtnRef = useRef();
 	const fileTypesArray = ["image/png", "image/jpeg"];
 
-	//Url
+	//Url states
 	const [ENBannerUrl, setENBannerUrl] = useState("");
 	const [ENContactsBannerUrl, setENContactsBannerUrl] = useState("");
 	const [ENGameTeamsBannerUrl, setENGameTeamsBannerUrl] = useState("");
@@ -77,10 +78,12 @@ function CMSHomePageEdit() {
 	const [ITBannerText, setITBannerText] = useState("");
 	const [ENBannerText, setENBannerText] = useState("");
 
+	//Getting data from the database.
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 
 	let selectedDoc = "";
 
+	//Filtering data from the database.
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
@@ -88,7 +91,7 @@ function CMSHomePageEdit() {
 			});
 		}
 	});
-
+	//Updating states on each call from the database.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -123,6 +126,7 @@ function CMSHomePageEdit() {
 		}
 	}, [docsFromHookCMS]);
 
+	// File upload event listeners. START
 	const ENBannerFileUploadEventListener = (e) => {
 		let uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
@@ -461,7 +465,9 @@ function CMSHomePageEdit() {
 			setITTournamentsBannerUrlFileTypeError("Please select an image file (png or jpg)");
 		}
 	};
+	// File upload event listeners. END
 
+	//Writing data to the database.
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("web-app-cms").doc("homePage");
 
@@ -806,13 +812,6 @@ function CMSHomePageEdit() {
                             Publish
 							</button>
 
-							{/*<button*/}
-							{/*    ref={cancelBtnRef}*/}
-							{/*    className="form-article__btn"*/}
-							{/*    onClick={()=>clearInput()}*/}
-							{/*>*/}
-							{/*    Cancel*/}
-							{/*</button>*/}
 						</div>
 					</div>
 				</section>

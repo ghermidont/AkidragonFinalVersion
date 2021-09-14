@@ -10,10 +10,11 @@ init("user_ryi2yglqohFlHpuZyAqiJ");
 
 export default function SubmitCvForm() {
 	const {t} = useTranslation();
+	const history = useHistory();
+	//States.
 	const [checkBoxState, setCheckBoxState] = useState(true);
 	const [sizeExceededError, setSizeExceededError] = useState();
-	const [fileSize, setFileSize] = useState(0);
-	const history = useHistory();
+	const [fileSize, setFileSize] = useState(0);	
 
 	useEffect(() => {
 		if (fileSize > 512000) {

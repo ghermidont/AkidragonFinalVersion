@@ -5,13 +5,14 @@ import {Link} from "react-router-dom";
 import {useTeamsContext} from "../../context/TeamsContext";
 import {useLanguageContext} from "../../context/LanguageContext";
 import {useTranslation} from "react-i18next";
+//Styles
 import classes from "./GameTeamsPage.module.scss";
 
 export default function GameTeamsPage() {
 	const {t} = useTranslation();
 
 	const {appLanguage} = useLanguageContext();
-
+	//States.
 	const [ITGamingTeamBannerUrl, setITGamingTeamBannerUrl] = useState("");
 	const [ENGamingTeamBannerUrl, setENGamingTeamBannerUrl] = useState("");
 
@@ -22,13 +23,16 @@ export default function GameTeamsPage() {
 	const [ENGamingTeamText, setENGamingTeamText] = useState("");
 
 	const [gameTeamMembersArr, setGameTeamMembersArr] = useState([]);
-
+	//Context.
 	const {setChosenTeamNumber} = useTeamsContext();
+
+	//Getting data from the database.
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 
    	let teamsArr = [];
 	let selectedDoc = "";
 
+	//Filtering the database data.
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
@@ -37,6 +41,7 @@ export default function GameTeamsPage() {
 		}
 	});
 
+	//Updating the states on each database data call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {

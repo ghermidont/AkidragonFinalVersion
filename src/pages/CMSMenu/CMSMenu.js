@@ -1,3 +1,4 @@
+/** The controller file for the CMS menu tabs. */
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -5,6 +6,7 @@ import Tab from "@material-ui/core/Tab";
 import TabContext from "@material-ui/lab/TabContext";
 import TabList from "@material-ui/lab/TabList";
 import TabPanel from "@material-ui/lab/TabPanel";
+//Tabs components.
 import CMSHomePageEdit from "./PagesEditComponents/CMSHomePageEdit";
 import CMSTournamentsPageEdit from "./PagesEditComponents/CMSTournamentsPageEdit";
 import CMSBlogPageEdit from "./PagesEditComponents/CMSBlogPageEdit";
@@ -14,7 +16,6 @@ import CMSContactUpPageEdit from "./PagesEditComponents/CMSContactUsPageEdit";
 import CMSSponsorshipPageEdit from "./PagesEditComponents/CMSSponsorshipPageEdit";
 import CMSGameTeamsPageEdit from "./PagesEditComponents/CMSGameTeamsPageEdit";
 import CMSGameSalesPageEdit from "./PagesEditComponents/CMSGameSalesPageEdit";
-
 
 const useStyles = makeStyles(() => ({
 	root: {

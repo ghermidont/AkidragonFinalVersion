@@ -1,27 +1,29 @@
+/** Search bar used in the blog page. */
 import React, {useEffect, useState} from "react";
 import {Modal} from "react-bootstrap";
-import BlogArticleSearchItem from "./BlogArticleSearchItem";
 import {useDataFromFirestore} from "../../../customHooks/useFirestore";
 import {useLanguageContext} from "../../../context/LanguageContext";
+//Components
+import BlogArticleSearchItem from "./BlogArticleSearchItem";
 
 function BlogSearchBar() {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	const {appLanguage} = useLanguageContext();
-
+	//States.
 	const [show, setShow] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [search, setSearch] = useState("");
 	const [serverDataSearchResultArr, setServerDataSearchResultArr] = useState([]);
 
-	//Getting data from DB
+	//Getting articles from the database
 	const {docsFromHook} = useDataFromFirestore("articles");
 
 	useEffect(() => {
 		if(docsFromHook)setIsLoading(false);
 	}, []);
 
-	// Search And Highlight Function
+	// Search and Highlight Function
 	const handleInput = event => {
 		let searchBarInputText = event.target.value;
 		setSearch(searchBarInputText);

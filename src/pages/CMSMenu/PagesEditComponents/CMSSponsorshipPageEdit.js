@@ -7,7 +7,7 @@ function CMSSponsorshipPageEdit() {
 	const publishBtnRef = useRef();
 
 	const fileTypesArray = ["image/png", "image/jpeg"];
-
+	//States.
 	const [ENBannerUrl, setENBannerUrl] = useState("");
 	const [ITBannerUrl, setITBannerUrl] = useState("");
 
@@ -28,10 +28,11 @@ function CMSSponsorshipPageEdit() {
 	const [ITFileSuccess ,setITFileSuccess] = useState(false);
 	const [ENFileSuccess ,setENFileSuccess] = useState(false);
 
+	//Getting data from the database.
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 
 	let selectedDoc = "";
-
+	//Filtering the data from the database.
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
@@ -40,6 +41,7 @@ function CMSSponsorshipPageEdit() {
 		}
 	});
 
+	//Updating the states on each database data call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -55,6 +57,7 @@ function CMSSponsorshipPageEdit() {
 		}
 	}, [docsFromHookCMS]);
 
+	//Writing data to the database.
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("web-app-cms").doc("sponsorshipPage");
 		collectionRef.set(
@@ -80,6 +83,7 @@ function CMSSponsorshipPageEdit() {
 			});
 	};
 
+	//File upload listeners. START
 	const ITFileUploadEventListener = (e) => {
 		let uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
@@ -137,6 +141,7 @@ function CMSSponsorshipPageEdit() {
 			setENFileTypeError("Please select an image file (png or jpg)");
 		}
 	};
+	//File upload listeners. END
 
 	return (
 		<>

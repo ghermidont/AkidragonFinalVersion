@@ -3,12 +3,16 @@ import ContactUsForm from "./ContactUsForm";
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
 import {useTranslation} from "react-i18next";
+//WhatsApp package import.
 import ReactWhatsapp from "react-whatsapp";
 
 function ContactUsPage() {
 	const {t} = useTranslation();
 	const {appLanguage} = useLanguageContext();
+
+	//Getting data from the database.
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
+
 	//States
 	const [ENAddress, setENAddress] = useState("");
 	const [ITAddress, setITAddress] = useState("");
@@ -20,6 +24,7 @@ function ContactUsPage() {
 
 	let selectedDoc = "";
 
+	//Filtering the data from the database.
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
@@ -28,6 +33,7 @@ function ContactUsPage() {
 		}
 	});
 
+	//Setting the states on each database data call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {

@@ -1,9 +1,11 @@
+/** For the future, consider refactoring the code in compliance with the DRY principle. */
 import React, {useEffect, useRef, useState} from "react";
 import {useHistory} from "react-router-dom";
 import {projectFirestore, projectStorage} from "../../../fireBase";
 import {useDataFromFirestoreCMS} from "../../../customHooks/useFirestore";
 //The red line between team members
 import { BsDashCircleFill,  BsPlusCircleFill} from "react-icons/bs";
+//Unique id generator.
 import { v4 as uuidv4 } from "uuid";
 import {FaLinkedinIn} from "react-icons/fa";
 
@@ -22,9 +24,10 @@ function CMSAboutUsPageEdit() {
 	let publishBtnRef = useRef();
 	const fileTypesArray = ["image/png", "image/jpeg"];
 	const history = useHistory();
+	//Extracting data from the database.
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 
-	// Urls
+	// Urls states.
 	const [ENBannerUrl, setENBannerUrl] = useState("");
 	const [ITBannerUrl, setITBannerUrl] = useState("");
 
@@ -75,7 +78,6 @@ function CMSAboutUsPageEdit() {
 	const [ENTitleText, setENTitleText] = useState("");
 	const [ITTitleText, setITTitleText] = useState("");
 
-	// Test START
 	const [generalTeamMembersArr, setGeneralTeamMembersArr] = useState([]);
 	const [generalPartnersLogoArr, setGeneralPartnersLogoArr] = useState([]);
 
@@ -86,6 +88,7 @@ function CMSAboutUsPageEdit() {
 		setGeneralPartnersLogoArr([...generalPartnersLogoArr, { logo: ""}]);
 	};
 
+	//Functions for adding and removing the fields for new team members.
 	const handleRemoveFields = id => {
 		const values  = [...generalTeamMembersArr];
 		values.splice(values.findIndex(value => value.id === id), 1);
@@ -97,6 +100,7 @@ function CMSAboutUsPageEdit() {
 		setGeneralPartnersLogoArr(values);
 	};
 
+	//Function for changing the state for fields who's values do not vary depending on the app language.
 	const handleChangeInput = (id, event) => {
 		const newInputFields = generalTeamMembersArr.map(doc => {
 			if(id === doc.id) {
@@ -107,6 +111,7 @@ function CMSAboutUsPageEdit() {
 		setGeneralTeamMembersArr(newInputFields);
 	};
 
+	//Function for changing the state for fields who's values vary depending on the app language.
 	const handleChangeInputTitle = (id, event, lng) => {
 		const newInputField = generalTeamMembersArr.map(doc => {
 			if(id === doc.id) {
@@ -117,6 +122,7 @@ function CMSAboutUsPageEdit() {
 		setGeneralTeamMembersArr(newInputField);
 	};
 
+	//Team members file upload listener.
 	const fileChangeInput = (id, e) =>{
 		let uploadedFile = e.target.files[0];
 		const newInputFields = generalTeamMembersArr.map(doc => {
@@ -148,9 +154,10 @@ function CMSAboutUsPageEdit() {
 		setGeneralTeamMembersArr(newInputFields);
 	};
 
+	//Partners logos file upload listener.
 	const fileChangeInputPartners = (id, e) =>{
 		let uploadedFile = e.target.files[0];
-		const newInputFields = generalTeamMembersArr.map(doc => {
+		const newInputFields = generalPartnersLogoArr.map(doc => {
 			if(id === doc.id) {
 				if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
 					// eslint-disable-next-line no-inner-declarations
@@ -192,6 +199,7 @@ function CMSAboutUsPageEdit() {
 	let membersArr = [];
 	let partnersArr = [];
 
+	//Setting the states after extracting the data from the database.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -243,6 +251,7 @@ function CMSAboutUsPageEdit() {
 		}
 	}, [docsFromHookCMS]);
 
+	//Banners upload listeners. START
 	const ENBannerFileUploadEventListener = (e) => {
 		let uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
@@ -346,7 +355,9 @@ function CMSAboutUsPageEdit() {
 			window.alert("Please select an image file (png or jpg)");
 		}
 	};
+	//Banners upload listeners. END
 
+	//Function for writing data to the database.
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("web-app-cms").doc("aboutUsPage");
 
@@ -874,7 +885,7 @@ function CMSAboutUsPageEdit() {
 
 						{/*partners logos*/}
 						<div>
-							{/*TPartners logos: START*/}
+							{/*Partners logos: START*/}
 							{ generalPartnersLogoArr.map(partner => (
 								<>
 									<div key={partner.id}>

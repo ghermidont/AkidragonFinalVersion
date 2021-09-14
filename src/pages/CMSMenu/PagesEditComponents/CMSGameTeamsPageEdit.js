@@ -19,8 +19,9 @@ function CMSGameTeamsPageEdit() {
 	);
 
 	const fileTypesArray = ["image/png", "image/jpeg"];
+	//Getting data from the database.
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
-
+	//States.
 	const [ITGamingTeamBannerUrl, setITGamingTeamBannerUrl] = useState("");
 	const [ENGamingTeamBannerUrl, setENGamingTeamBannerUrl] = useState("");
 
@@ -38,6 +39,7 @@ function CMSGameTeamsPageEdit() {
 	
 	const [gameTeamMembersArr, setGameTeamMembersArr] = useState([]);
 
+	// Function to add fields.
 	const handleAddFields = () => {
 		setGameTeamMembersArr([...gameTeamMembersArr,
 			{
@@ -71,6 +73,7 @@ function CMSGameTeamsPageEdit() {
 			}]);
 	};
 
+	// Function to remove fields.
 	const handleRemoveFields = slug => {
 		const teams  = [...gameTeamMembersArr];
 		teams.splice(teams.findIndex(team => team.slug === slug), 1);
@@ -87,6 +90,7 @@ function CMSGameTeamsPageEdit() {
 		setGameTeamMembersArr(newInputField);
 	};
 
+	//File uploads listener.
 	const fileChangeInput = (slug, e, lng) =>{
 		let uploadedFile = e.target.files[0];
 		const newInputFields = gameTeamMembersArr.map(doc => {
@@ -121,15 +125,16 @@ function CMSGameTeamsPageEdit() {
 	let teamsArr = [];
 	let selectedDoc = "";
 
+	//Filtering data from the database.
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
 				return doc.id === "game-teams";
 			});
 		}
-
 	});
 
+	//Updating states on each data base data call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -151,6 +156,7 @@ function CMSGameTeamsPageEdit() {
 		}
 	}, [docsFromHookCMS]);
 
+	//Files upload listeners. START
 	const ENGamingTeamTopBannerFileUploadEventListener = (e) => {
 		let uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
@@ -202,7 +208,9 @@ function CMSGameTeamsPageEdit() {
 			window.alert("Please select an image file (png or jpg)");
 		}
 	};
+	//Files upload listeners. END
 
+	//Write data to the database.
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("web-app-cms").doc("game-teams");
 
