@@ -23,6 +23,7 @@ export default function GameTeamsPage() {
 	const [ENGamingTeamText, setENGamingTeamText] = useState("");
 
 	const [gameTeamMembersArr, setGameTeamMembersArr] = useState([]);
+
 	//Context.
 	const {setChosenTeamNumber} = useTeamsContext();
 

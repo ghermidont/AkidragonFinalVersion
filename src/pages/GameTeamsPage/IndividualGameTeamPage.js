@@ -11,7 +11,7 @@ export default function IndividualGameTeamPage() {
 	const {t} = useTranslation();
 	const {appLanguage} = useLanguageContext();
 
-	//Editing the slug
+	//Process the slug
 	const parsedWindowLocation = queryString.parse(window.location.hash);
 	const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(10);
 
