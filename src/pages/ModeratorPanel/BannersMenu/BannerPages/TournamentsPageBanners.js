@@ -5,15 +5,15 @@ import {useDataFromFirestoreBanners} from "../../../../customHooks/useFirestore"
 
 function TournamentsPageBanners() {
 	let publishBtnRef = useRef();
-
+	//States.
 	const [vertical, setVertical] = useState("");
 	const [_250x250320x100320x50, set250x250320x100320x50] = useState("");
 	const [middle, setMiddle] = useState("");
-
+	//Get data from the database.
 	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
 	let selectedDoc = "";
-
+	//Filter the received database data.
 	useEffect(() => {
 		if (docsFromHookBanners) {
 			selectedDoc = docsFromHookBanners.filter(function (doc) {
@@ -21,7 +21,7 @@ function TournamentsPageBanners() {
 			});
 		}
 	});
-
+	//Updating the states on each database call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -32,6 +32,7 @@ function TournamentsPageBanners() {
 		}
 	}, [docsFromHookBanners]);
 
+	//Write to the database function.
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("banners").doc("tournamentsPage");
 		collectionRef.set(
@@ -40,9 +41,6 @@ function TournamentsPageBanners() {
 					"vertical": vertical,
 					"_250x250320x100320x50": _250x250320x100320x50
 				}
-				// "mobile": {
-				// 	"middle": middle
-				// }
 			})
 			.then(() => {
 				window.alert("Content edited successfully!");

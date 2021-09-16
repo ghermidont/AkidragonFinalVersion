@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react";
 import HtmlToReact from "html-to-react";
+import {Link} from "react-router-dom";
+//Components import.
 import ShortArticlesList from "../../components/ShortArticlesList";
 import LatestStreamsSwiper from "../../components/swipers/LatestStreamsSwiper";
-import {Link} from "react-router-dom";
+//Context import.
 import {useLanguageContext} from "../../context/LanguageContext";
 import logoSection from "../../assets/images/dest/logo-section.png";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -10,11 +12,13 @@ import {useDataFromFirestoreBanners, useDataFromFirestoreCMS} from "../../custom
 import {useTranslation} from "react-i18next";
 
 export default function HomePage() {
+	//Translation.
 	const {t} = useTranslation();
-	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 	const {appLanguage} = useLanguageContext();
+	//Getting the data from the database.
+	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 
-	//Url
+	//Url states.
 	const [ENBannerUrl, setENBannerUrl] = useState("");
 	const [ENContactsBannerUrl, setENContactsBannerUrl] = useState("");
 	const [ENGameTeamsBannerUrl, setENGameTeamsBannerUrl] = useState("");
@@ -27,17 +31,19 @@ export default function HomePage() {
 	const [ITSalesBannerUrl, setITSalesBannerUrl] = useState("");
 	const [ITSponsorshipBannerUrl, setITSponsorshipBannerUrl] = useState("");
 	const [ITTournamentsBannerUrl, setITTournamentsBannerUrl] = useState("");
+	//Text states.
 	const [ENBannerText, setENBannerText] = useState("");
 	const [ITBannerText, setITBannerText] = useState("");
+	//Banners states.
 	const [vertical, setVertical] = useState();
-	const [Top, setTop] = useState("");
+	const [top, setTop] = useState("");
 	const [middle, setMiddle] = useState("");
 	const [bottom, setBottom] = useState("");
 
 	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
 	let selectedBanners = "";
-
+	//Filter the banners received from the database.
 	useEffect(() => {
 		if (docsFromHookBanners) {
 			selectedBanners = docsFromHookBanners.filter(function (doc) {
@@ -47,7 +53,7 @@ export default function HomePage() {
 	});
 
 	let selectedDoc = "";
-
+	// Filter the homepage specific data from the database.
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
@@ -56,6 +62,7 @@ export default function HomePage() {
 		}
 	});
 
+	//Updating the states values after getting data from the data base regarding the CMS and banners.
 	useEffect(() => {
 		if (selectedBanners !== ""){
 			selectedBanners.map(doc => {
@@ -86,13 +93,12 @@ export default function HomePage() {
 		}
 	}, [docsFromHookCMS, docsFromHookBanners]);
 
-	// DB string tags parser
+	// Data base string tags parser. Is used for displaying the banners links from the database.
 	const stringTagsParser = (tag) => {
 		if(tag) {
 			let  htmlInput = tag;
 			let  htmlToReactParser = new HtmlToReact.Parser(React);
-			let  reactComponent = htmlToReactParser.parse(htmlInput);
-			return reactComponent;
+			return htmlToReactParser.parse(htmlInput);
 		}
 		return;
 	};
@@ -113,7 +119,7 @@ export default function HomePage() {
 				</section>
 
 				<div className="container banner__container">
-					<div className="banner banner__square">{stringTagsParser(Top)} </div>
+					<div className="banner banner__square">{stringTagsParser(top)} </div>
 				</div>
 
 				<section className="info">
@@ -227,4 +233,3 @@ export default function HomePage() {
 		</>
 	);
 }
-

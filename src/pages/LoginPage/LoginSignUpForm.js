@@ -3,12 +3,15 @@ import {useAuthContext} from "../../context/AuthContext";
 import classes from "./LoginSignUpForm.module.scss";
 import firebase from "firebase";
 
-//Implement the Enter key stroke login and signup
 const LoginSignUpForm = () => {
+	//Accepted file formats array.
 	const fileTypesArray = ["image/png", "image/jpeg"];
+
+	//States.
 	const [error, setError] = useState(null);
 	const [fileUploaded, setFileUploaded] = useState(false);
 
+	//Password reset function.
 	const passwordReset = () => {
 		firebase.auth().sendPasswordResetEmail(email)
 			.then(() => {
@@ -18,7 +21,7 @@ const LoginSignUpForm = () => {
 				window.alert(`The password could not be reset due to ${error.message}. Error code: ${error.code}`);
 			});
 	};
-
+	//Connecting variables from the context.
 	const {
 		email,
 		setEmail,
@@ -33,6 +36,7 @@ const LoginSignUpForm = () => {
 		setSignUpFormUserUploadedFile
 	} = useAuthContext();
 
+	//File upload listener function.
 	const fileUploadEventListener = (e) => {
 		let uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
@@ -47,9 +51,7 @@ const LoginSignUpForm = () => {
 		<>
 			<div className="container">
 				<div className={classes.formBody}>
-					<h1 className="title form__title">
-            Login/SignUp
-					</h1>
+					<h1 className="title form__title">Login/SignUp</h1>
 					<form className={classes.form}>
 						<input
 							className='form-article__input'

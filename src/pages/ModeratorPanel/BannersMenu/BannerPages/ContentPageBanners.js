@@ -6,13 +6,15 @@ import {useDataFromFirestoreBanners} from "../../../../customHooks/useFirestore"
 function ContentPageBanners() {
 	let publishBtnRef = useRef();
 
+	//Banners states.
 	const [vertical, setVertical] = useState("");
 	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
-
+	//Getting data from the database.
 	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
 	let selectedDoc = "";
 
+	//Filtering the data from the database.
 	useEffect(() => {
 		if (docsFromHookBanners) {
 			selectedDoc = docsFromHookBanners.filter(function (doc) {
@@ -21,6 +23,7 @@ function ContentPageBanners() {
 		}
 	});
 
+	//Updating the states on  each database call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -30,6 +33,7 @@ function ContentPageBanners() {
 		}
 	}, [docsFromHookBanners]);
 
+	//Write data to the database function.
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("banners").doc("contentPage");
 		collectionRef.set(

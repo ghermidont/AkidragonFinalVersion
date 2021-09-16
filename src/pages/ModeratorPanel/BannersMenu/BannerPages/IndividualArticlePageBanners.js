@@ -5,16 +5,16 @@ import {useDataFromFirestoreBanners} from "../../../../customHooks/useFirestore"
 
 function IndividualArticlePageBanners() {
 	let publishBtnRef = useRef();
-
+	//States.
 	const [vertical, setVertical] = useState("");
 	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
 	const [Top, setTop] = useState("");
 	const [bottom, setBottom] = useState("");
-
+	//Get data from the database.
 	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
 	let selectedDoc = "";
-
+	//Filter data from the database.
 	useEffect(() => {
 		if (docsFromHookBanners) {
 			selectedDoc = docsFromHookBanners.filter(function (doc) {
@@ -22,7 +22,7 @@ function IndividualArticlePageBanners() {
 			});
 		}
 	});
-
+	//Update the states on each database call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -34,6 +34,7 @@ function IndividualArticlePageBanners() {
 		}
 	}, [docsFromHookBanners]);
 
+	//Write to the database call.
 	const writeToFBCallback = () => {
 		const collectionRef = projectFirestore.collection("banners").doc("individualArticlePage");
 		collectionRef.set(

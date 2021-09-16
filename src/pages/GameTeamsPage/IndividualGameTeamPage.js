@@ -1,4 +1,4 @@
-/** In case necessary, use this code architecture for the files proposed for the DRY principle implementation.*/
+/** In case necessary, this code architecture may be used for the files proposed for the DRY principle implementation. */
 import React, {useEffect, useState} from "react";
 import { useDataFromFirestoreCMS } from "../../customHooks/useFirestore";
 import {useLanguageContext} from "../../context/LanguageContext";
@@ -8,6 +8,7 @@ const queryString = require("query-string");
 import {useTranslation} from "react-i18next";
 
 export default function IndividualGameTeamPage() {
+
 	const {t} = useTranslation();
 	const {appLanguage} = useLanguageContext();
 

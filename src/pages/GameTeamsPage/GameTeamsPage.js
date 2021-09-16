@@ -9,8 +9,8 @@ import {useTranslation} from "react-i18next";
 import classes from "./GameTeamsPage.module.scss";
 
 export default function GameTeamsPage() {
+	//Translation.
 	const {t} = useTranslation();
-
 	const {appLanguage} = useLanguageContext();
 	//States.
 	const [ITGamingTeamBannerUrl, setITGamingTeamBannerUrl] = useState("");

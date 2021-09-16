@@ -8,11 +8,28 @@ import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 export default function PreUserProfilePageCheck() {
+	//Two user instances for the case of page refresh.
 	const {currentUser} = useAuthContext();
 	const CurrentUserFromLS = JSON.parse(localStorage.getItem("LSCurrentUser"));
+	//States.
 	const [userInfo, setUserInfo] = useState(true);
 	const [loading, setLoading] = useState();
 
+	/*
+	*   IF (email verified)
+	*	{
+	* 		IF(user info exists in the database)
+	* 		{
+	* 			Redirect to the profile page.
+	* 		} ELSE {
+	* 			Redirect to complete profile page form.
+	* 		}
+	*	} ELSE {
+	*		Redirect to the email verification page.
+	*	}
+	*/
+
+	//The function check if there is user personal data in the database.
 	async function checkUserFieldsExist() {
 		await projectFirestore
 			.collection("user-profiles")
@@ -35,6 +52,7 @@ export default function PreUserProfilePageCheck() {
 			.catch(err => console.error(err));
 	},[currentUser]);
 
+	//The loader is used for displaying smth while the user data is being checked in the database.
 	return (
 		<>
 			{(loading===true)?(
