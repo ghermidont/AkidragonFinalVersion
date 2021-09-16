@@ -11,21 +11,28 @@ import youtubeThumbnail from "youtube-thumbnail";
 const queryString = require("query-string");
 
 export default function EditStreamForm(){
-	const {docsFromHook} = useDataFromFirestore("streams");
 	const history = useHistory();
+
+	//Two user instances for page refresh case safety.
 	const CurrentUserFromLS = JSON.parse(localStorage.getItem("LSCurrentUser"));
 	const {currentUser} = useAuthContext();
 
+	//Get data from the database.
+	const {docsFromHook} = useDataFromFirestore("streams");
+
+	//States.
 	const [streamCategory, setStreamCategory] = useState("");
 	const [videoURL, setVideoURL] = useState("");
 	const [createdAt, setCreatedAt] = useState("");
 	const [thumbnail, setThumbnail] = useState("");
 
+	//Processing the page slug.
 	let parsedWindowLocation = queryString.parse(window.location.hash);
 	const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(17);
 
 	let selectedStream = "";
 
+	//Filtering the received database data.
 	useEffect(() => {
 		if (docsFromHook) {
 			selectedStream = docsFromHook.filter(function (stream) {
@@ -34,11 +41,13 @@ export default function EditStreamForm(){
 		}
 	});
 
+	//Get youtube videos thumbnails.
 	useEffect(() => {
 		const getThumbnail = async () => setThumbnail(await youtubeThumbnail(videoURL));
 		getThumbnail().then().catch(err=>window.alert(err));
 	},[videoURL]);
 
+	//Updating the states on each database call.
 	useEffect(() => {
 		if (selectedStream !== "") {
 			selectedStream && selectedStream.map(doc => {
@@ -49,6 +58,7 @@ export default function EditStreamForm(){
 		}
 	}, [docsFromHook]);
 
+	//Write data to the database function.
 	const addStreamsWithFBCallback = () => {
 		const collectionRef = projectFirestore.collection("streams").doc(stringifiedSlug);
 

@@ -5,13 +5,14 @@ import {init} from "emailjs-com";
 import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
+//Part of the emailjs implementation. See documentation.
 init("user_ryi2yglqohFlHpuZyAqiJ");
 
 export default function SponsorshipForm() {
 	let publishBtnRef = useRef();
 	const history = useHistory();
 	const {t} = useTranslation();
-
+	//Send email function.
 	function sendSponsorshipEmail(e) {
 		e.preventDefault();
 		publishBtnRef.current&&publishBtnRef.current.setAttribute("disabled", "disabled");

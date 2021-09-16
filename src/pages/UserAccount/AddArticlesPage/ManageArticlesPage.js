@@ -4,11 +4,13 @@ import {useDataFromFirestore} from "../../../customHooks/useFirestore";
 import {useLanguageContext} from "../../../context/LanguageContext";
 import {Button} from "react-bootstrap";
 import {projectFirestore} from "../../../fireBase";
+//Styles
 import classes from "./styles/ManageArticlesPage.module.scss";
 
 const ManageArticlesPage = () => {
 	const {appLanguage} = useLanguageContext();
 
+	//Getting data from the database.
 	const {docsFromHook} = useDataFromFirestore("articles");
 
 	return (
@@ -39,7 +41,6 @@ const ManageArticlesPage = () => {
 												</div>
 											</article>
 											<div className={classes.btnInner}>
-												{/*TODO translate*/}
 												<Link to={`/edit-article/${doc.id}`} className={classes.btn}>
 													Edit article
 												</Link>

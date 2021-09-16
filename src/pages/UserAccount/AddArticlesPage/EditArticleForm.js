@@ -7,12 +7,18 @@ import {useTranslation} from "react-i18next";
 const queryString = require("query-string");
 
 export default function EditArticleForm() {
-	const {t} = useTranslation();
-	let publishBtnRef = useRef();
-	const {docsFromHook} = useDataFromFirestore("articles");
-	const fileTypesArray = ["image/png", "image/jpeg"];
 	const history = useHistory();
 
+	const {t} = useTranslation();
+	let publishBtnRef = useRef();
+
+	//Accepted file types array.
+	const fileTypesArray = ["image/png", "image/jpeg"];
+
+	//Getting data from the database.
+	const {docsFromHook} = useDataFromFirestore("articles");
+
+	//States.
 	const [ENTitle, setENTitle] = useState("");
 	const [ENDescription, setENDescription] = useState("");
 	const [ENText, setENText] = useState("");
@@ -39,7 +45,13 @@ export default function EditArticleForm() {
 	const [musicSwitch, setMusicSwitch] = useState(0);
 	const [moviesSwitch, setMoviesSwitch] = useState(0);
 	const [currentCategories, setCurrentCategories] = useState();
-	const categoryArr = [videoGamesSwitch===1?"videogames":"", moviesSwitch===1?"movies":"", musicSwitch===1?"music":""];
+
+	// Static length categories array. In the function that writes data to the database this array is filtered on empty strings.
+	const categoryArr = [
+		videoGamesSwitch===1?"videogames":"",
+		moviesSwitch===1?"movies":"",
+		musicSwitch===1?"music":""
+	];
 
 	//Getting an parsing data from url field
 	let parsedWindowLocation = queryString.parse(window.location.hash);
@@ -47,6 +59,7 @@ export default function EditArticleForm() {
 
 	let selectedArticle = "";
 
+	//Filtering database data.
 	useEffect(() => {
 		if(docsFromHook) {
 			selectedArticle = docsFromHook.filter(function (article) {
@@ -55,6 +68,7 @@ export default function EditArticleForm() {
 		}
 	});
 
+	//Updating the states on each database call.
 	useEffect(() => {
 		if(selectedArticle!==""){
 			selectedArticle && selectedArticle.map( doc =>
@@ -74,6 +88,7 @@ export default function EditArticleForm() {
 		}
 	}, [docsFromHook]);
 
+	//File upload event listeners.
 	const ENFileUploadEventListener = (e) => {
 		let uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
@@ -131,6 +146,7 @@ export default function EditArticleForm() {
 		}
 	};
 
+	//Writing data to the database function.
 	const publishArticleCFTrigger = () => {
 		const addData = functions.httpsCallable("publishArticle");
 		publishBtnRef.current&&publishBtnRef.current.setAttribute("disabled", "disabled");
@@ -366,9 +382,7 @@ export default function EditArticleForm() {
 					>
 						{t("EditArticleForm.SaveChanges")}
 					</button>
-
 				</div>
-
 			</section>
 		</>
 	);

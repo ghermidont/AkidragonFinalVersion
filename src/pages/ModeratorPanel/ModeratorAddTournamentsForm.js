@@ -1,5 +1,7 @@
+/** Consider the implementing the DRY principle similar to the CMSAboutUsPage, depending on the number of file entries.*/
+// noinspection DuplicatedCode
 /* eslint-disable no-mixed-spaces-and-tabs */
-//In future consider the implementing the DRY principle similar to the CMSAboutUsPage, depending on the number of file entries.
+
 import React, {useState} from "react";
 import {projectFirestore, projectStorage} from "../../fireBase";
 import {useHistory} from "react-router-dom";
@@ -9,12 +11,16 @@ import ReactPlayer from "react-player/lazy";
 import classes from "./styles/ModeratorAddTournament.module.scss";
 
 export default function ModeratorAddTournamentsForm() {
-	const {currentUser} = useAuthContext();
-	const fileTypesArray = ["image/png", "image/jpeg"];
 	const history = useHistory();
+
+	//Accepted filetypes array.
+	const fileTypesArray = ["image/png", "image/jpeg"];
+
+	//Two users instances for page refresh safety.
+	const {currentUser} = useAuthContext();
 	const CurrentUserFromLS = JSON.parse(localStorage.getItem("LSCurrentUser"));
 
-	//Texts
+	//Texts states
 	const [eventCategory, setEventCategory] = useState("");
 	const [eventTitle, setEventTitle] = useState("");
 	const [eventStatus, setEventStatus] = useState("");
@@ -22,7 +28,7 @@ export default function ModeratorAddTournamentsForm() {
 	const [eventDate, setEventDate] = useState("");
 	const [eventInfoPageLink, setEventInfoPageLink] = useState("");
 
-	//Errors
+	//Errors states
 	const [error1, setError1] = useState("");
 	const [error2, setError2] = useState("");
 	const [error3, setError3] = useState("");
@@ -31,7 +37,7 @@ export default function ModeratorAddTournamentsForm() {
 	const [errorWin2, setErrorWin2] = useState("");
 	const [errorBanner, setErrorBanner] = useState("");
 
-	//success
+	//Success messages states.
 	const [fileSuccess1, setFileSuccess1] = useState(false);
 	const [fileSuccess2, setFileSuccess2] = useState(false);
 	const [fileSuccess3, setFileSuccess3] = useState(false);
@@ -40,7 +46,7 @@ export default function ModeratorAddTournamentsForm() {
 	const [fileSuccessWin2, setFileSuccessWin2] = useState(false);
 	const [fileSuccessBanner, setFileSuccessBanner] = useState(false);
 
-	//loadings
+	//Loadings states.
 	const [loading1, setLoading1] = useState(true);
 	const [loading2, setLoading2] = useState(true);
 	const [loading3, setLoading3] = useState(true);
@@ -48,7 +54,7 @@ export default function ModeratorAddTournamentsForm() {
 	const [loadingWin1, setLoadingWin1] = useState(true);
 	const [loadingWin2, setLoadingWin2] = useState(true);
 
-	//urls
+	//Urls states
 	const [url1, setUrl1] = useState("");
 	const [url2, setUrl2] = useState("");
 	const [url3, setUrl3] = useState("");
@@ -58,6 +64,7 @@ export default function ModeratorAddTournamentsForm() {
 	const [urlBanner, setUrlBanner] = useState("");
 	const [validation, setValidation] = useState();
 
+	//Urls validation function.
 	const infoPageUrlValidation = (input) => {
 		const reg = new RegExp("((http|https)://)(www.)?");
 		if(reg.test(input)){
@@ -68,7 +75,7 @@ export default function ModeratorAddTournamentsForm() {
 		}
 	};
 
-	//Event listeners
+	//File upload event listeners START.
 	const file1UploadEventListener = (e) => {
 		let uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
@@ -255,6 +262,7 @@ export default function ModeratorAddTournamentsForm() {
 			setErrorBanner("Please select an image file (png or jpg)");
 		}
 	};
+	//File upload event listeners END.
 
 	//Write to FB:
 	const addTournamentWithFBCallback = () => {
@@ -364,7 +372,7 @@ export default function ModeratorAddTournamentsForm() {
 					{eventStatus === "future" &&
 					<>
 						<label className='form-update__label btn-upload btn-upload--tournament'>
-							<span className='icon-upload2'></span> Picture team 1
+							<span className='icon-upload2'> </span> Picture team 1
 							<input
 								className='form-update__btn visually-hidden'
 								type="file"
@@ -380,7 +388,7 @@ export default function ModeratorAddTournamentsForm() {
 						</div>
 						<br/>
 						<label className='form-update__label btn-upload btn-upload--tournament'>
-							<span className='icon-upload2'></span> Picture team 2
+							<span className='icon-upload2'> </span> Picture team 2
 							<input
 								className='form-update__btn visually-hidden'
 								type="file"
@@ -400,7 +408,7 @@ export default function ModeratorAddTournamentsForm() {
 					{(eventCategory === "tournament" && eventStatus === "future") &&
 					<>
 						<label className='form-update__label btn-upload btn-upload--tournament'><span
-							className='icon-upload2'></span> Picture team 3
+							className='icon-upload2'> </span> Picture team 3
 						<input
 							className='form-update__btn visually-hidden'
 							type="file"
@@ -415,7 +423,7 @@ export default function ModeratorAddTournamentsForm() {
 						</div>
 						<br/>
 						<label className='form-update__label btn-upload btn-upload--tournament'> <span
-							className='icon-upload2'></span> Picture team 4
+							className='icon-upload2'> </span> Picture team 4
 						<input
 							className='form-update__btn visually-hidden'
 							type="file"
@@ -517,9 +525,7 @@ export default function ModeratorAddTournamentsForm() {
 					<button
 						className="btn-upload"
 						onClick={() => addTournamentWithFBCallback()}
-					>
-						Submit
-					</button>
+					> Submit </button>
 
 				</form>
 			</div>

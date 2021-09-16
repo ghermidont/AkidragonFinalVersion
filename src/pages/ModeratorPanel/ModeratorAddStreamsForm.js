@@ -11,17 +11,23 @@ import youtubeThumbnail from "youtube-thumbnail";
 
 export default function ModeratorAddStreamsForm() {
 	const history = useHistory();
+
+	//Two user instances for page refresh safety.
 	const CurrentUserFromLS = JSON.parse(localStorage.getItem("LSCurrentUser"));
 	const {currentUser} = useAuthContext();
+
+	//States
 	const [streamCategory, setStreamCategory] = useState("");
 	const [videoURL, setVideoURL] = useState("");
 	const [thumbnail, setThumbnail] = useState("");
 
+	//Getting youtube videos thumbnails.
 	useEffect(() => {
 		const getThumbnail = async () => setThumbnail(await youtubeThumbnail(videoURL));
 		getThumbnail().then().catch(err=>console.log(err));
 	},[videoURL]);
 
+	// Write to database function.
 	const addStreamsWithFBCallback = () => {
 		if(streamCategory!=="") {
 			const collectionRef = projectFirestore.collection("streams").doc();

@@ -5,6 +5,10 @@ import {useLanguageContext} from "../../context/LanguageContext";
 import {useDataFromFirestoreCMS} from "../../customHooks/useFirestore";
 
 function SponsorshipPage() {
+	const {t} = useTranslation();
+	const {appLanguage} = useLanguageContext();
+
+	//States.
 	const [pageCMSContent, setCMSPageContent] = useState({
 		ENBannerUrl: "",
 		ITBannerUrl: "",
@@ -14,6 +18,7 @@ function SponsorshipPage() {
 		ITHowItWorksText: ""
 	});
 
+	//Destructuring.
 	const {
 		ENBannerUrl,
 		ITBannerUrl,
@@ -23,8 +28,10 @@ function SponsorshipPage() {
 		ITHowItWorksText
 	} = pageCMSContent;
 
+	//Get data from the database.
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 
+	//Filter data received from the database.
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
@@ -35,6 +42,7 @@ function SponsorshipPage() {
 
 	let selectedDoc = "";
 
+	//Updating the states on each database call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -50,12 +58,9 @@ function SponsorshipPage() {
 		}
 	}, [docsFromHookCMS]);
 
-	const {t} = useTranslation();
-	const {appLanguage} = useLanguageContext();
 	return (
 		<>
 			<div>{t("SponsorshipPage.PageTitle")}</div>
-
 			<section className="banner">
 				<div className="container">
 					<div className="banner__image">

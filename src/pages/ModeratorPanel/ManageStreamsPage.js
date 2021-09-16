@@ -7,7 +7,9 @@ import {projectFirestore} from "../../fireBase";
 import {useStreamsContext} from "../../context/StreamsContext";
 
 const ManageStreamsPage = () => {
+	//Get data from the database.
 	const {docsFromHook} = useDataFromFirestore("streams");
+	//Getting vars from the context.
 	const {setChosenModifyStreamNumber} = useStreamsContext();
 
 	return (

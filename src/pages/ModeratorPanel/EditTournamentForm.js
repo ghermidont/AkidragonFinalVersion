@@ -1,4 +1,7 @@
+/** Consider implementing the DRY principle in this file. */
 /* eslint-disable no-mixed-spaces-and-tabs */
+// noinspection DuplicatedCode
+
 import React, {useEffect, useState} from "react";
 import {projectFirestore, projectStorage} from "../../fireBase";
 import {useHistory} from "react-router-dom";
@@ -10,12 +13,19 @@ import {useDataFromFirestore} from "../../customHooks/useFirestore";
 const queryString = require("query-string");
 
 export default function EditTournamentsForm() {
-	const {docsFromHook} = useDataFromFirestore("tournaments");
-	const {currentUser} = useAuthContext();
-	const fileTypesArray = ["image/png", "image/jpeg"];
 	const history = useHistory();
+
+	//Accepted file types array.
+	const fileTypesArray = ["image/png", "image/jpeg"];
+
+	// Two instances of the current user for the case of page reload.
+	const {currentUser} = useAuthContext();
 	const CurrentUserFromLS = JSON.parse(localStorage.getItem("LSCurrentUser"));
 
+	//Getting data from the database.
+	const {docsFromHook} = useDataFromFirestore("tournaments");
+
+	//States. Suggestion: Due to the large number of the states they can be passed as a single object to a general state.
 	const [eventCategory, setEventCategory] = useState("");
 	const [eventTitle, setEventTitle] = useState("");
 	const [eventStatus, setEventStatus] = useState("");
@@ -67,11 +77,13 @@ export default function EditTournamentsForm() {
 
 	const [currentDate, setCurrentDate] = useState("");
 
+	//Processing the page slug
 	let parsedWindowLocation = queryString.parse(window.location.hash);
 	const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(21);
 
 	let selectedTournament = "";
 
+	//Filtering the received database data.
 	useEffect(() => {
 		if (docsFromHook) {
 			selectedTournament = docsFromHook.filter(function (tournament) {
@@ -80,6 +92,7 @@ export default function EditTournamentsForm() {
 		}
 	});
 
+	//Updating the states on each call to the database.
 	useEffect(() => {
 		if (selectedTournament !== "") {
 			selectedTournament && selectedTournament.map(doc => {
@@ -113,6 +126,7 @@ export default function EditTournamentsForm() {
 		}
 	}, [docsFromHook]);
 
+	//File upload event listeners. START
 	const file1UploadEventListener = (e) => {
 		let uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
@@ -294,7 +308,9 @@ export default function EditTournamentsForm() {
 			setFileTypeErrorBanner("Please select an image file (png or jpg)");
 		}
 	};
+	//File upload event listeners. END
 
+	//Write data to the database function. The function containing logic for separating events by type and status (passed or future).
 	const editTournamentWithFBCallback = () => {
 		const collectionRef = projectFirestore.collection("tournaments").doc(stringifiedSlug);
 
@@ -434,7 +450,7 @@ export default function EditTournamentsForm() {
 							<img style={{width: "25%", height: "auto"}} src={oldUrlBanner} alt=""/>
 						</div>
 						<label className='form-update__label btn-upload btn-upload--tournament'>
-							<span className='icon-upload2'></span> Event banner
+							<span className='icon-upload2'> </span> Event banner
 							<input
 								className='form-update__btn visually-hidden'
 								type="file"
@@ -469,7 +485,7 @@ export default function EditTournamentsForm() {
           		<img style={{width: "25%", height: "auto"}} src={oldUrl1} alt=""/>
           	</div>
           	<label className='form-update__label btn-upload btn-upload--tournament'>
-          		<span className='icon-upload2'></span> Picture team 1
+          		<span className='icon-upload2'> </span> Picture team 1
           		<input
           			className='form-update__btn visually-hidden'
           			type="file"
@@ -489,7 +505,7 @@ export default function EditTournamentsForm() {
           		<img style={{width: "25%", height: "auto"}} src={oldUrl2} alt=""/>
           	</div>
           	<label className='form-update__label btn-upload btn-upload--tournament'> <span
-          		className='icon-upload2'></span> Picture team 2
+          		className='icon-upload2'> </span> Picture team 2
           	<input
           		className='form-update__btn visually-hidden'
           		type="file"
@@ -512,7 +528,7 @@ export default function EditTournamentsForm() {
           		<img style={{width: "25%", height: "auto"}} src={oldUrl3} alt=""/>
           	</div>
           	<label className='form-update__label btn-upload btn-upload--tournament'><span
-          		className='icon-upload2'></span> Picture team 3
+          		className='icon-upload2'> </span> Picture team 3
           	<input
           		className='form-update__btn visually-hidden'
           		type="file"
@@ -533,7 +549,7 @@ export default function EditTournamentsForm() {
           		<img style={{width: "25%", height: "auto"}} src={oldUrl4} alt=""/>
           	</div>
           	<label className='form-update__label btn-upload btn-upload--tournament'>
-          		<span className='icon-upload2'></span> Picture team 4
+          		<span className='icon-upload2'> </span> Picture team 4
           		<input
           			className='form-update__btn visually-hidden'
           			type="file"
@@ -656,7 +672,7 @@ export default function EditTournamentsForm() {
 						className="form-article__btn"
 						onClick={() => editTournamentWithFBCallback()}
 					>
-            Submit
+            			Submit
 					</button>
 				</form>
 			</div>

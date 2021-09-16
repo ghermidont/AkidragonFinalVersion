@@ -7,8 +7,13 @@ import {useTournamentsContext} from "../../context/TournamentsContext";
 import { v4 as uuidv4 } from "uuid";
 
 function ManageTournamentsPage() {
+	//Getting data from the database.
 	const {docsFromHook} = useDataFromFirestore("tournaments");
+
+	//Importing vars from the context.
 	const {setChosenTournamentNumber} = useTournamentsContext();
+
+	//Filtering data from the database
 	const passedEvents = docsFromHook.filter(function (doc) {
 		return doc.eventStatus === "passed";
 	});
@@ -17,7 +22,7 @@ function ManageTournamentsPage() {
 		return doc.eventStatus === "future";
 	});
 
-	//Templates
+	//Templates START
 	const PassedMatchTemp = (doc) => {
 		let date = new Date(doc.eventDate);
 		let parsedDate = date.toString();
@@ -65,9 +70,7 @@ function ManageTournamentsPage() {
 							className="tab__link-info"
 							to={`/edit-tournament/${doc.id}`}
 							onClick={()=>setChosenTournamentNumber(doc.id)}
-						>
-              Update
-						</Link>
+						> Update </Link>
 						<Button
 							className="tab__link-info del"
 							ariant="danger"
@@ -78,9 +81,7 @@ function ManageTournamentsPage() {
 									window.alert("Error removing document: ", error);
 								});
 							}}
-						>
-              Delete
-						</Button>
+						> Delete </Button>
 					</div>
 				</div>
 			</li>
@@ -128,9 +129,7 @@ function ManageTournamentsPage() {
 							className="tab__link-info"
 							to={`/edit-tournament/${doc.id}`}
 							onClick={()=>setChosenTournamentNumber(doc.id)}
-						>
-              Update
-						</Link>
+						> Update </Link>
 						<Button
 							className="tab__link-info del"
 							ariant="danger"
@@ -141,9 +140,7 @@ function ManageTournamentsPage() {
 									window.alert("Error removing document: " + error);
 								});
 							}}
-						>
-              Delete
-						</Button>
+						> Delete </Button>
 					</div>
 				</div>
 			</li>
@@ -198,9 +195,7 @@ function ManageTournamentsPage() {
 							className="tab__link-info"
 							to={`/edit-tournament/${doc.id}`}
 							onClick={()=>setChosenTournamentNumber(doc.id)}
-						>
-              Update
-						</Link>
+						> Update </Link>
 						<Button
 							className="tab__link-info del"
 							variant="danger"
@@ -211,9 +206,7 @@ function ManageTournamentsPage() {
 									window.alert("Error removing document: " + error);
 								});
 							}}
-						>
-              Delete
-						</Button>
+						> Delete </Button>
 					</div>
 				</div>
 			</li>
@@ -285,9 +278,7 @@ function ManageTournamentsPage() {
 							className="tab__link-info"
 							to={`/edit-tournament/${doc.id}`}
 							onClick={()=>setChosenTournamentNumber(doc.id)}
-						>
-              Update
-						</Link>
+						> Update </Link>
 						<Button
 							className="tab__link-info del"
 							ariant="danger"
@@ -298,14 +289,13 @@ function ManageTournamentsPage() {
 									window.alert("Error removing document: " + error);
 								});
 							}}
-						>
-              Delete
-						</Button>
+						> Delete </Button>
 					</div>
 				</div>
 			</li>
 		);
 	};
+	//Templates END
 
 	return (
 		<>

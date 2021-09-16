@@ -1,3 +1,4 @@
+/** Controller file for the banners control menu.*/
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -20,8 +21,9 @@ const useStyles = makeStyles(() => ({
 
 export default function LabTabs() {
 	const classes = useStyles();
+	//States.
 	const [value, setValue] = React.useState("1");
-
+	//Function for toggling between tabs.
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	};

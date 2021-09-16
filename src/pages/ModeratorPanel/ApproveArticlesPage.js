@@ -1,15 +1,20 @@
+/** Moderator page for approving articles.*/
 import React, {useState} from "react";
 import {useDataFromFirestore} from "../../customHooks/useFirestore";
 import {functions} from "../../fireBase";
 import {useLanguageContext} from "../../context/LanguageContext";
 
 export default function ApproveArticlesPage() {
-	const {docsFromHook} = useDataFromFirestore("articles");
+
 	const {appLanguage} = useLanguageContext();
 	const [readMore, setReadMore] = useState(false);
 
+	//Getting data from the database
+	const {docsFromHook} = useDataFromFirestore("articles");
+
 	let pendingArticlesArr;
 
+	//Filtering the unapproved articles.
 	if (docsFromHook) {
 		//Filter the articles object and select the article who's slug corresponds to the current window slug
 		pendingArticlesArr = docsFromHook.filter(function (article) {
@@ -17,18 +22,20 @@ export default function ApproveArticlesPage() {
 		});
 	}
 
+	//Cloud function call for approving an article.
 	const approveCloudFunctTrigger = (id) => {
 		const addData = functions.httpsCallable("approveArticle");
 		addData({
 			articleId: id
-		}).then(() => window.alert("Article approved")).catch(err => console.log("Aprovement process went wrong " + err));
+		}).then(() => window.alert("Article approved")).catch(err => console.log("Approvement process went wrong " + err));
 	};
 
+	//Delete article cloud function trigger.
 	const deleteCloudFunctTrigger = (id) => {
 		const addData = functions.httpsCallable("deleteArticle");
 		addData({
 			articleId: id
-		}).then(() => window.alert("Article deleted")).catch(err => window.alert("Aprovement process went wrong " + err));
+		}).then(() => window.alert("Article deleted")).catch(err => window.alert("Approvement process went wrong " + err));
 	};
 
 	const linkName = readMore ? "Read Less << " : "Read More >> ";
@@ -53,11 +60,11 @@ export default function ApproveArticlesPage() {
 											setReadMore(!readMore);
 										}}><h2>{linkName}</h2></a>
 										{readMore &&
-                    <div style={{marginBottom: "10em"}}>
-                    	<p className="extra-content">
-                    		{doc.content[appLanguage].text}
-                    	</p>
-                    </div>
+											<div style={{marginBottom: "10em"}}>
+												<p className="extra-content">
+													{doc.content[appLanguage].text}
+												</p>
+											</div>
 										}
 									</div>
 									<div className="approve__box-btn">

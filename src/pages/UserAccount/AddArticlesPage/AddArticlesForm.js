@@ -8,8 +8,12 @@ import classes from "./styles/AddArticlesForm.module.scss";
 export default function AddArticlesForm() {
 	const {t} = useTranslation();
 	let publishBtnRef = useRef();
-	const fileTypesArray = ["image/png", "image/jpeg"];
 	const history = useHistory();
+
+	//Accepted file types array.
+	const fileTypesArray = ["image/png", "image/jpeg"];
+
+	//States.
 	const [ENTitle, setENTitle] = useState("");
 	const [ENDescription, setENDescription] = useState("");
 	const [ENText, setENText] = useState("");
@@ -32,8 +36,15 @@ export default function AddArticlesForm() {
 	const [videoGamesSwitch, setVideoGamesSwitch] = useState(0);
 	const [musicSwitch, setMusicSwitch] = useState(0);
 	const [moviesSwitch, setMoviesSwitch] = useState(0);
-	const categoryArr = [videoGamesSwitch === 1 ? "videogames" : "", moviesSwitch === 1 ? "movies" : "", musicSwitch === 1 ? "music" : ""];
 
+	// Static length categories array. In the function that writes data to the database this array is filtered on empty strings.
+	const categoryArr = [
+		videoGamesSwitch === 1 ? "videogames" : "",
+		moviesSwitch === 1 ? "movies" : "",
+		musicSwitch === 1 ? "music" : ""
+	];
+
+	//File upload event listeners.
 	const ENFileUploadEventListener = (e) => {
 		let uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
@@ -92,6 +103,7 @@ export default function AddArticlesForm() {
 		}
 	};
 
+	//Write to database function.
 	const publishArticleCFTrigger = () => {
 		const addData = functions.httpsCallable("publishArticle");
 		publishBtnRef.current&&publishBtnRef.current.setAttribute("disabled", "disabled");
