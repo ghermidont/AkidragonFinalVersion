@@ -18,7 +18,6 @@ const ManageArticlesPage = () => {
 			<section className='articles-page'>
 				<div className="container">
 					<h1 className={classes.title}>Manage articles</h1>
-					{/*TODO translate*/}
 					<Link className={classes.btn} to='/AddArticlesForm'>Add articles</Link>
 					<div className="articles-page__tab tab">
 						<div className="articles-page__tab-body">

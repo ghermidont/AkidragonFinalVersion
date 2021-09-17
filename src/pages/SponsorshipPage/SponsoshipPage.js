@@ -64,7 +64,6 @@ function SponsorshipPage() {
 			<section className="banner">
 				<div className="container">
 					<div className="banner__image">
-						{/*TODO Add change banner option to the CMS*/}
 						<img className="banner__img" src={appLanguage === "it" ? ITBannerUrl : ENBannerUrl} alt="Akidragon banner"/>
 					</div>
 
