@@ -10,7 +10,14 @@ import HtmlToReact from "html-to-react";
 
 export default function Contents() {
 	const {t} = useTranslation();
+
+	//Context data.
+	const {appLanguage} = useLanguageContext();
+
+	//Get page data from the database.
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
+
+	//States.
 	const [ITBannerTitle, setITBannerTitle] = useState("");
 	const [ITBannerText, setITBannerText] = useState("");
 	const [ITSwiper1Title, setITSwiper1Title] = useState("");
@@ -24,10 +31,9 @@ export default function Contents() {
 	const [vertical, setVertical] = useState();
 	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
 
-	const {appLanguage} = useLanguageContext();
-
 	let selectedDoc = "";
 
+	//Filter database received data.
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
@@ -36,10 +42,12 @@ export default function Contents() {
 		}
 	});
 
+	//Getting data from the database.
 	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
 	let selectedBanners = "";
 
+	//Filtering the data base data.
 	useEffect(() => {
 		if (docsFromHookBanners) {
 			selectedBanners = docsFromHookBanners.filter(function (doc) {
@@ -48,6 +56,7 @@ export default function Contents() {
 		}
 	});
 
+	//Updating the states on each database call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -71,13 +80,12 @@ export default function Contents() {
 		}
 	}, [docsFromHookCMS, docsFromHookBanners]);
 
-	// DB string tags parser
+	// Database banner tags parser.
 	const stringTagsParser = (tag) => {
 		if(tag) {
-			let  htmlInput = tag;
-			let  htmlToReactParser = new HtmlToReact.Parser(React);
-			let  reactComponent = htmlToReactParser.parse(htmlInput);
-			return reactComponent;
+			let htmlInput = tag;
+			let htmlToReactParser = new HtmlToReact.Parser(React);
+			return htmlToReactParser.parse(htmlInput);
 		}
 		return;
 	};

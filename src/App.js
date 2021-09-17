@@ -40,7 +40,6 @@ import EditStreamForm from "./pages/ModeratorPanel/EditStreamForm";
 import EditArticleForm from "./pages/UserAccount/AddArticlesPage/EditArticleForm";
 import SponsorshipPage from "./pages/SponsorshipPage/SponsoshipPage";
 import CMSMenu from "./pages/CMSMenu/CMSMenu";
-import MainSurveyPage from "./pages/SurveyPage/SurveySteps/MainSurveyPage";
 import BannersMenu from "./pages/ModeratorPanel/BannersMenu/BannersMainMenu";
 import FullStreamsList from "./pages/FullStreamsList";
 import GameSalesPage from "./pages/GameSalesPage";
@@ -83,7 +82,6 @@ function App() {
 												<PrivateRoute path="/edit-article/:slug" component={EditArticleForm} />
 												<PrivateRoute path="/DeleteProfilePage" component={DeleteProfilePage} />
 												<PrivateRoute path="/CMSMenu" component={CMSMenu} />
-												<PrivateRoute path="/MainSurveyPage" component={MainSurveyPage} />
 												<PrivateRoute path="/BannersMenu" component={BannersMenu} />
 
 												<Route path="/" exact component={HomePage} />

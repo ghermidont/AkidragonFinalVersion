@@ -8,16 +8,22 @@ import {Button} from "react-bootstrap";
 import {projectFirestore} from "../../fireBase";
 
 const UserProfileArticlesPage = () => {
-	const {docsFromHook} = useDataFromFirestore("articles");
+	//Two user instances for the page refresh data persistence.
 	const {currentUser} = useAuthContext();
+	const CurrentUserFromLS = JSON.parse(localStorage.getItem("LSCurrentUser"));
+
+	//Context variables.
 	const {appLanguage} = useLanguageContext();
 	const {setChosenArticleNumber} = useArticlesContext();
-	const CurrentUserFromLS = JSON.parse(localStorage.getItem("LSCurrentUser"));
 	const {setChosenModifyArticleNumber} = useArticlesContext();
+
+	//Getting data from the database.
+	const {docsFromHook} = useDataFromFirestore("articles");
 
 	let generalLatestArticlesArr = [];
 	let userPersonalArticlesArr = [];
 
+	//Database data filters.
 	if(docsFromHook&&(currentUser||CurrentUserFromLS)) {
 		userPersonalArticlesArr = docsFromHook.filter(function (article) {
 			return article.authorId === (currentUser.uid||CurrentUserFromLS.uid);
@@ -30,6 +36,7 @@ const UserProfileArticlesPage = () => {
 		});
 	}
 
+	//Tabs logic made with js built in functions.
 	const tabsBtn = document.querySelectorAll(".articles-page__tab-btn");
 	const tabsItems = document.querySelectorAll(".articles-page__tab-list");
 
@@ -104,7 +111,7 @@ const UserProfileArticlesPage = () => {
 												<h3 className="articles-page__content-title">{doc.content[appLanguage].title}</h3>
 
 												<div className="articles-page__content-info">
-													<time className="articles-page__content-date"></time>
+													<time className="articles-page__content-date"> </time>
 												</div>
 												<p className="articles-page__content-text">
 													{doc.content[appLanguage].text}
@@ -115,9 +122,7 @@ const UserProfileArticlesPage = () => {
 										<Link  to={`/edit-article/${doc.id}`} onClick={()=> {
 											setChosenModifyArticleNumber(doc.id);
 										}}>
-											<Button className='btn-article btn-upload'>
-                      UPDATE
-											</Button>
+											<Button className='btn-article btn-upload'>UPDATE</Button>
 										</Link>
 										<Button
 											className='btn-article btn-upload'
@@ -129,10 +134,7 @@ const UserProfileArticlesPage = () => {
 													window.alert("Error removing document: ", error);
 												});
 											}}
-										>
-											{/*TODO translate*/}
-                    DELETE
-										</Button>
+										> DELETE </Button>
 									</li>
 								))}
 							</ul>

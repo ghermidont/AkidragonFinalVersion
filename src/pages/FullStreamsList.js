@@ -3,6 +3,7 @@ import {useDataFromFirestore} from "../customHooks/useFirestore";
 import ReactPlayer from "react-player/youtube";
 
 const FullStreamsList = () => {
+	//Getting data from the database.
 	const {docsFromHook} = useDataFromFirestore("streams");
 
 	return (

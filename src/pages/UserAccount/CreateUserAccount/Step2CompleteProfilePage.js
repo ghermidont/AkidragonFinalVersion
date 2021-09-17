@@ -8,12 +8,17 @@ export default function Step2CompleteProfilePage() {
 	const {t} = useTranslation();
 	let publishBtnRef = useRef();
 	const history = useHistory();
+
+	//Importing vars from the context.
+	const {signUpFormUserUploadedFile, setUserUploadedPictureUrl} = useAuthContext();
 	const {userUploadedPictureUrl} = useAuthContext();
+
+	//States.
 	const [currentUserFirstName, setCurrentUserFirstName] = useState("");
 	const [currentUserLastName, setCurrentUserLastName] = useState("");
 	const [currentDisplayName, setCurrentDisplayName] = useState("");
-	const {signUpFormUserUploadedFile, setUserUploadedPictureUrl} = useAuthContext();
 
+	//This hook writes the user uploaded photo at the login form step to the database.
 	useEffect(()=>{
 		if (signUpFormUserUploadedFile) {
 			// eslint-disable-next-line no-inner-declarations
@@ -35,6 +40,7 @@ export default function Step2CompleteProfilePage() {
 		}
 	}, []);
 
+	//Write user data to database function.
 	const cloudFunctionTrigger = () => {
 		publishBtnRef.current&&publishBtnRef.current.setAttribute("disabled", "disabled");
 

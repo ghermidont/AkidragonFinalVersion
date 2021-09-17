@@ -8,15 +8,19 @@ import {useTranslation} from "react-i18next";
 
 export default function UserProfilePage() {
 	const {t} = useTranslation();
+
+	//Two user instances for data persistence in case of page refresh.
 	const { currentUser } = useAuthContext();
 	const CurrentUserFromLS = JSON.parse(localStorage.getItem("LSCurrentUser"));
 
-	//states
+	//States.
 	const [ moderator, setModerator ] = useState();
 	const [ currentUserExtraInfoFB, setCurrentUserExtraInfoFB ] = useState({});
 	const [ currentUserDbPointsInfo, setCurrentUserDbPointsInfo ] = useState();
 
 	useEffect(() => {
+
+		//Gets current user extra info from the database.
 		async function getCurrentUserExtraInfo() {
 			if (currentUser || CurrentUserFromLS) {
 				await projectFirestore
@@ -34,6 +38,7 @@ export default function UserProfilePage() {
 			}
 		}
 
+		//Check current user role function - simple user or moderator.
 		async function checkCurrentUserRole() {
 			await projectFirestore
 				.collection("roles")
@@ -48,6 +53,7 @@ export default function UserProfilePage() {
 				});
 		}
 
+		//Gets the user score info from the database.
 		async function getDoc(){
 			await projectFirestore
 				.collection("score")
@@ -62,6 +68,7 @@ export default function UserProfilePage() {
 					window.alert("Error getting score document:", error);
 				});
 		}
+		//Above functions calls.
 		getCurrentUserExtraInfo().then().catch(()=>window.alert("Connection error. Refresh the page"));
 		checkCurrentUserRole().then().catch(()=>window.alert("Connection error. Refresh the page"));
 		getDoc().then().catch(()=>window.alert("Connection error. Refresh the page"));
@@ -99,7 +106,7 @@ export default function UserProfilePage() {
             <ul className="profile__settings">
             	<li>
             		<div className="profile__settings-title">
-            			<span className="icon-cog"></span> {t("UserProfilePage.Actions")}:
+            			<span className="icon-cog"> </span> {t("UserProfilePage.Actions")}:
             		</div>
             		<ul className="profile__settings-list">
             			<li className="profile__settings-item">

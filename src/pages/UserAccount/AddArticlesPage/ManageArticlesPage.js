@@ -55,9 +55,7 @@ const ManageArticlesPage = () => {
 															window.alert("Error removing document: " + error);
 														});
 													}}
-												>
-                          							Delete Article
-												</Button>
+												> Delete Article </Button>
 											</div>
 										</li>
 										<br/>

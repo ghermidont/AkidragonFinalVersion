@@ -9,10 +9,16 @@ import date from "date-and-time";
 
 export default function UpdateUserProfilePage() {
 	const {t} = useTranslation();
+
+	//Tow user instances for the page refresh situation.
 	const {currentUser} = useAuthContext();
 	const CurrentUserFromLS = JSON.parse(localStorage.getItem("LSCurrentUser"));
-	const {docsFromHookUserInfo} = useDataFromFirestoreUserInfo("user-profiles");
+
+	//Accepted file types array.
 	const fileTypesArray = ["image/png", "image/jpeg"];
+
+	//Getting user info from the database.
+	const {docsFromHookUserInfo} = useDataFromFirestoreUserInfo("user-profiles");
 
 	//Refs
 	const passwordRef = useRef();
@@ -36,6 +42,7 @@ export default function UpdateUserProfilePage() {
 
 	let selectedUser = [];
 
+	//Filtering the data received from the database.
 	useEffect(() => {
 		if (docsFromHookUserInfo) {
 			selectedUser = docsFromHookUserInfo.filter(function (user) {
@@ -44,6 +51,7 @@ export default function UpdateUserProfilePage() {
 		}
 	});
 
+	//Updating the states on each database call.
 	useEffect(() => {
 		if (selectedUser !== "") {
 			selectedUser.map(doc => {
@@ -70,6 +78,7 @@ export default function UpdateUserProfilePage() {
 
 	let uploadedFile;
 
+	//File upload listener.
 	const fileUploadEventListener = (e) => {
 		uploadedFile = e.target.files[0];
 		if (uploadedFile && fileTypesArray.includes(uploadedFile.type)) {
@@ -97,6 +106,7 @@ export default function UpdateUserProfilePage() {
 		}
 	};
 
+	//Writing data to the database.
 	const cloudFunctionTrigger = () => {
 		const addData = functions.httpsCallable("setUserData");
 		addData({
@@ -118,6 +128,7 @@ export default function UpdateUserProfilePage() {
 			});
 	};
 
+	//Email update function.
 	const updateEmail = async () => {
 		if (emailRef.current.value !== currentUser.email) {
 			return await currentUser.updateEmail(emailRef.current.value).then(function() {
@@ -128,6 +139,7 @@ export default function UpdateUserProfilePage() {
 		}
 	};
 
+	//Password update function.
 	const updatePassword = async () => {
 		if (passwordRef.current.value !== passwordConfirmRef.current.value) {
 			return setPasswordError("Passwords do not match");

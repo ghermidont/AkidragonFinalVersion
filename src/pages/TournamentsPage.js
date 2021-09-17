@@ -10,7 +10,8 @@ import HtmlToReact from "html-to-react";
 function TournamentsPage() {
 	const {t} = useTranslation();
 	const {appLanguage} = useLanguageContext();
-	
+
+	//States.
 	const [passedEvents, setPassedEvents] = useState();
 	const [futureEvents, setFutureEvents] = useState();
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
@@ -25,10 +26,12 @@ function TournamentsPage() {
 	const [_250x250320x100320x50, set250x250320x100320x50] = useState("");
 	const [middle, setMiddle] = useState("");
 
+	//Get data from the database.
 	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
 
 	let selectedBanners = "";
 
+	//Datebase data filters.
 	useEffect(() => {
 		if (docsFromHookBanners) {
 			selectedBanners = docsFromHookBanners.filter(function (doc) {
@@ -62,6 +65,7 @@ function TournamentsPage() {
 		}
 	});
 
+	// Updating the states on database calls.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {
@@ -311,7 +315,7 @@ function TournamentsPage() {
 			</li>);
 	};
 
-	// DB string tags parser
+	// Banners string tags parser.
 	const stringTagsParser = (tag) => {
 		if(tag) {
 			let  htmlInput = tag;

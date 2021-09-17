@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import {useAuthContext} from "../../../context/AuthContext";
 
+//Send verification email function call.
 const sendVerifyEmail = (User) =>{
 	User.sendEmailVerification().then(function(){
 		window.alert("Verification email sent!");
@@ -10,10 +11,12 @@ const sendVerifyEmail = (User) =>{
 };
 
 export default function Step1EmailVerificationPage() {
+	//Two user instances for the case of page reload.
 	const {currentUser, handleLogout} = useAuthContext();
 	const CurrentUserFromLS = JSON.parse(localStorage.getItem("LSCurrentUser"));
 	const User = currentUser?currentUser:CurrentUserFromLS;
 
+	//This hook sends the email confirmation message on page load.
 	useEffect(()=>{
 		sendVerifyEmail(User);
 		handleLogout();

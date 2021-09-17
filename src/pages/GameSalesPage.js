@@ -8,8 +8,11 @@ import classes from "./styles/GameSalesPage.module.scss";
 function GameSalesPage() {
 	const {t} = useTranslation();
 	const {appLanguage} = useLanguageContext();
+
+	//Getting data from the database.
 	const {docsFromHookCMS} = useDataFromFirestoreCMS("web-app-cms");
 
+	//States.
 	const [ITSaleGamingBannerUrl ,setITSaleGamingBannerUrl] = useState("");
 	const [ENSaleGamingBannerUrl ,setENSaleGamingBannerUrl] = useState("");
 	const [ITSaleGamingText ,setITSaleGamingText] = useState("");
@@ -19,6 +22,7 @@ function GameSalesPage() {
 
 	let selectedDoc = "";
 
+	//Filter the data base received data.
 	useEffect(() => {
 		if (docsFromHookCMS) {
 			selectedDoc = docsFromHookCMS.filter(function (doc) {
@@ -27,6 +31,7 @@ function GameSalesPage() {
 		}
 	});
 
+	//Updating the states on each database call.
 	useEffect(() => {
 		if (selectedDoc !== "") {
 			selectedDoc.map(doc => {

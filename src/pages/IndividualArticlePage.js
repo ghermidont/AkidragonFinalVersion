@@ -1,3 +1,5 @@
+// noinspection DuplicatedCode
+
 import React, {useEffect, useState} from "react";
 import { useDataFromFirestore, useDataFromFirestoreBanners, useDataFromFirestoreUserInfo } from "../customHooks/useFirestore";
 import {Link} from "react-router-dom";
@@ -12,15 +14,21 @@ import date from "date-and-time";
 const queryString = require("query-string");
 
 export default function Article() {
+
+	//Getting  data from the database.
 	const {docsFromHook} = useDataFromFirestore("articles");
+	const {docsFromHookUserInfo} = useDataFromFirestoreUserInfo("user-profiles");
+	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
+
 	const {appLanguage} = useLanguageContext();
+
+	//Parsing the slug.
 	const parsedWindowLocation = queryString.parse(window.location.hash);
 	const stringifiedSlug = queryString.stringify(parsedWindowLocation).substr(13);
+
+	//States.
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
-
-	const {docsFromHookUserInfo} = useDataFromFirestoreUserInfo("user-profiles");
-
 	const [vertical, setVertical] = useState("");
 	const [_250x250320x100320x50,  set250x250320x100320x50] = useState("");
 	const [Top, setTop] = useState("");
@@ -28,12 +36,9 @@ export default function Article() {
 
 	let authorID = "";
 	let selectedUser = [];
-
-	//Extracting banners START
-	const {docsFromHookBanners} = useDataFromFirestoreBanners("banners");
-
 	let selectedBanners = "";
 
+	//Filtering the database data.
 	useEffect(() => {
 		if (docsFromHookBanners) {
 			selectedBanners = docsFromHookBanners.filter(function (doc) {
@@ -42,6 +47,7 @@ export default function Article() {
 		}
 	});
 
+	//Updating the states on database call.
 	useEffect(() => {
 		if (selectedBanners !== ""){
 			selectedBanners.map(doc => {
@@ -53,7 +59,8 @@ export default function Article() {
 		}
 	}, [docsFromHookBanners]);
 
-	//extracting banners END
+	//Facebook share function.
+	//! Change the url hosting accordingly.
 	const shareFacebook = () => {
 		let socialMediaLinks = new ShareLink("facebook");
 		socialMediaLinks.get({u: `http://mydomainfortesting.ml/#/article/${stringifiedSlug}`});
@@ -84,10 +91,7 @@ export default function Article() {
 		});
 	}, [selectedUser]);
 
-
-
-
-	// DB string tags parser
+	// Banners string tags parser.
 	const stringTagsParser = (tag) => {
 		if(tag) {
 			let  htmlInput = tag;
@@ -96,6 +100,7 @@ export default function Article() {
 		}
 	};
 
+	//Date converter function.
 	const dateConverter = (DATE, format) => {
 		if(format==="extended") {
 			let date = new Date(DATE);
@@ -146,9 +151,7 @@ export default function Article() {
 							/>
 						</div>
 
-						<p className="new-article__text">
-                Content: {doc.content[appLanguage].text}
-						</p>
+						<p className="new-article__text"> Content: {doc.content[appLanguage].text} </p>
 
 						<div className="banner banner__square banner__square--article">{stringTagsParser(_250x250320x100320x50)}</div>
 						<div className="banner banner__square banner__square--article">{stringTagsParser(Top)}</div>

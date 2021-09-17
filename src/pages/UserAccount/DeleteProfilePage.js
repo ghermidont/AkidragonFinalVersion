@@ -5,12 +5,17 @@ import {useTranslation} from "react-i18next";
 import {projectFirestore} from "../../fireBase";
 
 export default function DeleteProfilePage(){
-	const {handleLogout} = useAuthContext();
-	const {currentUser} = useAuthContext();
 	const history = useHistory();
 	const {t} = useTranslation();
+
+	//Logout function import.
+	const {handleLogout} = useAuthContext();
+
+	//Two user instances for page refresh safety.
+	const {currentUser} = useAuthContext();
 	const CurrentUserFromLS = JSON.parse(localStorage.getItem("LSCurrentUser"));
 
+	//Delete user info from the database after the user account is deleted.
 	const deleteUserInfoFromDB = () => {
 		projectFirestore.collection("user-profiles").doc(CurrentUserFromLS.id).delete().then(() => {
 			console.log("User info deleted.");
@@ -19,6 +24,7 @@ export default function DeleteProfilePage(){
 		});
 	};
 
+	//Delete user function call.
 	const deleteCurrentUser = async () => {
 		await currentUser.delete().then(function () {
 			window.alert("Profile deleted.");
